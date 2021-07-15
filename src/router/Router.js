@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 
 import Home from "../components/Home"
+import Login from "../components/Login"
+import TimeSheet from "../components/TimeSheet";
 
 const AppRouter = () => (
     <Router>
@@ -13,30 +15,12 @@ const AppRouter = () => (
         <Route path="/" exact={true}>
           <Home />
         </Route>
-        {/* <Route path="/:region/:orderNum">
-          <OrderInfo />
-        </Route>
-        <Route exact path="/exp-driver">
-          <ExpressHome />
-        </Route>
-        <Route exact path="/login">
-          <DriverLogin />
-        </Route>
-        
-        
-        <Route exact path="/driver">
-          <DriverHome />
-        </Route>
-        
-        <Route exact path="/thanks">
-          <Thanks />
-        </Route>
-        
-        <Route path="/:orderNum">
-          <ExpressOrderInfo />
-        </Route> */}
-        
-        
+        <Route path="/admin" exact={true}>
+          <Login />
+        </Route>  
+        <Route path="/admin/timesheet">
+          <TimeSheet />
+        </Route>          
       </Switch>
     </Router>
   )
