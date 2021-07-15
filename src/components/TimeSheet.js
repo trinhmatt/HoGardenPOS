@@ -23,7 +23,7 @@ const TimeSheet = () => {
     useEffect(() => {
         database.ref("timesheet").once("value")
             .then( snapshot => {
-                const currentDayString = "July_15"//dayjs().format("MMMM_D");
+                const currentDayString = dayjs().format("MMMM_D");
                 let allDaysObj = snapshot.val();
                 // Check if object for current day exists yet and set state
                 let currentDayObj = !!allDaysObj[currentDayString] ? allDaysObj[currentDayString] : {};
