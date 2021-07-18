@@ -20,6 +20,7 @@ const TimeSheet = () => {
         currentDayObj: {}
     });
 
+    // On component load, fetch timesheet for current day if one exists
     useEffect(() => {
         database.ref("timesheet").once("value")
             .then( snapshot => {
@@ -32,12 +33,14 @@ const TimeSheet = () => {
             .catch( err => console.log(err))
     }, [])
 
+    // Whenever the local time sheet changes, push the changes to firebase
     useEffect(() => {
         if (Object.keys(state.currentDayObj).length > 0) {
             database.ref(`timesheet/${state.currentDayString}`).set(state.currentDayObj, err => console.log(err));
         }
     }, [state.currentDayObj])
 
+    // Update local time sheet
     const updateClockTime = (isClockOut, employee) => {
         const currentTime = dayjs().format("HH:mm");
         let selectedEmployeeObj = {},

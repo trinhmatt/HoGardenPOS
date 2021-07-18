@@ -8,6 +8,8 @@ import {
 import Home from "../components/Home"
 import Login from "../components/Login"
 import TimeSheet from "../components/TimeSheet";
+import Menu from "../components/Menu";
+import NotFound from "../components/NotFound";
 
 const AppRouter = () => (
     <Router>
@@ -20,7 +22,13 @@ const AppRouter = () => (
         </Route>  
         <Route path="/admin/timesheet">
           <TimeSheet />
-        </Route>          
+        </Route>
+        <Route path="/order/:number">
+          <Menu />
+        </Route>
+        <Route path="/*">
+          <NotFound />
+        </Route>             
       </Switch>
     </Router>
   )

@@ -11,9 +11,9 @@ const firebaseConfig = {
 };
 
 if (!firebase.apps.length) {
-firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
 } else {
-firebase.app(); // if already initialized, use that one
+    firebase.app(); // if already initialized, use that one
 }
 
 firebase.analytics();
