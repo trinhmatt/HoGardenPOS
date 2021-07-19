@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux'; 
 
 const MenuSection = (props) => {
+    const ref = useRef(null);
     const { data, language } = props;
     const [items, setItems] = useState({});
     const [displaySection, setDisplay] = useState(false);
@@ -30,10 +31,11 @@ const MenuSection = (props) => {
         return elements;
     }
     const showDisplay = () => {
+        ref.current.focus()
         setDisplay(!displaySection);
     }
     return (
-        <div>
+        <div ref={ref}>
             <h1 onClick={showDisplay}>{data.title[language]}</h1>
             <div style={{display: displaySection ? "inline-block" : "none"}}>
                 {renderItems()}
