@@ -31,14 +31,14 @@ const TimeSheet = () => {
                 setState({...state, currentDayObj, currentDayString})
             })
             .catch( err => console.log(err))
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     // Whenever the local time sheet changes, push the changes to firebase
     useEffect(() => {
         if (Object.keys(state.currentDayObj).length > 0) {
             database.ref(`timesheet/${state.currentDayString}`).set(state.currentDayObj, err => console.log(err));
         }
-    }, [state.currentDayObj])
+    }, [state.currentDayObj]) // eslint-disable-line react-hooks/exhaustive-deps
 
     // Update local time sheet
     const updateClockTime = (isClockOut, employee) => {

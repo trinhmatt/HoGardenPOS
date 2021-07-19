@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { withRouter } from "react-router";
 import { firebase } from '../firebase/firebase';
 import { connect } from 'react-redux';
-import { loginSuccess, loginFail } from '../redux/actions/auth-actions';
+import { loginSuccess } from '../redux/actions/auth-actions';
 
 const Login = (props) => {
     const { loginSuccess, history } = props;
