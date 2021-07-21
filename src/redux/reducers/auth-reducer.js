@@ -2,7 +2,7 @@ import { authConsts } from "../../static/constants/auth-constants";
 
 const initState = {};
 
-export default (state = initState, action) => {
+export const authReducer = (state = initState, action) => {
     switch (action.type) {
         case authConsts.LOGIN_SUCCESS:
             return {
@@ -16,4 +16,4 @@ export default (state = initState, action) => {
         default:
             return state;
     }
-}
+} 

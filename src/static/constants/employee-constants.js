@@ -1,10 +1,10 @@
 export const employees = [
-    'Winnie',
-    'Si Ying',
-    'Mei Qing',
-    'Onki',
-    'Christy',
-    'Yinquang',
-    'Linda',
-    'Kitty'
+    'WINNIE',
+    'SI YING',
+    'MEI QING',
+    'ONKI',
+    'CHRISTY',
+    'YINGQUANG',
+    'LINDA',
+    'KITTY'
 ]
