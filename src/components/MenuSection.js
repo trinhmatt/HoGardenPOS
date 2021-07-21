@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux'; 
+import { withRouter } from 'react-router';
+
+import MenuSectionItem from "./MenuSectionItem";
+import { itemChoices } from "../constants/menu-constants";
 
 const MenuSection = (props) => {
     const ref = useRef(null);
@@ -23,12 +27,11 @@ const MenuSection = (props) => {
     useEffect(() => {
         let elements = [];
         if (Object.keys(items).length > 0) {
+            let sectionData = {...data};
+            delete sectionData.menuItems;
             for (const item in items) {
                 elements.push(
-                    <div key={item}>
-                        <p>{items[item][props.lang]} {items[item].qty > 0 && <span>{items[item].qty}</span>}</p>
-                        <p>{items[item].price}</p>
-                    </div>
+                    <MenuSectionItem sectionData={sectionData} table={props.match.params.number} language={language} key={item} data={items[item]} />
                 )
             }
             setItemElements(elements)
@@ -55,4 +58,4 @@ const mapStateToProps = (state) => ({
     language: state.lang.lang
 })
 
-export default connect(mapStateToProps)(MenuSection);
+export default withRouter(connect(mapStateToProps)(MenuSection));

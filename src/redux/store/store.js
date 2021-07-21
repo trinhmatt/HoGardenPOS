@@ -8,7 +8,7 @@ import { langReducer } from '../reducers/lang-reducer';
 const reducers = combineReducers({
     auth: authReducer,
     cart: cartReducer,
-    lang: langReducer
+    lang: langReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

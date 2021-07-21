@@ -839,6 +839,25 @@
                 "chinese": "奉送餐湯 或 熱: 港式奶茶或咖啡或檸檬茶"
             }
         ],
+        "noodleChoice": [  
+        {
+            "english": "Thick Noodle",
+            "chinese": "炒河"
+        },
+        {
+            "english": "Chow Mein",
+            "chinese": "麵"
+        }],
+        "diffNoodleChoice": [
+            {
+                "english": "Udon",
+                "chinese": "烏冬"
+            },
+            {
+                "english": "Spaghetti",
+                "chinese": "意粉"
+            }
+        ],
         "menuItems": {
             "FNR1": {
                 "english": "Black Pepper Beef Strips Fried Udon or Spaghetti",
@@ -846,17 +865,7 @@
                 "price": 10.95,
                 "isSpicy": false,
                 "hasDrink": true,
-                "hasNoodleChoice": true,
-                "noodleChoice": [
-                    {
-                        "english": "Udon",
-                        "chinese": "烏冬"
-                    },
-                    {
-                        "english": "Spaghetti",
-                        "chinese": "意粉"
-                    }
-                ]
+                "hasDiffNoodleChoice": true
             },
             "FNR2": {
                 "english": "Baked Butter Shrimp on Chow Mein",
@@ -1011,17 +1020,7 @@
                 "price": 10.95,
                 "isSpicy": false,
                 "hasDrink": true,
-                "hasNoodleChoice": true,
-                "noodleChoice": [
-                    {
-                        "english": "Thick Noodle",
-                        "chinese": "炒河"
-                    },
-                    {
-                        "english": "Chow Mein",
-                        "chinese": "麵"
-                    }
-                ]
+                "hasNoodleChoice": true
             },
             "FNR24": {
                 "english": "BIack Bean Beef/Chicken Fried Thick Noodle/Chow Mein",
@@ -1030,16 +1029,6 @@
                 "isSpicy": false,
                 "hasDrink": true,
                 "hasNoodleChoice": true,
-                "noodleChoice": [
-                    {
-                        "english": "Thick Noodle",
-                        "chinese": "炒河"
-                    },
-                    {
-                        "english": "Chow Mein",
-                        "chinese": "麵"
-                    }
-                ],
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
@@ -1174,17 +1163,7 @@
                 "price": 10.95,
                 "isSpicy": false,
                 "hasDrink": true,
-                "hasNoodleChoice": true,
-                "noodleChoice": [
-                    {
-                        "english": "Thick Noodle",
-                        "chinese": "炒河"
-                    },
-                    {
-                        "english": "Chow Mein",
-                        "chinese": "麵"
-                    }
-                ]
+                "hasNoodleChoice": true
             },
             "FNR41": {
                 "english": "Beef/Chicken and Bitter Melon Fried Vermicelli",
@@ -1635,47 +1614,56 @@
             "LM1": {
                 "english": "Oyster Sauce with Ginger & Green Onion Lo Mein",
                 "chinese": "薑蔥蠔油撈麵",
-                "price": 7.95
+                "price": 7.95,
+                "hasSauceChoice": true
             },
             "LM2": {
                 "english": "Shrimp Wonton Lo  Mein",
                 "chinese": "鮮蝦雲吞撈麵",
-                "price": 7.95
+                "price": 7.95,
+                "hasSauceChoice": true
             },
             "LM3": {
                 "english": "Beet Tendon Brisket Lo Mein",
                 "chinese": "柱候牛筋腩撈麵",
-                "price": 7.95
+                "price": 7.95,
+                "hasSauceChoice": true
             },
             "LM4": {
                 "english": "Vegetable & Pork Dumpling Lo Mein",
                 "chinese": "菜肉餃撈麵",
-                "price": 7.95
+                "price": 7.95,
+                "hasSauceChoice": true
             },
             "LM5": {
                 "english": "Ginger & Green Onion with BBQ Pork Lo Mein",
                 "chinese": "薑蔥叉燒撈麵",
-                "price": 8.95
+                "price": 8.95,
+                "hasSauceChoice": true
             },
             "LM6": {
                 "english": "Ginger & Green Onion wilh Beef Lo Mein",
                 "chinese": "薑蔥牛肉撈麵",
-                "price": 8.95
+                "price": 8.95,
+                "hasSauceChoice": true
             },
             "LM7": {
                 "english": "Wonton & Beef Tendon Brisket Lo Mein",
                 "chinese": "雲吞牛筋腩撈麵",
-                "price": 8.95
+                "price": 8.95,
+                "hasSauceChoice": true
             },
             "LM8": {
                 "english": "Wonton & BBO Pork Lo Mein",
                 "chinese": "雲吞叉撓撈麵",
-                "price": 8.95
+                "price": 8.95,
+                "hasSauceChoice": true
             },
             "LM9": {
                 "english": "Pork Hock with Fermented Red Been Curd Lo Mein",
                 "chinese": "南乳豬手撈麵",
-                "price": 8.95
+                "price": 8.95,
+                "hasSauceChoice": true
             }
         }
     },
@@ -1712,27 +1700,32 @@
             "V1": {
                 "english": "Choy Sum",
                 "chinese": "菜心",
-                "price": 6.95
+                "price": 6.95,
+                "hasSauceChoice": true
             },
             "V2": {
                 "english": "Chinese Broccoli",
                 "chinese": "芥蘭",
-                "price": 6.95
+                "price": 6.95,
+                "hasSauceChoice": true
             },
             "V3": {
                 "english": "Lettuce",
                 "chinese": "西生菜",
-                "price": 6.95
+                "price": 6.95,
+                "hasSauceChoice": true
             },
             "V4": {
                 "english": "Broccoli",
                 "chinese": "西蘭花",
-                "price": 6.95
+                "price": 6.95,
+                "hasSauceChoice": true
             },
             "V5": {
                 "english": "Taiwanese Vegetable",
                 "chinese": "A菜",
-                "price": 6.95
+                "price": 6.95,
+                "hasSauceChoice": true
             }
         }
     },
@@ -2498,6 +2491,56 @@
                 "chinese": "熱咖啡"
             }
         ],
+        "noodleChoice": [
+            {
+                "english": "Macaroni",
+                "chinese": "通粉"
+            },
+            {
+                "english": "Spaghetti",
+                "chinese": "意粉"
+            },
+            {
+                "english": "Vermicelli",
+                "chinese": "米粉"
+            }
+        ],
+        "diffNoodleChoice": [
+            {
+                "english": "Noodle",
+                "chinese": "麵"
+            },
+            {
+                "english": "Vermicelli",
+                "chinese": "米粉"
+            },
+            {
+                "english": "Thick Rice Noodle",
+                "chinese": "河"
+            },
+            {
+                "english": "Rice Noodle",
+                "chinese": "瀨"
+            }
+        ],
+        "condimentChoice": [
+            {
+                "english": "Condensed Milk",
+                "chinese": "奶油"
+            },
+            {
+                "english": "Butter",
+                "chinese": "油占"
+            },
+            {
+                "english": "Jam",
+                "chinese": "果酱"
+            },
+            {
+                "english": "Peanut Butter",
+                "chinese": "花生酱"
+            }
+        ],
         "menuItems": {
             "B1": {
                 "english": "Pineapple Bun with Slice of Butter",
@@ -2540,25 +2583,7 @@
                 "price": 5.50,
                 "hasDrink": true,
                 "restName": "早6",
-                "hasCondiment": true,
-                "condimentChoice": [
-                    {
-                        "english": "Condensed Milk",
-                        "chinese": "奶油"
-                    },
-                    {
-                        "english": "Butter",
-                        "chinese": "油占"
-                    },
-                    {
-                        "english": "Jam",
-                        "chinese": "果酱"
-                    },
-                    {
-                        "english": "Peanut Butter",
-                        "chinese": "花生酱"
-                    }
-                ]
+                "hasCondiment": true
             },
             "B7": {
                 "english": "French Toast (with Peanut Butter)",
@@ -2601,21 +2626,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早12",
-                "hasNoodleChoice": true,
-                "noodleChoice": [
-                    {
-                        "english": "Macaroni",
-                        "chinese": "通粉"
-                    },
-                    {
-                        "english": "Spaghetti",
-                        "chinese": "意粉"
-                    },
-                    {
-                        "english": "Vermicelli",
-                        "chinese": "米粉"
-                    }
-                ]
+                "hasNoodleChoice": true
             },
             "B13": {
                 "english": "Egg & Luncheon Meat with Macaroni/Spaghetti/Vermicelli in Soup",
@@ -2623,21 +2634,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早13",
-                "hasNoodleChoice": true,
-                "noodleChoice": [
-                    {
-                        "english": "Macaroni",
-                        "chinese": "通粉"
-                    },
-                    {
-                        "english": "Spaghetti",
-                        "chinese": "意粉"
-                    },
-                    {
-                        "english": "Vermicelli",
-                        "chinese": "米粉"
-                    }
-                ]
+                "hasNoodleChoice": true
             },
             "B14": {
                 "english": "Ham & Sausage with Macaroni/Spaghetti/Vermicelli in Soup",
@@ -2645,21 +2642,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早14",
-                "hasNoodleChoice": true,
-                "noodleChoice": [
-                    {
-                        "english": "Macaroni",
-                        "chinese": "通粉"
-                    },
-                    {
-                        "english": "Spaghetti",
-                        "chinese": "意粉"
-                    },
-                    {
-                        "english": "Vermicelli",
-                        "chinese": "米粉"
-                    }
-                ]
+                "hasNoodleChoice": true
             },
             "B15": {
                 "english": "Egg & Bacon with Macaroni/Spaghetti/Vermicelli in Soup",
@@ -2667,21 +2650,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早15",
-                "hasNoodleChoice": true,
-                "noodleChoice": [
-                    {
-                        "english": "Macaroni",
-                        "chinese": "通粉"
-                    },
-                    {
-                        "english": "Spaghetti",
-                        "chinese": "意粉"
-                    },
-                    {
-                        "english": "Vermicelli",
-                        "chinese": "米粉"
-                    }
-                ]
+                "hasNoodleChoice": true
             },
             "B16": {
                 "english": "Shredded Chicken with Macaroni/Spaghetti/Vermicelli in Soup",
@@ -2689,21 +2658,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早16",
-                "hasNoodleChoice": true,
-                "noodleChoice": [
-                    {
-                        "english": "Macaroni",
-                        "chinese": "通粉"
-                    },
-                    {
-                        "english": "Spaghetti",
-                        "chinese": "意粉"
-                    },
-                    {
-                        "english": "Vermicelli",
-                        "chinese": "米粉"
-                    }
-                ]
+                "hasNoodleChoice": true
             },
             "B17": {
                 "english": "Tuna Fish Sandwiches",
@@ -2781,25 +2736,7 @@
                 "chinese": "鮮蝦雲吞麵/米/河/瀨",
                 "price": 7.95,
                 "hasDrink": true,
-                "hasDiffNoodleChoice": true,
-                "diffNoodleChoice": [
-                    {
-                        "english": "Noodle",
-                        "chinese": "麵"
-                    },
-                    {
-                        "english": "Vermicelli",
-                        "chinese": "米粉"
-                    },
-                    {
-                        "english": "Thick Rice Noodle",
-                        "chinese": "河"
-                    },
-                    {
-                        "english": "Rice Noodle",
-                        "chinese": "瀨"
-                    }
-                ],
+                "hasNoodleChoice": true,
                 "restName": "H"
             },
             "B28": {
@@ -2807,25 +2744,7 @@
                 "chinese": "牛筋腩麵/米/河/瀨",
                 "price": 7.95,
                 "hasDrink": true,
-                "hasDiffNoodleChoice": true,
-                "diffNoodleChoice": [
-                    {
-                        "english": "Noodle",
-                        "chinese": "麵"
-                    },
-                    {
-                        "english": "Vermicelli",
-                        "chinese": "米粉"
-                    },
-                    {
-                        "english": "Thick Rice Noodle",
-                        "chinese": "河"
-                    },
-                    {
-                        "english": "Rice Noodle",
-                        "chinese": "瀨"
-                    }
-                ],
+                "hasNoodleChoice": true,
                 "restName": "I"
             },
             "B29": {
@@ -2833,25 +2752,7 @@
                 "chinese": "魚蛋麵/米/河/瀨",
                 "price": 7.95,
                 "hasDrink": true,
-                "hasDiffNoodleChoice": true,
-                "diffNoodleChoice": [
-                    {
-                        "english": "Noodle",
-                        "chinese": "麵"
-                    },
-                    {
-                        "english": "Vermicelli",
-                        "chinese": "米粉"
-                    },
-                    {
-                        "english": "Thick Rice Noodle",
-                        "chinese": "河"
-                    },
-                    {
-                        "english": "Rice Noodle",
-                        "chinese": "瀨"
-                    }
-                ],
+                "hasNoodleChoice": true,
                 "restName": "J"
             }
         }
@@ -2881,6 +2782,34 @@
                 "chinese": "熱咖啡"
             }
         ],
+        "condimentChoice": [
+            {
+                "english": "Condensed Milk",
+                "chinese": "奶油"
+            },
+            {
+                "english": "Butter",
+                "chinese": "油占"
+            },
+            {
+                "english": "Jam",
+                "chinese": "果酱"
+            },
+            {
+                "english": "Peanut Butter",
+                "chinese": "花生酱"
+            }
+        ],
+        "sideChoice": [
+            {
+                "english": "French Fries",
+                "chinese": "薯條"
+            },
+            {
+                "english": "Salad",
+                "chinese": "沙律"
+            }
+        ],
         "menuItems": {
             "AT1": {
                 "english": "Pineapple Bun with Butter",
@@ -2891,25 +2820,7 @@
                 "english": "Toast with Butter/Condensed Milk/Peanut Butter",
                 "chinese": "占多/奶油多/奶醬多",
                 "price": 5.50,
-                "hasCondiment": true,
-                "condimentChoice": [
-                    {
-                        "english": "Condensed Milk",
-                        "chinese": "奶油"
-                    },
-                    {
-                        "english": "Butter",
-                        "chinese": "油占"
-                    },
-                    {
-                        "english": "Jam",
-                        "chinese": "果酱"
-                    },
-                    {
-                        "english": "Peanut Butter",
-                        "chinese": "花生酱"
-                    }
-                ]
+                "hasCondiment": true
             },
             "AT3": {
                 "english": "Egg/Ham Sandwiches",
@@ -2930,17 +2841,7 @@
                 "english": "Deep Fried Chicken Wings with Fries/Salad",
                 "chinese": "炸雞翼薯條/沙律",
                 "price": 7.95,
-                "hasSide": true,
-                "sideChoice": [
-                    {
-                        "english": "French Fries",
-                        "chinese": "薯條"
-                    },
-                    {
-                        "english": "Salad",
-                        "chinese": "沙律"
-                    }
-                ]
+                "hasSide": true
             },
             "AT7": {
                 "english": "Deep Fried Chicken Leg with Fries/Salad",
@@ -2960,26 +2861,7 @@
             "AT10": {
                 "english": "Beef Tendon Brisket Noodle in Soup",
                 "chinese": "牛筋腩麵/米/河/瀨",
-                "price": 7.95,
-                "hasDiffNoodleChoice": true,
-                "diffNoodleChoice": [
-                    {
-                        "english": "Noodle",
-                        "chinese": "麵"
-                    },
-                    {
-                        "english": "Vermicelli",
-                        "chinese": "米粉"
-                    },
-                    {
-                        "english": "Thick Rice Noodle",
-                        "chinese": "河"
-                    },
-                    {
-                        "english": "Rice Noodle",
-                        "chinese": "瀨"
-                    }
-                ]
+                "price": 7.95
             },
             "AT11": {
                 "english": "Satay Beef/Ham with Macaroni in Soup",
@@ -3052,33 +2934,13 @@
                 "english": "Cutlet Pork Chop with Fries/Salad",
                 "chinese": "吉列豬扒薯條/沙律",
                 "price": 7.95,
-                "hasSide": true,
-                "sideChoice": [
-                    {
-                        "english": "French Fries",
-                        "chinese": "薯條"
-                    },
-                    {
-                        "english": "Salad",
-                        "chinese": "沙律"
-                    }
-                ]
+                "hasSide": true
             },
             "AT21": {
                 "english": "Cutlet Garoupa with Fries/Salad",
                 "chinese": "吉列石斑薯條/沙律",
                 "price": 7.95,
-                "hasSide": true,
-                "sideChoice": [
-                    {
-                        "english": "French Fries",
-                        "chinese": "薯條"
-                    },
-                    {
-                        "english": "Salad",
-                        "chinese": "沙律"
-                    }
-                ]
+                "hasSide": true
             },
             "AT22": {
                 "english": "Stir Fried Soya Sauce Thick Noodle",
