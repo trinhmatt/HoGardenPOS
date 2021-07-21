@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import MenuSection from './MenuSection'
-import menuJSON from '../constants/menu.json';
-import { cartConsts } from "../constants/cart-constants";
+import menuJSON from '../static/constants/menu.json';
+import { cartConsts } from "../static/constants/cart-constants";
 import { changeLanguage } from "../redux/actions/lang-actions";
-
 
 const Menu = (props) => {
     const numSections = Object.keys(menuJSON).length;

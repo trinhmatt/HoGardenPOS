@@ -1,4 +1,4 @@
-import { cartConsts } from "../../constants/cart-constants";
+import { cartConsts } from "../../static/constants/cart-constants";
 
 const initState = [];
 

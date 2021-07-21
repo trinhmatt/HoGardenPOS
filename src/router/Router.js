@@ -11,6 +11,7 @@ import TimeSheet from "../components/TimeSheet";
 import Menu from "../components/Menu";
 import NotFound from "../components/NotFound";
 import AddItem from "../components/AddItem";
+import AdminHome from "../components/AdminHome";
 
 const AppRouter = () => (
     <Router>
@@ -21,6 +22,9 @@ const AppRouter = () => (
         <Route path="/admin" exact={true}>
           <Login />
         </Route>  
+        <Route path="/admin/home">
+          <AdminHome />
+        </Route>
         <Route path="/admin/timesheet">
           <TimeSheet />
         </Route>
