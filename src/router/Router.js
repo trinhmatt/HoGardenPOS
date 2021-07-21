@@ -10,6 +10,7 @@ import Login from "../components/Login"
 import TimeSheet from "../components/TimeSheet";
 import Menu from "../components/Menu";
 import NotFound from "../components/NotFound";
+import AdminHome from "../components/AdminHome";
 
 const AppRouter = () => (
     <Router>
@@ -20,6 +21,9 @@ const AppRouter = () => (
         <Route path="/admin" exact={true}>
           <Login />
         </Route>  
+        <Route path="/admin/home">
+          <AdminHome />
+        </Route>
         <Route path="/admin/timesheet">
           <TimeSheet />
         </Route>

@@ -1,4 +1,4 @@
-import { authConsts } from "../../constants/auth-constants";
+import { authConsts } from "../../static/constants/auth-constants";
 
 const initState = {};
 

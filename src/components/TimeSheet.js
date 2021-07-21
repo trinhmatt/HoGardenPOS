@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import dayjs from 'dayjs';
-import { employees } from '../constants/employee-constants';
+import { employees } from '../static/constants/employee-constants';
 import database from '../firebase/firebase';
 
 import Table from '@material-ui/core/Table';

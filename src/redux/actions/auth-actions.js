@@ -1,4 +1,4 @@
-import { authConsts } from "../../constants/auth-constants";
+import { authConsts } from "../../static/constants/auth-constants";
 
 export const loginSuccess = (userData) => ({
     type: authConsts.LOGIN_SUCCESS,

@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500&display=swap');
+
+/* BACKGROUND */
+.home-bg {
+    background: #667db6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    overflow: auto;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+/* LAYOUT */
+.header {
+    text-align: center;
+    padding: 20px;
+}
+
+.center-wrapper {
+    text-align: center;
+    padding: 10%;
+    margin-top: -10%;
+}
+
+.input-wrapper {
+    text-align: center;
+}
+
+/* TITLE */
+.home-title, .home-title2 {
+    font-weight: 400;
+    font-size: 50px;
+    color: #fff;
+    line-height: 1em;
+}
+
+.home-title2 {
+    font-size: 100px;
+    margin-top: -4%;
+}
+
+/* BUTTONS */
+.order-btn {
+    background-color: #ffa500 !important;
+    color: #fff !important;
+    transform: scale(2);
+}
+
+/* INPUT */
+.login-input {
+    width: 40% !important;
+}
