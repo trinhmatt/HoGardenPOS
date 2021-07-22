@@ -9,13 +9,9 @@ import cx from 'clsx';
 import Card from '@material-ui/core/Card';
 import {
     CardContent,
-    CardMedia,
     CardActionArea,
-    Box,
-    Typography,
     TextField,
     Button,
-    FormControl,
     InputAdornment
 } from '@material-ui/core';
 import { useLightTopShadowStyles } from '@mui-treasury/styles/shadow/lightTop';
@@ -30,7 +26,7 @@ const Login = (props) => {
     // style consts
     const styles = homeStyles();
     const shadowStyles = useLightTopShadowStyles();
-    const mediaStyles = useCoverCardMediaStyles();
+    //const mediaStyles = useCoverCardMediaStyles();
 
     const { loginSuccess, history } = props;
     const [state, setState] = useState({

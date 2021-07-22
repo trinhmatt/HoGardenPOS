@@ -3,14 +3,16 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import MenuSection from './MenuSection'
-import menuJSON from '../static/constants/menu.json';
-import { cartConsts } from "../static/constants/cart-constants";
-import { changeLanguage } from "../redux/actions/lang-actions";
+import menuJSON from '../../static/constants/menu.json';
+import { cartConsts } from "../../static/constants/cart-constants";
+import { changeLanguage } from "../../redux/actions/lang-actions";
+import Cart from "../Cart/Cart";
+
+import Modal from '@material-ui/core/Modal';
 
 //Style imports
-import { menuStyles } from '../static/css/menuStyles';
-import { Row, Item } from '@mui-treasury/components/flex';
-import ElevationScroll from './subcomponents/ElevationScroll';
+import { menuStyles } from '../../static/css/menuStyles';
+import ElevationScroll from '../subcomponents/ElevationScroll';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -26,6 +28,8 @@ const Menu = (props) => {
     const [headerSections, setHeaderSections] = useState([]);
     //Set language to Chinese
     const [chinese, setChinese] = useState(false);
+    const [isCartOpen, setCartOpen] = useState(false);
+
     useEffect(() => {
         if (!!cartConsts.tables[props.match.params.number] || props.match.params.number === "takeout") {
             let menuSections = [];
@@ -53,6 +57,9 @@ const Menu = (props) => {
             props.history.push("/error");
         }
     }, [props.language]) // eslint-disable-line react-hooks/exhaustive-deps
+    const closeCart = () => {
+        setCartOpen(false);
+    }
     return (
         <React.Fragment>
             <Container className={styles.menuLayout}>
@@ -80,6 +87,14 @@ const Menu = (props) => {
                     />
                 </FormGroup>
                 {menuSections}
+                <Modal
+                open={isCartOpen}
+                onClose={closeCart}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                {isCartOpen && <Cart />}
+            </Modal>
             </Container>
             
         </Container>
@@ -88,7 +103,8 @@ const Menu = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    language: state.lang.lang
+    language: state.lang.lang,
+    cart: state.cart
 });
 
 const mapDispatchToProps = dispatch => ({
