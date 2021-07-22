@@ -48,7 +48,7 @@
                 "chinese": "豉油皇炒河 拼 皮蛋瘦肉粥",
                 "price": 8.95,
                 "isStar": true,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "A1"
             },
@@ -57,7 +57,7 @@
                 "chinese": "牛肉粥 拼 豉油皇芽菜仔炒麵",
                 "price": 8.95,
                 "isStar": true,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "A2"
             },
@@ -66,7 +66,7 @@
                 "chinese": "生滾肉片粥 拼 鼓油皇芽菜仔炒麵",
                 "price": 8.95,
                 "isStar": true,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "A3"
             },
@@ -75,7 +75,7 @@
                 "chinese": "煙肉煎雙蛋及牛油多士 拼 火腿/牛肉湯意",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "B"
             },
@@ -84,7 +84,7 @@
                 "chinese": "煎雙蛋及牛油多士 拼 腸仔/火腿/餐肉公仔麵",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "C"
             },
@@ -93,7 +93,7 @@
                 "chinese": "雞蛋三文治 拼 沙爹牛肉湯米",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "D"
             },
@@ -102,7 +102,7 @@
                 "chinese": "冬菜火腿牛肉烏冬",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "E"
             },
@@ -111,7 +111,7 @@
                 "chinese": "上蕩菜肉餃",
                 "price": 7.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "F"
             },
@@ -120,7 +120,7 @@
                 "chinese": "菜肉餃湯麵/米/河/瀨",
                 "price": 7.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "G"
             },
@@ -129,7 +129,7 @@
                 "chinese": "彈牙牛丸湯麵/米/河/瀨",
                 "price": 7.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "H"
             },
@@ -138,7 +138,7 @@
                 "chinese": "叉燒湯麵/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "I"
             },
@@ -147,7 +147,7 @@
                 "chinese": "雲吞公仔麵",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "J"
             },
@@ -156,7 +156,7 @@
                 "chinese": "柱候牛筋腩公仔麵",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "K"
             },
@@ -165,7 +165,7 @@
                 "chinese": "淨雲吞(10粒)",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "L"
             },
@@ -174,7 +174,7 @@
                 "chinese": "南乳豬手湯麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "M"
             },
@@ -183,7 +183,7 @@
                 "chinese": "雲吞牛腩湯麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全1"
             },
@@ -192,7 +192,7 @@
                 "chinese": "雙丸湯麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全2"
             },
@@ -201,7 +201,7 @@
                 "chinese": "牛丸牛腩湯麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全3"
             },
@@ -210,7 +210,7 @@
                 "chinese": "煎豬扒公仔麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全4"
             },
@@ -219,7 +219,7 @@
                 "chinese": "煎蛋沙爹牛肉公仔麵",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全5"
             },
@@ -228,7 +228,7 @@
                 "chinese": "吉列雞扒湯麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全6"
             },
@@ -237,7 +237,7 @@
                 "chinese": "蟹柳餐肉公仔麵/米/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全7"
             },
@@ -246,7 +246,7 @@
                 "chinese": "時菜牛肉湯麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全8"
             },
@@ -255,7 +255,7 @@
                 "chinese": "炸雞脾公仔麵/米/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全9"
             },
@@ -264,7 +264,7 @@
                 "chinese": "炸菜肉絲湯麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全10"
             },
@@ -273,7 +273,7 @@
                 "chinese": "雪菜雞絲湯麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全11"
             },
@@ -282,7 +282,7 @@
                 "chinese": "咖喱雞絲湯麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全12"
             },
@@ -291,7 +291,7 @@
                 "chinese": "吉列魚柳湯麵/米/河/瀨",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全13"
             },
@@ -300,7 +300,7 @@
                 "chinese": "時菜斑球通橋米線",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "全14"
             },
@@ -309,7 +309,7 @@
                 "chinese": "香茅豬扒米粉",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "全15"
             },
@@ -318,7 +318,7 @@
                 "chinese": "招牌湯瀨粉",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": false,
                 "restName": "全16"
             },
@@ -327,7 +327,7 @@
                 "chinese": "紅燒牛肉麵",
                 "price": 8.95,
                 "isStar": false,
-                "isHash": false,
+                "hasNoodle": false,
                 "isSpicy": true,
                 "restName": "全17"
             },
@@ -336,7 +336,7 @@
                 "chinese": "鮮蝦雲吞麵/米/河/瀨",
                 "price": 7.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全18"
             },
@@ -345,7 +345,7 @@
                 "chinese": "牛筋腩麵/米/河/瀨",
                 "price": 7.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全19"
             },
@@ -354,7 +354,7 @@
                 "chinese": "魚蛋麵/米/河/瀨",
                 "price": 7.95,
                 "isStar": false,
-                "isHash": true,
+                "hasNoodle": true,
                 "isSpicy": false,
                 "restName": "全20"
             }
@@ -910,7 +910,7 @@
                 "hasDrink": true
             },
             "FNR8": {
-                "english": "BIack Bean Spare Ribs Fried Thick Noodle",
+                "english": "Black Bean Spare Ribs Fried Thick Noodle",
                 "chinese": "豉椒排骨炒河",
                 "price": 10.95,
                 "isSpicy": false,
@@ -1020,15 +1020,15 @@
                 "price": 10.95,
                 "isSpicy": false,
                 "hasDrink": true,
-                "hasNoodleChoice": true
+                "hasNoodle": true
             },
             "FNR24": {
-                "english": "BIack Bean Beef/Chicken Fried Thick Noodle/Chow Mein",
+                "english": "Black Bean Beef/Chicken Fried Thick Noodle/Chow Mein",
                 "chinese": "豉椒牛肉/雞球炒河/麵",
                 "price": 10.95,
                 "isSpicy": false,
                 "hasDrink": true,
-                "hasNoodleChoice": true,
+                "hasNoodle": true,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
@@ -1163,7 +1163,7 @@
                 "price": 10.95,
                 "isSpicy": false,
                 "hasDrink": true,
-                "hasNoodleChoice": true
+                "hasNoodle": true
             },
             "FNR41": {
                 "english": "Beef/Chicken and Bitter Melon Fried Vermicelli",
@@ -1916,6 +1916,16 @@
             "english": "Drinks",
             "chinese": "凍熱飲品"
         },
+        "temp": {
+            "hot": {
+                "chinese": "暍",
+                "english": "hot"
+            },
+            "cold": {
+                "chinese": "冷",
+                "english": "cold"
+            }
+        },
         "extraInfo": [],
         "menuItems": {
             "D1": {
@@ -1949,8 +1959,8 @@
                 "coldPrice": 3.00
             },
             "D6": {
-                "english": "好立克",
-                "chinese": "Horlick",
+                "english": "Horlick",
+                "chinese": "好立克",
                 "hotPrice": 2.00,
                 "coldPrice": 3.00
             },
@@ -2626,7 +2636,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早12",
-                "hasNoodleChoice": true
+                "hasNoodle": true
             },
             "B13": {
                 "english": "Egg & Luncheon Meat with Macaroni/Spaghetti/Vermicelli in Soup",
@@ -2634,7 +2644,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早13",
-                "hasNoodleChoice": true
+                "hasNoodle": true
             },
             "B14": {
                 "english": "Ham & Sausage with Macaroni/Spaghetti/Vermicelli in Soup",
@@ -2642,7 +2652,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早14",
-                "hasNoodleChoice": true
+                "hasNoodle": true
             },
             "B15": {
                 "english": "Egg & Bacon with Macaroni/Spaghetti/Vermicelli in Soup",
@@ -2650,7 +2660,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早15",
-                "hasNoodleChoice": true
+                "hasNoodle": true
             },
             "B16": {
                 "english": "Shredded Chicken with Macaroni/Spaghetti/Vermicelli in Soup",
@@ -2658,7 +2668,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早16",
-                "hasNoodleChoice": true
+                "hasNoodle": true
             },
             "B17": {
                 "english": "Tuna Fish Sandwiches",
@@ -2736,7 +2746,7 @@
                 "chinese": "鮮蝦雲吞麵/米/河/瀨",
                 "price": 7.95,
                 "hasDrink": true,
-                "hasNoodleChoice": true,
+                "hasNoodle": true,
                 "restName": "H"
             },
             "B28": {
@@ -2744,7 +2754,7 @@
                 "chinese": "牛筋腩麵/米/河/瀨",
                 "price": 7.95,
                 "hasDrink": true,
-                "hasNoodleChoice": true,
+                "hasNoodle": true,
                 "restName": "I"
             },
             "B29": {
@@ -2752,7 +2762,7 @@
                 "chinese": "魚蛋麵/米/河/瀨",
                 "price": 7.95,
                 "hasDrink": true,
-                "hasNoodleChoice": true,
+                "hasNoodle": true,
                 "restName": "J"
             }
         }

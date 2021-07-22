@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import MenuSectionItem from "./MenuSectionItem";
-import { itemChoices } from "../constants/menu-constants";
+import { itemChoices } from "../../constants/menu-constants";
 
 const MenuSection = (props) => {
     const ref = useRef(null);

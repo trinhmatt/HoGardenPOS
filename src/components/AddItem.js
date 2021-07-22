@@ -24,56 +24,59 @@ const AddItem = (props) => {
         addToCart(orderItem);
         goBackToMenu();
     }
+    // Values for button are formatted like: choiceType:choiceValue 
+    // I use : as a delimitter to separate type and value so I can set the cart object 
     const renderChoices = () => {
         let choiceSections = []; 
-
-        //Check if item hasDrink, hasNoodle, hasSauce, etc.
-        for (const key in itemData) {
-            if (itemChoices[key]) {
-
-                // If it does, create a section using the data in the section object
-                let choices = [];
-                for (let i = 0; i < sectionData[itemChoices[key]].length; i++) {
-                    // Button value = chinese/english values for item to send to kitchen
-                    choices.push(
-                        <button 
-                            value={`${itemChoices[key]}:${JSON.stringify(sectionData[itemChoices[key]][i])}`} 
-                            key={`${i}/${sectionData[itemChoices[key]][i][language]}`}
+        const choicesBuilder = (choiceType, choicesArr) => {
+            let choices = [];
+            for (let i = 0; i < choicesArr.length; i++) {
+                choices.push(
+                    <button 
+                            value={`${choiceType}:${JSON.stringify(choicesArr[i])}`} 
+                            key={`${i}/${choicesArr[i][language]}`}
                             onClick={selectChoice}
                         >
-                            {sectionData[itemChoices[key]][i][language]}
+                            {choicesArr[i][language]}
                         </button>
-                    );
-                }
+                )
+            }
+            return choices;
+        }
+        //Check if item hasDrink, hasNoodle, hasSauce, etc.
+        for (const key in itemData) {
+            if (itemData[key] && itemChoices[key]) {
+                const choices = choicesBuilder(itemChoices[key], sectionData[itemChoices[key]]);
                 choiceSections.push(<div key={`${key}`}>{choices}</div>);
             }
         }
         if (itemData.hasProteinChoice) {
-            let choices = [];
-            for (let i = 0; i < itemData.proteinChoice.length; i++) {
-                // Button value = chinese/english values for item to send to kitchen
-                choices.push(
-                    <button 
-                        value={`proteinChoice:${JSON.stringify(itemData.proteinChoice[i])}`} 
-                        key={`${i}/${itemData.proteinChoice[i][language]}`}
-                        onClick={selectChoice}
-                    >
-                        {itemData.proteinChoice[i][language]}
-                    </button>
-                );
-            }
+            const choices = choicesBuilder("proteinChoice", itemData.proteinChoice);
             choiceSections.push(<div key={`proteinChoice`}>{choices}</div>);
+        }
+        if (itemData.hotPrice && itemData.coldPrice) {
+            choiceSections.push(
+                <div key="hotDrink">
+                    <button value={`tempChoice:${JSON.stringify(sectionData.temp.hot)}`} onClick={selectChoice}>{sectionData.temp.hot[language]}</button>
+                </div>
+            )
+            choiceSections.push(
+                <div key="coldDrink">
+                    <button value={`tempChoice:${JSON.stringify(sectionData.temp.cold)}`} onClick={selectChoice}>{sectionData.temp.cold[language]}</button>
+                </div>
+            )
         }
         return choiceSections;
     }
     const selectChoice = (e) => {
         const val = e.currentTarget.value;
-        console.log(val)
+        let price = item.price;
+        if (val.indexOf("tempChoice") > -1) {
+            price = val.indexOf("hot") > - 1 ? itemData.hotPrice : itemData.coldPrice;
+        }
         const separatorIndex = val.indexOf(":");
         const choiceType = val.substring(0, separatorIndex)
-        console.log(val.substring(separatorIndex+1))
-
-        setItem({...item, [choiceType]: JSON.parse(val.substring(separatorIndex+1))});
+        setItem({...item, price, [choiceType]: JSON.parse(val.substring(separatorIndex+1))});
     }
     return (
         <div>
@@ -88,7 +91,7 @@ const AddItem = (props) => {
                 <div>
                     {renderChoices()}
                 </div>
-                <button disabled={item.qty === 0} onClick={addToOrder}>Add to order</button>
+                <button disabled={item.qty === 0} onClick={addToOrder}>{`Add ${item.qty > 0 ? `${item.qty} ` : ' '}to order`}</button>
             </div>
         </div>
     )

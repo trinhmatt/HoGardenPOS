@@ -8,7 +8,7 @@ import {
 import Home from "../components/Home"
 import Login from "../components/Login"
 import TimeSheet from "../components/TimeSheet";
-import Menu from "../components/Menu";
+import Menu from "../components/Menu/Menu";
 import NotFound from "../components/NotFound";
 import AddItem from "../components/AddItem";
 import AdminHome from "../components/AdminHome";

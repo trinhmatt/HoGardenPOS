@@ -3,14 +3,19 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import MenuSection from './MenuSection'
-import menuJSON from '../static/constants/menu.json';
-import { cartConsts } from "../static/constants/cart-constants";
-import { changeLanguage } from "../redux/actions/lang-actions";
+import menuJSON from '../../static/constants/menu.json';
+import { cartConsts } from "../../static/constants/cart-constants";
+import { changeLanguage } from "../../redux/actions/lang-actions";
+import Cart from "../Cart/Cart";
+
+import Modal from '@material-ui/core/Modal';
 
 const Menu = (props) => {
     const numSections = Object.keys(menuJSON).length;
     const [menuSections, setMenuSections] = useState([]);
     const [headerSections, setHeaderSections] = useState([]);
+    const [isCartOpen, setCartOpen] = useState(false);
+
     useEffect(() => {
         if (!!cartConsts.tables[props.match.params.number] || props.match.params.number === "takeout") {
             let menuSections = [];
@@ -34,6 +39,9 @@ const Menu = (props) => {
             props.history.push("/error");
         }
     }, [props.language]) // eslint-disable-line react-hooks/exhaustive-deps
+    const closeCart = () => {
+        setCartOpen(false);
+    }
     return (
         <div>
             <div style={{overflowX: "scroll", width: "100vw", overflowY: "hidden", whiteSpace: "nowrap", position: "fixed", top: "0"}}>
@@ -42,13 +50,23 @@ const Menu = (props) => {
             <h1>Menu</h1>
             <button onClick={() => props.changeLanguage("chinese")}>to chinese</button>
             <button onClick={() => props.changeLanguage("english")}>to english</button>
+            <button style={{display: props.cart.length > 0 ? "block" : "none"}} onClick={() => setCartOpen(true)}>View Cart</button>
             {menuSections}
+            <Modal
+                open={isCartOpen}
+                onClose={closeCart}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                {isCartOpen && <Cart />}
+            </Modal>
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
-    language: state.lang.lang
+    language: state.lang.lang,
+    cart: state.cart
 });
 
 const mapDispatchToProps = dispatch => ({
