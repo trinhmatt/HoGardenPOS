@@ -6,6 +6,7 @@ const menuStyles = makeStyles(({spacing}) => ({
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflowX: 'hidden',
         minWidth: '100%',
+        backgroundColor: '#f0f0f0',
     },
     header: {
         lineHeight: '0.05em',
@@ -15,12 +16,14 @@ const menuStyles = makeStyles(({spacing}) => ({
         paddingTop: '5%'
     },
     foodLayout: {
-        marginTop: '15vh'
+        marginTop: '20vh'
     },
     switchLayout: {
         display: 'flex',
         alignItems: 'flex-end',
-        marginRight: '-5vw'
+        width: '100%',
+        marginTop: '-3vh',
+        marginRight: '-5vh',
     },
 
     //HEADERS
@@ -34,6 +37,18 @@ const menuStyles = makeStyles(({spacing}) => ({
         fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(','),
         fontSize: '40px',
         color: '#fff',
+    },
+    menuSectionTitle: {
+        textTransform: 'uppercase',
+        fontSize: '4vh',
+        color: '#4051b5',
+        textAlign: 'center',
+        border: '1px solid #4051b5',
+        borderTop: 'transparent',
+        borderLeft: 'transparent',
+        borderRight: 'transparent',
+        paddingTop: '5%',
+        wordBreak: 'break-word',
     },
 
     //SCROLL
@@ -65,6 +80,31 @@ const menuStyles = makeStyles(({spacing}) => ({
     },
     scrollContainer: {
         padding: '2px',
+    },
+    toTopArrow: {
+        position: 'fixed',
+        bottom: '2vh',
+        right: '2vw',
+    },
+
+    //MENU SECTIONS
+    menuSection: {
+        paddingLeft: '5%',
+        paddingRight: '5%',
+    },
+    section: {
+        padding: '3%',
+        display: 'flex',
+        alignItems: 'center',
+    },
+    item: {
+        paddingRight: '5%',
+    },
+    qty: {
+
+    },
+    price: {
+        fontWeight: 'bold',
     },
 }));
 
