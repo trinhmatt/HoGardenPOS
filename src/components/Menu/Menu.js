@@ -37,7 +37,7 @@ const Menu = (props) => {
             const returnTopPosition = (top, sectionTitle) => {
                 headers.push(
                     <Container className={styles.scrollContainer}>
-                    <span className={(props.language === 'chinese') ? styles.chinScrollItem : styles.engScrollItem} onClick={() => focusSection(top)} key={`headerSection/${top}`}>{sectionTitle}</span>
+                        <span className={(props.language === 'chinese') ? styles.chinScrollItem : styles.engScrollItem} onClick={() => focusSection(top)} key={`headerSection/${top}`}>{sectionTitle}</span>
                     </Container>
                 );
                 if (headers.length === numSections) {
