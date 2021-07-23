@@ -27,4 +27,8 @@ export const cartConsts = {
         "C10": true
     },
     chTablePrefix: "門口",
+    actions: {
+        add: "ADD_TO_CART",
+        update: "UPDATE_CART"
+    }
 };

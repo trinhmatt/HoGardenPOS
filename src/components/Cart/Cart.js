@@ -5,17 +5,19 @@ import CartItem from "./CartItem";
 
 const Cart = (props) => {
     const { cart, language } = props;
-    const [cartItems, setCartItems] = useState([]);
-    useEffect(() => {
+    const renderCartItems = () => {
         let cartItems = [];
         for (let i = 0; i < cart.length; i++) {
-            cartItems.push(<CartItem language={language} itemData={cart[i]} />)
+            cartItems.push(<CartItem key={`cartItem/${i}`} index={i} language={language} itemData={cart[i]} />)
         }
-        setCartItems(cartItems);
-    }, [])
+        return cartItems;
+    }
     return (
-        <div>
-            {cartItems}
+        <div style={{backgroundColor: "white"}}>
+            {
+            cart.length > 0 ? renderCartItems() 
+            : <div><h3>Cart is empty!</h3></div>
+            }
         </div>
     )
 }

@@ -96,6 +96,7 @@ const Menu = (props) => {
                 </ElevationScroll>
                 <Toolbar id='top-anchor' />
                 <Container className={styles.foodLayout}>
+                <button onClick={() => setCartOpen(true)}>cart</button>
                     {/* Menu sections */}
                     {menuSections}
                     <Modal

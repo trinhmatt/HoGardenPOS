@@ -23,10 +23,19 @@ const MenuSectionItem = (props) => {
             prices = data.price;
         } else {
             if (data.hotPrice) {
-                prices.push(<span>Hot Price <p>{data.hotPrice}</p></span>)
+                prices.push(
+                    <div key={'hot'}>
+                        <span>Hot Price</span>
+                        <p>{data.hotPrice}</p>
+                    </div>)
             }
             if (data.coldPrice) {
-                prices.push(<span>Cold Price <p>{data.coldPrice}</p></span>)
+                prices.push(
+                    <div key={'cold'}>
+                        <span>Cold Price</span>
+                        <p>{data.coldPrice}</p>
+                    </div>
+                )
             }
         }
         return prices;

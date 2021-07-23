@@ -46,7 +46,7 @@ const AddItem = (props) => {
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key]) {
-                const choices = choicesBuilder(itemChoices[key], sectionData[itemChoices[key]]);
+                const choices = choicesBuilder(itemChoices[key], sectionData[itemChoices[key].menuKey]);
                 choiceSections.push(<div key={`${key}`}>{choices}</div>);
             }
         }
@@ -70,7 +70,7 @@ const AddItem = (props) => {
     }
     const selectChoice = (e) => {
         const val = e.currentTarget.value;
-        let price = item.price;
+        let price = itemData.price;
         if (val.indexOf("tempChoice") > -1) {
             price = val.indexOf("hot") > - 1 ? itemData.hotPrice : itemData.coldPrice;
         }
