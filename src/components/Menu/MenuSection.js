@@ -10,7 +10,6 @@ import { menuStyles } from '../../static/css/menuStyles';
 
 //Material ui imports
 import Paper from '@material-ui/core/Paper';
-import { Container } from '@material-ui/core';
 
 const MenuSection = (props) => {
     const styles = menuStyles();

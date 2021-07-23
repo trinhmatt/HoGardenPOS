@@ -5,21 +5,17 @@ import { menuStyles } from '../../static/css/menuStyles';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Zoom from '@material-ui/core/Zoom';
 
-const ScrollTop = (props) => {
-    const { children } = props;
+const CartButton = (props) => {
+    const { children, cartOpen } = props;
     const styles = menuStyles();
-
+    
     const trigger = useScrollTrigger({
         disableHysteresis: true,
-        threshold: 100,
+        threshold: -10,
     });
 
-    const handleClick = (event) => {
-        const anchor = (event.target.ownerDocument || document).querySelector('#top-anchor');
-        
-        if (anchor) {
-            anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+    const handleClick = () => {
+        cartOpen(true);
     };
 
     return (
@@ -31,4 +27,4 @@ const ScrollTop = (props) => {
     )
 }
 
-export default ScrollTop;
+export default CartButton;

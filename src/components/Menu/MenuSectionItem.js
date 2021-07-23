@@ -42,17 +42,18 @@ const MenuSectionItem = (props) => {
     }
     return (
         <div>
-            <Grid container spacing={3} className={styles.section} onClick={pushToAdd}>
+            <Grid container spacing={0} className={styles.section} onClick={pushToAdd}>
                 <Grid item xs={9} className={styles.item}>
                     {data[language]}
                 </Grid>
-                <Grid item xs className={styles.price}>
+                <Grid item xs className={styles.qtyBubble}>
+                    1
+                    {/* {data.qty > 0 && <span>{data.qty}</span>} */}
+                </Grid>
+                <Grid item xs={1} className={styles.price}>
                     <span>${renderPrice()}</span>
                 </Grid>
             </Grid>
-            <Grid container className={styles.qty}>
-                    {data.qty > 0 && <span>{data.qty}</span>}
-                </Grid>
             <Divider />
         </div>
     )
