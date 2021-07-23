@@ -5,7 +5,15 @@ import { withRouter } from 'react-router';
 import MenuSectionItem from "./MenuSectionItem";
 import { itemChoices } from "../../constants/menu-constants";
 
+//Style imports
+import { menuStyles } from '../../static/css/menuStyles';
+
+//Material ui imports
+import Paper from '@material-ui/core/Paper';
+import { Container } from '@material-ui/core';
+
 const MenuSection = (props) => {
+    const styles = menuStyles();
     const ref = useRef(null);
     const { data, language } = props;
     const [items, setItems] = useState([]);
@@ -45,12 +53,12 @@ const MenuSection = (props) => {
         }
     }, [itemElements]) // eslint-disable-line react-hooks/exhaustive-deps
     return (
-        <div ref={ref}>
-            <h1>{data.title[language]}</h1>
-            <div>
+        <Paper className={styles.menuSection} elevation={3} ref={ref}>
+            <h1 className={styles.menuSectionTitle}>{data.title[language]}</h1>
+           
                 {itemElements}
-            </div>
-        </div>
+         
+        </Paper>
     )
 }
 

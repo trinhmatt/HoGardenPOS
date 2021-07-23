@@ -1,7 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 
+//Style imports
+import { menuStyles } from '../../static/css/menuStyles';
+
+//Material ui imports
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+
 const MenuSectionItem = (props) => {
+    const styles = menuStyles();
     const { data, language, table, sectionData } = props;
     const pushToAdd = () => {
         props.history.push({
@@ -33,12 +41,19 @@ const MenuSectionItem = (props) => {
         return prices;
     }
     return (
-        <div onClick={pushToAdd}>
-            <p>
-                {data[language]} 
-                {data.qty > 0 && <span>{data.qty}</span>}
-                <span>{renderPrice()}</span>
-            </p>
+        <div>
+            <Grid container spacing={3} className={styles.section} onClick={pushToAdd}>
+                <Grid item xs={9} className={styles.item}>
+                    {data[language]}
+                </Grid>
+                <Grid item xs className={styles.price}>
+                    <span>${renderPrice()}</span>
+                </Grid>
+            </Grid>
+            <Grid container className={styles.qty}>
+                    {data.qty > 0 && <span>{data.qty}</span>}
+                </Grid>
+            <Divider />
         </div>
     )
 }

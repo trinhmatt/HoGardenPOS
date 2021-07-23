@@ -12,14 +12,23 @@ import Modal from '@material-ui/core/Modal';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
-import ElevationScroll from '../subcomponents/ElevationScroll';
+
+//Material ui imports
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Fab from '@material-ui/core/Fab';
 import { Container } from '@material-ui/core';
+
+//Subcomponent imports
+import ElevationScroll from '../subcomponents/ElevationScroll';
+import ScrollTop from '../subcomponents/ScrollTop';
+
+//Icon imports
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
 const Menu = (props) => {
     const styles = menuStyles();
@@ -45,10 +54,11 @@ const Menu = (props) => {
                 }
             }
             const focusSection = (topPosition) => {
-                window.scrollTo({top: topPosition - 150, behavior: 'smooth'});
+                const header = document.getElementById('menu-header').offsetHeight;
+                window.scrollTo({ top: topPosition - header, behavior: 'smooth' });
             }
             for (const section in menuJSON) {
-                menuSections.push(<MenuSection lang={props.language} returnTopPosition={returnTopPosition} key={`menuSection/${section}`} data={menuJSON[section]}/>);
+                menuSections.push(<MenuSection lang={props.language} returnTopPosition={returnTopPosition} key={`menuSection/${section}`} data={menuJSON[section]} />);
             }
             setMenuSections(menuSections);
         } else {
@@ -61,42 +71,50 @@ const Menu = (props) => {
     return (
         <React.Fragment>
             <Container className={styles.menuLayout}>
-            <ElevationScroll {...props}>
-                <AppBar>
-                    <Toolbar className={styles.header}>
-                        <Typography className={styles.smallHeader}>ho garden chinese restaurant</Typography>
-                        <Typography className={styles.bigHeader}>半島餐廳</Typography>
-                        <Typography className={styles.menuScroll}>
-                            {headerSections}
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-            </ElevationScroll>
-            <Toolbar />
-            <Container className={styles.foodLayout}>
-                <FormGroup className={styles.switchLayout}>
-                    <FormControlLabel
-                        control={<Switch size="medium" checked={props.language === "chinese"} onChange={() => 
-                           { (props.language === "chinese") ?
-                               props.changeLanguage("english") : props.changeLanguage("chinese")}
-                        } 
-                        />}
-                        label={(props.language === 'english') ? <b>中文</b> : 'English'}
-                    />
-                </FormGroup>
+                {/* Header */}
+                <ElevationScroll {...props}>
+                    <AppBar id='menu-header'>
+                        <Toolbar className={styles.header}>
+                            <Typography className={styles.smallHeader}>ho garden chinese restaurant</Typography>
+                            <Typography className={styles.bigHeader}>半島餐廳</Typography>
+                            <FormGroup className={styles.switchLayout}>
+                            <FormControlLabel
+                                control={<Switch size="medium" checked={props.language === "chinese"} onChange={() => {
+                                    (props.language === "chinese") ?
+                                        props.changeLanguage("english") : props.changeLanguage("chinese")
+                                }
+                                }
+                                />}
+                                label={<b>中文</b>}
+                            />
+                        </FormGroup>
+                            <Typography className={styles.menuScroll}>
+                                {headerSections}
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                </ElevationScroll>
+                <Toolbar id='top-anchor' />
+                <Container className={styles.foodLayout}>
                 <button onClick={() => setCartOpen(true)}>cart</button>
-                {menuSections}
-                <Modal
-                    open={isCartOpen}
-                    onClose={closeCart}
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
-                >
-                {isCartOpen && <Cart />}
-            </Modal>
+                    {/* Menu sections */}
+                    {menuSections}
+                    <Modal
+                        open={isCartOpen}
+                        onClose={closeCart}
+                        aria-labelledby="simple-modal-title"
+                        aria-describedby="simple-modal-description"
+                    >
+                        {isCartOpen && <Cart />}
+                    </Modal>
+                </Container>
             </Container>
-            
-        </Container>
+            {/* Scroll to top arrow */}
+            <ScrollTop {...props}>
+                <Fab color='primary' size='small'>
+                    <KeyboardArrowUpIcon />
+                </Fab>
+            </ScrollTop>
         </React.Fragment>
     )
 }
