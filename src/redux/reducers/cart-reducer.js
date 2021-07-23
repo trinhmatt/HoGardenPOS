@@ -4,8 +4,10 @@ const initState = [];
 
 export const cartReducer = (state = initState, action) => {
     switch (action.type) {
-        case "ADD_TO_CART":
+        case cartConsts.actions.add:
             return [...state, action.item];
+        case cartConsts.actions.update:
+            return action.newCart;
         default:
             return state;
     }

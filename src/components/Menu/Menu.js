@@ -26,8 +26,6 @@ const Menu = (props) => {
     const numSections = Object.keys(menuJSON).length;
     const [menuSections, setMenuSections] = useState([]);
     const [headerSections, setHeaderSections] = useState([]);
-    //Set language to Chinese
-    const [chinese, setChinese] = useState(false);
     const [isCartOpen, setCartOpen] = useState(false);
 
     useEffect(() => {
@@ -86,13 +84,14 @@ const Menu = (props) => {
                         label={(props.language === 'english') ? <b>中文</b> : 'English'}
                     />
                 </FormGroup>
+                <button onClick={() => setCartOpen(true)}>cart</button>
                 {menuSections}
                 <Modal
-                open={isCartOpen}
-                onClose={closeCart}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-            >
+                    open={isCartOpen}
+                    onClose={closeCart}
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                >
                 {isCartOpen && <Cart />}
             </Modal>
             </Container>
