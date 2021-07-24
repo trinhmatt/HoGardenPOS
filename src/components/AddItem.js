@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { addToCart } from '../redux/actions/cart-actions';
+import { addToCart, updateCart } from '../redux/actions/cart-actions';
 import { itemChoices } from '../constants/menu-constants';
 
 // need to include functionality for if they want more than 1 AND the item has options
 const AddItem = (props) => {
-    const { itemData, table, sectionData } = props.location.state;
-    const { addToCart, language } = props;
-    const [item, setItem] = useState({qty: 0});
+    const { itemData, table, sectionData, index } = props.location.state;
+    const { addToCart, language, cart, updateCart } = props;
+    const [item, setItem] = useState({qty: itemData.qty ? itemData.qty : 0});
     const goBackToMenu = () => {
         // cannot just use history.goBack(), the header needs to re-render to work properly
         props.history.push(`/order/${table}`);
@@ -24,6 +24,16 @@ const AddItem = (props) => {
         addToCart(orderItem);
         goBackToMenu();
     }
+    const startUpdateCart = () => {
+        let cartItems = [...cart];
+        if (item.qty > 0) {
+            cartItems[index] = {...itemData, ...item};
+        } else {
+            cartItems.splice(index, 1);
+        }
+        updateCart(cartItems);
+        goBackToMenu()
+    }
     // Values for button are formatted like: choiceType:choiceValue 
     // I use : as a delimitter to separate type and value so I can set the cart object 
     const renderChoices = () => {
@@ -33,12 +43,12 @@ const AddItem = (props) => {
             for (let i = 0; i < choicesArr.length; i++) {
                 choices.push(
                     <button 
-                            value={`${choiceType}:${JSON.stringify(choicesArr[i])}`} 
-                            key={`${i}/${choicesArr[i][language]}`}
-                            onClick={selectChoice}
-                        >
-                            {choicesArr[i][language]}
-                        </button>
+                        value={`${choiceType}:${JSON.stringify(choicesArr[i])}`} 
+                        key={`${i}/${choicesArr[i][language]}`}
+                        onClick={selectChoice}
+                    >
+                        {choicesArr[i][language]}
+                    </button>
                 )
             }
             return choices;
@@ -91,18 +101,22 @@ const AddItem = (props) => {
                 <div>
                     {renderChoices()}
                 </div>
-                <button disabled={item.qty === 0} onClick={addToOrder}>{`Add ${item.qty > 0 ? `${item.qty} ` : ' '}to order`}</button>
+                <button disabled={item.qty === 0} onClick={index !== undefined ? startUpdateCart : addToOrder}>
+                    {index !== undefined ? "Update Order" : `Add ${item.qty > 0 ? `${item.qty} ` : ' '}to order`}
+                </button>
             </div>
         </div>
     )
 }
 
 const mapStateToProps = state => ({
-    language: state.lang.lang
+    language: state.lang.lang,
+    cart: state.cart
 })
 
 const mapDispatchToProps = dispatch => ({
-    addToCart: (item) => dispatch(addToCart(item))
+    addToCart: (item) => dispatch(addToCart(item)),
+    updateCart: (updatedCart) => dispatch(updateCart(updatedCart))
 })
 
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AddItem));
