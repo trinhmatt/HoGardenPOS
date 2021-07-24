@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { itemChoices } from "../../constants/menu-constants";
+import { itemChoices } from "../../static/constants/menu-constants";
 import { updateCart } from '../../redux/actions/cart-actions';
 
 const CartItem = (props) => {
-    const { itemData, language, cart, updateCart, index, table } = props;
+    const { itemData, language, cart, updateCart, index, table, sectionData } = props;
     const [choices, setChoices] = useState([]);
     // useEffect(() => {
     //     setChoices(renderChoices());
@@ -38,6 +38,7 @@ const CartItem = (props) => {
         updateCart(cartItems);
     }
     const editItem = () => {
+        console.log(sectionData);
         props.history.push({
             pathname: "/add-item",
             state: {itemData, index, table}

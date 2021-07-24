@@ -25,14 +25,15 @@ import { Container } from '@material-ui/core';
 
 //Subcomponent imports
 import ElevationScroll from '../subcomponents/ElevationScroll';
-import ScrollTop from '../subcomponents/ScrollTop';
+import CartButton from '../subcomponents/CartButton';
 
 //Icon imports
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
 
 const Menu = (props) => {
     const styles = menuStyles();
     const numSections = Object.keys(menuJSON).length;
+    const { language, changeLanguage } = props;
     const [menuSections, setMenuSections] = useState([]);
     const [headerSections, setHeaderSections] = useState([]);
     const [isCartOpen, setCartOpen] = useState(false);
@@ -46,7 +47,7 @@ const Menu = (props) => {
             const returnTopPosition = (top, sectionTitle) => {
                 headers.push(
                     <Container className={styles.scrollContainer}>
-                        <span className={(props.language === 'chinese') ? styles.chinScrollItem : styles.engScrollItem} onClick={() => focusSection(top)} key={`headerSection/${top}`}>{sectionTitle}</span>
+                        <span className={(language === 'chinese') ? styles.chinScrollItem : styles.engScrollItem} onClick={() => focusSection(top)} key={`headerSection/${top}`}>{sectionTitle}</span>
                     </Container>
                 );
                 if (headers.length === numSections) {
@@ -58,13 +59,13 @@ const Menu = (props) => {
                 window.scrollTo({ top: topPosition - header, behavior: 'smooth' });
             }
             for (const section in menuJSON) {
-                menuSections.push(<MenuSection lang={props.language} returnTopPosition={returnTopPosition} key={`menuSection/${section}`} data={menuJSON[section]} />);
+                menuSections.push(<MenuSection lang={language} returnTopPosition={returnTopPosition} key={`menuSection/${section}`} data={menuJSON[section]} />);
             }
             setMenuSections(menuSections);
         } else {
             props.history.push("/error");
         }
-    }, [props.language]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [language]) // eslint-disable-line react-hooks/exhaustive-deps
     const closeCart = () => {
         setCartOpen(false);
     }
@@ -78,16 +79,16 @@ const Menu = (props) => {
                             <Typography className={styles.smallHeader}>ho garden chinese restaurant</Typography>
                             <Typography className={styles.bigHeader}>半島餐廳</Typography>
                             <FormGroup className={styles.switchLayout}>
-                            <FormControlLabel
-                                control={<Switch size="medium" checked={props.language === "chinese"} onChange={() => {
-                                    (props.language === "chinese") ?
-                                        props.changeLanguage("english") : props.changeLanguage("chinese")
-                                }
-                                }
-                                />}
-                                label={<b>中文</b>}
-                            />
-                        </FormGroup>
+                                <FormControlLabel
+                                    control={<Switch size="medium" checked={language === "chinese"} onChange={() => {
+                                        (language === "chinese") ?
+                                            changeLanguage("english") : changeLanguage("chinese")
+                                    }
+                                    }
+                                    />}
+                                    label={<b>中文</b>}
+                                />
+                            </FormGroup>
                             <Typography className={styles.menuScroll}>
                                 {headerSections}
                             </Typography>
@@ -96,32 +97,31 @@ const Menu = (props) => {
                 </ElevationScroll>
                 <Toolbar id='top-anchor' />
                 <Container className={styles.foodLayout}>
-                <button onClick={() => setCartOpen(true)}>cart</button>
                     {/* Menu sections */}
                     {menuSections}
-                    <Modal
-                        open={isCartOpen}
-                        onClose={closeCart}
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
-                    >
-                        {isCartOpen && <Cart />}
-                    </Modal>
                 </Container>
             </Container>
-            {/* Scroll to top arrow */}
-            <ScrollTop {...props}>
+            {/* Cart modal */}
+            <Modal
+                open={isCartOpen}
+                onClose={closeCart}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                {isCartOpen && <Cart />}
+            </Modal>
+            {/* Cart button */}
+            <CartButton {...props} cartOpen={setCartOpen}>
                 <Fab color='primary' size='small'>
-                    <KeyboardArrowUpIcon />
+                    <ShoppingCart />
                 </Fab>
-            </ScrollTop>
+            </CartButton>
         </React.Fragment>
     )
 }
 
 const mapStateToProps = (state) => ({
-    language: state.lang.lang,
-    cart: state.cart
+    language: state.lang.lang
 });
 
 const mapDispatchToProps = dispatch => ({

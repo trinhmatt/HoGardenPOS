@@ -1,6 +1,12 @@
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles, createTheme } from '@material-ui/core/styles';
 
-const menuStyles = makeStyles(({spacing}) => ({
+const theme = createTheme({
+    color: {
+        blue: '#4051b5',
+    }
+});
+
+const menuStyles = makeStyles((theme) => ({
     //LAYOUT
     menuLayout: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
@@ -99,12 +105,62 @@ const menuStyles = makeStyles(({spacing}) => ({
     },
     item: {
         paddingRight: '5%',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize:'30px',
+        },
     },
-    qty: {
-
+    qtyBubble: {
+        display: 'flex',
+        justifyContent: 'center',
+        backgroundColor: '#ffbf00',
+        fontWeight: 'bold',
+        boxShadow: '0 1px 10px rgba(0,0,0,0.2)',
+        borderRadius: '50%',
+        //phone
+        '@media (min-width: 375px)': {
+            padding: '5%',
+            fontSize:'15px',
+            transform: 'scale(0.5)',
+        },
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize:'30px',
+            transform: 'scale(0.5)',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
+            padding: '5%',
+            fontSize:'50px',
+            transform: 'scale(0.3)'
+        },
+        
     },
     price: {
         fontWeight: 'bold',
+        fontSize: '3vw',
+        //desktop
+        '@media (min-width: 990px)': {
+            fontSize:'25px',
+        },
+    },
+
+    //CART
+    emptyCartBox: {
+        backgroundColor: '#fff',
+        width: '70vw',
+        height: '20vh',
+        fontFamily: ['Roboto', 'sans-serif'].join(','),
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textTransform: 'uppercase',
+        position: 'absolute',
+        transform: 'translate(25%, 200%)',
+        borderRadius: '10px'
+    },
+    chinCartText: {
+        fontSize: '5vw'
     },
 }));
 

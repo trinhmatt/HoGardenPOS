@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { addToCart, updateCart } from '../redux/actions/cart-actions';
-import { itemChoices } from '../constants/menu-constants';
+import { itemChoices } from '../static/constants/menu-constants';
 
 // need to include functionality for if they want more than 1 AND the item has options
 const AddItem = (props) => {
-    const { itemData, table, sectionData, index } = props.location.state;
+    const { itemData, table, index } = props.location.state;
+    
+    // Section data will be from the menu when adding or from itemData when editing
+    const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
+
     const { addToCart, language, cart, updateCart } = props;
     const [item, setItem] = useState({qty: itemData.qty ? itemData.qty : 0});
     const goBackToMenu = () => {
@@ -19,7 +23,8 @@ const AddItem = (props) => {
     const addToOrder = () => {
         const orderItem = {
             ...itemData,
-            ...item
+            ...item,
+            sectionData
         }
         addToCart(orderItem);
         goBackToMenu();
@@ -56,7 +61,9 @@ const AddItem = (props) => {
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key]) {
-                const choices = choicesBuilder(itemChoices[key], sectionData[itemChoices[key].menuKey]);
+                console.log(itemChoices)
+                console.log(sectionData)
+                const choices = choicesBuilder(itemChoices[key].menuKey, sectionData[itemChoices[key].menuKey]);
                 choiceSections.push(<div key={`${key}`}>{choices}</div>);
             }
         }
@@ -85,7 +92,7 @@ const AddItem = (props) => {
             price = val.indexOf("hot") > - 1 ? itemData.hotPrice : itemData.coldPrice;
         }
         const separatorIndex = val.indexOf(":");
-        const choiceType = val.substring(0, separatorIndex)
+        const choiceType = val.substring(0, separatorIndex);
         setItem({...item, price, [choiceType]: JSON.parse(val.substring(separatorIndex+1))});
     }
     return (

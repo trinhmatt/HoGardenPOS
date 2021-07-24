@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import dayjs from 'dayjs';
 
 import CartItem from "./CartItem";
+import database from "../../firebase/firebase";
+
+//Style imports
+import { menuStyles } from '../../static/css/menuStyles';
+
+//Material ui imports
+import Paper from '@material-ui/core/Paper';
+
+//Material ui icons
+import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 
 const Cart = (props) => {
+    const styles = menuStyles();
     const { cart, language } = props;
     const [cartItems, setCartItems] = useState([]);
-    const renderCartItems = () => {
-        console.log('hi')
-        
-    }
     useEffect(() => {
         let cartItems = [];
         for (let i = 0; i < cart.length; i++) {
@@ -18,11 +26,26 @@ const Cart = (props) => {
         }
         setCartItems(cartItems)
     }, [cart])
+    const checkout = () => {
+
+
+    }
     return (
         <div style={{backgroundColor: "white"}}>
             {
-            cart.length > 0 ? <div>{cartItems}</div>
-            : <div><h3>Cart is empty!</h3></div>
+            cart.length > 0 ? 
+                <div>
+                    {cartItems}
+                    <button onClick={checkout}>Checkout</button>
+                </div> 
+            : 
+                <div className={styles.emptyCartBox}>
+                    { (language === "english") ?
+                        <p>Your cart is empty!&nbsp;<SentimentDissatisfiedIcon /></p>
+                        : 
+                        <p className={styles.chinCartText}>你的購物車是空的!&nbsp;<SentimentDissatisfiedIcon /></p>
+                    }
+                </div>
             }
         </div>
     )
