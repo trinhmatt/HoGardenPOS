@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { addToCart } from '../redux/actions/cart-actions';
-import { itemChoices } from '../constants/menu-constants';
+import { itemChoices } from '../static/constants/menu-constants';
 import { changeLanguage } from "../redux/actions/lang-actions";
+import { updateCart } from "../redux/actions/cart-actions";
 
 //Style imports
 import { menuStyles } from '../static/css/menuStyles';
@@ -31,9 +32,14 @@ import ElevationScroll from './subcomponents/ElevationScroll';
 // need to include functionality for if they want more than 1 AND the item has options
 const AddItem = (props) => {
     const styles = menuStyles();
-    const { itemData, table, sectionData } = props.location.state;
-    const { addToCart, language } = props;
-    const [item, setItem] = useState({qty: 0});
+    const { itemData, table, index } = props.location.state;
+    
+    // Section data will be from the menu when adding or from itemData when editing
+    const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
+
+    const { addToCart, language, cart, updateCart } = props;
+    const [item, setItem] = useState({qty: itemData.qty ? itemData.qty : 0});
+
     const goBackToMenu = () => {
         // cannot just use history.goBack(), the header needs to re-render to work properly
         props.history.push(`/order/${table}`);
@@ -44,10 +50,21 @@ const AddItem = (props) => {
     const addToOrder = () => {
         const orderItem = {
             ...itemData,
-            ...item
+            ...item,
+            sectionData
         }
         addToCart(orderItem);
         goBackToMenu();
+    }
+    const startUpdateCart = () => {
+        let cartItems = [...cart];
+        if (item.qty > 0) {
+            cartItems[index] = {...itemData, ...item};
+        } else {
+            cartItems.splice(index, 1);
+        }
+        updateCart(cartItems);
+        goBackToMenu()
     }
     // Values for button are formatted like: choiceType:choiceValue 
     // I use : as a delimitter to separate type and value so I can set the cart object 
@@ -58,12 +75,12 @@ const AddItem = (props) => {
             for (let i = 0; i < choicesArr.length; i++) {
                 choices.push(
                     <button 
-                            value={`${choiceType}:${JSON.stringify(choicesArr[i])}`} 
-                            key={`${i}/${choicesArr[i][language]}`}
-                            onClick={selectChoice}
-                        >
-                            {choicesArr[i][language]}
-                        </button>
+                        value={`${choiceType}:${JSON.stringify(choicesArr[i])}`} 
+                        key={`${i}/${choicesArr[i][language]}`}
+                        onClick={selectChoice}
+                    >
+                        {choicesArr[i][language]}
+                    </button>
                 )
             }
             return choices;
@@ -71,7 +88,9 @@ const AddItem = (props) => {
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key]) {
-                const choices = choicesBuilder(itemChoices[key], sectionData[itemChoices[key].menuKey]);
+                console.log(itemChoices)
+                console.log(sectionData)
+                const choices = choicesBuilder(itemChoices[key].menuKey, sectionData[itemChoices[key].menuKey]);
                 choiceSections.push(<div key={`${key}`}>{choices}</div>);
             }
         }
@@ -100,7 +119,7 @@ const AddItem = (props) => {
             price = val.indexOf("hot") > - 1 ? itemData.hotPrice : itemData.coldPrice;
         }
         const separatorIndex = val.indexOf(":");
-        const choiceType = val.substring(0, separatorIndex)
+        const choiceType = val.substring(0, separatorIndex);
         setItem({...item, price, [choiceType]: JSON.parse(val.substring(separatorIndex+1))});
     }
     return (
@@ -153,7 +172,7 @@ const AddItem = (props) => {
                             {renderChoices()}
                         </div>
                     <Button className={styles.addToOrderBtn} variant='contained' disabled={item.qty === 0} onClick={addToOrder}>
-                            {`Add ${item.qty > 0 ? `${item.qty} ` : ' '}to order`}
+                        {index !== undefined ? "Update Order" : `Add ${item.qty > 0 ? `${item.qty} ` : ' '}to order`}
                     </Button>
                     </Paper>
                 </Container>
@@ -163,12 +182,14 @@ const AddItem = (props) => {
 }
 
 const mapStateToProps = state => ({
-    language: state.lang.lang
+    language: state.lang.lang,
+    cart: state.cart
 })
 
 const mapDispatchToProps = dispatch => ({
     addToCart: (item) => dispatch(addToCart(item)),
-    changeLanguage: (lang) => dispatch(changeLanguage(lang))
+    changeLanguage: (lang) => dispatch(changeLanguage(lang)),
+    updateCart: (updatedCart) => dispatch(updateCart(updatedCart))
 })
 
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AddItem));

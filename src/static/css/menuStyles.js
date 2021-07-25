@@ -151,7 +151,6 @@ const menuStyles = makeStyles((theme) => ({
         borderTop: 'transparent',
         borderLeft: 'transparent',
         borderRight: 'transparent',
-        width: '70%',
         marginTop: '5%',
     },
     chinLanguage: {
@@ -267,6 +266,7 @@ const menuStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        textAlign: 'center',
     },
     emptyCartBox: {
         width: '70vw',

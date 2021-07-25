@@ -582,11 +582,26 @@
             "chinese": "湯意粉/通心粉/公仔麵"
         },
         "extraInfo": [],
+        "noodleChoice": [
+            {
+                "chinese": "意粉",
+                "english": "Spaghetti"
+            },
+            {
+                "chinese": "通粉",
+                "english": "Macaroni"
+            },
+            {
+                "chinese": "公仔麵",
+                "english": "Instant Noodle"
+            }
+        ],
         "menuItems": {
             "N1": {
                 "english": "Ham/Beef/Sausage/Shredded Chicken/Luncheon Meat",
                 "chinese": "火腿/牛肉/腸仔/雞絲/餐肉",
                 "price": 5.95,
+                "hasNoodle": true,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
@@ -615,6 +630,7 @@
                 "english": "Pan Fried Egg with Ham/Beef/Sausage/Luncheon Meat/Bacon",
                 "chinese": "煎蛋拼牛肉/腸仔/餐肉/煙肉",
                 "price": 6.95,
+                "hasNoodle": true,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
@@ -643,6 +659,7 @@
                 "english": "Ham & Beef/Luncheon Meat",
                 "chinese": "火腿牛肉/火腿餐肉",
                 "price": 6.95,
+                "hasNoodle": true,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {

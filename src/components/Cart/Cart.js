@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import dayjs from 'dayjs';
 
 import CartItem from "./CartItem";
+import database from "../../firebase/firebase";
+import { cartConsts } from "../../static/constants/cart-constants";
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -15,26 +19,53 @@ import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
 const Cart = (props) => {
     const styles = menuStyles();
     const { cart, language } = props;
-    const renderCartItems = () => {
+    const [cartItems, setCartItems] = useState([]);
+    useEffect(() => {
         let cartItems = [];
         for (let i = 0; i < cart.length; i++) {
-            cartItems.push(<CartItem key={`cartItem/${i}`} index={i} language={language} itemData={cart[i]} />)
+            cartItems.push(<CartItem table={props.match.params.number} key={`cartItem/${i}`} index={i} language={language} itemData={cart[i]} />)
         }
-        return cartItems;
+        setCartItems(cartItems)
+    }, [cart])
+    const checkout = () => {
+        const currentDayStr = dayjs().format("YYYY_MM_DD")
+        database.ref(`orders/${currentDayStr}`).once("value")
+            .then( snapshot => {
+                let orders = snapshot.val();
+                let table = props.match.params.number;
+                if (table.indexOf("C") > -1) {
+                    table = table.replace("C", cartConsts.chTablePrefix);
+                }
+                const order = {
+                    id: orders ? orders.length : 0,
+                    table, 
+                    orderItems: cart
+                }
+                if (orders === null) {
+                    orders = [order];
+                } else {
+                    orders = [...orders, order];
+                }
+                database.ref(`orders/${currentDayStr}`).set(orders)
+                        .then( (e) => console.log(e))
+                        .catch( err => console.log(err))
+            })
+            .catch( err => console.log(err))
     }
     return (
         <div style={{backgroundColor: "white"}}>
             {
             cart.length > 0 ? 
                 <Paper elevation={3} className={styles.cartBox}>
-                    <div className={styles.cartTitle}>
+                    <div>
                     { (props.language === "english") ?
-                        <span>Cart</span>
+                        <span className={styles.cartTitle}>Cart</span>
                         : 
-                        <span>購物車</span>
+                        <span className={styles.cartTitle}>購物車</span>
                     }
-                    </div>
-                    {renderCartItems()}
+                    {cartItems}
+                    <button onClick={checkout}>Checkout</button>
+                    </div> 
                 </Paper>
             : 
                 <Paper elevation={3} className={styles.emptyCartBox}>
@@ -54,4 +85,4 @@ const mapStateToProps = state => ({
     language: state.lang.lang
 })
 
-export default connect(mapStateToProps)(Cart);
+export default withRouter(connect(mapStateToProps)(Cart));

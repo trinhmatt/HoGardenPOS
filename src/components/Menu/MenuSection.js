@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import MenuSectionItem from "./MenuSectionItem";
-import { itemChoices } from "../../constants/menu-constants";
+import { itemChoices } from "../../static/constants/menu-constants";
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -14,7 +14,7 @@ import Paper from '@material-ui/core/Paper';
 const MenuSection = (props) => {
     const styles = menuStyles();
     const ref = useRef(null);
-    const { data, language } = props;
+    const { data, language, cart } = props;
     const [items, setItems] = useState([]);
     const [itemElements, setItemElements] = useState([]);
 
@@ -33,17 +33,30 @@ const MenuSection = (props) => {
     // on item change or language change, (re)render item list
     useEffect(() => {
         let elements = [];
+        let itemQtyObjs = {};
+        for (let i = 0; i < cart.length; i++) {
+            if (cart[i].sectionData.title.english === data.title.english) {
+                const itemQtyKey = cart[i].english.replace(" ", "")
+                if (itemQtyObjs[itemQtyKey]) {
+                    itemQtyObjs[itemQtyKey] += cart[i].qty;
+                } else {
+                    itemQtyObjs[itemQtyKey] = cart[i].qty;
+                }
+            }
+        }
         if (Object.keys(items).length > 0) {
             let sectionData = {...data};
             delete sectionData.menuItems;
             for (const item in items) {
+                const qtyQueryKey = items[item].english.replace(" ", "");
+                const qty = itemQtyObjs[qtyQueryKey] ? itemQtyObjs[qtyQueryKey] : 0;
                 elements.push(
-                    <MenuSectionItem sectionData={sectionData} table={props.match.params.number} language={language} key={item} data={items[item]} />
+                    <MenuSectionItem qty={qty} sectionData={sectionData} table={props.match.params.number} language={language} key={item} data={items[item]} />
                 )
             }
             setItemElements(elements)
         }
-    }, [items, language]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [items, language, cart]) // eslint-disable-line react-hooks/exhaustive-deps
 
     // This needs to run after itemElements is set so that getBoundingClientRect() returns the correct position of the parent
     useEffect(() => {
@@ -62,7 +75,8 @@ const MenuSection = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    language: state.lang.lang
+    language: state.lang.lang,
+    cart: state.cart
 })
 
 export default withRouter(connect(mapStateToProps)(MenuSection));

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { itemChoices } from "../../constants/menu-constants";
+import { itemChoices } from "../../static/constants/menu-constants";
 import { updateCart } from '../../redux/actions/cart-actions';
 
 //Style imports
@@ -17,29 +18,16 @@ import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'
 
 const CartItem = (props) => {
     const styles = menuStyles();
-    const { itemData, language, cart, updateCart, index } = props;
-    const [choices, setChoices] = useState([]);
-    // useEffect(() => {
-    //     setChoices(renderChoices());
-    // })
+    const { itemData, language, cart, updateCart, index, table, sectionData } = props;
     const calculatePrice = (qty, price) => {
-        let priceStr = (parseFloat(qty)*price).toString();
-        if (priceStr.indexOf(".") > -1) {
-            if (priceStr.substring(priceStr.indexOf(".")).length === 2) {
-                priceStr += "0";
-            }
-        } else {
-            priceStr += ".00";
-        }
-        return priceStr;
+        return (parseFloat(qty)*price).toFixed(2);
     }
     const renderChoices = () => {
         let choices = [];
-        console.log(itemData)
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key]) {
                 choices.push(
-                    <div>
+                    <div key={`${key}/${itemData[itemChoices[key].menuKey][language]}`} onClick={editItem}>
                         <h2>{itemChoices[key][language]}</h2>
                         <p>{itemData[itemChoices[key].menuKey][language]}</p>
                     </div>
@@ -58,17 +46,24 @@ const CartItem = (props) => {
         }
         updateCart(cartItems);
     }
+    const editItem = () => {
+        console.log(sectionData);
+        props.history.push({
+            pathname: "/add-item",
+            state: {itemData, index, table}
+        })
+    }
     return (
         <div>
             <Grid container spacing={3} className={styles.cartItemSection}>
-                <Grid item xs={2}>
+                <Grid onClick={editItem} item xs={2}>
                     <span><span className={styles.cartQty}>{itemData.qty}</span>&nbsp;&times;</span>
                 </Grid>
-                <Grid item xs={7}>
-                    {` ${itemData[language]}`}
+                <Grid onClick={editItem} item xs={7}>
+                    <p>{` ${itemData[language]}`} </p>
                 </Grid>
                 <Grid item xs className={styles.cartPrice}>
-                    <span>${calculatePrice(itemData.qty, itemData.price)}</span>
+                    <span onClick={editItem}>${calculatePrice(itemData.qty, itemData.price)}</span>
                     <div className={styles.row}>
                         <IconButton className={styles.cartQtyBtns} value={-1} onClick={changeQty}>
                             <IndeterminateCheckBoxIcon className={styles.qtyBtnColor}/>
@@ -78,7 +73,7 @@ const CartItem = (props) => {
                         </IconButton>
                     </div>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid onClick={editItem} item xs={12}>
                 {renderChoices()}
                 </Grid>
             </Grid>
@@ -95,4 +90,4 @@ const mapDispatchToProps = dispatch => ({
     updateCart: (newCart) => dispatch(updateCart(newCart))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CartItem));

@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 
 const MenuSectionItem = (props) => {
     const styles = menuStyles();
-    const { data, language, table, sectionData } = props;
+    const { data, language, table, sectionData, qty } = props;
     const pushToAdd = () => {
         props.history.push({
             pathname: "/add-item",
@@ -46,10 +46,16 @@ const MenuSectionItem = (props) => {
                 <Grid item xs={9} className={styles.item}>
                     {data[language]}
                 </Grid>
-                <Grid item xs className={styles.qtyBubble}>
-                    1
-                    {/* {data.qty > 0 && <span>{data.qty}</span>} */}
-                </Grid>
+                {
+                    qty > 0 ? 
+                        <Grid item xs className={styles.qtyBubble}>
+                            <span>{qty}</span>
+                        </Grid>
+                        :
+                        <Grid item xs>
+                            <span></span>
+                        </Grid>
+                }
                 <Grid item xs={1} className={styles.price}>
                     <span>${renderPrice()}</span>
                 </Grid>
