@@ -25,15 +25,25 @@ const Cart = (props) => {
     return (
         <div style={{backgroundColor: "white"}}>
             {
-            cart.length > 0 ? renderCartItems() 
+            cart.length > 0 ? 
+                <Paper elevation={3} className={styles.cartBox}>
+                    <div className={styles.cartTitle}>
+                    { (props.language === "english") ?
+                        <span>Cart</span>
+                        : 
+                        <span>購物車</span>
+                    }
+                    </div>
+                    {renderCartItems()}
+                </Paper>
             : 
-                <div className={styles.emptyCartBox}>
+                <Paper elevation={3} className={styles.emptyCartBox}>
                     { (props.language === "english") ?
                         <p>Your cart is empty!&nbsp;<SentimentDissatisfiedIcon /></p>
                         : 
                         <p className={styles.chinCartText}>你的購物車是空的!&nbsp;<SentimentDissatisfiedIcon /></p>
                     }
-                </div>
+                </Paper>
             }
         </div>
     )

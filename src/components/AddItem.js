@@ -3,9 +3,34 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { addToCart } from '../redux/actions/cart-actions';
 import { itemChoices } from '../constants/menu-constants';
+import { changeLanguage } from "../redux/actions/lang-actions";
+
+//Style imports
+import { menuStyles } from '../static/css/menuStyles';
+
+//Material ui imports
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import { Container } from '@material-ui/core';
+
+//Material ui icon imports
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+
+//Subcomponent imports
+import ElevationScroll from './subcomponents/ElevationScroll';
 
 // need to include functionality for if they want more than 1 AND the item has options
 const AddItem = (props) => {
+    const styles = menuStyles();
     const { itemData, table, sectionData } = props.location.state;
     const { addToCart, language } = props;
     const [item, setItem] = useState({qty: 0});
@@ -79,21 +104,61 @@ const AddItem = (props) => {
         setItem({...item, price, [choiceType]: JSON.parse(val.substring(separatorIndex+1))});
     }
     return (
-        <div>
-            <button onClick={goBackToMenu}>Back</button>
-            <div>
-                <h1>{itemData[language]}</h1>
-                <div>
-                    <p>{item.qty}</p>
-                    {item.qty > 0 && <button value="-1" onClick={changeQty}>-</button>}
-                    <button value="1" onClick={changeQty}>+</button>
-                </div>
-                <div>
-                    {renderChoices()}
-                </div>
-                <button disabled={item.qty === 0} onClick={addToOrder}>{`Add ${item.qty > 0 ? `${item.qty} ` : ' '}to order`}</button>
-            </div>
-        </div>
+        <React.Fragment>
+            <Container className={styles.menuLayout}>
+                {/* Header */}
+                <ElevationScroll {...props}>
+                    <AppBar id='menu-header'>
+                        <Toolbar className={styles.header}>
+
+                    <IconButton className={styles.backLayout} onClick={goBackToMenu}>
+                        <ArrowBackIcon className={styles.backAddItemLayout} />
+                    </IconButton>
+                            <FormGroup className={styles.switchLayout}>
+                                <FormControlLabel
+                                    className={styles.switchAddItemLayout}
+                                    control={<Switch size="medium" checked={props.language === "chinese"} onChange={() => {
+                                        (props.language === "chinese") ?
+                                            props.changeLanguage("english") : props.changeLanguage("chinese")
+                                    }
+                                    }
+                                    />}
+                                    label={<b className={styles.chinLanguage}>中文</b>}
+                                />
+                            </FormGroup>
+                        </Toolbar>
+                    </AppBar>
+                </ElevationScroll>
+                <Toolbar />
+                <Container className={styles.addItemLayout}>
+                    {/* food item */}
+                    <Paper className={styles.addItemSection} elevation={3}>
+                        <h1 className={styles.itemTItle}>{itemData[language]}</h1>
+                        <div className={styles.row}>
+                            {item.qty > 0 ?
+                                <IconButton value="-1" onClick={changeQty}>
+                                    <RemoveCircleIcon className={styles.addItemQtyBtn} />
+                                </IconButton>
+                            :
+                                <IconButton value="-1" disabled onClick={changeQty}>
+                                    <RemoveCircleIcon className={styles.disabledAddItemQtyBtn}/>
+                                </IconButton>
+                            }
+                            <p>{item.qty}</p>
+                            <IconButton value="1" onClick={changeQty}>
+                                <AddCircleIcon className={styles.addItemQtyBtn}/>
+                            </IconButton>
+                        </div>
+                        <div>
+                            {renderChoices()}
+                        </div>
+                    <Button className={styles.addToOrderBtn} variant='contained' disabled={item.qty === 0} onClick={addToOrder}>
+                            {`Add ${item.qty > 0 ? `${item.qty} ` : ' '}to order`}
+                    </Button>
+                    </Paper>
+                </Container>
+            </Container>
+        </React.Fragment>
     )
 }
 
@@ -102,7 +167,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    addToCart: (item) => dispatch(addToCart(item))
+    addToCart: (item) => dispatch(addToCart(item)),
+    changeLanguage: (lang) => dispatch(changeLanguage(lang))
 })
 
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AddItem));

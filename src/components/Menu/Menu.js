@@ -8,8 +8,6 @@ import { cartConsts } from "../../static/constants/cart-constants";
 import { changeLanguage } from "../../redux/actions/lang-actions";
 import Cart from "../Cart/Cart";
 
-import Modal from '@material-ui/core/Modal';
-
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
 
@@ -21,6 +19,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Fab from '@material-ui/core/Fab';
+import Modal from '@material-ui/core/Modal';
 import { Container } from '@material-ui/core';
 
 //Subcomponent imports
@@ -75,8 +74,6 @@ const Menu = (props) => {
                 <ElevationScroll {...props}>
                     <AppBar id='menu-header'>
                         <Toolbar className={styles.header}>
-                            <Typography className={styles.smallHeader}>ho garden chinese restaurant</Typography>
-                            <Typography className={styles.bigHeader}>半島餐廳</Typography>
                             <FormGroup className={styles.switchLayout}>
                                 <FormControlLabel
                                     control={<Switch size="medium" checked={props.language === "chinese"} onChange={() => {
@@ -85,7 +82,7 @@ const Menu = (props) => {
                                     }
                                     }
                                     />}
-                                    label={<b>中文</b>}
+                                    label={<b className={styles.chinLanguage}>中文</b>}
                                 />
                             </FormGroup>
                             <Typography className={styles.menuScroll}>
@@ -94,7 +91,7 @@ const Menu = (props) => {
                         </Toolbar>
                     </AppBar>
                 </ElevationScroll>
-                <Toolbar id='top-anchor' />
+                <Toolbar />
                 <Container className={styles.foodLayout}>
                     {/* Menu sections */}
                     {menuSections}
@@ -102,6 +99,7 @@ const Menu = (props) => {
             </Container>
             {/* Cart modal */}
             <Modal
+                className={styles.modal}
                 open={isCartOpen}
                 onClose={closeCart}
                 aria-labelledby="simple-modal-title"
@@ -111,7 +109,7 @@ const Menu = (props) => {
             </Modal>
             {/* Cart button */}
             <CartButton {...props} cartOpen={setCartOpen}>
-                <Fab color='primary' size='small'>
+                <Fab className={styles.cartIcon} size='small'>
                     <ShoppingCart />
                 </Fab>
             </CartButton>

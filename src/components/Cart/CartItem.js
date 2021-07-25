@@ -3,7 +3,20 @@ import { connect } from 'react-redux';
 import { itemChoices } from "../../constants/menu-constants";
 import { updateCart } from '../../redux/actions/cart-actions';
 
+//Style imports
+import { menuStyles } from '../../static/css/menuStyles';
+
+//Material ui imports
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+
+//Icon imports
+import AddBox from '@material-ui/icons/AddBox';
+import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
+
 const CartItem = (props) => {
+    const styles = menuStyles();
     const { itemData, language, cart, updateCart, index } = props;
     const [choices, setChoices] = useState([]);
     // useEffect(() => {
@@ -47,16 +60,29 @@ const CartItem = (props) => {
     }
     return (
         <div>
-            <p>
-                <span>{itemData.qty}</span>
-                {` ${itemData[language]}`}
-                <span>{calculatePrice(itemData.qty, itemData.price)}</span>
-            </p>
-            <div>
-                <button value={-1} onClick={changeQty}>-</button>
-                <button value={1} onClick={changeQty}>+</button>
-            </div>
-            {renderChoices()}
+            <Grid container spacing={3} className={styles.cartItemSection}>
+                <Grid item xs={2}>
+                    <span><span className={styles.cartQty}>{itemData.qty}</span>&nbsp;&times;</span>
+                </Grid>
+                <Grid item xs={7}>
+                    {` ${itemData[language]}`}
+                </Grid>
+                <Grid item xs className={styles.cartPrice}>
+                    <span>${calculatePrice(itemData.qty, itemData.price)}</span>
+                    <div className={styles.row}>
+                        <IconButton className={styles.cartQtyBtns} value={-1} onClick={changeQty}>
+                            <IndeterminateCheckBoxIcon className={styles.qtyBtnColor}/>
+                        </IconButton>
+                        <IconButton className={styles.cartQtyBtns} value={1} onClick={changeQty}>
+                            <AddBox className={styles.qtyBtnColor}/>
+                        </IconButton>
+                    </div>
+                </Grid>
+                <Grid item xs={12}>
+                {renderChoices()}
+                </Grid>
+            </Grid>
+            <Divider />
         </div>
     )
 }
