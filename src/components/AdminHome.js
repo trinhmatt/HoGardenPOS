@@ -12,8 +12,8 @@ import { Fastfood, Schedule } from '@material-ui/icons';
 const AdminHome = () => {
     const history = useHistory();
 
-    const pushToOrders = () => {
-        history.push("timesheet");
+    const pushToPage = (e) => {
+        history.push(`${e.currentTarget.value}`);
     }
 
     return (
@@ -28,7 +28,8 @@ const AdminHome = () => {
                     variant="contained" 
                     startIcon={<Fastfood />} 
                     className="order-btn"
-                    onClick={pushToOrders}>
+                    value="orders"
+                    onClick={pushToPage}>
                         Orders/食品订单
                 </Button>
                 </div>
@@ -37,7 +38,8 @@ const AdminHome = () => {
                     variant="contained" 
                     startIcon={<Schedule />} 
                     className="order-btn"
-                    onClick={pushToOrders}>
+                    value="timesheet"
+                    onClick={pushToPage}>
                         Timetable/时间表
                 </Button>
             </div>

@@ -6,10 +6,6 @@ import { updateCart } from '../../redux/actions/cart-actions';
 
 const CartItem = (props) => {
     const { itemData, language, cart, updateCart, index, table, sectionData } = props;
-    const [choices, setChoices] = useState([]);
-    // useEffect(() => {
-    //     setChoices(renderChoices());
-    // })
     const calculatePrice = (qty, price) => {
         return (parseFloat(qty)*price).toFixed(2);
     }

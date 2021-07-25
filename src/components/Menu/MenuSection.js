@@ -44,7 +44,6 @@ const MenuSection = (props) => {
                 }
             }
         }
-        console.log(itemQtyObjs)
         if (Object.keys(items).length > 0) {
             let sectionData = {...data};
             delete sectionData.menuItems;

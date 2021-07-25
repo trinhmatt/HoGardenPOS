@@ -1,8 +1,9 @@
 import React from "react";
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
 } from "react-router-dom";
 
 import Home from "../components/Home"
@@ -12,31 +13,48 @@ import Menu from "../components/Menu/Menu";
 import NotFound from "../components/NotFound";
 import AddItem from "../components/AddItem";
 import AdminHome from "../components/AdminHome";
+import Unauthorized from "../components/Unauthorized";
+import Orders from "../components/Orders/Orders";
 
 const AppRouter = () => (
     <Router>
       <Switch>
-        <Route path="/" exact={true}>
+
+        <PublicRoute path="/" exact={true}>
           <Home />
-        </Route>
-        <Route path="/admin" exact={true}>
+        </PublicRoute>
+
+        <PublicRoute path="/admin" exact={true}>
           <Login />
-        </Route>  
-        <Route path="/admin/home">
+        </PublicRoute> 
+
+        <PrivateRoute path="/admin/home">
           <AdminHome />
-        </Route>
-        <Route path="/admin/timesheet">
+        </PrivateRoute>
+
+        <PrivateRoute path="/admin/timesheet">
           <TimeSheet />
-        </Route>
-        <Route path="/order/:number">
+        </PrivateRoute>
+
+        <PrivateRoute path="/admin/orders">
+          <Orders />
+        </PrivateRoute>
+
+        <PublicRoute path="/order/:number">
           <Menu />
-        </Route>
-        <Route path="/add-item">
+        </PublicRoute>
+
+        <PublicRoute path="/add-item">
           <AddItem />
-        </Route>
-        <Route path="/*">
+        </PublicRoute>
+
+        <PublicRoute path="/unauthorized">
+          <Unauthorized />
+        </PublicRoute>
+
+        <PublicRoute path="/*">
           <NotFound />
-        </Route>             
+        </PublicRoute>             
       </Switch>
     </Router>
   )
