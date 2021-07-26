@@ -13,6 +13,11 @@ const menuStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         alignItems: 'center',
     },
+    centered: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     menuLayout: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflowX: 'hidden',
@@ -42,7 +47,6 @@ const menuStyles = makeStyles((theme) => ({
     },
     foodLayout: {
         width: '110%',
-        height: '100vh',
         //phone
         '@media (min-width: 375px)': {
             marginTop: '18vh',
@@ -65,7 +69,7 @@ const menuStyles = makeStyles((theme) => ({
         height: '100vh',
         //phone
         '@media (min-width: 375px)': {
-            marginTop: '20vh',
+            marginTop: '16vh',
             marginLeft: '-5vw',
         },
         //ipad
@@ -209,8 +213,16 @@ const menuStyles = makeStyles((theme) => ({
             maxHeight: '10vh',
         },
     },
-    item: {
+    engMenuItem: {
         paddingRight: '5%',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize:'25px',
+        },
+    },
+    chinMenuItem: {
+        paddingRight: '5%',
+        fontSize: '20px',
         //ipad
         '@media (min-width: 760px)': {
             fontSize:'25px',
@@ -255,18 +267,20 @@ const menuStyles = makeStyles((theme) => ({
     //CART
     modal: {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'center',
     },
     cartBox: {
         backgroundColor: '#fff',
-        width: '85vw',
+        width: '95vw',
         height: '80vh',
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
+        paddingTop: '5%',
+        overflowY: 'auto',
     },
     emptyCartBox: {
         width: '70vw',
@@ -335,7 +349,7 @@ const menuStyles = makeStyles((theme) => ({
 
     //ADD ITEM 
     addItemSection: {
-        height: '68vh',
+        height: '70%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -344,6 +358,21 @@ const menuStyles = makeStyles((theme) => ({
     itemTItle: {
         padding: '5%',
         textAlign: 'center',
+        wordBreak: 'break-word',
+    },
+    itemChoices: {
+        color: '#000',
+        '&:active': {
+            backgroundColor: '#000',
+            color: '#fff'
+        },
+        '&:focus': {
+            backgroundColor: '#000',
+            color: '#fff'
+        },
+    },
+    itemChoiceGroup: {
+        backgroundColor: '#fff',
     },
     addItemQtyBtn: {
         fontSize: '40px',

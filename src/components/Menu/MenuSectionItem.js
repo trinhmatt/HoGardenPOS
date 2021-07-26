@@ -43,7 +43,7 @@ const MenuSectionItem = (props) => {
     return (
         <div>
             <Grid container spacing={0} className={styles.section} onClick={pushToAdd}>
-                <Grid item xs={9} className={styles.item}>
+                <Grid item xs={9} className={(language === 'chinese') ? styles.chinMenuItem : styles.engMenuItem}>
                     {data[language]}
                 </Grid>
                 {
