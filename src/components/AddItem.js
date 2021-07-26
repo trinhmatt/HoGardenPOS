@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { addToCart } from '../redux/actions/cart-actions';
@@ -19,6 +19,7 @@ import Switch from '@material-ui/core/Switch';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Container } from '@material-ui/core';
 
 //Material ui icon imports
@@ -32,6 +33,8 @@ import ElevationScroll from './subcomponents/ElevationScroll';
 // need to include functionality for if they want more than 1 AND the item has options
 const AddItem = (props) => {
     const styles = menuStyles();
+    // Changes button color on click
+    const [btnFlag, setBtnFlag] = useState(true);
     const { itemData, table, index } = props.location.state;
     
     // Section data will be from the menu when adding or from itemData when editing
@@ -74,13 +77,14 @@ const AddItem = (props) => {
             let choices = [];
             for (let i = 0; i < choicesArr.length; i++) {
                 choices.push(
-                    <button 
+                    <Button 
                         value={`${choiceType}:${JSON.stringify(choicesArr[i])}`} 
                         key={`${i}/${choicesArr[i][language]}`}
                         onClick={selectChoice}
+                        className={styles.itemChoices}
                     >
                         {choicesArr[i][language]}
-                    </button>
+                    </Button>
                 )
             }
             return choices;
@@ -89,12 +93,12 @@ const AddItem = (props) => {
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
                 const choices = choicesBuilder(itemChoices[key].menuKey, sectionData[itemChoices[key].menuKey]);
-                choiceSections.push(<div key={`${key}`}>{choices}</div>);
+                choiceSections.push(<ButtonGroup variant='contained' key={`${key}`}>{choices}</ButtonGroup>);
             }
         }
         if (itemData.hasProteinChoice) {
             const choices = choicesBuilder("proteinChoice", itemData.proteinChoice);
-            choiceSections.push(<div key={`proteinChoice`}>{choices}</div>);
+            choiceSections.push(<ButtonGroup variant='contained' key={`proteinChoice`}>{choices}</ButtonGroup>);
         }
         if (itemData.hotPrice && itemData.coldPrice) {
             choiceSections.push(
@@ -116,6 +120,7 @@ const AddItem = (props) => {
         return choiceSections;
     }
     const selectChoice = (e) => {
+        setBtnFlag(!btnFlag);
         const val = e.currentTarget.value;
         let price = itemData.price;
         if (val.indexOf("tempChoice") > -1) {
@@ -125,6 +130,12 @@ const AddItem = (props) => {
         const choiceType = val.substring(0, separatorIndex);
         setItem({...item, price, [choiceType]: JSON.parse(val.substring(separatorIndex+1))});
     }
+
+    useEffect(() => {
+        // Scroll to top of window on render
+        window.scrollTo(0,0);
+    }, []);
+
     return (
         <React.Fragment>
             <Container className={styles.menuLayout}>
@@ -132,7 +143,6 @@ const AddItem = (props) => {
                 <ElevationScroll {...props}>
                     <AppBar id='menu-header'>
                         <Toolbar className={styles.header}>
-
                     <IconButton className={styles.backLayout} onClick={goBackToMenu}>
                         <ArrowBackIcon className={styles.backAddItemLayout} />
                     </IconButton>
@@ -156,6 +166,10 @@ const AddItem = (props) => {
                     {/* food item */}
                     <Paper className={styles.addItemSection} elevation={3}>
                         <h1 className={styles.itemTItle}>{itemData[language]}</h1>
+                        {/* Item choices */}
+                        <div>
+                            {renderChoices()}
+                        </div>
                         <div className={styles.row}>
                             {item.qty > 0 ?
                                 <IconButton value="-1" onClick={changeQty}>
@@ -171,10 +185,7 @@ const AddItem = (props) => {
                                 <AddCircleIcon className={styles.addItemQtyBtn}/>
                             </IconButton>
                         </div>
-                        <div>
-                            {renderChoices()}
-                        </div>
-                    <Button className={styles.addToOrderBtn} variant='contained' disabled={item.qty === 0} onClick={addToOrder}>
+                    <Button className={styles.addToOrderBtn} variant='contained' disabled={item.qty === 0} onClick={index !== undefined ? startUpdateCart : addToOrder}>
                         {index !== undefined ? "Update Order" : `Add ${item.qty > 0 ? `${item.qty} ` : ' '}to order`}
                     </Button>
                     </Paper>

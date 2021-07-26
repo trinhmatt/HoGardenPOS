@@ -65,7 +65,7 @@ const CartItem = (props) => {
         <div>
             <Grid container spacing={3} className={styles.cartItemSection}>
                 <Grid onClick={editItem} item xs={2}>
-                    <span><span className={styles.cartQty}>{itemData.qty}</span>&nbsp;&times;</span>
+                    <span className={styles.cartQty}>{itemData.qty}</span>
                 </Grid>
                 <Grid onClick={editItem} item xs={7}>
                     <p>{` ${itemData[language]}`} </p>
@@ -82,7 +82,7 @@ const CartItem = (props) => {
                     </div>
                 </Grid>
                 <Grid onClick={editItem} item xs={12}>
-                {renderChoices()}
+                    {renderChoices()}
                 </Grid>
             </Grid>
             <Divider />

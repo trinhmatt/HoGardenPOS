@@ -55,7 +55,7 @@ const Menu = (props) => {
             }
             const focusSection = (topPosition) => {
                 const header = document.getElementById('menu-header').offsetHeight;
-                window.scrollTo({ top: topPosition - header, behavior: 'smooth' });
+                window.scrollTo({ top: (topPosition - header), behavior: 'smooth' });
             }
             for (const section in menuJSON) {
                 menuSections.push(<MenuSection lang={language} returnTopPosition={returnTopPosition} key={`menuSection/${section}`} data={menuJSON[section]} />);
@@ -110,7 +110,7 @@ const Menu = (props) => {
             </Modal>
             {/* Cart button */}
             <CartButton {...props} cartOpen={setCartOpen}>
-                <Fab className={styles.cartIcon} size='small'>
+                <Fab className={styles.cartIcon} size='large'>
                     <ShoppingCart />
                 </Fab>
             </CartButton>

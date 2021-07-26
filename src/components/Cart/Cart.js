@@ -12,6 +12,7 @@ import { menuStyles } from '../../static/css/menuStyles';
 
 //Material ui imports
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 //Material ui icons
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
@@ -56,6 +57,7 @@ const Cart = (props) => {
         <div style={{backgroundColor: "white"}}>
             {
             cart.length > 0 ? 
+            <div className={styles.centered}>
                 <Paper elevation={3} className={styles.cartBox}>
                     <div>
                     { (props.language === "english") ?
@@ -64,9 +66,10 @@ const Cart = (props) => {
                         <span className={styles.cartTitle}>購物車</span>
                     }
                     {cartItems}
-                    <button onClick={checkout}>Checkout</button>
                     </div> 
                 </Paper>
+                <Button className={styles.addToOrderBtn} variant='contained' onClick={checkout}>Checkout</Button>
+                </div>
             : 
                 <Paper elevation={3} className={styles.emptyCartBox}>
                     { (props.language === "english") ?
