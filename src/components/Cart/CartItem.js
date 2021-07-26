@@ -34,6 +34,14 @@ const CartItem = (props) => {
                 )
             }
         }
+        if (itemData.proteinChoice) {
+            choices.push(
+                <div key={`proteinChoice/${itemData.english}`} onClick={editItem}>
+                    <h2>{itemChoices.hasProtein[language]}</h2>
+                    <p>{itemData.proteinChoice[language]}</p>
+                </div>
+            )
+        }
         return choices;
     }
     const changeQty = (e) => {

@@ -76,16 +76,17 @@
                 "price": 8.95,
                 "isStar": false,
                 "hasNoodle": false,
+                "hasEgg": true,
                 "isSpicy": false,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
                         "chinese": "火腿",
-                        "english": "ham"
+                        "english": "Ham"
                     },
                     {
                         "chinese": "牛肉",
-                        "english": "beef"
+                        "english": "Beef"
                     }
                 ],
                 "restName": "B"
@@ -97,6 +98,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasEgg": true,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
@@ -115,7 +117,7 @@
                 "restName": "C"
             },
             "A7": {
-                "english": "Egg Sanwiches + Satay Beef with Vermicelli in Soup",
+                "english": "Egg Sandwiches + Satay Beef with Vermicelli in Soup",
                 "chinese": "雞蛋三文治 拼 沙爹牛肉湯米",
                 "price": 8.95,
                 "isStar": false,
@@ -722,61 +724,72 @@
                 "english": "Baked Pork Chop with Rice/Spaghetti/Macaroni",
                 "chinese": "焗茄汁豬扒飯/意粉/通粉",
                 "price": 10.95,
-                "hasNoodle": true
+                "hasNoodle": true,
+                "restName": "焗1"
             },
             "BC2": {
                 "english": "Baked Beef in Tomato Sauce with Rice/Spaghetti/Macaroni",
                 "chinese": "焗鮮茄牛肉飯/意粉/通粉",
                 "price": 10.95,
-                "hasNoodle": true
+                "hasNoodle": true,
+                "restName": "焗2"
             },
             "BC3": {
                 "english": "Baked Chicken in Portuguese Sauce with Rice/Spaghetti/Macaroni",
                 "chinese": "焗葡國雞飯/意粉/通粉",
                 "price": 10.95,
-                "hasNoodle": true
+                "hasNoodle": true,
+                "restName": "焗3"
             },
             "BC4": {
                 "english": "Baked Garoupa in White Herb Sauce with Rice/Spaghetti/Macaron",
                 "chinese": "焗白汁斑塊飯/意粉/通粉",
                 "price": 10.95,
-                "hasNoodle": true
+                "hasNoodle": true,
+                "restName": "焗4"
             },
             "BC5": {
                 "english": "Baked Chicken in Black Pepper Sauce with Rice/Spaghetti/Macaroni",
                 "chinese": "焗黑椒雞扒飯/意粉/通粉",
                 "price": 10.95,
-                "hasNoodle": true
+                "hasNoodle": true,
+                "restName": "焗5"
             },
             "BC6": {
                 "english": "Baked Ox Tongue in Garlic Sauce with Rice/Spaghetti/Macaroni",
                 "chinese": "焗蒜汁牛脷飯/意粉/通粉",
                 "price": 10.95,
-                "hasNoodle": true
+                "hasNoodle": true,
+                "restName": "焗6"
             },
             "BC7": {
                 "english": "Baked Minced Beef & Egg with Cheese with Rice/Spaghetti/Macaroni",
                 "chinese": "焗煎蛋芝士肉醬飯/意粉/通粉",
                 "price": 10.95,
-                "hasNoodle": true
+                "hasNoodle": true,
+                "hasEgg": true,
+                "restName": "焗7"
             },
             "BC8": {
                 "english": "Baked Ham & Shredded Chicken in White Herb Sauce with Rice/Spaghetti/Macaroni",
                 "chinese": "焗白汁火腿雞絲飯/意粉/通粉",
                 "price": 10.95,
-                "hasNoodle": true
+                "hasNoodle": true,
+                "restName": "焗8"
             },
             "BC9": {
                 "english": "Baked Seafood in White Herb Sauce with Rice/Spaghetti/Macaroni ",
                 "chinese": "焗白汁海鮮飯/意粉/通粉",
                 "price": 11.95,
-                "hasNoodle": true
+                "hasNoodle": true,
+                "restName": "焗9"
             },
             "BC10": {
                 "english": "Baked Chicken & Pork in BBQ Sauce with Rice/Spaghetti/Macaroni ",
                 "chinese": "焗燒汁鴛鴦扒飯/意粉/通粉",
                 "price": 11.95,
-                "hasNoodle": true
+                "hasNoodle": true,
+                "restName": "焗10"
             }
         }
     },
@@ -1461,6 +1474,7 @@
                 "english": "Pork Chop with Pan Fried Egg on Rice",
                 "chinese": "煎蛋豬扒飯",
                 "price": 10.95,
+                "hasEgg": true,
                 "hasDrink": true
             },
             "R14": {
@@ -1497,6 +1511,7 @@
                 "english": "Minced Pork with Pan Fried Egg on Rice",
                 "chinese": "菜甫肉碎煎蛋飯",
                 "price": 10.95,
+                "hasEgg": true,
                 "hasDrink": true
             },
             "R20": {
@@ -1524,7 +1539,7 @@
                 "hasDrink": true
             },
             "R24": {
-                "english": "Scrambled Egg with Shrimp on Ric",
+                "english": "Scrambled Egg with Shrimp on Rice",
                 "chinese": "滑蛋蝦仁飯",
                 "price": 10.95,
                 "hasDrink": true
@@ -1587,12 +1602,14 @@
                 "english": "Ham with Pan Fried Eggs on Rice",
                 "chinese": "煎雙蛋火腿飯",
                 "price": 10.95,
+                "hasEgg": true,
                 "hasDrink": true
             },
             "R35": {
-                "english": "Luncheon Meat with Pan Fried Eggs on Ric",
+                "english": "Luncheon Meat with Pan Fried Eggs on Rice",
                 "chinese": "煎雙蛋餐肉飯",
                 "price": 10.95,
+                "hasEgg": true,
                 "hasDrink": true
             }
         }
@@ -2768,6 +2785,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早13",
+                "hasEgg": true,
                 "hasNoodle": true
             },
             "B14": {
@@ -2784,6 +2802,7 @@
                 "price": 6.95,
                 "hasDrink": true,
                 "restName": "早15",
+                "hasEgg": true,
                 "hasNoodle": true
             },
             "B16": {
@@ -3017,6 +3036,7 @@
                 "english": "Luncheon Meat/Ham and Egg with Instant Moodle in Soup",
                 "chinese": "餐肉或火腿煎蛋公仔麵",
                 "price": 7.95,
+                "hasEgg": true,
                 "proteinChoice": [
                     {
                         "english": "Luncheon Meat",

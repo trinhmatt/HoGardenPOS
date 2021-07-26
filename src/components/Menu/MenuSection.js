@@ -61,6 +61,7 @@ const MenuSection = (props) => {
     // This needs to run after itemElements is set so that getBoundingClientRect() returns the correct position of the parent
     useEffect(() => {
         if (!!ref.current.getBoundingClientRect().y && itemElements.length > 0) {
+            console.log(ref.current.getBoundingClientRect().y)
             props.returnTopPosition(ref.current.getBoundingClientRect().y, data.title[language])
         }
     }, [itemElements]) // eslint-disable-line react-hooks/exhaustive-deps

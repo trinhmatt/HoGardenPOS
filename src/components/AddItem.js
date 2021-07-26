@@ -87,9 +87,7 @@ const AddItem = (props) => {
         }
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
-            if (itemData[key] && itemChoices[key]) {
-                console.log(itemChoices)
-                console.log(sectionData)
+            if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
                 const choices = choicesBuilder(itemChoices[key].menuKey, sectionData[itemChoices[key].menuKey]);
                 choiceSections.push(<div key={`${key}`}>{choices}</div>);
             }
@@ -109,6 +107,11 @@ const AddItem = (props) => {
                     <button value={`tempChoice:${JSON.stringify(sectionData.temp.cold)}`} onClick={selectChoice}>{sectionData.temp.cold[language]}</button>
                 </div>
             )
+        }
+        if (itemData.hasEgg) {
+            console.log(itemChoices.hasEgg.eggChoice)
+            const choices = choicesBuilder("eggChoice", itemChoices.hasEgg.eggChoice);
+            choiceSections.push(choices);
         }
         return choiceSections;
     }

@@ -34,5 +34,32 @@ export const itemChoices = {
         "english": "Side",
         "chinese": "小菜"
     },
+    "hasEgg": {
+        "menuKey": "eggChoice",
+        "english": "Egg",
+        "chinese": "蛋",
+        "eggChoice": [
+            {
+                "english": "Scrambled",
+                "chinese": "炒蛋"
+            },
+            {
+                "english": "Well done egg",
+                "chinese": "熟蛋"
+            },
+            {
+                "english": "Sunny side up",
+                "chinese": "太陽蛋"
+            },
+            {
+                "english": "Over-easy",
+                "chinese": "Over-easy"
+            }
+        ]
+    },
+    "hasProtein": {
+        "english": "Meat",
+        "chinese": "肉"
+    },
     "addOns": true
 };
