@@ -362,14 +362,10 @@ const menuStyles = makeStyles((theme) => ({
     },
     itemChoices: {
         color: '#000',
-        '&:active': {
-            backgroundColor: '#000',
-            color: '#fff'
-        },
-        '&:focus': {
-            backgroundColor: '#000',
-            color: '#fff'
-        },
+    },
+    selectedChoice: {
+        backgroundColor: '#000',
+        color: '#fff',
     },
     itemChoiceGroup: {
         backgroundColor: '#fff',

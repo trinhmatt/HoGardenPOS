@@ -55,7 +55,6 @@ const CartItem = (props) => {
         updateCart(cartItems);
     }
     const editItem = () => {
-        console.log(sectionData);
         props.history.push({
             pathname: "/add-item",
             state: {itemData, index, table}

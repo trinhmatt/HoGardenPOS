@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { addToCart } from '../redux/actions/cart-actions';
-import { itemChoices } from '../static/constants/menu-constants';
-import { changeLanguage } from "../redux/actions/lang-actions";
-import { updateCart } from "../redux/actions/cart-actions";
+import { addToCart } from '../../redux/actions/cart-actions';
+import { itemChoices } from '../../static/constants/menu-constants';
+import { changeLanguage } from "../../redux/actions/lang-actions";
+import { updateCart } from "../../redux/actions/cart-actions";
+import ItemChoiceSection from "./ItemChoiceSection";
 
 //Style imports
-import { menuStyles } from '../static/css/menuStyles';
+import { menuStyles } from '../../static/css/menuStyles';
 
 //Material ui imports
 import AppBar from '@material-ui/core/AppBar';
@@ -28,7 +29,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 
 //Subcomponent imports
-import ElevationScroll from './subcomponents/ElevationScroll';
+import ElevationScroll from '../subcomponents/ElevationScroll';
 
 // need to include functionality for if they want more than 1 AND the item has options
 const AddItem = (props) => {
@@ -92,13 +93,11 @@ const AddItem = (props) => {
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
-                const choices = choicesBuilder(itemChoices[key].menuKey, sectionData[itemChoices[key].menuKey]);
-                choiceSections.push(<ButtonGroup variant='contained' key={`${key}`}>{choices}</ButtonGroup>);
+                choiceSections.push(<ItemChoiceSection constKey={key} language={language} selectChoice={selectChoice} choiceType={itemChoices[key].menuKey} choicesArr={sectionData[itemChoices[key].menuKey]}/>);
             }
         }
         if (itemData.hasProteinChoice) {
-            const choices = choicesBuilder("proteinChoice", itemData.proteinChoice);
-            choiceSections.push(<ButtonGroup variant='contained' key={`proteinChoice`}>{choices}</ButtonGroup>);
+            choiceSections.push(<ItemChoiceSection constKey={"hasProtein"} language={language} selectChoice={selectChoice} choiceType={"proteinChoice"} choicesArr={itemData.proteinChoice}/>);
         }
         if (itemData.hotPrice && itemData.coldPrice) {
             choiceSections.push(
@@ -113,9 +112,7 @@ const AddItem = (props) => {
             )
         }
         if (itemData.hasEgg) {
-            console.log(itemChoices.hasEgg.eggChoice)
-            const choices = choicesBuilder("eggChoice", itemChoices.hasEgg.eggChoice);
-            choiceSections.push(choices);
+            choiceSections.push(<ItemChoiceSection constKey={"hasEgg"} language={language} selectChoice={selectChoice} choiceType={"proteinChoice"} choicesArr={itemData.hasEgg.eggChoice}/>);
         }
         return choiceSections;
     }
