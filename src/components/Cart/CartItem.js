@@ -25,7 +25,7 @@ const CartItem = (props) => {
     const renderChoices = () => {
         let choices = [];
         for (const key in itemData) {
-            if (itemData[key] && itemChoices[key]) {
+            if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
                 choices.push(
                     <div key={`${key}/${itemData[itemChoices[key].menuKey][language]}`} onClick={editItem}>
                         <h2>{itemChoices[key][language]}</h2>
@@ -39,6 +39,14 @@ const CartItem = (props) => {
                 <div key={`proteinChoice/${itemData.english}`} onClick={editItem}>
                     <h2>{itemChoices.hasProtein[language]}</h2>
                     <p>{itemData.proteinChoice[language]}</p>
+                </div>
+            )
+        }
+        if (itemData.hasEgg) {
+            choices.push(
+                <div key={`eggChoice/${itemChoices.hasEgg.eggChoice.english}`} onClick={editItem}>
+                    <h2>{itemChoices.hasEgg[language]}</h2>
+                    <p>{itemData.eggChoice[language]}</p>
                 </div>
             )
         }

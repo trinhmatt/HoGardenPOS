@@ -2,7 +2,7 @@ import React from 'react';
 import { itemChoices } from '../../static/constants/menu-constants';
 
 const OrderCard = (props) => {
-    const { orderData } = props;
+    const { orderData, completeOrder, index } = props;
     const renderChoices = (order) => {
         let choicesElements = [];
         for (const key in order) {
@@ -39,12 +39,16 @@ const OrderCard = (props) => {
         }
         return itemElements;
     }
+    const startCompleteOrder = () => {
+        completeOrder(index);
+    }
     return (
         <div>
             <h1>Table {orderData.table}</h1>
             <div>
                 {renderOrders()}
             </div>
+            <button onClick={startCompleteOrder}>COMPLETE</button>
         </div>
     )
 }

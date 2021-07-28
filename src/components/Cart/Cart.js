@@ -29,11 +29,13 @@ const Cart = (props) => {
         setCartItems(cartItems)
     }, [cart])
     const checkout = () => {
-        const currentDayStr = dayjs().format("YYYY_MM_DD")
+        const currentDayStr = dayjs().format("YYYY_MM_DD");
+        //Check if any orders exist for the day
         database.ref(`orders/${currentDayStr}`).once("value")
             .then( snapshot => {
                 let orders = snapshot.val();
                 let table = props.match.params.number;
+                // Check if the table is C(number), table name for restaurant is chinese and cant use that in route params 
                 if (table.indexOf("C") > -1) {
                     table = table.replace("C", cartConsts.chTablePrefix);
                 }
@@ -41,14 +43,21 @@ const Cart = (props) => {
                     id: orders ? orders.length : 0,
                     table, 
                     orderItems: cart
-                }
+                };
+                // If no orders that day, create new object, otherwise add order to existing orders for the day 
                 if (orders === null) {
                     orders = [order];
                 } else {
                     orders = [...orders, order];
                 }
+                // Update order table
                 database.ref(`orders/${currentDayStr}`).set(orders)
-                        .then( (e) => console.log(e))
+                        .then( () => {
+                            props.history.push({
+                                pathname:`/order/${table}/review`,
+                                state: {order}
+                            });
+                        })
                         .catch( err => console.log(err))
             })
             .catch( err => console.log(err))

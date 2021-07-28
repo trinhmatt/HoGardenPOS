@@ -15,6 +15,7 @@ import AddItem from "../components/AddItem/AddItem";
 import AdminHome from "../components/AdminHome";
 import Unauthorized from "../components/Unauthorized";
 import Orders from "../components/Orders/Orders";
+import ReviewOrder from "../components/ReviewOrder/ReviewOrder";
 
 const AppRouter = () => (
     <Router>
@@ -40,8 +41,12 @@ const AppRouter = () => (
           <Orders />
         </PrivateRoute>
 
-        <PublicRoute path="/order/:number">
+        <PublicRoute path="/order/:number" exact={true}>
           <Menu />
+        </PublicRoute>
+
+        <PublicRoute path="/order/:number/review">
+          <ReviewOrder />
         </PublicRoute>
 
         <PublicRoute path="/add-item">
