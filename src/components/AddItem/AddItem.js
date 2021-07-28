@@ -30,20 +30,19 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 
 //Subcomponent imports
 import ElevationScroll from '../subcomponents/ElevationScroll';
+import { render } from '@testing-library/react';
 
 // need to include functionality for if they want more than 1 AND the item has options
 const AddItem = (props) => {
+    console.log('render')
     const styles = menuStyles();
-    // Changes button color on click
-    const [btnFlag, setBtnFlag] = useState(true);
     const { itemData, table, index } = props.location.state;
-    
     // Section data will be from the menu when adding or from itemData when editing
     const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
 
     const { addToCart, language, cart, updateCart } = props;
     const [item, setItem] = useState({qty: itemData.qty ? itemData.qty : 0});
-
+    const [choiceSections, setChoiceSections] = useState([]);
     const goBackToMenu = () => {
         // cannot just use history.goBack(), the header needs to re-render to work properly
         props.history.push(`/order/${table}`);
@@ -70,34 +69,29 @@ const AddItem = (props) => {
         updateCart(cartItems);
         goBackToMenu()
     }
+    const selectChoice = (choiceData) => {
+        const val = choiceData;
+        let price = itemData.price;
+        if (val.indexOf("tempChoice") > -1) {
+            price = val.indexOf("hot") > - 1 ? itemData.hotPrice : itemData.coldPrice;
+        }
+        const separatorIndex = val.indexOf(":");
+        const choiceType = val.substring(0, separatorIndex);
+        console.log('before render')
+        setItem({...item, price, [choiceType]: JSON.parse(val.substring(separatorIndex+1))});
+    }
     // Values for button are formatted like: choiceType:choiceValue 
     // I use : as a delimitter to separate type and value so I can set the cart object 
     const renderChoices = () => {
         let choiceSections = []; 
-        const choicesBuilder = (choiceType, choicesArr) => {
-            let choices = [];
-            for (let i = 0; i < choicesArr.length; i++) {
-                choices.push(
-                    <Button 
-                        value={`${choiceType}:${JSON.stringify(choicesArr[i])}`} 
-                        key={`${i}/${choicesArr[i][language]}`}
-                        onClick={selectChoice}
-                        className={styles.itemChoices}
-                    >
-                        {choicesArr[i][language]}
-                    </Button>
-                )
-            }
-            return choices;
-        }
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
-                choiceSections.push(<ItemChoiceSection constKey={key} language={language} selectChoice={selectChoice} choiceType={itemChoices[key].menuKey} choicesArr={sectionData[itemChoices[key].menuKey]}/>);
+                choiceSections.push(<ItemChoiceSection key={key} constKey={key} language={language} selectChoice={selectChoice} choiceType={itemChoices[key].menuKey} choicesArr={sectionData[itemChoices[key].menuKey]}/>);
             }
         }
         if (itemData.hasProteinChoice) {
-            choiceSections.push(<ItemChoiceSection constKey={"hasProtein"} language={language} selectChoice={selectChoice} choiceType={"proteinChoice"} choicesArr={itemData.proteinChoice}/>);
+            choiceSections.push(<ItemChoiceSection key={"proteinChoice"} constKey={"hasProtein"} language={language} selectChoice={selectChoice} choiceType={"proteinChoice"} choicesArr={itemData.proteinChoice}/>);
         }
         if (itemData.hotPrice && itemData.coldPrice) {
             choiceSections.push(
@@ -112,26 +106,19 @@ const AddItem = (props) => {
             )
         }
         if (itemData.hasEgg) {
-            choiceSections.push(<ItemChoiceSection constKey={"hasEgg"} language={language} selectChoice={selectChoice} choiceType={"proteinChoice"} choicesArr={itemData.hasEgg.eggChoice}/>);
+            choiceSections.push(<ItemChoiceSection key={"hasEgg"} constKey={"hasEgg"} language={language} selectChoice={selectChoice} choiceType={"eggChoice"} choicesArr={itemChoices.hasEgg.eggChoice}/>);
         }
         return choiceSections;
-    }
-    const selectChoice = (e) => {
-        setBtnFlag(!btnFlag);
-        const val = e.currentTarget.value;
-        let price = itemData.price;
-        if (val.indexOf("tempChoice") > -1) {
-            price = val.indexOf("hot") > - 1 ? itemData.hotPrice : itemData.coldPrice;
-        }
-        const separatorIndex = val.indexOf(":");
-        const choiceType = val.substring(0, separatorIndex);
-        setItem({...item, price, [choiceType]: JSON.parse(val.substring(separatorIndex+1))});
     }
 
     useEffect(() => {
         // Scroll to top of window on render
         window.scrollTo(0,0);
     }, []);
+
+    useEffect(() => {
+        renderChoices()
+    }, [item])
 
     return (
         <React.Fragment>

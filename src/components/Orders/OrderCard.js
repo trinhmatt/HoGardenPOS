@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 
 const OrderCard = (props) => {
     const styles = homeStyles();
-    const { orderData } = props;
+    const { orderData, completeOrder, index } = props;
     const renderChoices = (order) => {
         let choicesElements = [];
         for (const key in order) {
@@ -58,10 +58,14 @@ const OrderCard = (props) => {
         }
         return itemElements;
     }
+    const startCompleteOrder = () => {
+        completeOrder(index);
+    }
     return (
         <Paper elevation={3} className={styles.orderCard}>
             <h1 className={styles.orderTable}>table/桌 {orderData.table}</h1>
             {renderOrders()}
+            <button onClick={startCompleteOrder}>COMPLETE</button>
         </Paper>
     )
 }

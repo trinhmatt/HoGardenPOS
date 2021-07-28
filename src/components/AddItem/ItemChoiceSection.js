@@ -5,14 +5,14 @@ import { menuStyles } from '../../static/css/menuStyles';
 import { itemChoices } from '../../static/constants/menu-constants';
 
 const ItemChoiceSection = (props) => {
+    
     const styles = menuStyles();
     const { choiceType, choicesArr, selectChoice, language, constKey } = props;
     const [selectedItem, setSelectedItem] = useState(-1);
-    const [choices, setChoices] = useState([]);
     const handleSelect = (e) => {
         const index = parseInt(e.currentTarget.id.charAt(0));
+        selectChoice(e.currentTarget.value);
         setSelectedItem(index);
-        selectChoice(e);
     }
     const choicesBuilder = (choiceType, choicesArr) => {
         let choices = [];
@@ -31,13 +31,10 @@ const ItemChoiceSection = (props) => {
         }
         return choices;
     }
-    useEffect(() => {
-        setChoices(choicesBuilder(choiceType, choicesArr));
-    }, [choicesArr, selectedItem, language])
     return (
         <div>
             <h2>{itemChoices[constKey][language]}</h2>
-            <ButtonGroup variant='contained'>{choices}</ButtonGroup>
+            <ButtonGroup variant='contained'>{choicesBuilder(choiceType, choicesArr)}</ButtonGroup>
         </div>
     )
 }
