@@ -12,7 +12,6 @@ import TimeSheet from "../components/TimeSheet";
 import Menu from "../components/Menu/Menu";
 import NotFound from "../components/NotFound";
 import AddItem from "../components/AddItem/AddItem";
-import AdminHome from "../components/AdminHome";
 import Unauthorized from "../components/Unauthorized";
 import Orders from "../components/Orders/Orders";
 
@@ -27,10 +26,6 @@ const AppRouter = () => (
         <PublicRoute path="/admin" exact={true}>
           <Login />
         </PublicRoute> 
-
-        <PrivateRoute path="/admin/home">
-          <AdminHome />
-        </PrivateRoute>
 
         <PrivateRoute path="/admin/timesheet">
           <TimeSheet />

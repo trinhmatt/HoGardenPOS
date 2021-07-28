@@ -5,17 +5,11 @@ import { connect } from 'react-redux';
 import { loginSuccess } from '../redux/actions/auth-actions';
 
 // style imports
+import '../static/css/home.css';
 import cx from 'clsx';
 import Card from '@material-ui/core/Card';
-import {
-    CardContent,
-    CardActionArea,
-    TextField,
-    Button,
-    InputAdornment
-} from '@material-ui/core';
+import { CardContent, CardActionArea, TextField, Button, InputAdornment } from '@material-ui/core';
 import { useLightTopShadowStyles } from '@mui-treasury/styles/shadow/lightTop';
-import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import { Row, Item } from '@mui-treasury/components/flex';
 import { homeStyles } from '../static/css/homeStyles';
 
@@ -26,7 +20,6 @@ const Login = (props) => {
     // style consts
     const styles = homeStyles();
     const shadowStyles = useLightTopShadowStyles();
-    //const mediaStyles = useCoverCardMediaStyles();
 
     const { loginSuccess, history } = props;
     const [state, setState] = useState({
@@ -42,7 +35,7 @@ const Login = (props) => {
         firebase.auth().signInWithEmailAndPassword(state.email, state.password)
             .then((userData) => {
                 loginSuccess(userData.user.email);
-                history.push("admin/home");
+                history.push("admin/orders");
             })
             .catch((err) => {
                 if (err.code.indexOf("user-not-found") > -1) {
@@ -55,7 +48,7 @@ const Login = (props) => {
             });
     }
     return (
-        <div className={styles.homebg}>
+        <div className="home-bg">
             <div className={styles.header}>
                 <h1 className={styles.homeTitle}>login</h1>
                 <h2 className={styles.homeTitle2}>登录</h2>
@@ -64,8 +57,8 @@ const Login = (props) => {
                 <Item position={'center'}>
                     <Card className={cx(styles.loginCard, shadowStyles.root)}>
                         <CardActionArea>
-                            <CardContent>
-                                <Row mt={10} alignItems={'center'}>
+                            <CardContent className={styles.loginAction}>
+                                <Row mt={5} alignItems={'center'}>
                                     <Item position={'center'}>
                                         <TextField
                                             onChange={handleInputChange}
@@ -113,7 +106,7 @@ const Login = (props) => {
                     </Card>
                 </Item>
             </Row>
-            {state.errMsg && state.errMsg}
+            
         </div>
     )
 }

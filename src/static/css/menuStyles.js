@@ -202,14 +202,14 @@ const menuStyles = makeStyles((theme) => ({
         paddingLeft: '5%',
         paddingRight: '5%',
     },
-    section: {
+    menuItemSection: {
         padding: '3%',
         display: 'flex',
         alignItems: 'center',
         alignContent: 'center',
         //desktop/ipad
         '@media (min-width: 760px)': {
-            padding: '0',
+            padding: '2%',
             maxHeight: '10vh',
         },
     },

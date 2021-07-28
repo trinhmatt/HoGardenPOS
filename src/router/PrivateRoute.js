@@ -2,15 +2,15 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { firebase } from '../firebase/firebase';
+import BottomNav from '../components/subcomponents/BottomNav';
 
-export const PrivateRoute = ({
+const PrivateRoute = ({
   isAuth,
-  component: Component,
+  comp: Component,
   ...rest
   }) => { 
-    console.log(isAuth); 
     return isAuth ? (
-        <Route {...rest} component={ (props) => (
+        <Route {...rest} render={ (props) => (
             <div>
             <Component {...props}/>
             </div>)} />) : 

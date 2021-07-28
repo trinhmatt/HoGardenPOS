@@ -18,7 +18,6 @@ const homeStyles = makeStyles(({spacing}) => ({
     // LAYOUT
     header: {
         textAlign: 'center',
-        padding: '20px',
     },
     centerWrapper: {
         textAlign: 'center',
@@ -32,16 +31,55 @@ const homeStyles = makeStyles(({spacing}) => ({
     // TITLE
     homeTitle: {
         fontWeight: '400',
-        fontSize: '50px',
         color: '#fff',
         lineHeight: '1em',
+        margin: 0,
+        '@media screen and (orientation: portrait)': {
+            fontSize: '7vh',
+        },
+        '@media screen and (orientation: landscape)': {
+            fontSize: '10vh'
+        },
     },
     homeTitle2: {
         fontWeight: '400',
         color: '#fff',
         lineHeight: '1em',
-        fontSize: '100px',
-        marginTop: '-4%',
+        '@media screen and (orientation: portrait)': {
+            fontSize: '12vh',
+            marginTop: '-3%',
+        },
+        '@media screen and (orientation: landscape)': {
+            fontSize: '17vh',
+            marginTop: '-1%',
+            marginBottom: '1%',
+        },
+    },
+    ordersTitle: {
+        fontWeight: '400',
+        color: '#fff',
+        lineHeight: '1em',
+        margin: 0,
+        '@media screen and (orientation: portrait)': {
+            fontSize: '4vh',
+        },
+        '@media screen and (orientation: landscape)': {
+            fontSize: '5vh'
+        },
+    },
+    ordersTitle2: {
+        fontWeight: '400',
+        color: '#fff',
+        lineHeight: '1em',
+        '@media screen and (orientation: portrait)': {
+            fontSize: '9vh',
+            marginTop: '-1%',
+        },
+        '@media screen and (orientation: landscape)': {
+            fontSize: '10vh',
+            marginTop: '-1%',
+            marginBottom: '1%',
+        },
     },
     subTitle: {
         fontWeight: '400',
@@ -66,15 +104,39 @@ const homeStyles = makeStyles(({spacing}) => ({
 
     // CARD
     loginCard: {
-        width: 500,
-        height: 350,
-        borderRadius: spacing(2),
-        marginTop: '-10%'
+        borderRadius: '15px',
+        '@media screen and (orientation: portrait)': {
+            width: '80vw',
+            height: '40vh',
+            marginTop: '5%',
+        },
+        '@media screen and (orientation: landscape)': {
+            width: '50vw',
+            height: '70vh',
+        },
+        '@media screen and (min-width: 760px) and (orientation: portrait)': {
+            width: '50vw',
+            height: '27vh',
+            marginTop: '25%',
+        },
+        '@media screen and (min-width: 760px) and (orientation: landscape)': {
+            width: '35vw',
+            height: '35vh',
+            marginTop: '25%',
+        },
+    },
+    loginAction: {
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '0',
     },
 
     // INPUT
     inputField: {
-        width: '300px !important',
+        width: '100% !important',
     },
 
     //TABLE
@@ -90,7 +152,52 @@ const homeStyles = makeStyles(({spacing}) => ({
         position: 'fixed',
         bottom: '0%',
         width: '100%'
-    }
+    },
+
+    //ORDERS
+    orderLayout: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+    },
+    orderCard: {
+        width: '40%',
+        height: '50%',
+        display: 'flex',
+        flexDirection: 'column',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+    },
+    orderTable: {
+        fontSize: '25px',
+        textAlign: 'center',
+        backgroundColor: 'lightgrey',
+        boxShadow: '1px 2px 5px rgb(0 0 0 / 20%)',
+    },
+    orderGrid: {
+        padding: '2%',
+    },
+    orderQty: {
+        padding: '10%',
+        backgroundColor: '#000',
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: '25px',
+        width: '50%',
+        textAlign: 'center',
+        boxShadow: '1px 2px 5px rgb(0 0 0 / 20%)',
+    },
+    orderQtyGrid: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+    },
+    orderAddOns: {
+        fontSize: '20px',
+    },
     
 }));
 
