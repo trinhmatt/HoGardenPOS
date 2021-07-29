@@ -42,7 +42,6 @@ const AddItem = (props) => {
 
     const { addToCart, language, cart, updateCart } = props;
     const [item, setItem] = useState({qty: itemData.qty ? itemData.qty : 0});
-    const [choiceSections, setChoiceSections] = useState([]);
     const goBackToMenu = () => {
         // cannot just use history.goBack(), the header needs to re-render to work properly
         props.history.push(`/order/${table}`);
@@ -77,7 +76,6 @@ const AddItem = (props) => {
         }
         const separatorIndex = val.indexOf(":");
         const choiceType = val.substring(0, separatorIndex);
-        console.log('before render')
         setItem({...item, price, [choiceType]: JSON.parse(val.substring(separatorIndex+1))});
     }
     // Values for button are formatted like: choiceType:choiceValue 
@@ -115,10 +113,6 @@ const AddItem = (props) => {
         // Scroll to top of window on render
         window.scrollTo(0,0);
     }, []);
-
-    useEffect(() => {
-        renderChoices()
-    }, [item])
 
     return (
         <React.Fragment>

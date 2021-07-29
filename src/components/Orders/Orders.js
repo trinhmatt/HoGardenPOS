@@ -6,13 +6,9 @@ import OrderCard from './OrderCard';
 //Style imports
 import { homeStyles } from '../../static/css/homeStyles';
 
-//Subcomponent imports
-import BottomNav from '../subcomponents/BottomNav';
-
 const Orders = (props) => {
     const styles = homeStyles();
     const currentDayStr = dayjs().format("YYYY_MM_DD");
-    console.log(currentDayStr)
     const [state, setState] = useState({orderCards: [], orders: []});
     useEffect(() => {
         database.ref(`orders/${currentDayStr}`).on("value", (snapshot) => {
@@ -41,7 +37,6 @@ const Orders = (props) => {
             <div className={styles.orderLayout}>
                 {state.orderCards}
             </div>
-            <BottomNav />
         </div>
     )
 }

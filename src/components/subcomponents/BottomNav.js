@@ -29,8 +29,8 @@ const BottomNav = (props) => {
             showLabels
             className={styles.bottomNav}
         >
-            <BottomNavigationAction value='orders'  label='ORDERS/订单' icon={<Fastfood />} />
-            <BottomNavigationAction value='timesheet'  label='SIGNIN/登录和退出' icon={<Schedule />} />
+            <BottomNavigationAction value='orders' onClick={() => navigateTo('orders')} label='ORDERS/订单' icon={<Fastfood />} />
+            <BottomNavigationAction value='timesheet'  onClick={() => navigateTo('timesheet')} label='SIGNIN/登录和退出' icon={<Schedule />} />
             <BottomNavigationAction onClick={() => navigateTo('/')} label='HOURS/员工工作时间' icon={<DateRange />} />
             <BottomNavigationAction onClick={() => navigateTo('/')} label='PLACE ORDER/下订单' icon={<Create />} />
             

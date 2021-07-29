@@ -6,9 +6,6 @@ import database from '../firebase/firebase';
 //Style imports
 import { homeStyles, StyledTableRow, StyledTableCell } from '../static/css/homeStyles';
 
-//Subcomponent imports
-import BottomNav from './subcomponents/BottomNav';
-
 //Material ui imports
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -106,8 +103,6 @@ const TimeSheet = () => {
                     </Table>
                 </TableContainer>
             </div>
-
-            <BottomNav />
         </div>
     )
 }

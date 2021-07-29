@@ -5,8 +5,9 @@ import {
   BrowserRouter as Router,
   Switch,
 } from "react-router-dom";
+import { connect } from 'react-redux';
 
-import Home from "../components/Home"
+import Home from "../components/Home";
 import Login from "../components/Login"
 import TimeSheet from "../components/TimeSheet";
 import Menu from "../components/Menu/Menu";
@@ -15,9 +16,17 @@ import AddItem from "../components/AddItem/AddItem";
 import Unauthorized from "../components/Unauthorized";
 import Orders from "../components/Orders/Orders";
 import ReviewOrder from "../components/ReviewOrder/ReviewOrder";
+import BottomNav from "../components/subcomponents/BottomNav";
 
-const AppRouter = () => (
+const AppRouter = (props) => {
+  return (
     <Router>
+      {
+        props.auth.userData && 
+          <div>
+            <BottomNav />
+          </div>
+      }
       <Switch>
 
         <PublicRoute path="/" exact={true}>
@@ -58,5 +67,10 @@ const AppRouter = () => (
       </Switch>
     </Router>
   )
-  
-  export default AppRouter;
+}
+
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps)(AppRouter);
