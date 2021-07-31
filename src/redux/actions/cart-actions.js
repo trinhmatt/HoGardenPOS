@@ -9,3 +9,7 @@ export const updateCart = (newCart) => ({
     type: cartConsts.actions.update,
     newCart
 })
+
+export const clearCart = () => ({
+    type: cartConsts.actions.clear
+})

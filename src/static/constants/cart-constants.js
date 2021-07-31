@@ -30,6 +30,7 @@ export const cartConsts = {
     chTablePrefix: "門口",
     actions: {
         add: "ADD_TO_CART",
-        update: "UPDATE_CART"
+        update: "UPDATE_CART",
+        clear: "CLEAR_CART"
     }
 };

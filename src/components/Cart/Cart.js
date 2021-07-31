@@ -6,6 +6,8 @@ import dayjs from 'dayjs';
 import CartItem from "./CartItem";
 import database from "../../firebase/firebase";
 import { cartConsts } from "../../static/constants/cart-constants";
+import { authConsts } from "../../static/constants/auth-constants";
+import { clearCart } from "../../redux/actions/cart-actions";
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -19,7 +21,7 @@ import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
 
 const Cart = (props) => {
     const styles = menuStyles();
-    const { cart, language, auth } = props;
+    const { cart, language, auth, clearCart } = props;
     const [cartItems, setCartItems] = useState([]);
     const [table, setTable] = useState("1");
     useEffect(() => {
@@ -41,7 +43,7 @@ const Cart = (props) => {
         setTable(e.currentTarget.value)
     }
     const checkout = () => {
-        const currentDayStr = dayjs().format("YYYY_MM_DD");
+        const currentDayStr = dayjs().format(authConsts.DATE);
         //Check if any orders exist for the day
         database.ref(`orders/${currentDayStr}`).once("value")
             .then( snapshot => {
@@ -65,6 +67,7 @@ const Cart = (props) => {
                 // Update order table
                 database.ref(`orders/${currentDayStr}`).set(orders)
                         .then( () => {
+                            clearCart();
                             props.history.push({
                                 pathname:`/order/${table}/review`,
                                 state: {order}
@@ -83,7 +86,7 @@ const Cart = (props) => {
                     {
                         auth.userData && 
                             <div>
-                                <label for="table">{'桌子 '}</label>
+                                <label htmlFor="table">{'桌子 '}</label>
                                 <select onChange={setTableVal} name="table">
                                     {renderTables()}
                                 </select>
@@ -119,4 +122,8 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default withRouter(connect(mapStateToProps)(Cart));
+const mapDispatchToProps = dispatch => ({
+    clearCart: () => dispatch(clearCart())
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart));

@@ -8,6 +8,8 @@ export const cartReducer = (state = initState, action) => {
             return [...state, action.item];
         case cartConsts.actions.update:
             return action.newCart;
+        case cartConsts.actions.clear:
+            return initState;
         default:
             return state;
     }
