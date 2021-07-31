@@ -1,8 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { firebase } from '../firebase/firebase';
-import BottomNav from '../components/subcomponents/BottomNav';
 
 const PrivateRoute = ({
   isAuth,

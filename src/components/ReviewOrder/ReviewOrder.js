@@ -52,6 +52,7 @@ const ReviewOrder = (props) => {
         }
         setItemElements(itemElements);
     }
+    
     useEffect(() => {
         renderOrder();
     }, [])
