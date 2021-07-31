@@ -38,6 +38,12 @@ const Menu = (props) => {
     const [isCartOpen, setCartOpen] = useState(false);
 
     useEffect(() => {
+        if (props.match.params.number === 'admin') {
+            changeLanguage("chinese");
+        }
+    }, [])
+
+    useEffect(() => {
         if (!!cartConsts.tables[props.match.params.number] || props.match.params.number === "takeout") {
             let menuSections = [];
             let headers = [];
@@ -80,8 +86,7 @@ const Menu = (props) => {
                                     control={<Switch size="medium" checked={language === "chinese"} onChange={() => {
                                         (language === "chinese") ?
                                             changeLanguage("english") : changeLanguage("chinese")
-                                    }
-                                    }
+                                    }}
                                     />}
                                     label={<b className={styles.chinLanguage}>中文</b>}
                                 />
