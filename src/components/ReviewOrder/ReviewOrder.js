@@ -10,7 +10,7 @@ const ReviewOrder = (props) => {
     const { language } = props;
     const [errorMsg, setError] = useState(null);
     const [itemElements, setItemElements] = useState([]);
-    const currentDayStr = dayjs().format('YYYY_MM_DD');
+    const currentDayStr = dayjs().format('');
 
     const fetchOrder = () => {
         return new Promise( (resolve, reject) => {
@@ -52,6 +52,7 @@ const ReviewOrder = (props) => {
         }
         setItemElements(itemElements);
     }
+    
     useEffect(() => {
         renderOrder();
     }, [])

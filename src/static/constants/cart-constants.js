@@ -24,11 +24,13 @@ export const cartConsts = {
         "C7": true,
         "C8": true,
         "C9": true,
-        "C10": true
+        "C10": true,
+        "admin": true
     },
     chTablePrefix: "門口",
     actions: {
         add: "ADD_TO_CART",
-        update: "UPDATE_CART"
+        update: "UPDATE_CART",
+        clear: "CLEAR_CART"
     }
 };

@@ -32,20 +32,24 @@ const Login = (props) => {
     }
 
     const handleLogin = () => {
-        firebase.auth().signInWithEmailAndPassword(state.email, state.password)
-            .then((userData) => {
-                loginSuccess(userData.user.email);
-                history.push("admin/orders");
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+            .then(() => {
+                firebase.auth().signInWithEmailAndPassword(state.email, state.password)
+                    .then((userData) => {
+                        loginSuccess(userData.user.email);
+                        history.push("admin/orders");
+                    })
+                    .catch((err) => {
+                        if (err.code.indexOf("user-not-found") > -1) {
+                            setState({ ...state, errMsg: "User does not exist" });
+                        } else if (err.code.indexOf("wrong-password") > -1) {
+                            setState({ ...state, errMsg: "Invalid password" });
+                        } else {
+                            setState({ ...state, errMsg: err.code });
+                        }
+                    });
             })
-            .catch((err) => {
-                if (err.code.indexOf("user-not-found") > -1) {
-                    setState({ ...state, errMsg: "User does not exist" });
-                } else if (err.code.indexOf("wrong-password") > -1) {
-                    setState({ ...state, errMsg: "Invalid password" });
-                } else {
-                    setState({ ...state, errMsg: err.code });
-                }
-            });
+            .catch( err => console.log(err));
     }
     return (
         <div className="home-bg">

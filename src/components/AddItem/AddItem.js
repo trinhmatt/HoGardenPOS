@@ -34,7 +34,6 @@ import { render } from '@testing-library/react';
 
 // need to include functionality for if they want more than 1 AND the item has options
 const AddItem = (props) => {
-    console.log('render')
     const styles = menuStyles();
     const { itemData, table, index } = props.location.state;
     // Section data will be from the menu when adding or from itemData when editing

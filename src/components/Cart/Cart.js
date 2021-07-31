@@ -6,6 +6,8 @@ import dayjs from 'dayjs';
 import CartItem from "./CartItem";
 import database from "../../firebase/firebase";
 import { cartConsts } from "../../static/constants/cart-constants";
+import { authConsts } from "../../static/constants/auth-constants";
+import { clearCart } from "../../redux/actions/cart-actions";
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -19,8 +21,9 @@ import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
 
 const Cart = (props) => {
     const styles = menuStyles();
-    const { cart, language } = props;
+    const { cart, language, auth, clearCart } = props;
     const [cartItems, setCartItems] = useState([]);
+    const [table, setTable] = useState("1");
     useEffect(() => {
         let cartItems = [];
         for (let i = 0; i < cart.length; i++) {
@@ -28,20 +31,31 @@ const Cart = (props) => {
         }
         setCartItems(cartItems)
     }, [cart])
+    const renderTables = () => {
+        let tables = [];
+        for (const table in cartConsts.tables) {
+            const tableVal = table.indexOf("C") > -1 ? table.replace("C", "門口") : table;
+            tables.push(<option value={tableVal}>{tableVal}</option>)
+        }
+        return tables;
+    }
+    const setTableVal = (e) => {
+        setTable(e.currentTarget.value)
+    }
     const checkout = () => {
-        const currentDayStr = dayjs().format("YYYY_MM_DD");
+        const currentDayStr = dayjs().format(authConsts.DATE);
         //Check if any orders exist for the day
         database.ref(`orders/${currentDayStr}`).once("value")
             .then( snapshot => {
                 let orders = snapshot.val();
-                let table = props.match.params.number;
+                let tableVal = props.match.params.number !== "admin" ? props.match.params.number : table;
                 // Check if the table is C(number), table name for restaurant is chinese and cant use that in route params 
-                if (table.indexOf("C") > -1) {
-                    table = table.replace("C", cartConsts.chTablePrefix);
+                if (tableVal.indexOf("C") > -1) {
+                    tableVal = tableVal.replace("C", cartConsts.chTablePrefix);
                 }
                 const order = {
                     id: orders ? orders.length : 0,
-                    table, 
+                    table: tableVal, 
                     orderItems: cart
                 };
                 // If no orders that day, create new object, otherwise add order to existing orders for the day 
@@ -53,6 +67,7 @@ const Cart = (props) => {
                 // Update order table
                 database.ref(`orders/${currentDayStr}`).set(orders)
                         .then( () => {
+                            clearCart();
                             props.history.push({
                                 pathname:`/order/${table}/review`,
                                 state: {order}
@@ -68,6 +83,15 @@ const Cart = (props) => {
             cart.length > 0 ? 
             <div className={styles.centered}>
                 <Paper elevation={3} className={styles.cartBox}>
+                    {
+                        auth.userData && 
+                            <div>
+                                <label htmlFor="table">{'桌子 '}</label>
+                                <select onChange={setTableVal} name="table">
+                                    {renderTables()}
+                                </select>
+                            </div>
+                    }
                     <div>
                     { (props.language === "english") ?
                         <span className={styles.cartTitle}>Cart</span>
@@ -94,7 +118,12 @@ const Cart = (props) => {
 
 const mapStateToProps = state => ({
     cart: state.cart,
-    language: state.lang.lang
+    language: state.lang.lang,
+    auth: state.auth
 })
 
-export default withRouter(connect(mapStateToProps)(Cart));
+const mapDispatchToProps = dispatch => ({
+    clearCart: () => dispatch(clearCart())
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart));

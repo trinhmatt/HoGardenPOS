@@ -67,9 +67,7 @@ const MenuSection = (props) => {
     return (
         <Paper className={styles.menuSection} elevation={3} ref={ref}>
             <h1 className={styles.menuSectionTitle}>{data.title[language]}</h1>
-           
                 {itemElements}
-         
         </Paper>
     )
 }
