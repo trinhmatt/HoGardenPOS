@@ -14,6 +14,42 @@
                 "chinese": "改凍飲 汽水 公仔麵 蜜糖 加$1.50 • 改加底 加$2.00"
             }
         ],
+        "addOns": [
+            {
+                "type": {
+                    "english": "Change",
+                    "chinese": "改凍飲"
+                },
+                "choices": [
+                    {
+                        "english": "Iced Drink",
+                        "chinese": "汽水"
+                    },
+                    {
+                        "english": "Instant Noodle",
+                        "chinese": "公仔麵"
+                    },
+                    {
+                        "english": "Honey",
+                        "chinese": "蜜糖"
+                    }
+                ],
+                "price": 1.50
+            },
+            {
+                "type": {
+                    "english": "Extra",
+                    "chinese": "加"
+                },
+                "choices": [
+                    {
+                        "english": "Rice",
+                        "chinese": "飯"
+                    }
+                ],
+                "price": 2.00
+            }
+        ],
         "drinkChoice": [
             {
                 "english": "Hot HK Milk Tea",
@@ -705,6 +741,42 @@
                 "chinese": "改加底 加$2.00"
             }
         ],
+        "addOns": [
+            {
+                "type": {
+                    "english": "Change",
+                    "chinese": "改凍飲"
+                },
+                "choices": [
+                    {
+                        "english": "Iced Drink",
+                        "chinese": "汽水"
+                    },
+                    {
+                        "english": "Instant Noodle",
+                        "chinese": "公仔麵"
+                    },
+                    {
+                        "english": "Honey",
+                        "chinese": "蜜糖"
+                    }
+                ],
+                "price": 1.50
+            },
+            {
+                "type": {
+                    "english": "Extra",
+                    "chinese": "加"
+                },
+                "choices": [
+                    {
+                        "english": "Rice",
+                        "chinese": "飯"
+                    }
+                ],
+                "price": 2.50
+            }
+        ],
         "noodleChoice": [
             {
                 "chinese": "飯",
@@ -1381,6 +1453,34 @@
             {
                 "english": "Add Pan Fried Egg add $1.25 each",
                 "chinese": "煎蛋加$1.25"
+            }
+        ],
+        "addOns": [
+            {
+                "type": {
+                    "english": "Change",
+                    "chinese": "改凍飲"
+                },
+                "choices": [
+                    {
+                        "english": "Fried Rice",
+                        "chinese": "炒底"
+                    }
+                ],
+                "price": 2.00
+            },
+            {
+                "type": {
+                    "english": "Add",
+                    "chinese": "加"
+                },
+                "choices": [
+                    {
+                        "english": "Pan fried egg",
+                        "chinese": "煎蛋"
+                    }
+                ],
+                "price": 1.25
             }
         ],
         "drinkChoice": [
@@ -2200,6 +2300,43 @@
                 "chinese": "外買杯盒 $0.25"
             }
         ],
+        "addOns": [
+            {
+                "type": {
+                    "english": "Change",
+                    "chinese": "改凍飲"
+                },
+                "choices": [
+                    {
+                        "english": "Iced Drink",
+                        "chinese": "汽水"
+                    },
+                    {
+                        "english": "Honey",
+                        "chinese": "蜜糖"
+                    },
+                    {
+                        "english": "Iced Lemon Water with Honey ($2.00)",
+                        "chinese": "改凍檸蜜 加$2.00",
+                        "price": 2.00
+                    }
+                ],
+                "price": 1.50
+            },
+            {
+                "type": {
+                    "english": "Add",
+                    "chinese": "加"
+                },
+                "choices": [
+                    {
+                        "english": "Take-out box/cup",
+                        "chinese": "外買杯盒"
+                    }
+                ],
+                "price": 0.25
+            }
+        ],
         "drinkChoice": [
             {
                 "english": "Coffee",
@@ -2274,13 +2411,29 @@
         ],
         "addOns": [
             {
-                "english": "Steamed Rice",
-                "chinese": "絲苗白飯(每碗)",
+                "type": {
+                    "english": "Add",
+                    "chinese": "加"
+                },
+                "choices": [
+                    {
+                        "english": "Steamed Rice",
+                        "chinese": "絲苗白飯(每碗)"
+                    }
+                ],
                 "price": 1.95
             },
             {
-                "english": "Oily Rice",
-                "chinese": "大碗油飯(每碗)",
+                "type": {
+                    "english": "Add",
+                    "chinese": "加"
+                },
+                "choices": [
+                    {
+                        "english": "Oily Rice",
+                        "chinese": "大碗油飯(每碗)"
+                    }
+                ],
                 "price": 2.95
             }
         ],
@@ -2307,28 +2460,28 @@
             },
             {
                 "english": "6 Choices",
-                "chinese": "五款",
+                "chinese": "六款",
                 "price": 64.99
             },
             {
                 "english": "7 Choices",
-                "chinese": "五款",
+                "chinese": "七款",
                 "price": 74.99
             },
             {
                 "english": "8 Choices",
-                "chinese": "五款",
+                "chinese": "八款",
                 "price": 84.99
             }
         ],
         "menuItems": {
             "SD1": {
-                "english": "祕制海南雞 (半隻)",
-                "chinese": "Hainanese Chicken (half)"
+                "english": "Hainanese Chicken (half)",
+                "chinese": "祕制海南雞 (半隻)"
             },
             "SD2": {
-                "english": "南乳吊燒雞 (半隻)",
-                "chinese": "Southern Milk Roasted Chicken (half)"
+                "english": "Southern Milk Roasted Chicken (half)",
+                "chinese": "南乳吊燒雞 (半隻)"
             },
             "SD3": {
                 "english": "Stir-fried Kale with Pork Spicy Pork",

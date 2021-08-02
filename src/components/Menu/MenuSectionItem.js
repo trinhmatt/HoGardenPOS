@@ -18,23 +18,34 @@ const MenuSectionItem = (props) => {
             state: {itemData: data, table, sectionData}
         })
     }
+    const parsePrice = (price) => {
+        if (price.indexOf(".") === -1) {
+            price += ".00";
+        } else if (price.indexOf(".") === price.length-2) {
+            price += "0";
+        }
+        return price;
+    }
     const renderPrice = () => {
         let prices = [];
         if (data.price) {
-            prices = data.price;
+            let price = data.price.toString();
+            prices = parsePrice(price);
         } else {
             if (data.hotPrice) {
+                const hotPrice = parsePrice(data.hotPrice.toString());
                 prices.push(
                     <div key={'hot'}>
                         <span>Hot Price</span>
-                        <p>{data.hotPrice}</p>
+                        <p>{hotPrice}</p>
                     </div>)
             }
             if (data.coldPrice) {
+                const coldPrice = parsePrice(data.coldPrice.toString())
                 prices.push(
                     <div key={'cold'}>
                         <span>Cold Price</span>
-                        <p>{data.coldPrice}</p>
+                        <p>{coldPrice}</p>
                     </div>
                 )
             }

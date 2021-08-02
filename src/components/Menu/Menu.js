@@ -32,14 +32,19 @@ import ShoppingCart from '@material-ui/icons/ShoppingCart';
 const Menu = (props) => {
     const styles = menuStyles();
     const numSections = Object.keys(menuJSON).length;
-    const { language, changeLanguage } = props;
+    const { language, changeLanguage, auth } = props;
     const [menuSections, setMenuSections] = useState([]);
     const [headerSections, setHeaderSections] = useState([]);
     const [isCartOpen, setCartOpen] = useState(false);
 
     useEffect(() => {
         if (props.match.params.number === 'admin') {
-            changeLanguage("chinese");
+            if (!auth.userData) {
+                props.history.push("/unauthorized");
+            } else {
+                changeLanguage("chinese");
+            }
+            
         }
     }, [])
 
@@ -124,7 +129,8 @@ const Menu = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-    language: state.lang.lang
+    language: state.lang.lang,
+    auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({

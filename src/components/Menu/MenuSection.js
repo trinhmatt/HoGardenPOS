@@ -64,9 +64,20 @@ const MenuSection = (props) => {
             props.returnTopPosition(ref.current.getBoundingClientRect().y, data.title[language])
         }
     }, [itemElements]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    const renderExtraInfo = () => {
+        let extraInfoElements = [];
+        if (data.extraInfo && data.extraInfo.length > 0) {
+            for (let i = 0; i < data.extraInfo.length; i++) {
+                extraInfoElements.push(<p>{data.extraInfo[i][language]}</p>)
+            }
+        }
+        return extraInfoElements;
+    }
     return (
         <Paper className={styles.menuSection} elevation={3} ref={ref}>
             <h1 className={styles.menuSectionTitle}>{data.title[language]}</h1>
+            <div>{renderExtraInfo()}</div>
                 {itemElements}
         </Paper>
     )
