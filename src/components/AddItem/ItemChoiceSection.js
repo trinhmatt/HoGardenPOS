@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
+
+//Material ui imports
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+
+//Style imports
 import { menuStyles } from '../../static/css/menuStyles';
+
+//Constants imports
 import { itemChoices } from '../../static/constants/menu-constants';
 
 const ItemChoiceSection = (props) => {
@@ -102,9 +108,9 @@ const ItemChoiceSection = (props) => {
         return choices;
     }
     return (
-        <div>
+        <div className={styles.itemChoiceLayout}>
             <h2>{isAddOn ? choicesArr.type[language]: itemChoices[constKey][language]}</h2>
-            <ButtonGroup variant='contained'>{choicesBuilder(choiceType, choicesArr)}</ButtonGroup>
+            <ButtonGroup variant='contained' size='small'>{choicesBuilder(choiceType, choicesArr)}</ButtonGroup>
         </div>
     )
 }
