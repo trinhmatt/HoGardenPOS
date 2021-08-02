@@ -127,7 +127,6 @@ const Home = (props) => {
             <div id='menu' className={styles.afterBackground}>
                 <div className={styles.menuTitle}>MENU/菜單</div>
                 <Carousel
-                    autoPlay={true}
                     dynamicHeight={true}
                     swipeable={true}
                     emulateTouch={true}

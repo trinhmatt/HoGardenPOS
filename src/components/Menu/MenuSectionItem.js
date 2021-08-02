@@ -30,22 +30,22 @@ const MenuSectionItem = (props) => {
         let prices = [];
         if (data.price) {
             let price = data.price.toString();
-            prices = parsePrice(price);
+            prices = <p style={{margin: '0'}}>${parsePrice(price)}</p>;
         } else {
             if (data.hotPrice) {
                 const hotPrice = parsePrice(data.hotPrice.toString());
                 prices.push(
-                    <div key={'hot'}>
-                        <span>Hot Price</span>
-                        <p>{hotPrice}</p>
+                    <div key={'hot'} style={{textAlign: 'center'}}>
+                        <span>Hot</span>
+                        <p>${hotPrice}</p>
                     </div>)
             }
             if (data.coldPrice) {
                 const coldPrice = parsePrice(data.coldPrice.toString())
                 prices.push(
-                    <div key={'cold'}>
-                        <span>Cold Price</span>
-                        <p>{coldPrice}</p>
+                    <div key={'cold'} style={{textAlign: 'center'}}>
+                        <span>Cold</span>
+                        <p>&nbsp;&nbsp;${coldPrice}</p>
                     </div>
                 )
             }
@@ -54,22 +54,21 @@ const MenuSectionItem = (props) => {
     }
     return (
         <div>
-            <Grid container spacing={0} className={styles.menuItemSection} onClick={pushToAdd}>
-                <Grid item xs={9} className={(language === 'chinese') ? styles.chinMenuItem : styles.engMenuItem}>
+            <Grid container spacing={0} className={qty > 0 ? styles.menuItemSectionQty : styles.menuItemSection} onClick={pushToAdd}>
+                <Grid item xs={8} className={(language === 'chinese') ? styles.chinMenuItem : styles.engMenuItem}>
                     {auth.userData ? data.restName ? `${data.restName}. ${data[language]}` : `${data[language]}` : `${data[language]}`}
                 </Grid>
                 {
                     qty > 0 ? 
-                        <Grid item xs className={styles.qtyBubble}>
-                            <span>{qty}</span>
-                        </Grid>
+                        <span className={styles.qtyBubble}>
+                            {qty}
+                        </span>
                         :
-                        <Grid item xs>
-                            <span></span>
-                        </Grid>
+                        <span></span>
                 }
-                <Grid item xs={1} className={styles.price}>
-                    <span>${renderPrice()}</span>
+                <Grid item xs className={styles.priceColumn}>
+                
+                    <span className={styles.price}>{renderPrice()}</span>
                 </Grid>
             </Grid>
             <Divider />

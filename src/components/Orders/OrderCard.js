@@ -8,6 +8,10 @@ import { homeStyles } from '../../static/css/homeStyles';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+
+//Icon imports
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const OrderCard = (props) => {
     const styles = homeStyles();
@@ -44,7 +48,7 @@ const OrderCard = (props) => {
                             {orderData.orderItems[i].qty}
                         </div>
                     </Grid>
-                    <Grid item xs>
+                    <Grid item xs={9} style={{wordBreak: 'break-word'}}>
                         <h2>项目名: {orderData.orderItems[i].restName}</h2>
                         <h2>{`${orderData.orderItems[i].chinese}/${orderData.orderItems[i].english}`}</h2>
                         <div>
@@ -65,7 +69,15 @@ const OrderCard = (props) => {
         <Paper elevation={3} className={styles.orderCard}>
             <h1 className={styles.orderTable}>table/桌 {orderData.table}</h1>
             {renderOrders()}
-            <button onClick={startCompleteOrder}>COMPLETE</button>
+            <Button 
+                onClick={startCompleteOrder} 
+                variant='contained' 
+                disableElevation
+                className={styles.completeButton}
+                startIcon={<CheckCircleIcon />}
+            >
+                <h3>COMPLETE/<b>完畢</b></h3>
+            </Button>
         </Paper>
     )
 }

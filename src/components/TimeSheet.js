@@ -22,6 +22,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 
+//Icons
+import TodayIcon from '@material-ui/icons/Today';
 
 const TimeSheet = () => {
     const currentDayObj = dayjs();
@@ -86,9 +88,14 @@ const TimeSheet = () => {
                 <h2 className={styles.subTitle2}>时间表</h2>
                 <h1 className={styles.subTitle} style={{marginTop: '-3%'}}>today/今天: <b>{state.dayObj.format("YYYY/MM/DD")}</b></h1>
             </div>
-            <div>
+            <div className={styles.dateWrapper}>
+                <TodayIcon fontSize='large'/>
                 <MuiPickersUtilsProvider utils={DayJSUtils}>
-                    <DatePicker value={state.dayObj} onChange={handleDateChange}/>
+                    <DatePicker
+                        value={state.dayObj}
+                        onChange={handleDateChange}
+                        format='YYYY/MM/DD'
+                    />
                 </MuiPickersUtilsProvider>
             </div>
             <div className={styles.tableWrapper}>

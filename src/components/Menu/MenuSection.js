@@ -69,7 +69,9 @@ const MenuSection = (props) => {
         let extraInfoElements = [];
         if (data.extraInfo && data.extraInfo.length > 0) {
             for (let i = 0; i < data.extraInfo.length; i++) {
-                extraInfoElements.push(<p>{data.extraInfo[i][language]}</p>)
+                extraInfoElements.push(
+                    <p className={styles.menuExtraInfo}>{data.extraInfo[i][language]}</p>
+                )
             }
         }
         return extraInfoElements;
@@ -77,7 +79,7 @@ const MenuSection = (props) => {
     return (
         <Paper className={styles.menuSection} elevation={3} ref={ref}>
             <h1 className={styles.menuSectionTitle}>{data.title[language]}</h1>
-            <div>{renderExtraInfo()}</div>
+            <div className={styles.centered} style={{textAlign: 'center', flexDirection: 'column'}}>{renderExtraInfo()}</div>
                 {itemElements}
         </Paper>
     )

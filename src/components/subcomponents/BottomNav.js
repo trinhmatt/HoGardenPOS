@@ -4,11 +4,18 @@ import { firebase } from '../../firebase/firebase';
 
 //Style imports
 import {homeStyles} from '../../static/css/homeStyles';
+
+//Material ui imports
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Button from '@material-ui/core/Button';
 
 // icons
-import { Fastfood, Schedule, Create, DateRange } from '@material-ui/icons';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Fastfood from '@material-ui/icons/Fastfood';
+import Schedule from '@material-ui/icons/Schedule';
+import Create from '@material-ui/icons/Create';
+import DateRange from '@material-ui/icons/DateRange';
 
 const BottomNav = (props) => {
     const styles = homeStyles();
@@ -41,7 +48,7 @@ const BottomNav = (props) => {
             <BottomNavigationAction value='timesheet'  onClick={() => navigateTo('/admin/timesheet')} label='SIGNIN/登录和退出' icon={<Schedule />} />
             <BottomNavigationAction onClick={() => navigateTo('/')} label='HOURS/员工工作时间' icon={<DateRange />} />
             <BottomNavigationAction onClick={() => navigateTo('/order/admin')} label='PLACE ORDER/下订单' icon={<Create />} />
-            <button onClick={signOut}>SIGN OUT</button>
+            <BottomNavigationAction onClick={signOut} label='SIGN OUT/登出' icon={<ExitToAppIcon />}/>
             
         </BottomNavigation>
     )

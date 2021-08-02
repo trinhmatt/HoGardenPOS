@@ -27,6 +27,13 @@ const homeStyles = makeStyles(({spacing}) => ({
     inputWrapper: {
         textAlign: 'center',
     },
+    centered: {
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
     // TITLE
     homeTitle: {
@@ -139,11 +146,18 @@ const homeStyles = makeStyles(({spacing}) => ({
         width: '100% !important',
     },
 
-    //TABLE
+    //TIMETABLE
     tableWrapper: {
         transform: 'scale(0.8)',
         margin: '0 auto',
         marginTop: '-5%'
+    },
+    dateWrapper: {
+        position: 'fixed',
+        top: '0',
+        display: 'flex',
+        flexDirection: 'row',
+        padding: '1%',
     },
 
     //NAV
@@ -151,7 +165,8 @@ const homeStyles = makeStyles(({spacing}) => ({
         justifyContent: 'space-evenly',
         position: 'fixed',
         bottom: '0%',
-        width: '100%'
+        width: '100%',
+        zIndex: '99',
     },
 
     //ORDERS
@@ -161,15 +176,16 @@ const homeStyles = makeStyles(({spacing}) => ({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
     },
     orderCard: {
         width: '40%',
-        height: '50%',
+        height: '80%',
         display: 'flex',
         flexDirection: 'column',
         overflowY: 'auto',
         overflowX: 'hidden',
+        margin: '2%',
     },
     orderTable: {
         fontSize: '25px',
@@ -197,6 +213,9 @@ const homeStyles = makeStyles(({spacing}) => ({
     },
     orderAddOns: {
         fontSize: '20px',
+    },
+    completeButton: {
+        color: '#32cd59',
     },
     
 }));
