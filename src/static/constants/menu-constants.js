@@ -60,6 +60,5 @@ export const itemChoices = {
     "hasProtein": {
         "english": "Meat",
         "chinese": "肉"
-    },
-    "addOns": true
+    }
 };

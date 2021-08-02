@@ -6,6 +6,7 @@ import { itemChoices } from '../../static/constants/menu-constants';
 import { changeLanguage } from "../../redux/actions/lang-actions";
 import { updateCart } from "../../redux/actions/cart-actions";
 import ItemChoiceSection from "./ItemChoiceSection";
+import AddOnSection from "./AddOnSection";
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -40,7 +41,7 @@ const AddItem = (props) => {
     const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
 
     const { addToCart, language, cart, updateCart } = props;
-    const [item, setItem] = useState({qty: itemData.qty ? itemData.qty : 0});
+    const [item, setItem] = useState({qty: itemData.qty ? itemData.qty : 0, addOn: []});
     const goBackToMenu = () => {
         // cannot just use history.goBack(), the header needs to re-render to work properly
         props.history.push(`/order/${table}`);
@@ -75,7 +76,26 @@ const AddItem = (props) => {
         }
         const separatorIndex = val.indexOf(":");
         const choiceType = val.substring(0, separatorIndex);
-        setItem({...item, price, [choiceType]: JSON.parse(val.substring(separatorIndex+1))});
+        const returnObj = JSON.parse(val.substring(separatorIndex+1));
+        let choiceValue = null;
+        if (choiceType === "addOn") {
+            choiceValue = item.addOn;
+            let didChange = false;
+            for (let i = 0; i < choiceValue.length; i++) {
+                if (choiceValue[i].english === returnObj.english) {
+                    choiceValue[i] = returnObj;
+                    didChange = true;
+                }
+            }
+            if (!didChange) {
+                choiceValue.push(returnObj);
+            }
+        }
+        if (choiceValue === null) {
+            choiceValue = JSON.parse(val.substring(separatorIndex+1));
+        }
+
+        setItem({...item, price, [choiceType]: choiceValue});
     }
     // Values for button are formatted like: choiceType:choiceValue 
     // I use : as a delimitter to separate type and value so I can set the cart object 
@@ -85,7 +105,7 @@ const AddItem = (props) => {
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
                 choiceSections.push(<ItemChoiceSection key={key} constKey={key} language={language} selectChoice={selectChoice} choiceType={itemChoices[key].menuKey} choicesArr={sectionData[itemChoices[key].menuKey]}/>);
-            }
+            } 
         }
         if (itemData.hasProteinChoice) {
             choiceSections.push(<ItemChoiceSection key={"proteinChoice"} constKey={"hasProtein"} language={language} selectChoice={selectChoice} choiceType={"proteinChoice"} choicesArr={itemData.proteinChoice}/>);
@@ -104,6 +124,11 @@ const AddItem = (props) => {
         }
         if (itemData.hasEgg) {
             choiceSections.push(<ItemChoiceSection key={"hasEgg"} constKey={"hasEgg"} language={language} selectChoice={selectChoice} choiceType={"eggChoice"} choicesArr={itemChoices.hasEgg.eggChoice}/>);
+        }
+        if (sectionData.addOns && sectionData.addOns.length > 0) {
+            for (let i = 0; i < sectionData.addOns.length; i++) {
+                choiceSections.push(<ItemChoiceSection key={`addOn/${i}`} constKey={"addOn"} choiceType={"addOn"} language={language} selectChoice={selectChoice} choicesArr={sectionData.addOns[i]} />);
+            }
         }
         return choiceSections;
     }

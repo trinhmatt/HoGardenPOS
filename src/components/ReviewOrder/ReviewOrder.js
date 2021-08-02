@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import dayjs from 'dayjs';
 import database from '../../firebase/firebase';
 import CustOrderItem from './CustOrderItem';
+import { authConsts } from '../../static/constants/auth-constants';
 
 
 const ReviewOrder = (props) => {
     const { language } = props;
     const [errorMsg, setError] = useState(null);
     const [itemElements, setItemElements] = useState([]);
-    const currentDayStr = dayjs().format('');
+    const currentDayStr = dayjs().format(authConsts.DATE);
 
     const fetchOrder = () => {
         return new Promise( (resolve, reject) => {
@@ -18,7 +19,6 @@ const ReviewOrder = (props) => {
                 .then( snapshot => {
                     const orders = snapshot.val();
                     const tableNum = props.match.params.number.indexOf("C") > -1 ? props.match.params.number.replace("C","門口") : props.match.params.number;
-
                     if (orders) {
                         for (let i = 0; i < orders.length; i++) {
                             console.log(orders[i])
