@@ -9,6 +9,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+
+//Icon imports
+import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 
 //Carousel import
 import {Carousel} from 'react-responsive-carousel';
@@ -17,26 +23,61 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 //Subcomponent imports
 import ElevationScroll from "./subcomponents/ElevationScroll";
 
-//Menu pdf
+//Menu 
 import adc1 from '../static/menu/adc-1.jpg';
 import adc2 from '../static/menu/adc-2.jpg';
 import adc3 from '../static/menu/adc-3.jpg';
+import adc4 from '../static/menu/adc-4.jpg';
+import adc5 from '../static/menu/adc-5.jpg';
+import adc6 from '../static/menu/adc-6.jpg';
+import at1 from '../static/menu/at-1.jpg';
+import b1 from '../static/menu/b-1.jpg';
+import hc1 from '../static/menu/hc-1.jpg';
+import hc2 from '../static/menu/hc-2.jpg';
 
 const Home = (props) => {
     const styles = mainStyles();
     const [state, setState] = useState({});
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
     
-    const test = () => {
-        database.ref("menu").update({test: "hi"})
+    const scrollToMenu = () => {
+        const menu = document.getElementById('menu');
+        menu.scrollIntoView({ block: 'start', behavior: 'smooth'});
     }
+
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    }
+
     return (
         <div className={styles.homePage}>
              {/* Header */}
              <ElevationScroll {...props}>
                     <AppBar id='menu-header'>
                         <Toolbar className={styles.titleBackground}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={6} className={styles.centered}>
+                            <Grid container spacing={0}>
+                                <Grid item xs={1} style={{display: 'flex'}}>
+                                    <IconButton onClick={handleMenu} style={{padding: '0'}}>
+                                        <MenuRoundedIcon className={styles.menuIcon} />
+                                    </IconButton>
+                                    <Menu 
+                                        anchorEl={anchorEl}
+                                        anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
+                                        keepMounted
+                                        transformOrigin={{vertical: 'bottom', horizontal: 'right'}}
+                                        open={open}
+                                        onClose={handleClose}
+                                    >
+                                        <MenuItem onClick={scrollToMenu}>MENU/菜單</MenuItem>
+                                        <MenuItem >ORDER PICKUP/取貨訂單</MenuItem>
+                                    </Menu>
+                                </Grid>
+                                <Grid item xs={5} className={styles.centered}>
                                     <div className={styles.title}>半島餐廳</div>
                                 </Grid>
                                 <Grid item xs={6} className={styles.titleRightLayout}>
@@ -50,7 +91,6 @@ const Home = (props) => {
                 </ElevationScroll>
                 <Toolbar />
                 <Carousel
-                    autoPlay={true}
                     swipeable={true}
                     emulateTouch={true}
                     showThumbs={false}
@@ -58,6 +98,12 @@ const Home = (props) => {
                     <div className={styles.parallaxBackground}></div>
                     <div className={styles.parallaxBackground2}></div>
                     <div className={styles.parallaxBackground3}></div>
+                    <div className={styles.parallaxBackground4}></div>
+                    <div className={styles.parallaxBackground5}></div>
+                    <div className={styles.parallaxBackground6}></div>
+                    <div className={styles.parallaxBackground7}></div>
+                    <div className={styles.parallaxBackground8}></div>
+                    <div className={styles.parallaxBackground9}></div>
                 </Carousel>
             <Grid container spacing={0} className={styles.mapBackground}>
                 <Grid item xs={6} className={styles.mapouter}>
@@ -78,15 +124,15 @@ const Home = (props) => {
                     <div className={styles.mapSmall}>SUNDAY: 8AM-9PM</div>
                 </Grid>
             </Grid>
-            <div className={styles.afterBackground}>
+            <div id='menu' className={styles.afterBackground}>
                 <div className={styles.menuTitle}>MENU/菜單</div>
                 <Carousel
                     autoPlay={true}
-                    centerMode={true}
                     dynamicHeight={true}
                     swipeable={true}
                     emulateTouch={true}
                     showIndicators={false}
+                    infiniteLoop={true}
                 >
                     <div>
                         <img src={adc1} className={styles.menuImg}/>
@@ -96,6 +142,27 @@ const Home = (props) => {
                     </div>
                     <div>
                         <img src={adc3} className={styles.menuImg} />
+                    </div>
+                    <div>
+                        <img src={adc4} className={styles.menuImg} />
+                    </div>
+                    <div>
+                        <img src={adc5} className={styles.menuImg} />
+                    </div>
+                    <div>
+                        <img src={adc6} className={styles.menuImg} />
+                    </div>
+                    <div>
+                        <img src={at1} className={styles.menuImg} />
+                    </div>
+                    <div>
+                        <img src={b1} className={styles.menuImg} />
+                    </div>
+                    <div>
+                        <img src={hc1} className={styles.menuImg} />
+                    </div>
+                    <div>
+                        <img src={hc2} className={styles.menuImg} />
                     </div>
                 </Carousel>
             </div>
