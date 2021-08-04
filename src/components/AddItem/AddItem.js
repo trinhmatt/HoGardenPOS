@@ -14,15 +14,14 @@ import { menuStyles } from '../../static/css/menuStyles';
 //Material ui imports
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Container } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 
 //Material ui icon imports
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -37,17 +36,25 @@ import { render } from '@testing-library/react';
 const AddItem = (props) => {
     const styles = menuStyles();
     const { itemData, table, index } = props.location.state;
+
     // Section data will be from the menu when adding or from itemData when editing
     const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
 
     const { addToCart, language, cart, updateCart } = props;
-    const [item, setItem] = useState({qty: itemData.qty ? itemData.qty : 0, addOn: []});
+    const [item, setItem] = useState({ qty: itemData.qty ? itemData.qty : 0, addOn: [] });
+
+    // Constants for add to order button text
+    const engUpdateBtnText = "Update Order";
+    const chinUpdateBtnText = "更新訂單";
+    const engAddBtnText = `Add ${item.qty > 0 ? `${item.qty} ` : ' '}to order`;
+    const chinAddBtnText = `添加 ${item.qty > 0 ? `${item.qty} ` : ' '}到訂單`;
+
     const goBackToMenu = () => {
         // cannot just use history.goBack(), the header needs to re-render to work properly
         props.history.push(`/order/${table}`);
     }
     const changeQty = (e) => {
-        setItem({...item, qty: item.qty + parseInt(e.currentTarget.value)});
+        setItem({ ...item, qty: item.qty + parseInt(e.currentTarget.value) });
     }
     const addToOrder = () => {
         const orderItem = {
@@ -61,7 +68,7 @@ const AddItem = (props) => {
     const startUpdateCart = () => {
         let cartItems = [...cart];
         if (item.qty > 0) {
-            cartItems[index] = {...itemData, ...item};
+            cartItems[index] = { ...itemData, ...item };
         } else {
             cartItems.splice(index, 1);
         }
@@ -76,7 +83,7 @@ const AddItem = (props) => {
         }
         const separatorIndex = val.indexOf(":");
         const choiceType = val.substring(0, separatorIndex);
-        const returnObj = JSON.parse(val.substring(separatorIndex+1));
+        const returnObj = JSON.parse(val.substring(separatorIndex + 1));
         let choiceValue = null;
         if (choiceType === "addOn") {
             choiceValue = item.addOn;
@@ -92,23 +99,23 @@ const AddItem = (props) => {
             }
         }
         if (choiceValue === null) {
-            choiceValue = JSON.parse(val.substring(separatorIndex+1));
+            choiceValue = JSON.parse(val.substring(separatorIndex + 1));
         }
 
-        setItem({...item, price, [choiceType]: choiceValue});
+        setItem({ ...item, price, [choiceType]: choiceValue });
     }
     // Values for button are formatted like: choiceType:choiceValue 
     // I use : as a delimitter to separate type and value so I can set the cart object 
     const renderChoices = () => {
-        let choiceSections = []; 
+        let choiceSections = [];
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
-                choiceSections.push(<ItemChoiceSection key={key} constKey={key} language={language} selectChoice={selectChoice} choiceType={itemChoices[key].menuKey} choicesArr={sectionData[itemChoices[key].menuKey]}/>);
-            } 
+                choiceSections.push(<ItemChoiceSection key={key} constKey={key} language={language} selectChoice={selectChoice} choiceType={itemChoices[key].menuKey} choicesArr={sectionData[itemChoices[key].menuKey]} />);
+            }
         }
         if (itemData.hasProteinChoice) {
-            choiceSections.push(<ItemChoiceSection key={"proteinChoice"} constKey={"hasProtein"} language={language} selectChoice={selectChoice} choiceType={"proteinChoice"} choicesArr={itemData.proteinChoice}/>);
+            choiceSections.push(<ItemChoiceSection key={"proteinChoice"} constKey={"hasProtein"} language={language} selectChoice={selectChoice} choiceType={"proteinChoice"} choicesArr={itemData.proteinChoice} />);
         }
         if (itemData.hotPrice && itemData.coldPrice) {
             choiceSections.push(
@@ -123,7 +130,7 @@ const AddItem = (props) => {
             )
         }
         if (itemData.hasEgg) {
-            choiceSections.push(<ItemChoiceSection key={"hasEgg"} constKey={"hasEgg"} language={language} selectChoice={selectChoice} choiceType={"eggChoice"} choicesArr={itemChoices.hasEgg.eggChoice}/>);
+            choiceSections.push(<ItemChoiceSection key={"hasEgg"} constKey={"hasEgg"} language={language} selectChoice={selectChoice} choiceType={"eggChoice"} choicesArr={itemChoices.hasEgg.eggChoice} />);
         }
         if (sectionData.addOns && sectionData.addOns.length > 0) {
             for (let i = 0; i < sectionData.addOns.length; i++) {
@@ -135,19 +142,19 @@ const AddItem = (props) => {
 
     useEffect(() => {
         // Scroll to top of window on render
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }, []);
 
     return (
         <React.Fragment>
-            <Container className={styles.menuLayout}>
+            <Container container spacing={0} className={styles.menuLayout}>
                 {/* Header */}
                 <ElevationScroll {...props}>
                     <AppBar id='menu-header'>
                         <Toolbar className={styles.header}>
-                    <IconButton className={styles.backLayout} onClick={goBackToMenu}>
-                        <ArrowBackIcon className={styles.backAddItemLayout} />
-                    </IconButton>
+                            <IconButton className={styles.backLayout} onClick={goBackToMenu}>
+                                <ArrowBackIcon className={styles.backAddItemLayout} />
+                            </IconButton>
                             <FormGroup className={styles.switchLayout}>
                                 <FormControlLabel
                                     className={styles.switchAddItemLayout}
@@ -164,33 +171,42 @@ const AddItem = (props) => {
                     </AppBar>
                 </ElevationScroll>
                 <Toolbar />
-                <Container className={styles.addItemLayout}>
-                    {/* food item */}
-                    <Paper className={styles.addItemSection} elevation={3}>
-                        <h1 className={styles.itemTItle}>{itemData[language]}</h1>
-                        {/* Item choices */}
-                        <div>
-                            {renderChoices()}
-                        </div>
-                        <div className={styles.row}>
-                            {item.qty > 0 ?
-                                <IconButton value="-1" onClick={changeQty}>
-                                    <RemoveCircleIcon className={styles.addItemQtyBtn} />
+                <Container>
+                    <Box className={styles.centered}>
+                        {/* food item */}
+                        <Paper className={styles.addItemSection} elevation={3}>
+                            <br /><br /><br />
+                            <h1 className={(language === 'english') ? styles.itemTitle : styles.chinItemTitle}>{itemData[language]}</h1>
+                            {/* Item choices */}
+                            <div>
+                                {renderChoices()}
+                            </div>
+                            <div className={styles.row}>
+                                {item.qty > 0 ?
+                                    <IconButton value="-1" onClick={changeQty}>
+                                        <RemoveCircleIcon className={styles.addItemQtyBtn} />
+                                    </IconButton>
+                                    :
+                                    <IconButton value="-1" disabled onClick={changeQty}>
+                                        <RemoveCircleIcon className={styles.disabledAddItemQtyBtn} />
+                                    </IconButton>
+                                }
+                                <p style={{fontSize: '25px'}}>{item.qty}</p>
+                                <IconButton value="1" onClick={changeQty}>
+                                    <AddCircleIcon className={styles.addItemQtyBtn} />
                                 </IconButton>
-                            :
-                                <IconButton value="-1" disabled onClick={changeQty}>
-                                    <RemoveCircleIcon className={styles.disabledAddItemQtyBtn}/>
-                                </IconButton>
+                            </div>
+                            <br />
+                        </Paper>
+                        <Button className={language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn} variant='contained' disabled={item.qty === 0} onClick={index !== undefined ? startUpdateCart : addToOrder}>
+                            {
+                            index !== undefined ? 
+                                (language === 'english' ? engUpdateBtnText : chinUpdateBtnText)
+                                : 
+                                (language === 'english' ? engAddBtnText : chinAddBtnText)
                             }
-                            <p>{item.qty}</p>
-                            <IconButton value="1" onClick={changeQty}>
-                                <AddCircleIcon className={styles.addItemQtyBtn}/>
-                            </IconButton>
-                        </div>
-                    <Button className={styles.addToOrderBtn} variant='contained' disabled={item.qty === 0} onClick={index !== undefined ? startUpdateCart : addToOrder}>
-                        {index !== undefined ? "Update Order" : `Add ${item.qty > 0 ? `${item.qty} ` : ' '}to order`}
-                    </Button>
-                    </Paper>
+                        </Button>
+                    </Box>
                 </Container>
             </Container>
         </React.Fragment>
@@ -208,4 +224,4 @@ const mapDispatchToProps = dispatch => ({
     updateCart: (updatedCart) => dispatch(updateCart(updatedCart))
 })
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(AddItem));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddItem));

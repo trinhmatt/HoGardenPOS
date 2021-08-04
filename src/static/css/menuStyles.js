@@ -21,8 +21,13 @@ const menuStyles = makeStyles((theme) => ({
     menuLayout: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflowX: 'hidden',
-        minWidth: '100%',
         backgroundColor: '#fdb678',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        height: '100vh',
+        width: '100vw',
     },
     header: {
         lineHeight: '0.05em',
@@ -68,26 +73,6 @@ const menuStyles = makeStyles((theme) => ({
             padding: '0',
         },
     },
-    addItemLayout: {
-        width: '110%',
-        height: '100vh',
-        //phone
-        '@media (min-width: 375px)': {
-            marginTop: '16vh',
-            marginLeft: '-5vw',
-        },
-        //ipad
-        '@media (min-width: 760px)': {
-            marginTop: '22vh',
-            marginLeft: '-5vw',
-        },
-        //desktop
-        '@media (min-width: 960px)': {
-            marginTop: '25vh',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
-    },
     switchLayout: {
         display: 'flex',
         alignItems: 'flex-end',
@@ -127,17 +112,35 @@ const menuStyles = makeStyles((theme) => ({
     itemChoiceLayout: {
         textAlign: 'center',
         lineHeight: '0.5em',
+        marginBottom: '10%',
         //phone
         '@media (min-width: 375px)': {
-            fontSize: '10px',
+            fontSize: '12px',
         },
         //ipad
         '@media (min-width: 760px)': {
-            fontSize: '15px',
+            fontSize: '20px',
         },
         //desktop
         '@media (min-width: 960px)': {
             fontSize: '20px',
+        },
+    },
+    chinItemChoiceLayout: {
+        textAlign: 'center',
+        lineHeight: '0.5em',
+        marginBottom: '10%',
+        //phone
+        '@media (min-width: 375px)': {
+            fontSize: '18px',
+        },
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '30px',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
+            fontSize: '35px',
         },
     },
 
@@ -414,7 +417,8 @@ const menuStyles = makeStyles((theme) => ({
 
     //ADD ITEM 
     addItemSection: {
-        height: '70%',
+        height: '60vh',
+        width: '100%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -422,17 +426,36 @@ const menuStyles = makeStyles((theme) => ({
         overflow: 'auto',
         padding: '5%',
     },
-    itemTItle: {
+    itemTitle: {
         padding: '5%',
         textAlign: 'center',
         wordBreak: 'break-word',
+        border: '2px dashed #7f9877',
         //phone
         '@media (min-width: 375px)': {
             fontSize: '20px',
         },
         //ipad
         '@media (min-width: 760px)': {
+            fontSize: '35px',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
             fontSize: '30px',
+        },
+    },
+    chinItemTitle: {
+        padding: '5%',
+        textAlign: 'center',
+        wordBreak: 'break-word',
+        border: '2px dashed #7f9877',
+        //phone
+        '@media (min-width: 375px)': {
+            fontSize: '30px',
+        },
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '55px',
         },
         //desktop
         '@media (min-width: 960px)': {
@@ -441,29 +464,72 @@ const menuStyles = makeStyles((theme) => ({
     },
     itemChoices: {
         color: '#000',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '20px',
+        },
+    },
+    chinItemChoices: {
+        color: '#000',
+        fontSize: '20px',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '30px',
+        },
     },
     selectedChoice: {
         backgroundColor: '#000',
         color: '#fff',
     },
+    chinSelectedChoice: {
+        backgroundColor: '#000',
+        color: '#fff',
+        fontSize: '20px',
+    },
     itemChoiceGroup: {
         backgroundColor: '#fff',
     },
     addItemQtyBtn: {
-        fontSize: '40px',
         color: '#000',
+        //phone
+        '@media (min-width: 375px)': {
+            fontSize: '40px',
+        },
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '60px',
+        },
     },
     disabledAddItemQtyBtn: {
-        fontSize: '40px',
         color: 'darkgray',
+        //phone
+        '@media (min-width: 375px)': {
+            fontSize: '40px',
+        },
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '60px',
+        },
     },
     addToOrderBtn: {
-        width: '85%',
-        position: 'fixed',
-        bottom: '1vh',
+        width: '75%',
+        position: 'absolute',
+        bottom: '5%',
         backgroundColor: '#000',
         color: '#fff',
-    }
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '20px',
+        },
+    },
+    chinAddToOrderBtn: {
+        width: '75%',
+        position: 'absolute',
+        bottom: '5%',
+        backgroundColor: '#000',
+        color: '#fff',
+        fontSize: '25px',
+    },
 }));
 
 export {menuStyles}

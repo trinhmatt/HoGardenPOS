@@ -10,8 +10,6 @@ import bkgrnd6 from '../images/home4.jpeg';
 import bkgrnd7 from '../images/home5.jpeg';
 import bkgrnd8 from '../images/home6.jpeg';
 import bkgrnd9 from '../images/home7.jpeg';
-import bkgrnd10 from '../images/home8.jpeg';
-import bkgrnd11 from '../images/home9.jpeg';
 
 const mainStyles = makeStyles(({spacing}) => ({
     fullPage: {

@@ -6,6 +6,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
+import cx from 'clsx';
 
 //Constants imports
 import { itemChoices } from '../../static/constants/menu-constants';
@@ -67,7 +68,7 @@ const ItemChoiceSection = (props) => {
                     - Both ":" and "/" are used as delimitters so I know where in the string to look for the information I need (qty and increment/decrement)
             */
             for (let i = 0; i < choicesArr.choices.length; i++) {
-                const price = parsePrice(choicesArr.price.toString());
+                const price = '$' + parsePrice(choicesArr.price.toString());
                 if (choicesArr.type.english === "Change" || choicesArr.type.english === "Extra") {
                     choices.push(
                         <Button
@@ -75,7 +76,9 @@ const ItemChoiceSection = (props) => {
                             value={`${choiceType}:${JSON.stringify(choicesArr.choices[i])}`} 
                             key={`${i}/${choicesArr.choices[i][language]}`}
                             onClick={handleSingleChoice}
-                            className={styles.itemChoices,(selectedItem === i ? styles.selectedChoice : null)}
+                            className={language === 'english' ? 
+                                cx(styles.itemChoices,(selectedItem === i ? styles.selectedChoice : null)) :
+                                cx(styles.chinItemChoices,(selectedItem === i ? styles.chinSelectedChoice : null))}
                         >
                             {choicesArr.choices[i][language]} (+{price})
                         </Button>)
@@ -108,7 +111,7 @@ const ItemChoiceSection = (props) => {
         return choices;
     }
     return (
-        <div className={styles.itemChoiceLayout}>
+        <div className={(language === 'english') ? styles.itemChoiceLayout : styles.chinItemChoiceLayout}>
             <h2>{isAddOn ? choicesArr.type[language]: itemChoices[constKey][language]}</h2>
             <ButtonGroup variant='contained' size='small'>{choicesBuilder(choiceType, choicesArr)}</ButtonGroup>
         </div>
