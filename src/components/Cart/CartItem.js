@@ -38,7 +38,7 @@ const CartItem = (props) => {
             choices.push(
                 <div key={`proteinChoice/${itemData.english}`} onClick={editItem}>
                     <h2>{itemChoices.hasProtein[language]}</h2>
-                    <p>{itemData.proteinChoice[language]}</p>
+                    <p>{itemData.selectedProtein[language]}</p>
                 </div>
             )
         }

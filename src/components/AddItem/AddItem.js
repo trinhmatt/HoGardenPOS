@@ -41,7 +41,10 @@ const AddItem = (props) => {
     const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
 
     const { addToCart, language, cart, updateCart } = props;
-    const [item, setItem] = useState({qty: itemData.qty ? itemData.qty : 0, addOn: []});
+    const [item, setItem] = useState({
+                                qty: itemData.qty ? itemData.qty : 0, 
+                                addOn: itemData.addOn ? itemData.addOn : []
+                            });
     const goBackToMenu = () => {
         // cannot just use history.goBack(), the header needs to re-render to work properly
         props.history.push(`/order/${table}`);
@@ -71,19 +74,27 @@ const AddItem = (props) => {
     const selectChoice = (choiceData) => {
         const val = choiceData;
         let price = itemData.price;
+
         if (val.indexOf("tempChoice") > -1) {
             price = val.indexOf("hot") > - 1 ? itemData.hotPrice : itemData.coldPrice;
         }
+
         const separatorIndex = val.indexOf(":");
         const choiceType = val.substring(0, separatorIndex);
-        const returnObj = JSON.parse(val.substring(separatorIndex+1));
         let choiceValue = null;
+
         if (choiceType === "addOn") {
+            const returnObj = JSON.parse(val.substring(separatorIndex+1));
             choiceValue = item.addOn;
             let didChange = false;
             for (let i = 0; i < choiceValue.length; i++) {
                 if (choiceValue[i].english === returnObj.english) {
-                    choiceValue[i] = returnObj;
+                    //if no quantity, it is a add on that is on/off
+                    if (choiceValue[i].qty === undefined) {
+                        choiceValue.splice(i, 1);
+                    } else {
+                        choiceValue[i] = returnObj;
+                    }
                     didChange = true;
                 }
             }
@@ -91,7 +102,8 @@ const AddItem = (props) => {
                 choiceValue.push(returnObj);
             }
         }
-        if (choiceValue === null) {
+
+        if (choiceValue === null && choiceData.indexOf("null") === -1) {
             choiceValue = JSON.parse(val.substring(separatorIndex+1));
         }
 
@@ -104,11 +116,32 @@ const AddItem = (props) => {
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
-                choiceSections.push(<ItemChoiceSection key={key} constKey={key} language={language} selectChoice={selectChoice} choiceType={itemChoices[key].menuKey} choicesArr={sectionData[itemChoices[key].menuKey]}/>);
+                // selectedObj is not undefined when user is editing a cart item 
+                // constKey is the key used in the menu-consts 
+                // choiceType = noodleChoice, sauceChoice, etc. 
+                choiceSections.push(
+                    <ItemChoiceSection 
+                        selectedObj={itemData[itemChoices[key].menuKey]} 
+                        key={key} 
+                        constKey={key} 
+                        language={language} 
+                        selectChoice={selectChoice} 
+                        choiceType={itemChoices[key].menuKey} 
+                        choicesArr={sectionData[itemChoices[key].menuKey]}
+                    />);
             } 
         }
         if (itemData.hasProteinChoice) {
-            choiceSections.push(<ItemChoiceSection key={"proteinChoice"} constKey={"hasProtein"} language={language} selectChoice={selectChoice} choiceType={"proteinChoice"} choicesArr={itemData.proteinChoice}/>);
+            choiceSections.push(
+                <ItemChoiceSection 
+                    selectedObj={itemData.selectedProtein} 
+                    key={"proteinChoice"} 
+                    constKey={"hasProtein"} 
+                    language={language} 
+                    selectChoice={selectChoice} 
+                    choiceType={"selectedProtein"} 
+                    choicesArr={itemData.proteinChoice}
+                />);
         }
         if (itemData.hotPrice && itemData.coldPrice) {
             choiceSections.push(
@@ -123,11 +156,29 @@ const AddItem = (props) => {
             )
         }
         if (itemData.hasEgg) {
-            choiceSections.push(<ItemChoiceSection key={"hasEgg"} constKey={"hasEgg"} language={language} selectChoice={selectChoice} choiceType={"eggChoice"} choicesArr={itemChoices.hasEgg.eggChoice}/>);
+            choiceSections.push(
+                <ItemChoiceSection 
+                    selectedObj={itemData.eggChoice} 
+                    key={"hasEgg"} 
+                    constKey={"hasEgg"} 
+                    language={language} 
+                    selectChoice={selectChoice} 
+                    choiceType={"eggChoice"} 
+                    choicesArr={itemChoices.hasEgg.eggChoice}
+                />);
         }
         if (sectionData.addOns && sectionData.addOns.length > 0) {
             for (let i = 0; i < sectionData.addOns.length; i++) {
-                choiceSections.push(<ItemChoiceSection key={`addOn/${i}`} constKey={"addOn"} choiceType={"addOn"} language={language} selectChoice={selectChoice} choicesArr={sectionData.addOns[i]} />);
+                choiceSections.push(
+                    <ItemChoiceSection 
+                        selectedObj={itemData.addOn} 
+                        key={`addOn/${i}`} 
+                        constKey={"addOn"} 
+                        choiceType={"addOn"} 
+                        language={language} 
+                        selectChoice={selectChoice} 
+                        choicesArr={sectionData.addOns[i]} 
+                    />);
             }
         }
         return choiceSections;
