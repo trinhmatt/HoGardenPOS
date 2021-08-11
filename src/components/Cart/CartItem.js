@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { itemChoices } from "../../static/constants/menu-constants";
 import { updateCart } from '../../redux/actions/cart-actions';
+import CartItemChoice from './CartItemChoice';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -18,40 +19,65 @@ import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'
 
 const CartItem = (props) => {
     const styles = menuStyles();
-    const { itemData, language, cart, updateCart, index, table, sectionData } = props;
-    const calculatePrice = (qty, price) => {
-        return (parseFloat(qty)*price).toFixed(2);
-    }
+    const { itemData, language, cart, updateCart, index, table, price } = props;
+
     const renderChoices = () => {
         let choices = [];
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
                 choices.push(
-                    <div key={`${key}/${itemData[itemChoices[key].menuKey][language]}`} onClick={editItem}>
-                        <h2>{itemChoices[key][language]}</h2>
-                        <p>{itemData[itemChoices[key].menuKey][language]}</p>
-                    </div>
+                    <CartItemChoice 
+                        key={key}
+                        title={itemChoices[key][language]} 
+                        choice={itemData[itemChoices[key].menuKey][language]} 
+                        editItem={editItem} 
+                    />
                 )
             }
         }
         if (itemData.proteinChoice) {
             choices.push(
-                <div key={`proteinChoice/${itemData.english}`} onClick={editItem}>
-                    <h2>{itemChoices.hasProtein[language]}</h2>
-                    <p>{itemData.selectedProtein[language]}</p>
-                </div>
+                <CartItemChoice 
+                        key={'proteinChoice'}
+                        title={itemChoices.hasProtein[language]} 
+                        choice={itemData.selectedProtein[language]} 
+                        editItem={editItem} 
+                />
             )
         }
         if (itemData.hasEgg) {
             choices.push(
-                <div key={`eggChoice/${itemChoices.hasEgg.eggChoice.english}`} onClick={editItem}>
-                    <h2>{itemChoices.hasEgg[language]}</h2>
-                    <p>{itemData.eggChoice[language]}</p>
-                </div>
+                <CartItemChoice 
+                    key={'eggChoice'}
+                    title={itemChoices.hasEgg[language]} 
+                    choice={itemData.eggChoice[language]} 
+                    editItem={editItem} 
+                />
             )
         }
         return choices;
     }
+
+    const renderAddOns = () => {
+        let addOns = [];
+        if (itemData.addOn && itemData.addOn.length > 0) {
+            for (let i = 0; i < itemData.addOn.length; i++) {
+                addOns.push(
+                    <CartItemChoice 
+                        key={`addOn/${i}`}
+                        title={"addOn"}
+                        choice={itemData.addOn[i][language]}
+                        price={itemData.addOn[i].price}
+                        qty={itemData.addOn[i].qty}
+                        editItem={editItem}
+                    />
+                )
+            }
+        }
+        return addOns;
+        
+    }
+
     const changeQty = (e) => {
         const qty = itemData.qty + parseInt(e.currentTarget.value);
         let cartItems = [...cart];
@@ -62,12 +88,14 @@ const CartItem = (props) => {
         }
         updateCart(cartItems);
     }
+
     const editItem = () => {
         props.history.push({
             pathname: "/add-item",
             state: {itemData, index, table}
         })
     }
+
     return (
         <div>
             <Grid container spacing={3} className={styles.cartItemSection}>
@@ -78,7 +106,7 @@ const CartItem = (props) => {
                     <p>{` ${itemData[language]}`} </p>
                 </Grid>
                 <Grid item xs className={styles.cartPrice}>
-                    <span onClick={editItem}>${calculatePrice(itemData.qty, itemData.price)}</span>
+                    <span onClick={editItem}>${price.toFixed(2)}</span>
                     <div className={styles.row}>
                         <IconButton className={styles.cartQtyBtns} value={-1} onClick={changeQty}>
                             <IndeterminateCheckBoxIcon className={styles.qtyBtnColor}/>
@@ -90,6 +118,8 @@ const CartItem = (props) => {
                 </Grid>
                 <Grid onClick={editItem} item xs={12}>
                     {renderChoices()}
+                    {itemData.addOn && itemData.addOn.length > 0 && <h2>Add ons:</h2>}
+                    {renderAddOns()}
                 </Grid>
             </Grid>
             <Divider />

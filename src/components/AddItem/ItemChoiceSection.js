@@ -114,7 +114,7 @@ const ItemChoiceSection = (props) => {
         if (isAddOn) {
             
             for (let i = 0; i < choicesArr.choices.length; i++) {
-                const price = '$' + parsePrice(choicesArr.price.toString());
+                const price = '$' + (choicesArr.choices[i].price ? parsePrice(choicesArr.choices[i].price.toString()) : parsePrice(choicesArr.price.toString()));
                 if (choicesArr.type.english === "Change" || choicesArr.type.english === "Extra") {
                     choices.push(
                         <Button

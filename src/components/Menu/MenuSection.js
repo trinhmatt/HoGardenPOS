@@ -70,7 +70,7 @@ const MenuSection = (props) => {
         if (data.extraInfo && data.extraInfo.length > 0) {
             for (let i = 0; i < data.extraInfo.length; i++) {
                 extraInfoElements.push(
-                    <p className={styles.menuExtraInfo}>{data.extraInfo[i][language]}</p>
+                    <p key={data.extraInfo[i][language]} className={styles.menuExtraInfo}>{data.extraInfo[i][language]}</p>
                 )
             }
         }

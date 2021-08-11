@@ -20,17 +20,37 @@ import Button from '@material-ui/core/Button';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 
 const Cart = (props) => {
+    const isAdmin = props.match.params.number === "admin";
     const styles = menuStyles();
     const { cart, language, auth, clearCart } = props;
     const [cartItems, setCartItems] = useState([]);
-    const [table, setTable] = useState("1");
+    const [table, setTable] = useState(isAdmin ? "1" : props.match.params.number);
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    const calculatePrice = (itemData) => {
+        let total = itemData.price;
+        if (itemData.addOn && itemData.addOn.length > 0) {
+            for (let i = 0; i < itemData.addOn.length; i++) {
+                total += itemData.addOn[i].price * (itemData.addOn[i].qty ? itemData.addOn[i].qty : 1.0);
+            }
+        }
+        total *= parseFloat(itemData.qty);
+        return total;
+    }
+
     useEffect(() => {
         let cartItems = [];
+        let totalPrice = 0;
         for (let i = 0; i < cart.length; i++) {
-            cartItems.push(<CartItem table={props.match.params.number} key={`cartItem/${i}`} index={i} language={language} itemData={cart[i]} />)
+            let price = calculatePrice(cart[i]);
+            totalPrice += price;
+            cartItems.push(<CartItem price={price} table={props.match.params.number} key={`cartItem/${i}`} index={i} language={language} itemData={cart[i]} />)
         }
-        setCartItems(cartItems)
+        setCartItems(cartItems);
+        setTotalPrice(totalPrice);
     }, [cart])
+
+    // for admin orders
     const renderTables = () => {
         let tables = [];
         for (const table in cartConsts.tables) {
@@ -39,9 +59,12 @@ const Cart = (props) => {
         }
         return tables;
     }
+
+    // for admin orders
     const setTableVal = (e) => {
         setTable(e.currentTarget.value)
     }
+
     const checkout = () => {
         const currentDayStr = dayjs().format(authConsts.DATE);
         //Check if any orders exist for the day
@@ -101,6 +124,7 @@ const Cart = (props) => {
                     {cartItems}
                     </div> 
                 </Paper>
+                <h2>Total: {totalPrice.toFixed(2)}</h2>
                 <Button className={styles.addToOrderBtn} variant='contained' onClick={checkout}>Checkout</Button>
                 </div>
             : 
