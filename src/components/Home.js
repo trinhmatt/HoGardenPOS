@@ -43,7 +43,7 @@ const Home = (props) => {
     
     const scrollToMenu = () => {
         const menu = document.getElementById('menu');
-        menu.scrollIntoView({ block: 'start', behavior: 'smooth'});
+        menu.scrollIntoView({ block: 'nearest', behavior: 'smooth'});
     }
 
     const handleMenu = (event) => {
@@ -91,9 +91,12 @@ const Home = (props) => {
                 </ElevationScroll>
                 <Toolbar />
                 <Carousel
-                    swipeable={true}
+                    autoPlay={true}
+                    transitionTime={8000}
+                    swipeScrollTolerance={15}
                     emulateTouch={true}
                     showThumbs={false}
+                    infiniteLoop={true}
                 >
                     <div className={styles.parallaxBackground}></div>
                     <div className={styles.parallaxBackground2}></div>
@@ -106,14 +109,14 @@ const Home = (props) => {
                     <div className={styles.parallaxBackground9}></div>
                 </Carousel>
             <Grid container spacing={0} className={styles.mapBackground}>
-                <Grid item xs={6} className={styles.mapouter}>
+                <Grid item xs={7} className={styles.mapouter}>
                     <div className={styles.gmap_canvas}>
-                        <iframe width="600" height="330" id="gmap_canvas" src={"https://maps.google.com/maps?q=9255%20woodbine%20ave&t=&z=15&ie=UTF8&iwloc=&output=embed"} frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                        <iframe className={styles.gmap_iframe} id="gmap_canvas" src={"https://maps.google.com/maps?q=9255%20woodbine%20ave&t=&z=15&ie=UTF8&iwloc=&output=embed"} frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                         <br />
                         <a href="https://www.embedgooglemap.net">location map for website</a>
                     </div>
                 </Grid>
-                <Grid item xs={6} className={styles.titleRightLayout}>
+                <Grid item xs={5} className={styles.titleRightLayout}>
                     <div className={styles.titleRight}>HOURS/營業時間:</div>
                     <div className={styles.mapSmall}>MONDAY: 8AM-9PM</div>
                     <div className={styles.mapSmall}>TUESDAY: 8AM-9PM</div>
@@ -128,10 +131,8 @@ const Home = (props) => {
                 <div className={styles.menuTitle}>MENU/菜單</div>
                 <Carousel
                     dynamicHeight={true}
-                    swipeable={true}
                     emulateTouch={true}
                     showIndicators={false}
-                    infiniteLoop={true}
                 >
                     <div>
                         <img src={adc1} className={styles.menuImg}/>

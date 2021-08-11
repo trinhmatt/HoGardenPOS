@@ -22,6 +22,11 @@ const menuStyles = makeStyles((theme) => ({
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflowX: 'hidden',
         backgroundColor: '#fdb678',
+    },
+    addItemLayout: {
+        fontFamily: ['Roboto', 'sans-serif'].join(','),
+        overflowX: 'hidden',
+        backgroundColor: '#fdb678',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

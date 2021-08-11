@@ -198,7 +198,7 @@ const AddItem = (props) => {
 
     return (
         <React.Fragment>
-            <Container container spacing={0} className={styles.menuLayout}>
+            <Container container spacing={0} className={styles.addItemLayout}>
                 {/* Header */}
                 <ElevationScroll {...props}>
                     <AppBar id='menu-header'>
