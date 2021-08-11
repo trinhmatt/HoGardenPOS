@@ -65,6 +65,7 @@ const Menu = (props) => {
                 }
             }
             const focusSection = (topPosition) => {
+                console.log(topPosition)
                 const header = document.getElementById('menu-header').offsetHeight;
                 window.scrollTo({ top: (topPosition - header), behavior: 'smooth' });
             }

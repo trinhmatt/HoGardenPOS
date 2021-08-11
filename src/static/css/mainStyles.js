@@ -40,6 +40,11 @@ const mainStyles = makeStyles(({spacing}) => ({
         },
         //ipad+
         '@media (min-width: 760px)': {  
+            fontSize: '50px',
+            letterSpacing: '15px',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
             fontSize: '60px',
             letterSpacing: '20px',
         },
@@ -97,9 +102,8 @@ const mainStyles = makeStyles(({spacing}) => ({
     //parallax
     parallaxBackground: {
         backgroundImage: `url(${bkgrnd})`,
-        minHeight: '620px',
-        minWidth: '100vw',
-        backgroundAttachment: 'fixed',
+        minHeight: '600px',
+        maxWidth: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -110,8 +114,8 @@ const mainStyles = makeStyles(({spacing}) => ({
     },
     parallaxBackground2: {
         backgroundImage: `url(${bkgrnd2})`,
-        minHeight: '620px',
-        minWidth: '100vw',
+        minHeight: '600px',
+        maxWidth: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -122,8 +126,8 @@ const mainStyles = makeStyles(({spacing}) => ({
     },
     parallaxBackground3: {
         backgroundImage: `url(${bkgrnd3})`,
-        minHeight: '620px',
-        minWidth: '100vw',
+        minHeight: '600px',
+        maxWidth: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -134,8 +138,8 @@ const mainStyles = makeStyles(({spacing}) => ({
     },
     parallaxBackground4: {
         backgroundImage: `url(${bkgrnd4})`,
-        minHeight: '620px',
-        minWidth: '100vw',
+        minHeight: '600px',
+        maxWidth: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -146,8 +150,8 @@ const mainStyles = makeStyles(({spacing}) => ({
     },
     parallaxBackground5: {
         backgroundImage: `url(${bkgrnd5})`,
-        minHeight: '620px',
-        minWidth: '100vw',
+        minHeight: '600px',
+        maxWidth: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -158,8 +162,8 @@ const mainStyles = makeStyles(({spacing}) => ({
     },
     parallaxBackground6: {
         backgroundImage: `url(${bkgrnd6})`,
-        minHeight: '620px',
-        minWidth: '100vw',
+        minHeight: '600px',
+        maxWidth: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -170,8 +174,8 @@ const mainStyles = makeStyles(({spacing}) => ({
     },
     parallaxBackground7: {
         backgroundImage: `url(${bkgrnd7})`,
-        minHeight: '620px',
-        minWidth: '100vw',
+        minHeight: '600px',
+        maxWidth: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -182,8 +186,8 @@ const mainStyles = makeStyles(({spacing}) => ({
     },
     parallaxBackground8: {
         backgroundImage: `url(${bkgrnd8})`,
-        minHeight: '620px',
-        minWidth: '100vw',
+        minHeight: '600px',
+        maxWidth: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -194,8 +198,8 @@ const mainStyles = makeStyles(({spacing}) => ({
     },
     parallaxBackground9: {
         backgroundImage: `url(${bkgrnd9})`,
-        minHeight: '620px',
-        minWidth: '100vw',
+        minHeight: '600px',
+        maxWidth: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -207,6 +211,7 @@ const mainStyles = makeStyles(({spacing}) => ({
     afterBackground: {
         padding: '5%',
         background: '#004e92',
+        backgroundAttachment: 'fixed',
         background: '-webkit-linear-gradient(to bottom, #000428, #004e92)',  
         background: 'linear-gradient(to bottom, #000428, #004e92)',
         //phone
@@ -215,6 +220,10 @@ const mainStyles = makeStyles(({spacing}) => ({
         },
         //ipad+
         '@media (min-width: 760px)': { 
+            minHeight: '1200px',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
             minHeight: '2000px',
         },
     },
@@ -224,16 +233,6 @@ const mainStyles = makeStyles(({spacing}) => ({
         position: 'relative',
         textAlign: 'right',
         padding: '0 !important',
-        //phone
-        '@media (min-width: 375px)': {  
-            height: '130px',
-            width: '200px',
-        },
-        //ipad+
-        '@media (min-width: 760px)': {  
-            height: '330px',
-            width: '600px',
-        },
     },
     gmap_canvas: {
         overflow: 'hidden',
@@ -245,6 +244,28 @@ const mainStyles = makeStyles(({spacing}) => ({
         },
         //ipad+
         '@media (min-width: 760px)': {  
+            height: '330px',
+            width: '450px',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
+            height: '330px',
+            width: '600px',
+        },
+    },
+    gmap_iframe: {
+        //phone
+        '@media (min-width: 375px)': {  
+            height: '130px',
+            width: '200px',
+        },
+        //ipad+
+        '@media (min-width: 760px)': {  
+            height: '330px',
+            width: '450px',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
             height: '330px',
             width: '600px',
         },
@@ -288,8 +309,19 @@ const mainStyles = makeStyles(({spacing}) => ({
         borderRadius: '50%',
         backgroundColor: '#fff',
         color: '#033E7C',
-        padding: '30%',
+        //phone
+        '@media (min-width: 375px)': {  
+            padding: '15%',
+        },
+        //ipad+
+        '@media (min-width: 760px)': { 
+            padding: '30%',
+        },
     },
+    menuList: {
+        backgroundColor: '#043F7D',
+        color: '#FFDD7A',
+    }
 }))
 
 export { mainStyles };
