@@ -17,6 +17,7 @@ import Unauthorized from "../components/Unauthorized";
 import Orders from "../components/Orders/Orders";
 import ReviewOrder from "../components/ReviewOrder/ReviewOrder";
 import BottomNav from "../components/subcomponents/BottomNav";
+import Tables from "../components/Tables/Tables";
 
 const AppRouter = (props) => {
   return (
@@ -43,6 +44,10 @@ const AppRouter = (props) => {
 
         <PrivateRoute path="/admin/orders">
           <Orders />
+        </PrivateRoute>
+
+        <PrivateRoute path="/admin/tables">
+          <Tables />
         </PrivateRoute>
 
         <PublicRoute path="/order/:number" exact={true}>

@@ -16,6 +16,7 @@ import Fastfood from '@material-ui/icons/Fastfood';
 import Schedule from '@material-ui/icons/Schedule';
 import Create from '@material-ui/icons/Create';
 import DateRange from '@material-ui/icons/DateRange';
+import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
 
 const BottomNav = (props) => {
     const styles = homeStyles();
@@ -44,6 +45,7 @@ const BottomNav = (props) => {
             showLabels
             className={styles.bottomNav}
         >
+            <BottomNavigationAction value='tables' onClick={() => navigateTo('/admin/tables')} label='TABLES/桌' icon={<DesktopWindowsIcon />} />
             <BottomNavigationAction value='orders' onClick={() => navigateTo('/admin/orders')} label='ORDERS/订单' icon={<Fastfood />} />
             <BottomNavigationAction value='timesheet'  onClick={() => navigateTo('/admin/timesheet')} label='SIGNIN/登录和退出' icon={<Schedule />} />
             <BottomNavigationAction onClick={() => navigateTo('/')} label='HOURS/员工工作时间' icon={<DateRange />} />

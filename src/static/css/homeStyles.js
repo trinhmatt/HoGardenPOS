@@ -2,7 +2,10 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-const homeStyles = makeStyles(({spacing}) => ({
+//Image
+import home from '../images/home.jpeg';
+
+const homeStyles = makeStyles(() => ({
 
     // BACKGROUND
     homebg: {
@@ -13,6 +16,18 @@ const homeStyles = makeStyles(({spacing}) => ({
         width: '100vw',
         height: '100vh',
         fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(',')
+    },
+    loginbg: {
+        backgroundImage: `url(${home})`,
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     // LAYOUT
@@ -38,26 +53,28 @@ const homeStyles = makeStyles(({spacing}) => ({
     // TITLE
     homeTitle: {
         fontWeight: '400',
-        color: '#fff',
+        color: '#000',
         lineHeight: '1em',
         margin: 0,
+        fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(','),
         '@media screen and (orientation: portrait)': {
-            fontSize: '7vh',
+            fontSize: '25px',
         },
         '@media screen and (orientation: landscape)': {
-            fontSize: '10vh'
+            fontSize: '35px'
         },
     },
     homeTitle2: {
         fontWeight: '400',
-        color: '#fff',
+        color: '#000',
         lineHeight: '1em',
+        fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(','),
         '@media screen and (orientation: portrait)': {
-            fontSize: '12vh',
+            fontSize: '35px',
             marginTop: '-3%',
         },
         '@media screen and (orientation: landscape)': {
-            fontSize: '17vh',
+            fontSize: '55px',
             marginTop: '-1%',
             marginBottom: '1%',
         },
@@ -111,25 +128,25 @@ const homeStyles = makeStyles(({spacing}) => ({
 
     // CARD
     loginCard: {
-        borderRadius: '15px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         '@media screen and (orientation: portrait)': {
             width: '80vw',
-            height: '40vh',
-            marginTop: '5%',
+            height: '50vh',
         },
         '@media screen and (orientation: landscape)': {
-            width: '50vw',
-            height: '70vh',
+            width: '55vw',
+            height: '80vh',
         },
         '@media screen and (min-width: 760px) and (orientation: portrait)': {
-            width: '50vw',
-            height: '27vh',
-            marginTop: '25%',
+            width: '55vw',
+            height: '35vh',
         },
         '@media screen and (min-width: 760px) and (orientation: landscape)': {
-            width: '35vw',
-            height: '35vh',
-            marginTop: '25%',
+            width: '40vw',
+            height: '42vh',
         },
     },
     loginAction: {
@@ -143,7 +160,7 @@ const homeStyles = makeStyles(({spacing}) => ({
 
     // INPUT
     inputField: {
-        width: '100% !important',
+        width: '80% !important',
     },
 
     //TIMETABLE
@@ -216,6 +233,21 @@ const homeStyles = makeStyles(({spacing}) => ({
     },
     completeButton: {
         color: '#32cd59',
+    },
+
+    //TABLES
+    hTable: {
+        width: '100px',
+        height: '40px',
+    },
+    vTable: {
+        width: '40px',
+        height: '100px',
+    },
+    roundTable: {
+        borderRadius: '50%',
+        width: '100px',
+        height: '100px',
     },
     
 }));

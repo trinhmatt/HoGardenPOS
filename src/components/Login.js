@@ -8,6 +8,7 @@ import { loginSuccess } from '../redux/actions/auth-actions';
 import '../static/css/home.css';
 import cx from 'clsx';
 import Card from '@material-ui/core/Card';
+import Paper from '@material-ui/core/Paper';
 import { CardContent, CardActionArea, TextField, Button, InputAdornment } from '@material-ui/core';
 import { useLightTopShadowStyles } from '@mui-treasury/styles/shadow/lightTop';
 import { Row, Item } from '@mui-treasury/components/flex';
@@ -49,68 +50,52 @@ const Login = (props) => {
                         }
                     });
             })
-            .catch( err => console.log(err));
+            .catch(err => console.log(err));
     }
     return (
-        <div className="home-bg">
-            <div className={styles.header}>
-                <h1 className={styles.homeTitle}>login</h1>
-                <h2 className={styles.homeTitle2}>登录</h2>
+        <div className={styles.loginbg}>
+            <div className={styles.centered}>
+                <Paper elevation={2} className={styles.loginCard}>
+                    <div className={styles.header}>
+                        <h1 className={styles.homeTitle}>login</h1>
+                        <h2 className={styles.homeTitle2}>登录</h2>
+                    </div>
+                    <br />
+                    <TextField
+                        onChange={handleInputChange}
+                        value={state.email}
+                        id="email"
+                        variant="outlined"
+                        label="Email/电子邮件"
+                        color="secondary"
+                        className={styles.inputField}
+                        InputProps={{
+                            startAdornment: (<InputAdornment position="start"><AlternateEmail /></InputAdornment>)
+                        }}
+                    />
+                    <br />
+                    <TextField
+                        onChange={handleInputChange}
+                        value={state.password}
+                        id="password"
+                        variant="outlined"
+                        label="Password/密码"
+                        type="password"
+                        color="secondary"
+                        className={styles.inputField}
+                        InputProps={{
+                            startAdornment: (<InputAdornment position="start"><Lock /></InputAdornment>)
+                        }} />
+                    <br />
+                    <Button
+                        onClick={handleLogin}
+                        variant="contained"
+                        color="primary"
+                    >
+                        Login
+                    </Button>
+                </Paper>
             </div>
-            <Row alignItems={'center'}>
-                <Item position={'center'}>
-                    <Card className={cx(styles.loginCard, shadowStyles.root)}>
-                        <CardActionArea>
-                            <CardContent className={styles.loginAction}>
-                                <Row mt={5} alignItems={'center'}>
-                                    <Item position={'center'}>
-                                        <TextField
-                                            onChange={handleInputChange}
-                                            value={state.email}
-                                            id="email"
-                                            variant="outlined"
-                                            label="Email/电子邮件"
-                                            className={styles.inputField}
-                                            color="secondary"
-                                            InputProps={{
-                                                startAdornment: (<InputAdornment position="start"><AlternateEmail /></InputAdornment>)
-                                            }}
-                                        />
-                                    </Item>
-                                </Row>
-                                <Row mt={4} alignItems={'center'}>
-                                    <Item position={'center'}>
-                                        <TextField
-                                            onChange={handleInputChange}
-                                            value={state.password}
-                                            id="password"
-                                            variant="outlined"
-                                            label="Password/密码"
-                                            className={styles.inputField}
-                                            type="password"
-                                            color="secondary"
-                                            InputProps={{
-                                                startAdornment: (<InputAdornment position="start"><Lock /></InputAdornment>)
-                                            }} />
-                                    </Item>
-                                </Row>
-                                <Row mt={4} alignItems={'center'}>
-                                    <Item position={'center'}>
-                                        <Button 
-                                            onClick={handleLogin}
-                                            variant="contained"
-                                            color="primary"
-                                            >
-                                                Login
-                                        </Button>
-                                    </Item>
-                                </Row>
-                            </CardContent>
-                        </CardActionArea>
-                    </Card>
-                </Item>
-            </Row>
-            
         </div>
     )
 }
