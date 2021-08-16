@@ -122,7 +122,7 @@ const AddItem = (props) => {
         let choiceSections = [];
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
-            if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
+            if (itemData[key] && itemChoices[key] && key !== "hasEgg" && key !== "hasSoup") {
                 // selectedObj is not undefined when user is editing a cart item 
                 // constKey is the key used in the menu-consts 
                 // choiceType = noodleChoice, sauceChoice, etc. 
@@ -173,6 +173,19 @@ const AddItem = (props) => {
                     choiceType={"eggChoice"} 
                     choicesArr={itemChoices.hasEgg.eggChoice}
                 />);
+        }
+        if (itemData.hasSoup) {
+            choiceSections.push(
+                <ItemChoiceSection 
+                    selectedObj={itemData.soupChoice} 
+                    key={"hasSoup"} 
+                    constKey={"hasSoup"} 
+                    language={language} 
+                    selectChoice={selectChoice} 
+                    choiceType={"soupChoice"} 
+                    choicesArr={itemChoices.hasSoup.soupChoice}
+                />
+            )
         }
         if (sectionData.addOns && sectionData.addOns.length > 0) {
             for (let i = 0; i < sectionData.addOns.length; i++) {

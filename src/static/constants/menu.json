@@ -585,32 +585,38 @@
             "RHP1": {
                 "english": "Salted Fish and Pork",
                 "chinese": "咸魚肉片煲仔飯",
-                "price": 12.95
+                "price": 12.95,
+                "hasSoup": true
             },
             "RHP2": {
                 "english": "Mushroom and Chicken",
                 "chinese": "北菇滑雞煲仔飯",
-                "price": 12.95
+                "price": 12.95,
+                "hasSoup": true
             },
             "RHP3": {
                 "english": "Chicken and Chinese Sausage",
                 "chinese": "臘腸滑雞煲仔飯",
-                "price": 12.95
+                "price": 12.95,
+                "hasSoup": true
             },
             "RHP4": {
                 "english": "Spare Ribs with Black Bean Sauce",
                 "chinese": "豉汁排骨煲仔飯",
-                "price": 12.95
+                "price": 12.95,
+                "hasSoup": true
             },
             "RHP5": {
                 "english": "Beef with Raw Egg",
                 "chinese": "窩蛋牛肉煲仔飯",
-                "price": 12.95
+                "price": 12.95,
+                "hasSoup": true
             },
             "RHP6": {
                 "english": "Preserved Meat",
                 "chinese": "臘味煲仔飯",
-                "price": 12.95
+                "price": 12.95,
+                "hasSoup": true
             }
         }
     },
@@ -791,12 +797,35 @@
                 "english": "Macaroni"
             }
         ],
+        "drinkChoice": [
+            {
+                "english": "Hot HK Milk Tea",
+                "chinese": "熱港式奶茶"
+            },
+            {
+                "english": "Hot Coffee",
+                "chinese": "熱咖啡"
+            },
+            {
+                "english": "Lemon Tea",
+                "chinese": "檸檬茶"
+            },
+            {
+                "english": "Chinese soup",
+                "chinese": "ch"
+            },
+            {
+                "english": "Borscht",
+                "chinese": "Borscht-ch"
+            }
+        ],
         "menuItems": {
             "BC1": {
                 "english": "Baked Pork Chop with Rice/Spaghetti/Macaroni",
                 "chinese": "焗茄汁豬扒飯/意粉/通粉",
                 "price": 10.95,
                 "hasNoodle": true,
+                "hasDrink": true,
                 "restName": "焗1"
             },
             "BC2": {
@@ -804,6 +833,7 @@
                 "chinese": "焗鮮茄牛肉飯/意粉/通粉",
                 "price": 10.95,
                 "hasNoodle": true,
+                "hasDrink": true,
                 "restName": "焗2"
             },
             "BC3": {
@@ -811,6 +841,7 @@
                 "chinese": "焗葡國雞飯/意粉/通粉",
                 "price": 10.95,
                 "hasNoodle": true,
+                "hasDrink": true,
                 "restName": "焗3"
             },
             "BC4": {
@@ -818,6 +849,7 @@
                 "chinese": "焗白汁斑塊飯/意粉/通粉",
                 "price": 10.95,
                 "hasNoodle": true,
+                "hasDrink": true,
                 "restName": "焗4"
             },
             "BC5": {
@@ -825,6 +857,7 @@
                 "chinese": "焗黑椒雞扒飯/意粉/通粉",
                 "price": 10.95,
                 "hasNoodle": true,
+                "hasDrink": true,
                 "restName": "焗5"
             },
             "BC6": {
@@ -832,6 +865,7 @@
                 "chinese": "焗蒜汁牛脷飯/意粉/通粉",
                 "price": 10.95,
                 "hasNoodle": true,
+                "hasDrink": true,
                 "restName": "焗6"
             },
             "BC7": {
@@ -839,6 +873,7 @@
                 "chinese": "焗煎蛋芝士肉醬飯/意粉/通粉",
                 "price": 10.95,
                 "hasNoodle": true,
+                "hasDrink": true,
                 "hasEgg": true,
                 "restName": "焗7"
             },
@@ -847,6 +882,7 @@
                 "chinese": "焗白汁火腿雞絲飯/意粉/通粉",
                 "price": 10.95,
                 "hasNoodle": true,
+                "hasDrink": true,
                 "restName": "焗8"
             },
             "BC9": {
@@ -854,6 +890,7 @@
                 "chinese": "焗白汁海鮮飯/意粉/通粉",
                 "price": 11.95,
                 "hasNoodle": true,
+                "hasDrink": true,
                 "restName": "焗9"
             },
             "BC10": {
@@ -861,6 +898,7 @@
                 "chinese": "焗燒汁鴛鴦扒飯/意粉/通粉",
                 "price": 11.95,
                 "hasNoodle": true,
+                "hasDrink": true,
                 "restName": "焗10"
             }
         }
@@ -885,6 +923,7 @@
                 "hasCarbs": false,
                 "hasDrink": false,
                 "hasSauce": false,
+                "hasSoup": true,
                 "restName": "A"
             },
             "SP2": {
@@ -895,6 +934,7 @@
                 "hasCarbs": false,
                 "hasDrink": false,
                 "hasSauce": false,
+                "hasSoup": true,
                 "restName": "B"
             },
             "SP3": {
@@ -905,6 +945,7 @@
                 "hasCarbs": false,
                 "hasDrink": false,
                 "hasSauce": false,
+                "hasSoup": true,
                 "restName": "C"
             },
             "SP4": {
@@ -915,6 +956,7 @@
                 "hasCarbs": false,
                 "hasDrink": false,
                 "hasSauce": false,
+                "hasSoup": true,
                 "restName": "D"
             },
             "SP5": {
@@ -925,6 +967,7 @@
                 "hasCarbs": false,
                 "hasDrink": false,
                 "hasSauce": false,
+                "hasSoup": true,
                 "restName": "E"
             },
             "SP6": {
@@ -935,6 +978,7 @@
                 "hasCarbs": false,
                 "hasDrink": false,
                 "hasSauce": false,
+                "hasSoup": true,
                 "restName": "F"
             },
             "SP7": {
@@ -945,6 +989,7 @@
                 "hasCarbs": false,
                 "hasDrink": true,
                 "hasSauce": true,
+                "hasSoup": true,
                 "restName": "1"
             },
             "SP8": {
@@ -955,6 +1000,7 @@
                 "hasCarbs": true,
                 "hasDrink": true,
                 "hasSauce": true,
+                "hasSoup": true,
                 "restName": "2"
             },
             "SP9": {
@@ -965,6 +1011,7 @@
                 "hasCarbs": true,
                 "hasDrink": true,
                 "hasSauce": true,
+                "hasSoup": true,
                 "restName": "3"
             },
             "SP10": {
@@ -975,6 +1022,7 @@
                 "hasCarbs": true,
                 "hasDrink": true,
                 "hasSauce": true,
+                "hasSoup": true,
                 "restName": "4"
             },
             "SP11": {
@@ -985,6 +1033,7 @@
                 "hasCarbs": true,
                 "hasDrink": true,
                 "hasSauce": true,
+                "hasSoup": true,
                 "restName": "5"
             },
             "SP12": {
@@ -995,6 +1044,7 @@
                 "hasCarbs": true,
                 "hasDrink": true,
                 "hasSauce": true,
+                "hasSoup": true,
                 "restName": "6"
             }
         },
@@ -1419,8 +1469,12 @@
         },
         "drinkChoice": [
             {
-                "english": "Daily Soup",
+                "english": "Chinese Soup",
                 "chinese": "湯 或"
+            },
+            {
+                "english": "Borscht",
+                "chinese": ""
             },
             {
                 "english": "HK Milk Tea",
@@ -1502,215 +1556,250 @@
                 "english": "Shredded Pork and Vegetable on Rice",
                 "chinese": "時菜肉片飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R2": {
                 "english": "Mushroom, Fungus and Beef on Rice",
                 "chinese": "雲耳冬菇牛肉飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R3": {
                 "english": "MaPo Tofu on Rice",
                 "chinese": "麻婆豆腐飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R4": {
                 "english": "Diced Pork with Cream Corn on Rice",
                 "chinese": "粟米肉粒飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R5": {
                 "english": "Beef with Vegetable on Rice",
                 "chinese": "時菜牛肉飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R6": {
                 "english": "Beef with Fresh Tomato and Egg on Rice",
                 "chinese": "鮮茄牛肉蛋飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R7": {
                 "english": "Beef with Raw Egg on Rice",
                 "chinese": "窩蛋牛肉飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R8": {
                 "english": "Diced Chicken with Salted Fish and Tofu on Rice",
                 "chinese": "咸魚雞粒豆腐飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R9": {
                 "english": "Braised Tofu on Rice",
                 "chinese": "紅燒豆腐飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R10": {
                 "english": "Garoupa with Cream Corn on Rice",
                 "chinese": "粟米石斑飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R11": {
                 "english": "Beef Brisket with Vegetable on Rice",
                 "chinese": "時菜牛腩飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R12": {
                 "english": "Beef Tendon Brisket with Radish on Rice",
                 "chinese": "蘿蔔牛筋腩飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R13": {
                 "english": "Pork Chop with Pan Fried Egg on Rice",
                 "chinese": "煎蛋豬扒飯",
                 "price": 10.95,
                 "hasEgg": true,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R14": {
                 "english": "Cutlet Pork with Tomato Sauce on Rice",
                 "chinese": "吉列豬扒飯(茄汁)",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R15": {
                 "english": "Russian Style Beef on Rice",
                 "chinese": "俄國牛肉飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R16": {
                 "english": "Chicken a La King on Rice",
                 "chinese": "鮮忌廉雞皇飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R17": {
                 "english": "Satay Beef on Rice",
                 "chinese": "沙爹牛肉飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R18": {
                 "english": "Chicken with Black Bean Sauce on Rice",
                 "chinese": "豉椒雞球飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R19": {
                 "english": "Minced Pork with Pan Fried Egg on Rice",
                 "chinese": "菜甫肉碎煎蛋飯",
                 "price": 10.95,
                 "hasEgg": true,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R20": {
                 "english": "Beef with Bitter Melon on Rice",
                 "chinese": "涼瓜牛肉飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R21": {
                 "english": "Minced Pork with Spicy Eggplant on Rice",
                 "chinese": "魚香茄子飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R22": {
                 "english": "Pork Chop with Vegetable on Rice",
                 "chinese": "時菜豬扒飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R23": {
                 "english": "Minced Pork with Tofu on Rice",
                 "chinese": "炸菜肉碎滑豆腐飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R24": {
                 "english": "Scrambled Egg with Shrimp on Rice",
                 "chinese": "滑蛋蝦仁飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R25": {
                 "english": "Assorted Meat with Vegetable on Rice",
                 "chinese": "時菜雜會飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R26": {
                 "english": "Curry Beef Brisket on Rice",
                 "chinese": "咖喱牛腩飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R27": {
                 "english": "Curry Chicken on Rice",
                 "chinese": "咖喱雞飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R28": {
                 "english": "Curry Beef on Rice",
                 "chinese": "咖喱牛肉飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R29": {
                 "english": "Curry Pork Chop on Rice",
                 "chinese": "咖喱豬扒飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R30": {
                 "english": "Curry Garoupa on Rice",
                 "chinese": "咖喱石斑飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R31": {
                 "english": "Pork Chop with Onion on Rice",
                 "chinese": "洋蔥豬扒飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R32": {
                 "english": "Fish Fillet with Vegetable on Rice",
                 "chinese": "菜遠斑球飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R33": {
                 "english": "Assorted Vegetables on Rice",
                 "chinese": "羅漢齋飯",
                 "price": 10.95,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R34": {
                 "english": "Ham with Pan Fried Eggs on Rice",
                 "chinese": "煎雙蛋火腿飯",
                 "price": 10.95,
                 "hasEgg": true,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             },
             "R35": {
                 "english": "Luncheon Meat with Pan Fried Eggs on Rice",
                 "chinese": "煎雙蛋餐肉飯",
                 "price": 10.95,
                 "hasEgg": true,
-                "hasDrink": true
+                "hasDrink": true,
+                "hasSoup": true
             }
         }
     },
@@ -1727,8 +1816,12 @@
         ],
         "drinkChoice": [
             {
-                "english": "Daily Soup",
-                "chinese": "湯 或"
+                "english": "Chinese soup",
+                "chinese": "ch"
+            },
+            {
+                "english": "Borscht",
+                "chinese": "Borscht-ch"
             },
             {
                 "english": "HK Milk Tea",
@@ -1856,55 +1949,64 @@
                 "english": "Oyster Sauce with Ginger & Green Onion Lo Mein",
                 "chinese": "薑蔥蠔油撈麵",
                 "price": 7.95,
-                "hasSauceChoice": true
+                "hasSauceChoice": true,
+                "hasSoup": true
             },
             "LM2": {
                 "english": "Shrimp Wonton Lo  Mein",
                 "chinese": "鮮蝦雲吞撈麵",
                 "price": 7.95,
-                "hasSauceChoice": true
+                "hasSauceChoice": true,
+                "hasSoup": true
             },
             "LM3": {
                 "english": "Beet Tendon Brisket Lo Mein",
                 "chinese": "柱候牛筋腩撈麵",
                 "price": 7.95,
-                "hasSauceChoice": true
+                "hasSauceChoice": true,
+                "hasSoup": true
             },
             "LM4": {
                 "english": "Vegetable & Pork Dumpling Lo Mein",
                 "chinese": "菜肉餃撈麵",
                 "price": 7.95,
-                "hasSauceChoice": true
+                "hasSauceChoice": true,
+                "hasSoup": true
             },
             "LM5": {
                 "english": "Ginger & Green Onion with BBQ Pork Lo Mein",
                 "chinese": "薑蔥叉燒撈麵",
                 "price": 8.95,
-                "hasSauceChoice": true
+                "hasSauceChoice": true,
+                "hasSoup": true
             },
             "LM6": {
                 "english": "Ginger & Green Onion wilh Beef Lo Mein",
                 "chinese": "薑蔥牛肉撈麵",
                 "price": 8.95,
-                "hasSauceChoice": true
+                "hasSauceChoice": true,
+                "hasSoup": true
             },
             "LM7": {
                 "english": "Wonton & Beef Tendon Brisket Lo Mein",
                 "chinese": "雲吞牛筋腩撈麵",
                 "price": 8.95,
-                "hasSauceChoice": true
+                "hasSauceChoice": true,
+                "hasSoup": true
             },
             "LM8": {
                 "english": "Wonton & BBO Pork Lo Mein",
                 "chinese": "雲吞叉撓撈麵",
                 "price": 8.95,
-                "hasSauceChoice": true
+                "hasSauceChoice": true,
+                "hasSoup": true
             },
             "LM9": {
                 "english": "Pork Hock with Fermented Red Been Curd Lo Mein",
                 "chinese": "南乳豬手撈麵",
                 "price": 8.95,
-                "hasSauceChoice": true
+                "hasSauceChoice": true,
+                "hasSoup": true
             }
         }
     },
@@ -2361,32 +2463,38 @@
             "HC1": {
                 "english": "Hai Nan Chicken Special Rice",
                 "chinese": "海南雞飯",
-                "price": 10.95
+                "price": 10.95,
+                "hasSoup": true
             },
             "HC2": {
                 "english": "Teriyaki Chicken",
                 "chinese": "日式照燒雞扒飯",
-                "price": 10.95
+                "price": 10.95,
+                "hasSoup": true
             },
             "HC3": {
                 "english": "Thai Style Pad Thai",
                 "chinese": "泰式 Pad Thai 粉",
-                "price": 10.95
+                "price": 10.95,
+                "hasSoup": true
             },
             "HC4": {
                 "english": "House Special Pork Chop",
                 "chinese": "香茅豬扒飯",
-                "price": 10.95
+                "price": 10.95,
+                "hasSoup": true
             },
             "HC5": {
                 "english": "Pork Belly Served with Rice",
                 "chinese": "梅菜扣肉飯",
-                "price": 10.95
+                "price": 10.95,
+                "hasSoup": true
             },
             "HC6": {
                 "english": "Pork Hock with Fermented Red Bean Curd on Rice",
                 "chinese": "南乳豬手飯",
-                "price": 10.95
+                "price": 10.95,
+                "hasSoup": true
             }
         }
     },
@@ -3074,8 +3182,27 @@
                 "chinese": "供應時間 2:00pm - 5:30pm"
             },
             {
-                "english": "Served with Hot: HK Milk Tea or Coffee or Hot Drinks (Change to Red Bean Ice Cream Freeze or  Grass Jello Ice Cream Freeze add $2.00)",
+                "english": "Served with Hot: HK Milk Tea or Coffee or Hot Drinks (Change to Red Bean Ice Cream Freeze or Grass Jello Ice Cream Freeze add $2.00)",
                 "chinese": "奉送 熱港式奶茶或咖啡或各式熱飲 (改雪糕紅豆冰或雪糕涼粉冰加$2.00)"
+            }
+        ],
+        "addOns": [
+            {
+                "type": {
+                    "english": "Change",
+                    "chinese": "改凍飲"
+                },
+                "choices": [
+                    {
+                        "english": "Red Bean Freeze with Ice Cream",
+                        "chinese": "雪糕紅豆冰"
+                    },
+                    {
+                        "english": "Grass Jelly with Ice Cream",
+                        "chinese": "雪糕涼粉冰"
+                    }
+                ],
+                "price": 2.00
             }
         ],
         "drinkChoice": [

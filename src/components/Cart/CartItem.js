@@ -24,7 +24,9 @@ const CartItem = (props) => {
     const renderChoices = () => {
         let choices = [];
         for (const key in itemData) {
-            if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
+            if (itemData[key] && itemChoices[key] && key !== "hasEgg" && key !== "hasSoup") {
+                console.log(key)
+                console.log(itemData[key])
                 choices.push(
                     <CartItemChoice 
                         key={key}

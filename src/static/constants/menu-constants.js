@@ -1,4 +1,19 @@
 export const itemChoices = {
+    "hasSoup": {
+        "menuKey": "soupChoice",
+        "english": "Soup",
+        "chinese": "湯",
+        "soupChoice": [
+            {
+                "english": "Chinese soup",
+                "chinese": "ch"
+            },
+            {
+                "english": "Borscht",
+                "chinese": "Borscht-ch"
+            }
+        ]
+    },
     "hasDrink": {
         "menuKey": "drinkChoice",
         "english": "Drink",
