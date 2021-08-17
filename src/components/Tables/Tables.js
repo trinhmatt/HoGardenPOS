@@ -12,102 +12,138 @@ const Tables = (props) => {
 
     return (
         <div className={styles.homebg}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={3}>
+            <div className={styles.tableLayout}>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={1}>
                     <div></div>
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                    <Paper className={styles.hTable}>table 1</Paper>
+                    <Paper className={styles.hTable}>門7</Paper>
+                </Grid>
+                <Grid item xs={12} sm={1}>
+                    <Paper className={styles.smolhTable}>門6</Paper>
+                </Grid>
+                <Grid item xs={12} sm={1}>
+                    <Paper className={styles.smolhTable}>門5</Paper>
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                    <Paper className={styles.hTable}>table 2</Paper>
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                    <Paper className={styles.hTable}>table 3</Paper>
-                </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={2}>
-                    <div></div>
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                    <Paper className={styles.hTable}>table 4</Paper>
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                    <Paper className={styles.hTable}>table 5</Paper>
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                    <div></div>
-                </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={2}>
-                    <Paper className={styles.vTable}>table 7</Paper>
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                    <div></div>
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                    <Paper className={styles.hTable}>table 8</Paper>
+                    <Paper className={styles.hTable}>門4</Paper>
                 </Grid>
                 <Grid item xs={12} sm={3}>
                     <div></div>
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                    <Paper className={styles.roundTable}>table 9</Paper>
+                    <Paper className={styles.hTable}>門B</Paper>
                 </Grid>
             </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={2}>
-                    <Paper className={styles.vTable}>table 10</Paper>
-                </Grid>
-                <Grid item xs={12} sm={2}>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={1}>
                     <div></div>
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                    <Paper className={styles.hTable}>table 11</Paper>
+                    <Paper className={styles.hTable}>門3</Paper>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.hTable}>門2</Paper>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.hTable}>門3</Paper>
                 </Grid>
                 <Grid item xs={12} sm={3}>
                     <div></div>
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                    <Paper className={styles.roundTable}>table 12</Paper>
+                    <Paper className={styles.hTable}>門A</Paper>
                 </Grid>
             </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={2}>
-                    <Paper className={styles.vTable}>table 13</Paper>
-                </Grid>
+            <Grid container spacing={3}>
                 <Grid item xs={12} sm={2}>
                     <div></div>
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                    <Paper className={styles.hTable}>table 14</Paper>
+                    <Paper className={styles.hTable}>A</Paper>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.hTable}>B</Paper>
                 </Grid>
                 <Grid item xs={12} sm={3}>
                     <div></div>
                 </Grid>
-                <Grid item xs={12} sm={2}>
-                    <Paper className={styles.roundTable}>table 15</Paper>
-                </Grid>
             </Grid>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
                 <Grid item xs={12} sm={2}>
-                    <Paper className={styles.vTable}>table 16</Paper>
+                    <Paper className={styles.vTable}>41</Paper>
                 </Grid>
                 <Grid item xs={12} sm={2}>
                     <div></div>
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                    <Paper className={styles.hTable}>table 17</Paper>
+                    <Paper className={styles.hTable}>21</Paper>
                 </Grid>
-                <Grid item xs={12} sm={3}>
+                <Grid item xs={12} sm={4}>
                     <div></div>
                 </Grid>
                 <Grid item xs={12} sm={2}>
-                    <Paper className={styles.roundTable}>table 18</Paper>
+                    <Paper className={styles.roundTable}>1</Paper>
                 </Grid>
             </Grid>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.vTable}>42</Paper>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <div></div>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.hTable}>22</Paper>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <div></div>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.roundTable}>2</Paper>
+                </Grid>
+            </Grid>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.vTable}>43</Paper>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <div></div>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.hTable}>23</Paper>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <div></div>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.roundTable}>3</Paper>
+                </Grid>
+            </Grid>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.vTable}>44</Paper>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <div></div>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.hTable}>24</Paper>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                    <div></div>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.roundTable}>4</Paper>
+                </Grid>
+            </Grid>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={2}>
+                    <Paper className={styles.hTable}>45</Paper>
+                </Grid>
+            </Grid>
+            </div>
         </div>
     )
 }

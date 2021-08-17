@@ -50,8 +50,6 @@ const mainStyles = makeStyles(({spacing}) => ({
         },
     },
     titleBackground: {
-        background: '#000428',
-        background: '-webkit-linear-gradient(to bottom, #004e92, #000428)',  
         background: 'linear-gradient(to bottom, #004e92, #000428)',
         //phone
         '@media (min-width: 375px)': { 
@@ -210,9 +208,7 @@ const mainStyles = makeStyles(({spacing}) => ({
     },
     afterBackground: {
         padding: '5%',
-        background: '#004e92',
         backgroundAttachment: 'fixed',
-        background: '-webkit-linear-gradient(to bottom, #000428, #004e92)',  
         background: 'linear-gradient(to bottom, #000428, #004e92)',
         //phone
         '@media (min-width: 375px)': { 

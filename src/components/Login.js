@@ -6,12 +6,12 @@ import { loginSuccess } from '../redux/actions/auth-actions';
 
 // style imports
 import '../static/css/home.css';
-import cx from 'clsx';
-import Card from '@material-ui/core/Card';
+
+// material ui imports
 import Paper from '@material-ui/core/Paper';
-import { CardContent, CardActionArea, TextField, Button, InputAdornment } from '@material-ui/core';
-import { useLightTopShadowStyles } from '@mui-treasury/styles/shadow/lightTop';
-import { Row, Item } from '@mui-treasury/components/flex';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import { homeStyles } from '../static/css/homeStyles';
 
 // icon imports
@@ -20,7 +20,6 @@ import { AlternateEmail, Lock } from '@material-ui/icons';
 const Login = (props) => {
     // style consts
     const styles = homeStyles();
-    const shadowStyles = useLightTopShadowStyles();
 
     const { loginSuccess, history } = props;
     const [state, setState] = useState({
