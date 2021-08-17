@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { addToCart } from '../../redux/actions/cart-actions';
-import { itemChoices } from '../../static/constants/menu-constants';
+import { itemChoices, itemTitleEnum } from '../../static/constants/menu-constants';
 import { changeLanguage } from "../../redux/actions/lang-actions";
 import { updateCart } from "../../redux/actions/cart-actions";
 import ItemChoiceSection from "./ItemChoiceSection";
@@ -43,7 +43,8 @@ const AddItem = (props) => {
     const { addToCart, language, cart, updateCart } = props;
     const [item, setItem] = useState({
                                 qty: itemData.qty ? itemData.qty : 0, 
-                                addOn: itemData.addOn ? itemData.addOn : []
+                                addOn: itemData.addOn ? itemData.addOn : [],
+                                maxChoices: itemData.nChoices ? itemData.nChoices : 0
                             });
 
     // Constants for add to order button text
@@ -124,7 +125,7 @@ const AddItem = (props) => {
         let choiceSections = [];
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
-            if (itemData[key] && itemChoices[key] && key !== "hasEgg" && key !== "hasSoup") {
+            if (itemData[key] && itemChoices[key] && sectionData[itemChoices[key].menuKey]) {
                 // selectedObj is not undefined when user is editing a cart item 
                 // constKey is the key used in the menu-consts 
                 // choiceType = noodleChoice, sauceChoice, etc. 
@@ -138,7 +139,18 @@ const AddItem = (props) => {
                         choiceType={itemChoices[key].menuKey} 
                         choicesArr={sectionData[itemChoices[key].menuKey]}
                     />);
-            } 
+            } else if (itemChoices[key] && itemChoices[key][itemChoices[key].menuKey]) {
+                choiceSections.push(
+                    <ItemChoiceSection 
+                        selectedObj={itemData[itemChoices[key].menuKey]} 
+                        key={key} 
+                        constKey={key} 
+                        language={language} 
+                        selectChoice={selectChoice} 
+                        choiceType={itemChoices[key].menuKey} 
+                        choicesArr={itemChoices[key][itemChoices[key].menuKey]}
+                    />);
+            }
         }
         if (itemData.hasProteinChoice) {
             choiceSections.push(
@@ -162,31 +174,6 @@ const AddItem = (props) => {
                 <div key="coldDrink">
                     <button value={`tempChoice:${JSON.stringify(sectionData.temp.cold)}`} onClick={selectChoice}>{sectionData.temp.cold[language]}</button>
                 </div>
-            )
-        }
-        if (itemData.hasEgg) {
-            choiceSections.push(
-                <ItemChoiceSection 
-                    selectedObj={itemData.eggChoice} 
-                    key={"hasEgg"} 
-                    constKey={"hasEgg"} 
-                    language={language} 
-                    selectChoice={selectChoice} 
-                    choiceType={"eggChoice"} 
-                    choicesArr={itemChoices.hasEgg.eggChoice}
-                />);
-        }
-        if (itemData.hasSoup) {
-            choiceSections.push(
-                <ItemChoiceSection 
-                    selectedObj={itemData.soupChoice} 
-                    key={"hasSoup"} 
-                    constKey={"hasSoup"} 
-                    language={language} 
-                    selectChoice={selectChoice} 
-                    choiceType={"soupChoice"} 
-                    choicesArr={itemChoices.hasSoup.soupChoice}
-                />
             )
         }
         if (sectionData.addOns && sectionData.addOns.length > 0) {

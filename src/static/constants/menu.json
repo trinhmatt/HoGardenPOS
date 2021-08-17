@@ -2547,297 +2547,304 @@
         ],
         "choices": [
             {
-                "english": "2 Choices",
-                "chinese": "二款",
-                "price": 23.99
-            },
-            {
-                "english": "3 Choices",
-                "chinese": "三款",
-                "price": 33.99
-            },
-            {
-                "english": "4 Choices",
-                "chinese": "四款",
-                "price": 43.99
-            },
-            {
-                "english": "5 Choices",
-                "chinese": "五款",
-                "price": 54.99
-            },
-            {
-                "english": "6 Choices",
-                "chinese": "六款",
-                "price": 64.99
-            },
-            {
-                "english": "7 Choices",
-                "chinese": "七款",
-                "price": 74.99
-            },
-            {
-                "english": "8 Choices",
-                "chinese": "八款",
-                "price": 84.99
-            }
-        ],
-        "menuItems": {
-            "SD1": {
                 "english": "Hainanese Chicken (half)",
                 "chinese": "祕制海南雞 (半隻)"
             },
-            "SD2": {
+            {
                 "english": "Southern Milk Roasted Chicken (half)",
                 "chinese": "南乳吊燒雞 (半隻)"
             },
-            "SD3": {
+            {
                 "english": "Stir-fried Kale with Pork Spicy Pork",
                 "chinese": "豬爽肉炒芥蘭"
             },
-            "SD4": {
+            {
                 "english": "Stir-Fried Bacon with Chive Flower Tofu",
                 "chinese": "韮菜花豆腐炒咸肉"
             },
-            "SD5": {
+            {
                 "english": "Taro and Lap Flavor Pot",
                 "chinese": "香芋臘味煲"
             },
-            "SD6": {
+            {
                 "english": "Beef Tendon with Radish in Clay Pot",
                 "chinese": "蘿蔔牛筋腩煲"
             },
-            "SD7": {
+            {
                 "english": "Bazhen Tofu Pot",
                 "chinese": "八珍豆腐煲"
             },
-            "SD8": {
+            {
                 "english": "Plaque Tofu Casserole",
                 "chinese": "斑塊豆腐煲"
             },
-            "SD9": {
+            {
                 "english": "Bitter Melon Plaque Clay Pot",
                 "chinese": "涼瓜斑塊煲"
             },
-            "SD10": {
+            {
                 "english": "Jer Jer Chicken Pot",
                 "chinese": "睹睹雞煲"
             },
-            "SD11": {
+            {
                 "english": "海鮮豆腐煲",
                 "chinese": "Seafood Tofu Casserole"
             },
-            "SD12": {
+            {
                 "english": "Fish-Flavored Eggplant Pot",
                 "chinese": "魚香茄子煲"
             },
-            "SD13": {
+            {
                 "english": "Satay Vermicelli Beef Claypot",
                 "chinese": "沙爹粉絲牛肉煲"
             },
-            "SD14": {
+            {
                 "english": "Salted Fish and Chicken Diced Tofu in Claypot",
                 "chinese": "咸魚雞粒豆腐煲"
             },
-            "SD15": {
+            {
                 "english": "Fried Chicken Wings (10)",
                 "chinese": "酥炸雞翼10件"
             },
-            "SD16": {
+            {
                 "english": "Gillette Dragon Willow",
                 "chinese": "吉列龍脷柳"
             },
-            "SD17": {
+            {
                 "english": "Curry Plaque",
                 "chinese": "咖喱斑塊"
             },
-            "SD18": {
+            {
                 "english": "Mei Cai Kou Po",
                 "chinese": "梅菜扣肉"
             },
-            "SD19": {
+            {
                 "english": "Boiled Shrimp",
                 "chinese": "白灼中蝦"
             },
-            "SD20": {
+            {
                 "english": "Steamed Meat Cake with Salted Fish",
                 "chinese": "咸魚蒸肉餅"
             },
-            "SD21": {
+            {
                 "english": "Stir-fried Beef Tenderloin with Wei Cai",
                 "chinese": "味菜炒牛柳絲"
             },
-            "SD22": {
+            {
                 "english": "Southern Milk Stewed Pork Knuckles",
                 "chinese": "南乳炆豬手"
             },
-            "SD23": {
+            {
                 "english": "Stir-Fried Lamai with Parsley",
                 "chinese": "荷芹炒臘昧"
             },
-            "SD24": {
+            {
                 "english": "Shrimp in Salt and Pepper",
                 "chinese": "椒鹽中蝦"
             },
-            "SD25": {
+            {
                 "english": "Maggi Fresh Shrimp",
                 "chinese": "美極鮮中蝦"
             },
-            "SD26": {
+            {
                 "english": "Pineapple Scrambled Chicken",
                 "chinese": "鳳梨咕嚕雞"
             },
-            "SD27": {
+            {
                 "english": "Pineapple Sweet and Sour Pork",
                 "chinese": "菠蘿咕嚕肉"
             },
-            "SD28": {
+            {
                 "english": "Kyoto Baked Pork Steak",
                 "chinese": "京都焗肉排"
             },
-            "SD29": {
+            {
                 "english": "Salt and Pepper Baked Pork Steak",
                 "chinese": "椒鹽焗肉排"
             },
-            "SD30": {
+            {
                 "english": "Zhenjiang Steak",
                 "chinese": "鎮江肉排"
             },
-            "SD31": {
+            {
                 "english": "Bitter Melon and Preserved Vegetables Omlette",
                 "chinese": "涼瓜菜脯煎蛋"
             },
-            "SD32": {
+            {
                 "english": "Rice and Fish Omelette",
                 "chinese": "白飯魚煎蛋"
             },
-            "SD33": {
+            {
                 "english": "Egg Shrimp",
                 "chinese": "滑蛋蝦仁"
             },
-            "SD34": {
+            {
                 "english": "Scrambled Eggs",
                 "chinese": "蜜汁叉燒炒蛋"
             },
-            "SD35": {
+            {
                 "english": "Stir-fried A Choy with Tempeh and Bacon",
                 "chinese": "豆豉咸肉炒A菜"
             },
-            "SD36": {
+            {
                 "english": "Stir-fried Beef with Fungus and Melon",
                 "chinese": "雲耳勝瓜炒牛肉"
             },
-            "SD37": {
+            {
                 "english": "Stir-fried Beef with Yunersheng Melon and Stir-fried Cabbage Seedlings with Garlic",
                 "chinese": "清炒/蒜蓉炒白菜苗"
             },
-            "SD38": {
+            {
                 "english": "Stir-fried Beef Tenderloin with Leek Flower",
                 "chinese": "韮菜花炒牛柳絲"
             },
-            "SD39": {
+            {
                 "english": "Grilled Double Rice with Seasonal Vegetables",
                 "chinese": "雙菰扒時蔬"
             },
-            "SD40": {
+            {
                 "english": "Taiwanese Stir Fry",
                 "chinese": "台灣小炒"
             },
-            "SD41": {
+            {
                 "english": "Soup with Garlic and Soaked Seasonal Vegetables",
                 "chinese": "上湯蒜子浸時蔬"
             },
-            "SD42": {
+            {
                 "english": "Stir-Fried Bacon with Southern Milk Lotus Root Slices",
                 "chinese": "南乳藕片炒咸肉"
             },
-            "SD43": {
+            {
                 "english": "Palace Minced Prk and Crispy Tofu",
                 "chinese": "宮廷肉碎脆豆腐"
             },
-            "SD44": {
+            {
                 "english": "Mapo Tofu",
                 "chinese": "麻婆豆腐"
             },
-            "SD45": {
+            {
                 "english": "Salt and Pepper Tofu",
                 "chinese": "椒鹽豆腐"
             },
-            "SD46": {
+            {
                 "english": "Corn Plaque",
                 "chinese": "粟米斑塊"
             },
-            "SD47": {
+            {
                 "english": "Boiled Beef with Fresh Eggplant and Egg",
                 "chinese": "鮮茄蛋煮牛肉"
             },
-            "SD48": {
+            {
                 "english": "Fermented Bean Curd with Shredded Chili/A Choy",
                 "chinese": "腐乳椒絲通菜/A菜"
             },
-            "SD49": {
+            {
                 "english": "Stir-Fried String Beans",
                 "chinese": "干煸四季豆"
             },
-            "SD50": {
+            {
                 "english": "Stir-Fried Chicken with Bitter Melon",
                 "chinese": "涼瓜炒雞片"
             },
-            "SD51": {
+            {
                 "english": "Stir-Fried Beef with Black Pepper",
                 "chinese": "豉椒炒牛肉"
             },
-            "SD52": {
+            {
                 "english": "Stir-Fried Chinese Kale",
                 "chinese": "臘味炒芥蘭"
             },
-            "SD53": {
+            {
                 "english": "Golden and Silver Egg Soaked Vegetable Seedlings",
                 "chinese": "金銀蛋浸菜苗"
             },
-            "SD54": {
+            {
                 "english": "Fujian Tofu",
                 "chinese": "福建豆腐"
             },
-            "SD55": {
+            {
                 "english": "Fried Kale with Salted Fish",
                 "chinese": "咸魚炒芥蘭"
             },
-            "SD56": {
+            {
                 "english": "Stir-Fried Pork Pork with XO Sauce",
                 "chinese": "XO醬爆豬爽肉"
             },
-            "SD57": {
+            {
                 "english": "Lemongrass Pork Chop",
                 "chinese": "香茅豬扒"
             },
-            "SD58": {
+            {
                 "english": "Stir-Fried Pork Balls with Black Beans and Peppers",
                 "chinese": "豉椒炒斑球"
             },
-            "SD59": {
+            {
                 "english": "Stir-Fried Pork Balls with Broccoli",
                 "chinese": "西蘭花炒斑球"
             },
-            "SD60": {
+            {
                 "english": "Sweet and Sour Plaque",
                 "chinese": "糖醋斑塊"
             },
-            "SD61": {
+            {
                 "english": "Steamed Egg",
                 "chinese": "蒸水蛋"
             },
-            "SD62": {
+            {
                 "english": "Stir-fried Pork Ribs with Black Beans and Peppers",
                 "chinese": "豉椒炒排骨"
             },
-            "SD63": {
+            {
                 "english": "Crab Meat and Fish Maw Soup",
                 "chinese": "蟹肉魚肚羹"
             },
-            "SD64": {
+            {
                 "english": "Haihuang Tofu Soup",
                 "chinese": "海皇豆腐羹"
+            }
+        ],
+        "menuItems": {
+            "two": {
+                "english": "2 Choices",
+                "chinese": "二款",
+                "price": 23.99,
+                "nChoices": 2
+            },
+            "three": {
+                "english": "3 Choices",
+                "chinese": "三款",
+                "price": 33.99,
+                "nChoices": 3
+            },
+            "four": {
+                "english": "4 Choices",
+                "chinese": "四款",
+                "price": 43.99,
+                "nChoices": 4
+            },
+            "five": {
+                "english": "5 Choices",
+                "chinese": "五款",
+                "price": 54.99,
+                "nChoices": 5
+            },
+            "six": {
+                "english": "6 Choices",
+                "chinese": "六款",
+                "price": 64.99,
+                "nChoices": 6
+            },
+            "seven": {
+                "english": "7 Choices",
+                "chinese": "七款",
+                "price": 74.99,
+                "nChoices": 7
+            },
+            "eight": {
+                "english": "8 Choices",
+                "chinese": "八款",
+                "price": 84.99,
+                "nChoices": 8
             }
         }
     },
