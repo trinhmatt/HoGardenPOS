@@ -79,7 +79,7 @@ const AddItem = (props) => {
         goBackToMenu()
     }
     const selectChoice = (choiceData) => {
-        const val = choiceData;
+        const val = choiceData.currentTarget ? choiceData.currentTarget.value : choiceData;
         let price = itemData.price;
 
         if (val.indexOf("tempChoice") > -1) {
@@ -88,7 +88,7 @@ const AddItem = (props) => {
 
         const separatorIndex = val.indexOf(":");
         const choiceType = val.substring(0, separatorIndex);
-        let choiceValue = null;
+        let choiceValue = "";
 
         if (choiceType === "addOn") {
             const returnObj = JSON.parse(val.substring(separatorIndex+1));
@@ -108,14 +108,16 @@ const AddItem = (props) => {
             if (!didChange) {
                 choiceValue.push(returnObj);
             }
-        }
-
-        if (choiceValue === null && choiceData.indexOf("null") === -1) {
+        } else if (val.indexOf("null") === -1) {
             choiceValue = JSON.parse(val.substring(separatorIndex+1));
         }
 
         setItem({ ...item, price, [choiceType]: choiceValue });
     }
+
+
+    //CLEAN THIS SHIT UP!!!! (renderChoices)
+
     // Values for button are formatted like: choiceType:choiceValue 
     // I use : as a delimitter to separate type and value so I can set the cart object 
     const renderChoices = () => {

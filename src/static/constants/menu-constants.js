@@ -75,5 +75,23 @@ export const itemChoices = {
     "hasProtein": {
         "english": "Meat",
         "chinese": "肉"
+    },
+    "Temperature": {
+        "english": "Temperature",
+        "chinese": "溫度"
     }
 };
+
+export const itemTitleEnum = {
+    "eggChoice": "hasEgg",
+    "soupChoice": "hasSoup",
+    "sideChoice": "hasSide",
+    "condimentChoice": "hasCondiment",
+    "sauceChoice": "hasSauce",
+    "carbChoice": "hasChoice",
+    "diffNoodleChoice": "hasDiffNoodleChoice",
+    "noodleChoice": "hasNoodle",
+    "drinkChoice": "hasDrink",
+    "tempChoice": "Temperature",
+    "selectedProtein": "hasProtein"
+}

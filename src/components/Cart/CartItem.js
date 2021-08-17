@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { itemChoices } from "../../static/constants/menu-constants";
+import { itemChoices, itemTitleEnum } from "../../static/constants/menu-constants";
 import { updateCart } from '../../redux/actions/cart-actions';
 import CartItemChoice from './CartItemChoice';
 
@@ -25,8 +25,6 @@ const CartItem = (props) => {
         let choices = [];
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && key !== "hasEgg" && key !== "hasSoup") {
-                console.log(key)
-                console.log(itemData[key])
                 choices.push(
                     <CartItemChoice 
                         key={key}
@@ -35,27 +33,16 @@ const CartItem = (props) => {
                         editItem={editItem} 
                     />
                 )
+            } else if (itemData[key][language]) {
+                choices.push(
+                    <CartItemChoice 
+                        key={key}
+                        title={itemChoices[itemTitleEnum[key]][language]}
+                        choice={itemData[key][language]}
+                        editItem={editItem}
+                    />
+                )
             }
-        }
-        if (itemData.proteinChoice) {
-            choices.push(
-                <CartItemChoice 
-                        key={'proteinChoice'}
-                        title={itemChoices.hasProtein[language]} 
-                        choice={itemData.selectedProtein[language]} 
-                        editItem={editItem} 
-                />
-            )
-        }
-        if (itemData.hasEgg) {
-            choices.push(
-                <CartItemChoice 
-                    key={'eggChoice'}
-                    title={itemChoices.hasEgg[language]} 
-                    choice={itemData.eggChoice[language]} 
-                    editItem={editItem} 
-                />
-            )
         }
         return choices;
     }
