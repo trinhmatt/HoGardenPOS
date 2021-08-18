@@ -82,7 +82,8 @@ export const itemChoices = {
     },
     "choices": {
         "english": "Choices",
-        "chinese": "甄拔"
+        "chinese": "甄拔",
+        "menuKey": "choices"
     }
 };
 

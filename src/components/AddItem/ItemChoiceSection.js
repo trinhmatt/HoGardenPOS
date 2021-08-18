@@ -160,7 +160,7 @@ const ItemChoiceSection = (props) => {
     }
     return (
         <div className={(language === 'english') ? styles.itemChoiceLayout : styles.chinItemChoiceLayout}>
-            <h2>{isAddOn ? choicesArr.type[language]: itemChoices[constKey][language]}</h2>
+            <h2>{isAddOn ? choicesArr.type[language] : itemChoices[constKey][language]+"*"}</h2>
             <ButtonGroup variant='contained' size='small'>{choicesBuilder(choiceType, choicesArr)}</ButtonGroup>
         </div>
     )

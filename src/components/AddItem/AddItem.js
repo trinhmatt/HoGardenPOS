@@ -45,7 +45,7 @@ const AddItem = (props) => {
                                 qty: itemData.qty ? itemData.qty : 0, 
                                 addOn: itemData.addOn ? itemData.addOn : [],
                                 maxChoices: itemData.nChoices ? itemData.nChoices : 0,
-                                choices: []
+                                choices: itemData.choices ? itemData.choices : []
                             });
 
     // Constants for add to order button text
@@ -203,6 +203,21 @@ const AddItem = (props) => {
         return choiceSections;
     }
 
+    const checkRequiredChoices = () => {
+        let allRequiredChosen = true;
+        for (const key in itemData) {
+
+            if (
+                itemData[key] && itemChoices[key] && !item[itemChoices[key].menuKey] || 
+                (key === "hasProteinChoice" && !item.selectedProtein) || 
+                (key === "nChoices" && itemData.nChoices !== item.choices.length)
+            ) {
+                allRequiredChosen = false;
+            } 
+        }
+        return item.qty === 0 || !allRequiredChosen;
+    }
+
     useEffect(() => {
         // Scroll to top of window on render
         window.scrollTo(0, 0);
@@ -261,7 +276,7 @@ const AddItem = (props) => {
                             </div>
                             <br />
                         </Paper>
-                        <Button className={language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn} variant='contained' disabled={item.qty === 0} onClick={index !== undefined ? startUpdateCart : addToOrder}>
+                        <Button className={language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn} variant='contained' disabled={checkRequiredChoices()} onClick={index !== undefined ? startUpdateCart : addToOrder}>
                             {
                             index !== undefined ? 
                                 (language === 'english' ? engUpdateBtnText : chinUpdateBtnText)
