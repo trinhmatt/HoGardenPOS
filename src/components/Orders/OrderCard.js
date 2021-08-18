@@ -18,6 +18,16 @@ const OrderCard = (props) => {
     const { orderData, completeOrder, index } = props;
     const renderChoices = (order) => {
         let choicesElements = [];
+        console.log(order)
+        if (order.length !== undefined && order.length > 0) {
+            for (let i = 0; i < order.length; i++) {
+                choicesElements.push(
+                    <div>
+                        <p className={styles.orderAddOns}>{`${order[i].chinese}/${order[i].english}`}</p>
+                    </div>
+                )
+            }
+        } 
         for (const key in order) {
             if (itemChoices[key] && order[key]) {
                 choicesElements.push(
@@ -39,26 +49,31 @@ const OrderCard = (props) => {
     const renderOrders = () => {
         let itemElements = [];
         for (let i = 0; i < orderData.orderItems.length; i++) {
-            itemElements.push(
-                <div>
-                <Divider />
-                <Grid container spacing={1} className={styles.orderGrid}>
-                    <Grid item xs={2} className={styles.orderQtyGrid}>
-                        <div className={styles.orderQty}>
-                            {orderData.orderItems[i].qty}
-                        </div>
+            let choicesData = orderData.orderItems[i].choices && orderData.orderItems[i].choices.length > 0 ? orderData.orderItems[i].choices : orderData.orderItems[i];
+            //if (orderData.orderItems[i].choices && orderData.orderItems[i].choices.length > 0) {
+
+            //} else {
+                itemElements.push(
+                    <div>
+                    <Divider />
+                    <Grid container spacing={1} className={styles.orderGrid}>
+                        <Grid item xs={2} className={styles.orderQtyGrid}>
+                            <div className={styles.orderQty}>
+                                {orderData.orderItems[i].qty}
+                            </div>
+                        </Grid>
+                        <Grid item xs={9} style={{wordBreak: 'break-word'}}>
+                            <h2>项目名: {orderData.orderItems[i].restName}</h2>
+                            <h2>{`${orderData.orderItems[i].chinese}/${orderData.orderItems[i].english}`}</h2>
+                            <div>
+                                {renderChoices(choicesData)}
+                            </div>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={9} style={{wordBreak: 'break-word'}}>
-                        <h2>项目名: {orderData.orderItems[i].restName}</h2>
-                        <h2>{`${orderData.orderItems[i].chinese}/${orderData.orderItems[i].english}`}</h2>
-                        <div>
-                            {renderChoices(orderData.orderItems[i])}
-                        </div>
-                    </Grid>
-                </Grid>
-                <Divider />
-                </div>
-            )
+                    <Divider />
+                    </div>
+                )
+            //}
         }
         return itemElements;
     }
