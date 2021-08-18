@@ -51,16 +51,6 @@ const Cart = (props) => {
     }, [cart])
 
     // for admin orders
-    const renderTables = () => {
-        let tables = [];
-        for (const table in cartConsts.tables) {
-            const tableVal = table.indexOf("C") > -1 ? table.replace("C", "門口") : table;
-            tables.push(<option value={tableVal}>{tableVal}</option>)
-        }
-        return tables;
-    }
-
-    // for admin orders
     const setTableVal = (e) => {
         setTable(e.currentTarget.value)
     }
@@ -106,15 +96,6 @@ const Cart = (props) => {
             cart.length > 0 ? 
             <div className={styles.centered}>
                 <Paper elevation={3} className={styles.cartBox}>
-                    {
-                        auth.userData && 
-                            <div>
-                                <label htmlFor="table">{'桌子 '}</label>
-                                <select onChange={setTableVal} name="table">
-                                    {renderTables()}
-                                </select>
-                            </div>
-                    }
                     <div>
                     { (props.language === "english") ?
                         <span className={styles.cartTitle}>Cart</span>

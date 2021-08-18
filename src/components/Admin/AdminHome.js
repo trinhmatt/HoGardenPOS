@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 // style imports
 import Button from '@material-ui/core/Button';
-import '../static/css/home.css';
+import '../../static/css/home.css';
 
 // icons
 import { Fastfood, Schedule } from '@material-ui/icons';

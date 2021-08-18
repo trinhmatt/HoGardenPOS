@@ -8,8 +8,8 @@ import {
 import { connect } from 'react-redux';
 
 import Home from "../components/Home";
-import Login from "../components/Login"
-import TimeSheet from "../components/TimeSheet";
+import Login from "../components/Admin/Login"
+import TimeSheet from "../components/Admin/TimeSheet";
 import Menu from "../components/Menu/Menu";
 import NotFound from "../components/NotFound";
 import AddItem from "../components/AddItem/AddItem";
@@ -17,7 +17,8 @@ import Unauthorized from "../components/Unauthorized";
 import Orders from "../components/Orders/Orders";
 import ReviewOrder from "../components/ReviewOrder/ReviewOrder";
 import BottomNav from "../components/subcomponents/BottomNav";
-import Tables from "../components/Tables/Tables";
+import Tables from "../components/Admin/Tables";
+import AdminPlaceOrder from "../components/Admin/AdminPlaceOrder";
 
 const AppRouter = (props) => {
   return (
@@ -48,6 +49,10 @@ const AppRouter = (props) => {
 
         <PrivateRoute path="/admin/tables">
           <Tables />
+        </PrivateRoute>
+
+        <PrivateRoute path="/admin/place-order/:number">
+          <AdminPlaceOrder />
         </PrivateRoute>
 
         <PublicRoute path="/order/:number" exact={true}>
