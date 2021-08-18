@@ -13,8 +13,9 @@ import { itemChoices } from '../../static/constants/menu-constants';
 
 const ItemChoiceSection = (props) => {
     const styles = menuStyles();
-    const { choiceType, choicesArr, selectChoice, language, constKey, selectedObj } = props;
+    const { choiceType, choicesArr, selectChoice, language, constKey, selectedObj, maxChoices } = props;
     const isAddOn = choiceType === "addOn";
+    const isSetDinner = choiceType === "choices";
     const [selectedItem, setSelectedItem] = useState(-1);
     const [selectedAddOns, setSelectedAddOns] = useState([]);
     const [qty, setQty] = useState({});
@@ -24,14 +25,15 @@ const ItemChoiceSection = (props) => {
         if (selectedObj) {
             // If it is an addOn, the array of choices is inside choicesArr.choices 
                 // else, choicesArr IS the array
-            if (isAddOn) {
+            if (isAddOn || isSetDinner) {
+                const allChoices = isAddOn ? choicesArr.choices : choicesArr;
                 let selectedAddOns = [];
                 let qty = {};
                 let qtyKey = "";
-                for (let i = 0; i < choicesArr.choices.length; i++) {
+                for (let i = 0; i < allChoices.length; i++) {
                     for (let n = 0; n < selectedObj.length; n++) {
                         // Check for matching choice
-                        if (choicesArr.choices[i].english === selectedObj[n].english) {
+                        if (allChoices[i].english === selectedObj[n].english) {
                             selectedAddOns.push(i);
                             // If the add on is a qty item (# of take out cups, # of extra bowls of rice, etc.) update qty obj
                             if (selectedObj[n].qty !== undefined) {
@@ -53,17 +55,17 @@ const ItemChoiceSection = (props) => {
         }
     }, [])
     const handleSingleChoice = (e) => {
-        const index = parseInt(e.currentTarget.id.charAt(0));
+        const index = parseInt(e.currentTarget.id.substring(0, e.currentTarget.id.indexOf("/")));
         // if this item has been selected, unselect it
         // i check for null in the returnValue string to determine if it is a deselect vs a select
         let returnValue = selectedItem === index ? `${choiceType}:null` : e.currentTarget.value;
-        if (isAddOn) {
+        if (isAddOn || isSetDinner) {
             let allSelected = selectedAddOns;
 
             if (allSelected.includes(index)) {
                 allSelected.splice(allSelected.indexOf(index), 1);
             } else {
-                returnValue = returnValue.substring(0, returnValue.length-1) + `, "price": ${choicesArr.price}}`;
+                returnValue = isAddOn ? returnValue.substring(0, returnValue.length-1) + `, "price": ${choicesArr.price}}` : returnValue;
                 allSelected.push(index);
             }
 
@@ -112,7 +114,6 @@ const ItemChoiceSection = (props) => {
     const choicesBuilder = (choiceType, choicesArr) => {
         let choices = [];
         if (isAddOn) {
-            
             for (let i = 0; i < choicesArr.choices.length; i++) {
                 const price = '$' + (choicesArr.choices[i].price ? parsePrice(choicesArr.choices[i].price.toString()) : parsePrice(choicesArr.price.toString()));
                 if (choicesArr.type.english === "Change" || choicesArr.type.english === "Extra") {
@@ -143,11 +144,12 @@ const ItemChoiceSection = (props) => {
             for (let i = 0; i < choicesArr.length; i++) {
                 choices.push(
                     <Button
-                        id={`${i}/${choiceType}`} 
+                        id={`${i}/${choiceType}`}
+                        disabled={isSetDinner && selectedAddOns.length === maxChoices && !selectedAddOns.includes(i)} 
                         value={`${choiceType}:${JSON.stringify(choicesArr[i])}`} 
                         key={`${i}/${choicesArr[i][language]}`}
                         onClick={handleSingleChoice}
-                        className={styles.itemChoices,(selectedItem === i ? styles.selectedChoice : null)}
+                        className={styles.itemChoices,(selectedItem === i || selectedAddOns.includes(i) ? styles.selectedChoice : null)}
                     >
                         {choicesArr[i][language]}
                     </Button>

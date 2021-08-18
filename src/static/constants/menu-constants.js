@@ -79,6 +79,10 @@ export const itemChoices = {
     "Temperature": {
         "english": "Temperature",
         "chinese": "溫度"
+    },
+    "choices": {
+        "english": "Choices",
+        "chinese": "甄拔"
     }
 };
 
@@ -93,5 +97,6 @@ export const itemTitleEnum = {
     "noodleChoice": "hasNoodle",
     "drinkChoice": "hasDrink",
     "tempChoice": "Temperature",
-    "selectedProtein": "hasProtein"
+    "selectedProtein": "hasProtein",
+    "nChoices": "choices"
 }

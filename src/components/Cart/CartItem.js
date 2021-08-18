@@ -24,7 +24,7 @@ const CartItem = (props) => {
     const renderChoices = () => {
         let choices = [];
         for (const key in itemData) {
-            if (itemData[key] && itemChoices[key] && key !== "hasEgg" && key !== "hasSoup") {
+            if (itemData[key] && itemChoices[key] && itemData[itemChoices[key].menuKey]) {
                 choices.push(
                     <CartItemChoice 
                         key={key}
@@ -33,16 +33,18 @@ const CartItem = (props) => {
                         editItem={editItem} 
                     />
                 )
-            } else if (itemData[key][language]) {
-                choices.push(
-                    <CartItemChoice 
-                        key={key}
-                        title={itemChoices[itemTitleEnum[key]][language]}
-                        choice={itemData[key][language]}
-                        editItem={editItem}
-                    />
-                )
-            }
+            } else if (key === "choices") {
+                for (let i = 0; i < itemData.choices.length; i++) {
+                    choices.push(
+                        <CartItemChoice 
+                            key={`choice/${i}`}
+                            title={""}
+                            choice={itemData.choices[i][language]}
+                            editItem={editItem}
+                        />
+                    )
+                }
+            } 
         }
         return choices;
     }
@@ -92,7 +94,7 @@ const CartItem = (props) => {
                     <span className={styles.cartQty}>{itemData.qty}</span>
                 </Grid>
                 <Grid onClick={editItem} item xs={7}>
-                    <p>{` ${itemData[language]}`} </p>
+                    <p>{(itemData.maxChoices ? "Set Dinner:" : "")+` ${itemData[language]}`} </p>
                 </Grid>
                 <Grid item xs className={styles.cartPrice}>
                     <span onClick={editItem}>${price.toFixed(2)}</span>

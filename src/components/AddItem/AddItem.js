@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { addToCart } from '../../redux/actions/cart-actions';
-import { itemChoices, itemTitleEnum } from '../../static/constants/menu-constants';
+import { itemChoices } from '../../static/constants/menu-constants';
 import { changeLanguage } from "../../redux/actions/lang-actions";
 import { updateCart } from "../../redux/actions/cart-actions";
 import ItemChoiceSection from "./ItemChoiceSection";
@@ -44,7 +44,8 @@ const AddItem = (props) => {
     const [item, setItem] = useState({
                                 qty: itemData.qty ? itemData.qty : 0, 
                                 addOn: itemData.addOn ? itemData.addOn : [],
-                                maxChoices: itemData.nChoices ? itemData.nChoices : 0
+                                maxChoices: itemData.nChoices ? itemData.nChoices : 0,
+                                choices: []
                             });
 
     // Constants for add to order button text
@@ -90,10 +91,10 @@ const AddItem = (props) => {
         const separatorIndex = val.indexOf(":");
         const choiceType = val.substring(0, separatorIndex);
         let choiceValue = "";
+        const returnObj = JSON.parse(val.substring(separatorIndex+1));
 
-        if (choiceType === "addOn") {
-            const returnObj = JSON.parse(val.substring(separatorIndex+1));
-            choiceValue = item.addOn;
+        if (choiceType === "addOn" || choiceType === "choices") {
+            choiceValue = choiceType === "addOn" ? item.addOn : item.choices;
             let didChange = false;
             for (let i = 0; i < choiceValue.length; i++) {
                 if (choiceValue[i].english === returnObj.english) {
@@ -110,25 +111,19 @@ const AddItem = (props) => {
                 choiceValue.push(returnObj);
             }
         } else if (val.indexOf("null") === -1) {
-            choiceValue = JSON.parse(val.substring(separatorIndex+1));
+            choiceValue = returnObj;
         }
 
         setItem({ ...item, price, [choiceType]: choiceValue });
     }
-
-
-    //CLEAN THIS SHIT UP!!!! (renderChoices)
-
     // Values for button are formatted like: choiceType:choiceValue 
     // I use : as a delimitter to separate type and value so I can set the cart object 
     const renderChoices = () => {
         let choiceSections = [];
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
+            // Item specific choices (protein, saunce, carb, etc)
             if (itemData[key] && itemChoices[key] && sectionData[itemChoices[key].menuKey]) {
-                // selectedObj is not undefined when user is editing a cart item 
-                // constKey is the key used in the menu-consts 
-                // choiceType = noodleChoice, sauceChoice, etc. 
                 choiceSections.push(
                     <ItemChoiceSection 
                         selectedObj={itemData[itemChoices[key].menuKey]} 
@@ -139,6 +134,7 @@ const AddItem = (props) => {
                         choiceType={itemChoices[key].menuKey} 
                         choicesArr={sectionData[itemChoices[key].menuKey]}
                     />);
+            // General choices (egg, daily soup)
             } else if (itemChoices[key] && itemChoices[key][itemChoices[key].menuKey]) {
                 choiceSections.push(
                     <ItemChoiceSection 
@@ -189,6 +185,20 @@ const AddItem = (props) => {
                         choicesArr={sectionData.addOns[i]} 
                     />);
             }
+        }
+        // set dinner choices 
+        if (itemData.nChoices !== undefined) {
+            choiceSections.push(
+                <ItemChoiceSection
+                    selectedObj={itemData.choices}
+                    key={`choices`}
+                    constKey={"choices"}
+                    choiceType={"choices"}
+                    maxChoices={item.maxChoices}
+                    language={language}
+                    selectChoice={selectChoice}
+                    choicesArr={sectionData.choices}
+                />)
         }
         return choiceSections;
     }
