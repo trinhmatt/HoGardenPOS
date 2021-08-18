@@ -9,9 +9,7 @@ const homeStyles = makeStyles(() => ({
 
     // BACKGROUND
     homebg: {
-        background: '#667db6',  /* fallback for old browsers */
-        background: '-webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6)',  /* Chrome 10-25, Safari 5.1-6 */
-        background: 'linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6)',/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+        background: 'linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6)',   
         overflow: 'auto',
         width: '100vw',
         height: '100vh',
@@ -48,6 +46,9 @@ const homeStyles = makeStyles(() => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    tableLayout: {
+        margin: '2%',
     },
 
     // TITLE
@@ -238,16 +239,32 @@ const homeStyles = makeStyles(() => ({
     //TABLES
     hTable: {
         width: '100px',
-        height: '40px',
+        height: '50px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    smolhTable: {
+        width: '80px',
+        height: '50px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     vTable: {
-        width: '40px',
+        width: '50px',
         height: '100px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     roundTable: {
         borderRadius: '50%',
         width: '100px',
         height: '100px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     
 }));

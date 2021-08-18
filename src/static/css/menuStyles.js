@@ -1,12 +1,6 @@
-import { makeStyles, createTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const theme = createTheme({
-    color: {
-        blue: '#4051b5',
-    }
-});
-
-const menuStyles = makeStyles((theme) => ({
+const menuStyles = makeStyles(() => ({
     //LAYOUT
     row: {
         display: 'flex',

@@ -8,7 +8,6 @@ import {homeStyles} from '../../static/css/homeStyles';
 //Material ui imports
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import Button from '@material-ui/core/Button';
 
 // icons
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';

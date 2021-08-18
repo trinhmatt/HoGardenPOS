@@ -8,7 +8,6 @@ import { mainStyles } from "../static/css/mainStyles";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -111,7 +110,7 @@ const Home = (props) => {
             <Grid container spacing={0} className={styles.mapBackground}>
                 <Grid item xs={7} className={styles.mapouter}>
                     <div className={styles.gmap_canvas}>
-                        <iframe className={styles.gmap_iframe} id="gmap_canvas" src={"https://maps.google.com/maps?q=9255%20woodbine%20ave&t=&z=15&ie=UTF8&iwloc=&output=embed"} frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                        <iframe title='gmap' className={styles.gmap_iframe} id="gmap_canvas" src={"https://maps.google.com/maps?q=9255%20woodbine%20ave&t=&z=15&ie=UTF8&iwloc=&output=embed"} frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                         <br />
                         <a href="https://www.embedgooglemap.net">location map for website</a>
                     </div>
@@ -135,34 +134,34 @@ const Home = (props) => {
                     showIndicators={false}
                 >
                     <div>
-                        <img src={adc1} className={styles.menuImg}/>
+                        <img alt='menu-1' src={adc1} className={styles.menuImg}/>
                     </div>
                     <div>
-                        <img src={adc2} className={styles.menuImg} />
+                        <img alt='menu-2' src={adc2} className={styles.menuImg} />
                     </div>
                     <div>
-                        <img src={adc3} className={styles.menuImg} />
+                        <img alt='menu-3' src={adc3} className={styles.menuImg} />
                     </div>
                     <div>
-                        <img src={adc4} className={styles.menuImg} />
+                        <img alt='menu-4' src={adc4} className={styles.menuImg} />
                     </div>
                     <div>
-                        <img src={adc5} className={styles.menuImg} />
+                        <img alt='menu-5' src={adc5} className={styles.menuImg} />
                     </div>
                     <div>
-                        <img src={adc6} className={styles.menuImg} />
+                        <img alt='menu-6' src={adc6} className={styles.menuImg} />
                     </div>
                     <div>
-                        <img src={at1} className={styles.menuImg} />
+                        <img alt='menu-7' src={at1} className={styles.menuImg} />
                     </div>
                     <div>
-                        <img src={b1} className={styles.menuImg} />
+                        <img alt='menu-8' src={b1} className={styles.menuImg} />
                     </div>
                     <div>
-                        <img src={hc1} className={styles.menuImg} />
+                        <img alt='menu-9' src={hc1} className={styles.menuImg} />
                     </div>
                     <div>
-                        <img src={hc2} className={styles.menuImg} />
+                        <img alt='menu-10' src={hc2} className={styles.menuImg} />
                     </div>
                 </Carousel>
             </div>
