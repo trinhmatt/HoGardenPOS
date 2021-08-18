@@ -7,7 +7,7 @@ const CustOrderItem = (props) => {
     const renderChoices = () => {
         let choices = [];
         for (const key in itemData) {
-            if (itemData[key] && itemChoices[key] && key !== "hasEgg") {
+            if (itemData[key] && itemChoices[key] && key !== "hasEgg" && itemData[key].length === undefined) {
                 choices.push(
                     <CartItemChoice 
                         key={key}
@@ -15,6 +15,16 @@ const CustOrderItem = (props) => {
                         choice={itemData[itemChoices[key].menuKey][language]} 
                     />
                 )
+            } else if (key === "choices" && itemData.choices.length > 0) {
+                for (let i = 0; i < itemData.choices.length; i++) {
+                    choices.push(
+                        <CartItemChoice 
+                            key={`choice/${i}`}
+                            title={""}
+                            choice={itemData.choices[i][language]}
+                        />
+                    )
+                }
             }
         }
         if (itemData.proteinChoice) {
@@ -53,7 +63,6 @@ const CustOrderItem = (props) => {
             }
         }
         return addOns;
-        
     }
     return (
         <div>

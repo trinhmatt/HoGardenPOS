@@ -21,7 +21,6 @@ const ReviewOrder = (props) => {
                     const tableNum = props.match.params.number.indexOf("C") > -1 ? props.match.params.number.replace("C","門口") : props.match.params.number;
                     if (orders) {
                         for (let i = 0; i < orders.length; i++) {
-                            console.log(orders[i])
                             if (tableNum === orders[i].table) {
                                 resolve(orders[i]);
                             }
@@ -48,7 +47,7 @@ const ReviewOrder = (props) => {
     const buildItemElements = (orders) => {
         let itemElements = [];
         for (let i = 0; i < orders.length; i++) {
-            itemElements.push(<CustOrderItem key={`${i}/item`} language={language} itemData={orders[i]}/>)
+            itemElements.push(<CustOrderItem key={`${i}/item`} language={language} itemData={orders[i]}/>);
         }
         setItemElements(itemElements);
     }

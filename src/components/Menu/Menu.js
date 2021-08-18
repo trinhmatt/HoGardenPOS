@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 import MenuSection from './MenuSection'
 import menuJSON from '../../static/constants/menu.json';
 import { cartConsts } from "../../static/constants/cart-constants";
+import { authConsts } from '../../static/constants/auth-constants';
 import { changeLanguage } from "../../redux/actions/lang-actions";
 import Cart from "../Cart/Cart";
+
+import database from '../../firebase/firebase';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -44,8 +48,19 @@ const Menu = (props) => {
             } else {
                 changeLanguage("chinese");
             }
-            
-        }
+        } else if (props.match.params.number !== "takeout") {
+            database.ref(`orders/${dayjs().format(authConsts.DATE)}`).on("value", (snapshot) => {
+                const orders = snapshot.val(); 
+
+                if (orders) {
+                    for (let i = 0; i < orders.length; i++) {
+                        if (orders[i].table === props.match.params.number) {
+                            props.history.push(`${props.match.params.number}/review`);
+                        }
+                    }
+                }
+            })
+        }   
     }, [])
 
     useEffect(() => {
