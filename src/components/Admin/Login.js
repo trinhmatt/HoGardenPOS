@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { withRouter } from "react-router";
-import { firebase } from '../firebase/firebase';
+import { firebase } from '../../firebase/firebase';
 import { connect } from 'react-redux';
-import { loginSuccess } from '../redux/actions/auth-actions';
+import { loginSuccess } from '../../redux/actions/auth-actions';
 
 // style imports
-import '../static/css/home.css';
+import '../../static/css/home.css';
 
 // material ui imports
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import { homeStyles } from '../static/css/homeStyles';
+import { homeStyles } from '../../static/css/homeStyles';
 
 // icon imports
 import { AlternateEmail, Lock } from '@material-ui/icons';

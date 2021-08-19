@@ -18,7 +18,6 @@ const OrderCard = (props) => {
     const { orderData, completeOrder, index } = props;
     const renderChoices = (order) => {
         let choicesElements = [];
-        console.log(order)
         if (order.length !== undefined && order.length > 0) {
             for (let i = 0; i < order.length; i++) {
                 choicesElements.push(

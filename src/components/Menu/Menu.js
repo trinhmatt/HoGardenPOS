@@ -49,17 +49,18 @@ const Menu = (props) => {
                 changeLanguage("chinese");
             }
         } else if (props.match.params.number !== "takeout") {
-            database.ref(`orders/${dayjs().format(authConsts.DATE)}`).on("value", (snapshot) => {
-                const orders = snapshot.val(); 
+            database.ref(`orders/${dayjs().format(authConsts.DATE)}`).once("value")
+                .then( (snapshot) => {
+                    const orders = snapshot.val(); 
 
-                if (orders) {
-                    for (let i = 0; i < orders.length; i++) {
-                        if (orders[i].table === props.match.params.number) {
-                            props.history.push(`${props.match.params.number}/review`);
+                    if (orders) {
+                        for (let i = 0; i < orders.length; i++) {
+                            if (orders[i].table === props.match.params.number) {
+                                props.history.push(`${props.match.params.number}/review`);
+                            }
                         }
                     }
-                }
-            })
+                })
         }   
     }, [])
 

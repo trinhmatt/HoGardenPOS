@@ -27,7 +27,7 @@ export const cartConsts = {
         "C10": true,
         "admin": true
     },
-    chTablePrefix: "門口",
+    chTablePrefix: "門",
     actions: {
         add: "ADD_TO_CART",
         update: "UPDATE_CART",

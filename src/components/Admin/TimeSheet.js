@@ -6,12 +6,12 @@ import {
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 
-import { employees } from '../static/constants/employee-constants';
-import { authConsts } from '../static/constants/auth-constants';
-import database from '../firebase/firebase';
+import { employees } from '../../static/constants/employee-constants';
+import { authConsts } from '../../static/constants/auth-constants';
+import database from '../../firebase/firebase';
 
 //Style imports
-import { homeStyles, StyledTableRow, StyledTableCell } from '../static/css/homeStyles';
+import { homeStyles, StyledTableRow, StyledTableCell } from '../../static/css/homeStyles';
 
 //Material ui imports
 import Table from '@material-ui/core/Table';

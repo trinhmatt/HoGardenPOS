@@ -51,16 +51,6 @@ const Cart = (props) => {
     }, [cart])
 
     // for admin orders
-    const renderTables = () => {
-        let tables = [];
-        for (const table in cartConsts.tables) {
-            const tableVal = table.indexOf("C") > -1 ? table.replace("C", "門口") : table;
-            tables.push(<option value={tableVal}>{tableVal}</option>)
-        }
-        return tables;
-    }
-
-    // for admin orders
     const setTableVal = (e) => {
         setTable(e.currentTarget.value)
     }
@@ -106,15 +96,6 @@ const Cart = (props) => {
             cart.length > 0 ? 
             <div className={styles.cartLayout}>
                 <Paper elevation={3} className={styles.cartBox}>
-                    {
-                        auth.userData && 
-                            <div>
-                                <label htmlFor="table">{'桌子 '}</label>
-                                <select onChange={setTableVal} name="table">
-                                    {renderTables()}
-                                </select>
-                            </div>
-                    }
                     <div>
                     { (props.language === "english") ?
                         <span>
@@ -131,7 +112,9 @@ const Cart = (props) => {
                     }
                     {cartItems}
                     </div> 
-                <h2>Total: {totalPrice.toFixed(2)}</h2>
+                    <h2>Sub-total: {totalPrice.toFixed(2)}</h2>
+                    <h2>HST: {(totalPrice * 0.13).toFixed(2)}</h2>
+                    <h2>Total: {(totalPrice * 1.13).toFixed(2)}</h2>
                 </Paper>
                 <Button className={styles.addToOrderBtn} variant='contained' onClick={checkout}>Checkout</Button>
                 </div>
