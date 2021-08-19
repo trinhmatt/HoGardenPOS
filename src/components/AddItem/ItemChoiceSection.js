@@ -133,9 +133,19 @@ const ItemChoiceSection = (props) => {
                     choices.push(
                         <div key={choicesArr.choices[i].english}>
                             <span>{choicesArr.choices[i][language]} (+{price})</span>
-                            <Button value={`${choiceType}${i}:${JSON.stringify(choicesArr.choices[i])}/-1`} onClick={handleQtyChoice}>-</Button>
+                            <Button 
+                                value={`${choiceType}${i}:${JSON.stringify(choicesArr.choices[i])}/-1`} 
+                                onClick={handleQtyChoice}
+                            >
+                                -
+                            </Button>
                             <span>{qty[`${choiceType}${i}`] ? qty[`${choiceType}${i}`] : 0}</span>
-                            <Button value={`${choiceType}${i}:${JSON.stringify(choicesArr.choices[i])}/1`} onClick={handleQtyChoice}>+</Button>
+                            <Button 
+                                value={`${choiceType}${i}:${JSON.stringify(choicesArr.choices[i])}/1`} 
+                                onClick={handleQtyChoice}
+                            >
+                                +
+                            </Button>
                         </div>
                     )
                 }
@@ -149,7 +159,9 @@ const ItemChoiceSection = (props) => {
                         value={`${choiceType}:${JSON.stringify(choicesArr[i])}`} 
                         key={`${i}/${choicesArr[i][language]}`}
                         onClick={handleSingleChoice}
-                        className={styles.itemChoices,(selectedItem === i || selectedAddOns.includes(i) ? styles.selectedChoice : null)}
+                        className={language === 'english' ? 
+                            cx(styles.itemChoices,(selectedItem === i || selectedAddOns.includes(i) ? styles.selectedChoice : null)) :
+                            cx(styles.chinItemChoices,(selectedItem === i || selectedAddOns.includes(i) ? styles.chinSelectedChoice : null))}
                     >
                         {choicesArr[i][language]}
                     </Button>
@@ -160,7 +172,7 @@ const ItemChoiceSection = (props) => {
     }
     return (
         <div className={(language === 'english') ? styles.itemChoiceLayout : styles.chinItemChoiceLayout}>
-            <h2>{isAddOn ? choicesArr.type[language] : itemChoices[constKey][language]+"*"}</h2>
+            <h2>{isAddOn ? choicesArr.type[language] : itemChoices[constKey][language]}{<span className={styles.red}>{!isAddOn && '*'}</span>}</h2>
             <ButtonGroup variant='contained' size='small'>{choicesBuilder(choiceType, choicesArr)}</ButtonGroup>
         </div>
     )

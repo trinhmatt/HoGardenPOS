@@ -1,6 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const menuStyles = makeStyles(() => ({
+    //GLOBALS
+    red: {
+        color: '#F50157',
+    },
+
     //LAYOUT
     row: {
         display: 'flex',
@@ -21,7 +26,7 @@ const menuStyles = makeStyles(() => ({
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflowX: 'hidden',
         backgroundColor: '#fdb678',
-        display: 'flex',
+        display: 'flex !important',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-around',
@@ -142,6 +147,13 @@ const menuStyles = makeStyles(() => ({
             fontSize: '35px',
         },
     },
+    cartLayout: {
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
     //HEADERS
     smallHeader: {
@@ -211,7 +223,7 @@ const menuStyles = makeStyles(() => ({
         fontSize: '18px',
     },
     scrollContainer: {
-        padding: '2px',
+        padding: '2px !important',
     },
     toTopArrow: {
         position: 'fixed',
@@ -362,15 +374,15 @@ const menuStyles = makeStyles(() => ({
         fontSize: '5vw'
     },
     cartIcon: {
-        backgroundColor: '#7f9877',
-        color: '#fff',
+        backgroundColor: '#7f9877 !important',
+        color: '#fff !important',
     },
     cartItemSection: {
         display: 'flex',
         alignItems: 'center',
         //phone
         '@media (min-width: 375px)': {
-            padding: '5%',
+            padding: '3%',
         },
         //ipad + desktop
         '@media (min-width: 760px)': {
@@ -413,10 +425,19 @@ const menuStyles = makeStyles(() => ({
     qtyBtnColor: {
         color: '#000'
     },
+    cartAddonTitle: {
+        padding: '2% !important',
+        textAlign: 'center',
+        wordBreak: 'break-word',
+        backgroundColor: '#dee4db',
+    },
+    cartSubtitle: {
+        fontSize: '12px',
+        color: '#DE6434',
+    },
 
     //ADD ITEM 
     addItemSection: {
-        height: '60vh',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -424,6 +445,14 @@ const menuStyles = makeStyles(() => ({
         alignItems: 'center',
         overflow: 'auto',
         padding: '5%',
+        //phone
+        '@media (min-width: 375px)': {
+            height: '65vh',
+        },
+        //ipad
+        '@media (min-width: 760px)': {
+            height: '60vh',
+        },
     },
     itemTitle: {
         padding: '5%',
@@ -445,9 +474,11 @@ const menuStyles = makeStyles(() => ({
     },
     chinItemTitle: {
         padding: '5%',
+        marginTop: '30%',
         textAlign: 'center',
         wordBreak: 'break-word',
         border: '2px dashed #7f9877',
+        marginTop: '35%',
         //phone
         '@media (min-width: 375px)': {
             fontSize: '30px',
@@ -455,6 +486,7 @@ const menuStyles = makeStyles(() => ({
         //ipad
         '@media (min-width: 760px)': {
             fontSize: '55px',
+            marginTop: '45%',
         },
         //desktop
         '@media (min-width: 960px)': {

@@ -104,7 +104,7 @@ const Cart = (props) => {
         <div style={{backgroundColor: "white"}}>
             {
             cart.length > 0 ? 
-            <div className={styles.centered}>
+            <div className={styles.cartLayout}>
                 <Paper elevation={3} className={styles.cartBox}>
                     {
                         auth.userData && 
@@ -117,14 +117,22 @@ const Cart = (props) => {
                     }
                     <div>
                     { (props.language === "english") ?
-                        <span className={styles.cartTitle}>Cart</span>
-                        : 
-                        <span className={styles.cartTitle}>購物車</span>
+                        <span>
+                            <span className={styles.cartTitle}>Cart</span>
+                            <br />
+                            <span className={styles.cartSubtitle}>(tap item to edit)</span>
+                        </span>
+                        :
+                        <span>
+                            <span className={styles.cartTitle}>購物車</span>
+                            <br />
+                            <span className={styles.cartSubtitle}>(點擊項目進行編輯)</span>
+                        </span>
                     }
                     {cartItems}
                     </div> 
-                </Paper>
                 <h2>Total: {totalPrice.toFixed(2)}</h2>
+                </Paper>
                 <Button className={styles.addToOrderBtn} variant='contained' onClick={checkout}>Checkout</Button>
                 </div>
             : 
