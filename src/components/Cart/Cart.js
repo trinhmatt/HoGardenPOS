@@ -22,7 +22,7 @@ import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
 const Cart = (props) => {
     const isAdmin = props.match.params.number === "admin";
     const styles = menuStyles();
-    const { cart, language, auth, clearCart } = props;
+    const { cart, language, clearCart } = props;
     const [cartItems, setCartItems] = useState([]);
     const [table, setTable] = useState(isAdmin ? "1" : props.match.params.number);
     const [totalPrice, setTotalPrice] = useState(0);

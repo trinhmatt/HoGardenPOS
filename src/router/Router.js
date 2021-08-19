@@ -19,6 +19,7 @@ import ReviewOrder from "../components/ReviewOrder/ReviewOrder";
 import BottomNav from "../components/subcomponents/BottomNav";
 import Tables from "../components/Admin/Tables";
 import AdminPlaceOrder from "../components/Admin/AdminPlaceOrder";
+import WeeklyTimeSheet from "../components/Admin/WeeklyTimeSheet";
 
 const AppRouter = (props) => {
   return (
@@ -39,8 +40,12 @@ const AppRouter = (props) => {
           <Login />
         </PublicRoute> 
 
-        <PrivateRoute path="/admin/timesheet">
+        <PrivateRoute path="/admin/timesheet" exact={true}>
           <TimeSheet />
+        </PrivateRoute>
+
+        <PrivateRoute path="/admin/timesheet/weekly">
+          <WeeklyTimeSheet />
         </PrivateRoute>
 
         <PrivateRoute path="/admin/orders">

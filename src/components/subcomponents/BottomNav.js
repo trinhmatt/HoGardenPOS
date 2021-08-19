@@ -47,7 +47,7 @@ const BottomNav = (props) => {
             <BottomNavigationAction value='tables' onClick={() => navigateTo('/admin/tables')} label='TABLES/桌' icon={<DesktopWindowsIcon />} />
             <BottomNavigationAction value='orders' onClick={() => navigateTo('/admin/orders')} label='ORDERS/订单' icon={<Fastfood />} />
             <BottomNavigationAction value='timesheet'  onClick={() => navigateTo('/admin/timesheet')} label='SIGNIN/登录和退出' icon={<Schedule />} />
-            <BottomNavigationAction onClick={() => navigateTo('/')} label='HOURS/员工工作时间' icon={<DateRange />} />
+            <BottomNavigationAction onClick={() => navigateTo('/admin/timesheet/weekly')} label='HOURS/员工工作时间' icon={<DateRange />} />
             <BottomNavigationAction onClick={() => navigateTo('/order/admin')} label='PLACE ORDER/下订单' icon={<Create />} />
             <BottomNavigationAction onClick={signOut} label='SIGN OUT/登出' icon={<ExitToAppIcon />}/>
             
