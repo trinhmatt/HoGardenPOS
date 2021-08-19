@@ -266,6 +266,9 @@ const homeStyles = makeStyles(() => ({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    orderTakenTable: {
+        backgroundColor: '#ffaa00'
+    }
     
 }));
 
