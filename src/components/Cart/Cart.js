@@ -105,7 +105,8 @@ const Cart = (props) => {
                     {cartItems}
                     </div> 
                 </Paper>
-                <h2>Total: {totalPrice.toFixed(2)}</h2>
+                <h2>Sub-total: {totalPrice.toFixed(2)}</h2>
+                <h2>Total: {(totalPrice * 1.13).toFixed(2)}</h2>
                 <Button className={styles.addToOrderBtn} variant='contained' onClick={checkout}>Checkout</Button>
                 </div>
             : 
