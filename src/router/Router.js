@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import Home from "../components/Home";
 import Login from "../components/Admin/Login"
-import TimeSheet from "../components/Admin/TimeSheet";
+import TimeSheet from "../components/Admin/TimeSheet/TimeSheet";
 import Menu from "../components/Menu/Menu";
 import NotFound from "../components/NotFound";
 import AddItem from "../components/AddItem/AddItem";
@@ -19,7 +19,8 @@ import ReviewOrder from "../components/ReviewOrder/ReviewOrder";
 import BottomNav from "../components/subcomponents/BottomNav";
 import Tables from "../components/Admin/Tables";
 import AdminPlaceOrder from "../components/Admin/AdminPlaceOrder";
-import WeeklyTimeSheet from "../components/Admin/WeeklyTimeSheet";
+import WeeklyTimeSheet from "../components/Admin/TimeSheet/WeeklyTimeSheet";
+import EmployeeWeeklyTimeSheet from "../components/Admin/TimeSheet/EmployeeWeeklyTimeSheet";
 
 const AppRouter = (props) => {
   return (
@@ -44,8 +45,12 @@ const AppRouter = (props) => {
           <TimeSheet />
         </PrivateRoute>
 
-        <PrivateRoute path="/admin/timesheet/weekly">
+        <PrivateRoute path="/admin/timesheet/weekly" exact={true}>
           <WeeklyTimeSheet />
+        </PrivateRoute>
+
+        <PrivateRoute path="/admin/timesheet/weekly/:employee/:start/:end">
+          <EmployeeWeeklyTimeSheet />
         </PrivateRoute>
 
         <PrivateRoute path="/admin/orders">

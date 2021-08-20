@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 
 import isBetween from 'dayjs/plugin/isBetween';
 import duration from 'dayjs/plugin/duration';
@@ -10,11 +10,12 @@ import {
     MuiPickersUtilsProvider,
   } from '@material-ui/pickers';
 
-import database from '../../firebase/firebase';
-import { authConsts } from '../../static/constants/auth-constants';
+import database from '../../../firebase/firebase';
+import { authConsts } from '../../../static/constants/auth-constants';
+import EmployeeWeeklyTimeSheet from './EmployeeWeeklyTimeSheet';
 
 //Style imports
-import { homeStyles, StyledTableRow, StyledTableCell } from '../../static/css/homeStyles';
+import { StyledTableRow, StyledTableCell } from '../../../static/css/homeStyles';
 
 //Material ui imports
 import Table from '@material-ui/core/Table';
@@ -22,16 +23,23 @@ import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import Modal from '@material-ui/core/Modal';
 
-const WeeklyTimeSheet = (props) => {
+const WeeklyTimeSheet = () => {
     dayjs.extend(isBetween);
     dayjs.extend(duration); 
     const [state, setState] = useState({
                                 startDate: dayjs(),
                                 endDate: dayjs(),
-                                employeeTableRows: [] 
-                             })
+                                employeeTableRows: [],
+                                isSingleEmployeeOpen: false,
+                                singleEmployeeHours: "" 
+                             });
+    
+    // Need this so that the callback (viewEmployeeHours) passed to each TableRow in getHours() has access to the most current state
+    const currentState = useRef();
+    currentState.current = state.employeeTableRows;
+
     const handleStartDate = (newDate) => {
         setState({...state, startDate: newDate});
     }
@@ -43,49 +51,52 @@ const WeeklyTimeSheet = (props) => {
             .then( snapshot => {
                 const timesheets = snapshot.val();
                 let timesheetsInRange = [];
-                let employeeHours = {};
+                let allEmployeeHours = {};
                 let employeeTableRows = [];
 
                 if (timesheets && Object.keys(timesheets).length > 0) {
                     // Add all timesheets that are for days in range to array
                     for (const day in timesheets) {
                         if (dayjs(day, authConsts.DATE).isBetween(state.startDate, state.endDate, 'day', '[]')) {
-                            timesheetsInRange.push(timesheets[day]);
+                            timesheetsInRange.push({timesheet: timesheets[day], day});
                         }
                     }
-                    // Add up the hours inside each timesheet in range
+
+                    // For each employee, populate object with each day as a key and the hours as the value
                     for (let i = 0; i < timesheetsInRange.length; i++) {
-                        for (const employee in timesheetsInRange[i]) {
-                            const start = dayjs(timesheetsInRange[i][employee].in, "HH:mm"); 
+                        for (const employee in timesheetsInRange[i].timesheet) {
+                            const start = dayjs(timesheetsInRange[i].timesheet[employee].in, "HH:mm"); 
                             let end;
                             let isFlagged = false;
-                            if (timesheetsInRange[i][employee].out === undefined) {
+
+                            if (timesheetsInRange[i].timesheet[employee].out === undefined) {
                                 end = start.add(9, 'hour');
                                 isFlagged = true;
                             } else {
-                                end = dayjs(timesheetsInRange[i][employee].out, "HH:mm");
+                                end = dayjs(timesheetsInRange[i].timesheet[employee].out, "HH:mm");
                             }
+
                             const hours = dayjs.duration(end.diff(start)).asMinutes();
-                            if (employeeHours[employee] === undefined) {
-                                employeeHours[employee] = {};
-                                employeeHours[employee].hours = hours;
-                            } else {
-                                employeeHours[employee].hours += hours;
-                            }
+
+                            if (allEmployeeHours[employee] === undefined) {
+                                allEmployeeHours[employee] = {hasFlaggedDay: false};
+                            } 
+                            allEmployeeHours[employee][timesheetsInRange[i].day] = {hours, isFlagged};
+                            
                             // Flagged means the employee forgot to sign out 
-                            if (isFlagged && !employeeHours[employee].isFlagged) {
-                                employeeHours[employee].isFlagged = isFlagged;
+                            if (isFlagged && !allEmployeeHours[employee].hasFlaggedDay) {
+                                allEmployeeHours[employee].hasFlaggedDay = isFlagged;
                             }
                         }
                     }
                     // Create the DOM elements to render to user
-                    if (Object.keys(employeeHours).length > 0) {
-                        for (const employee in employeeHours) {
+                    if (Object.keys(allEmployeeHours).length > 0) {
+                        for (const employee in allEmployeeHours) {
                             employeeTableRows.push(
-                                <StyledTableRow key={employee}>
+                                <StyledTableRow key={employee} onClick={() => {viewEmployeeHours(employee, allEmployeeHours[employee])}}>
                                     <StyledTableCell align="left" component="th" scope="row">{employee}</StyledTableCell>
-                                    <StyledTableCell align="right">{(employeeHours[employee].hours/60).toFixed(2)}</StyledTableCell>
-                                    <StyledTableCell align="right">{employeeHours[employee].isFlagged ? "yes" : "no"}</StyledTableCell>
+                                    <StyledTableCell align="right">{getHoursInRange(allEmployeeHours[employee])}</StyledTableCell>
+                                    <StyledTableCell align="right">{allEmployeeHours[employee].hasFlaggedDay ? "yes" : "no"}</StyledTableCell>
                                 </StyledTableRow>
                             )
                         }
@@ -95,6 +106,24 @@ const WeeklyTimeSheet = (props) => {
             })
             .catch( error => setState({...state, error}) )
     }
+    const getHoursInRange = (employeeHoursObj) => {
+        let minutes = 0;
+        for (const key in employeeHoursObj) {
+            if (key !== "hasFlaggedDay") {
+                minutes += employeeHoursObj[key].hours;
+            }
+        }
+        return (minutes/60).toFixed(2);
+    }
+    const viewEmployeeHours = (employee, employeeHoursObj) => {
+        setState({
+            ...state,
+            employeeTableRows: currentState.current,
+            isSingleEmployeeOpen: true, 
+            singleEmployeeHours: <EmployeeWeeklyTimeSheet employee={employee} employeeHours={employeeHoursObj} start={state.startDate} end={state.end} />
+        });
+    }
+    const closeSingleEmployeeModal = () => setState({...state, isSingleEmployeeOpen: false});
     return (
         <div>
             <h2>Weekly Time Sheet</h2>
@@ -137,6 +166,17 @@ const WeeklyTimeSheet = (props) => {
                     </Table>
                 </TableContainer>
             </div>
+            <Modal
+                style={{backgroundColor: "white"}}
+                open={state.isSingleEmployeeOpen}
+                onClose={closeSingleEmployeeModal}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <div>
+                    {state.singleEmployeeHours}
+                </div>
+            </Modal>
         </div>
     )
 }
