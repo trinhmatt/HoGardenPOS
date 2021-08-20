@@ -116,7 +116,13 @@ const ItemChoiceSection = (props) => {
         if (isAddOn) {
             for (let i = 0; i < choicesArr.choices.length; i++) {
                 const price = '$' + (choicesArr.choices[i].price ? parsePrice(choicesArr.choices[i].price.toString()) : parsePrice(choicesArr.price.toString()));
+
+                // Add on choice can be change/extra or qty choice 
                 if (choicesArr.type.english === "Change" || choicesArr.type.english === "Extra") {
+
+                    //Save type in choice object for use later
+                    choicesArr.choices[i].type = choicesArr.type.english;
+
                     choices.push(
                         <Button
                             id={`${i}/${choiceType}`} 

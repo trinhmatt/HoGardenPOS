@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { itemChoices, itemTitleEnum } from "../../static/constants/menu-constants";
+import { itemChoices } from "../../static/constants/menu-constants";
 import { updateCart } from '../../redux/actions/cart-actions';
 import CartItemChoice from './CartItemChoice';
 
@@ -23,28 +23,35 @@ const CartItem = (props) => {
 
     const renderChoices = () => {
         let choices = [];
+        console.log(itemData)
         for (const key in itemData) {
-            if (itemData[key] && itemChoices[key] && itemData[itemChoices[key].menuKey]) {
+            if (itemData[key] && itemChoices[key] && itemData[itemChoices[key].menuKey] && itemData[key].length === undefined) {
                 choices.push(
                     <CartItemChoice 
                         key={key}
-                        title={itemChoices[key][language]} 
                         choice={itemData[itemChoices[key].menuKey][language]} 
                         editItem={editItem} 
                     />
                 )
-            } else if (key === "choices") {
+            } else if (key === "choices" && itemData.choices.length > 0) {
                 for (let i = 0; i < itemData.choices.length; i++) {
                     choices.push(
                         <CartItemChoice 
                             key={`choice/${i}`}
-                            title={""}
                             choice={itemData.choices[i][language]}
                             editItem={editItem}
                         />
                     )
                 }
-            } 
+            } else if (key === "selectedProtein") {
+                choices.push(
+                    <CartItemChoice 
+                        key={`selectedProtein/${itemData.english}/${itemData.selectedProtein.english}`}
+                        choice={itemData.selectedProtein[language]}
+                        editItem={editItem}
+                    />
+                )
+            }
         }
         return choices;
     }
@@ -58,6 +65,7 @@ const CartItem = (props) => {
                         key={`addOn/${i}`}
                         title={"addOn"}
                         choice={itemData.addOn[i][language]}
+                        type={itemData.addOn[i].type}
                         price={itemData.addOn[i].price}
                         qty={itemData.addOn[i].qty}
                         editItem={editItem}
@@ -112,6 +120,7 @@ const CartItem = (props) => {
             </Grid>
             <Grid container spacing={3} onClick={editItem}>
                 <Grid item xs className={styles.cartAddonTitle}>
+                    <span><b>{(props.language === "english") ? 'Choices:' : 'chinese choices:'}</b></span>
                     {renderChoices()}
                 </Grid>
                 <Grid item xs className={styles.cartAddonTitle}>

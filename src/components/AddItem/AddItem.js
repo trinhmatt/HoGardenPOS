@@ -6,7 +6,6 @@ import { itemChoices } from '../../static/constants/menu-constants';
 import { changeLanguage } from "../../redux/actions/lang-actions";
 import { updateCart } from "../../redux/actions/cart-actions";
 import ItemChoiceSection from "./ItemChoiceSection";
-import AddOnSection from "./AddOnSection";
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -30,7 +29,6 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 
 //Subcomponent imports
 import ElevationScroll from '../subcomponents/ElevationScroll';
-import { render } from '@testing-library/react';
 
 // need to include functionality for if they want more than 1 AND the item has options
 const AddItem = (props) => {
@@ -208,7 +206,7 @@ const AddItem = (props) => {
         for (const key in itemData) {
 
             if (
-                itemData[key] && itemChoices[key] && !item[itemChoices[key].menuKey] || 
+                (itemData[key] && itemChoices[key] && !item[itemChoices[key].menuKey]) || 
                 (key === "hasProteinChoice" && !item.selectedProtein) || 
                 (key === "nChoices" && itemData.nChoices !== item.choices.length)
             ) {

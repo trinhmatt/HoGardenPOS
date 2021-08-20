@@ -50,11 +50,6 @@ const Cart = (props) => {
         setTotalPrice(totalPrice);
     }, [cart])
 
-    // for admin orders
-    const setTableVal = (e) => {
-        setTable(e.currentTarget.value)
-    }
-
     const checkout = () => {
         const currentDayStr = dayjs().format(authConsts.DATE);
         //Check if any orders exist for the day
@@ -133,8 +128,7 @@ const Cart = (props) => {
 
 const mapStateToProps = state => ({
     cart: state.cart,
-    language: state.lang.lang,
-    auth: state.auth
+    language: state.lang.lang
 })
 
 const mapDispatchToProps = dispatch => ({

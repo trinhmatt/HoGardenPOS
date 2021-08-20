@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import database from "../firebase/firebase";
 
 //Style imports
 import { mainStyles } from "../static/css/mainStyles";
@@ -36,7 +35,6 @@ import hc2 from '../static/menu/hc-2.jpg';
 
 const Home = (props) => {
     const styles = mainStyles();
-    const [state, setState] = useState({});
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import MenuSectionItem from "./MenuSectionItem";
-import { itemChoices } from "../../static/constants/menu-constants";
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
