@@ -42,26 +42,18 @@ const Menu = (props) => {
     const [isCartOpen, setCartOpen] = useState(false);
 
     useEffect(() => {
-        if (props.match.params.number === 'admin') {
-            if (!auth.userData) {
-                props.history.push("/unauthorized");
-            } else {
-                changeLanguage("chinese");
-            }
-        } else if (props.match.params.number !== "takeout") {
-            database.ref(`orders/${dayjs().format(authConsts.DATE)}`).once("value")
-                .then( (snapshot) => {
-                    const orders = snapshot.val(); 
+        database.ref(`orders/${dayjs().format(authConsts.DATE)}`).once("value")
+            .then( (snapshot) => {
+                const orders = snapshot.val(); 
 
-                    if (orders) {
-                        for (let i = 0; i < orders.length; i++) {
-                            if (orders[i].table === props.match.params.number) {
-                                props.history.push(`${props.match.params.number}/review`);
-                            }
+                if (orders) {
+                    for (let i = 0; i < orders.length; i++) {
+                        if (orders[i].table === props.match.params.number) {
+                            props.history.push(`${props.match.params.number}/review`);
                         }
                     }
-                })
-        }   
+                }
+            })
     }, [])
 
     useEffect(() => {

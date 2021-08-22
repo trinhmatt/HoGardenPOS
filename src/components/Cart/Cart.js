@@ -20,11 +20,10 @@ import Button from '@material-ui/core/Button';
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
 
 const Cart = (props) => {
-    const isAdmin = props.match.params.number === "admin";
     const styles = menuStyles();
+    const table = props.match.params.number;
     const { cart, language, clearCart } = props;
     const [cartItems, setCartItems] = useState([]);
-    const [table, setTable] = useState(isAdmin ? "1" : props.match.params.number);
     const [totalPrice, setTotalPrice] = useState(0);
 
     const calculatePrice = (itemData) => {
@@ -52,8 +51,24 @@ const Cart = (props) => {
 
     const checkout = () => {
         const currentDayStr = dayjs().format(authConsts.DATE);
+        const isTakeout = table === "takeout";
+
+        if (isTakeout) {
+            database.ref(`takeoutNumber/${currentDayStr}`).once("value")
+                .then( snapshot => {
+                    const takeoutNumber = snapshot.val() === null ? 1 : snapshot.val()+1;
+                    pushOrderToDatabase(currentDayStr, takeoutNumber);
+                })
+        } else {
+            pushOrderToDatabase(currentDayStr);
+        }
+        
+    }
+
+    const pushOrderToDatabase = (dayStr, takeoutNumber = null) => {
+        const isTakeout = takeoutNumber !== null;
         //Check if any orders exist for the day
-        database.ref(`orders/${currentDayStr}`).once("value")
+        database.ref(`orders/${dayStr}`).once("value")
             .then( snapshot => {
                 let orders = snapshot.val();
                 let tableVal = props.match.params.number !== "admin" ? props.match.params.number : table;
@@ -61,23 +76,30 @@ const Cart = (props) => {
                 if (tableVal.indexOf("C") > -1) {
                     tableVal = tableVal.replace("C", cartConsts.chTablePrefix);
                 }
-                const order = {
+                let order = {
                     id: orders ? orders.length : 0,
                     table: tableVal, 
                     orderItems: cart
                 };
+
+                if (isTakeout) {
+                    order.takeoutNumber = takeoutNumber;
+                    database.ref(`takeoutNumber/${dayStr}`).set(takeoutNumber);
+                }
+
                 // If no orders that day, create new object, otherwise add order to existing orders for the day 
                 if (orders === null) {
                     orders = [order];
                 } else {
                     orders = [...orders, order];
                 }
+
                 // Update order table
-                database.ref(`orders/${currentDayStr}`).set(orders)
+                database.ref(`orders/${dayStr}`).set(orders)
                         .then( () => {
                             clearCart();
                             props.history.push({
-                                pathname:`/order/${table}/review`,
+                                pathname: isTakeout ? `/order/${takeoutNumber}/takeout` : `/order/${table}/review`,
                                 state: {order}
                             });
                         })

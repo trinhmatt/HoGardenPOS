@@ -21,6 +21,7 @@ import Tables from "../components/Admin/Tables";
 import AdminPlaceOrder from "../components/Admin/AdminPlaceOrder";
 import WeeklyTimeSheet from "../components/Admin/TimeSheet/WeeklyTimeSheet";
 import EmployeeWeeklyTimeSheet from "../components/Admin/TimeSheet/EmployeeWeeklyTimeSheet";
+import Takeout from "../components/Admin/Takeout";
 
 const AppRouter = (props) => {
   return (
@@ -61,6 +62,10 @@ const AppRouter = (props) => {
           <Tables />
         </PrivateRoute>
 
+        <PrivateRoute path="/admin/takeout">
+          <Takeout />
+        </PrivateRoute>
+
         <PrivateRoute path="/admin/place-order/:number">
           <AdminPlaceOrder />
         </PrivateRoute>
@@ -70,6 +75,10 @@ const AppRouter = (props) => {
         </PublicRoute>
 
         <PublicRoute path="/order/:number/review">
+          <ReviewOrder />
+        </PublicRoute>
+
+        <PublicRoute path="/order/:number/takeout">
           <ReviewOrder />
         </PublicRoute>
 

@@ -19,11 +19,12 @@ const ReviewOrder = (props) => {
                 .then( snapshot => {
                     const orders = snapshot.val();
                     const tableNum = props.match.params.number.indexOf("C") > -1 ? props.match.params.number.replace("C","門口") : props.match.params.number;
+                    const isTakeout = props.location.pathname.indexOf("takeout") > -1;
                     if (orders) {
                         for (let i = 0; i < orders.length; i++) {
-                            if (tableNum === orders[i].table) {
+                            if ( (tableNum === orders[i].table && !isTakeout) || (isTakeout && tableNum === orders[i].takeoutNumber.toString()) ) {
                                 resolve(orders[i]);
-                            }
+                            } 
                         }
                     }
                     reject("no order")
