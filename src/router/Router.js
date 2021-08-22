@@ -14,7 +14,7 @@ import Menu from "../components/Menu/Menu";
 import NotFound from "../components/NotFound";
 import AddItem from "../components/AddItem/AddItem";
 import Unauthorized from "../components/Unauthorized";
-import Orders from "../components/Orders/Orders";
+import Orders from "../components/Admin/Orders/Orders";
 import ReviewOrder from "../components/ReviewOrder/ReviewOrder";
 import BottomNav from "../components/subcomponents/BottomNav";
 import Tables from "../components/Admin/Tables";

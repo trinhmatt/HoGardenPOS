@@ -42,7 +42,8 @@ const Menu = (props) => {
     const [isCartOpen, setCartOpen] = useState(false);
 
     useEffect(() => {
-        database.ref(`orders/${dayjs().format(authConsts.DATE)}`).once("value")
+        if (props.match.params.number !== "takeout") {
+            database.ref(`orders/${dayjs().format(authConsts.DATE)}`).once("value")
             .then( (snapshot) => {
                 const orders = snapshot.val(); 
 
@@ -54,6 +55,7 @@ const Menu = (props) => {
                     }
                 }
             })
+        }
     }, [])
 
     useEffect(() => {

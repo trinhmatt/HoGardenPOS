@@ -1,8 +1,8 @@
 import React from 'react'; 
-import { itemChoices } from '../../static/constants/menu-constants';
+import { itemChoices } from '../../../static/constants/menu-constants';
 
 //Style imports
-import { homeStyles } from '../../static/css/homeStyles';
+import { homeStyles } from '../../../static/css/homeStyles';
 
 //Material ui imports
 import Paper from '@material-ui/core/Paper';
@@ -22,7 +22,7 @@ const OrderCard = (props) => {
             for (let i = 0; i < order.length; i++) {
                 choicesElements.push(
                     <div>
-                        <p className={styles.orderAddOns}>{`${order[i].chinese}/${order[i].english}`}</p>
+                        <p className={styles.orderAddOns}>{`- ${order[i].chinese}/${order[i].english}`}</p>
                     </div>
                 )
             }
@@ -31,7 +31,7 @@ const OrderCard = (props) => {
             if (itemChoices[key] && order[key]) {
                 choicesElements.push(
                     <div>
-                        <p className={styles.orderAddOns}>{`${order[itemChoices[key].menuKey].chinese}/${order[itemChoices[key].menuKey].english}`}</p>
+                        <p className={styles.orderAddOns}>{`- ${order[itemChoices[key].menuKey].chinese}/${order[itemChoices[key].menuKey].english}`}</p>
                     </div>
                 )
             }
@@ -39,7 +39,7 @@ const OrderCard = (props) => {
         if (order.proteinChoice) {
             choicesElements.push(
                 <div>
-                    <p className={styles.orderAddOns}>{`${order.proteinChoice.chinese}/${order.proteinChoice.english}`}</p>
+                    <p className={styles.orderAddOns}>{`- ${order.selectedProtein.chinese}/${order.selectedProtein.english}`}</p>
                 </div>
             )
         }
@@ -49,9 +49,6 @@ const OrderCard = (props) => {
         let itemElements = [];
         for (let i = 0; i < orderData.orderItems.length; i++) {
             let choicesData = orderData.orderItems[i].choices && orderData.orderItems[i].choices.length > 0 ? orderData.orderItems[i].choices : orderData.orderItems[i];
-            //if (orderData.orderItems[i].choices && orderData.orderItems[i].choices.length > 0) {
-
-            //} else {
                 itemElements.push(
                     <div>
                     <Divider />
@@ -72,7 +69,6 @@ const OrderCard = (props) => {
                     <Divider />
                     </div>
                 )
-            //}
         }
         return itemElements;
     }
@@ -81,7 +77,7 @@ const OrderCard = (props) => {
     }
     return (
         <Paper elevation={3} className={styles.orderCard}>
-            <h1 className={styles.orderTable}>table/桌 {orderData.table}</h1>
+            <h1 className={styles.orderTable}>{orderData.table === 'takeout' ? `Takeout/外賣 #${orderData.takeoutNumber}` : `table/桌 ${orderData.table}`}</h1>
             {renderOrders()}
             <Button 
                 onClick={startCompleteOrder} 
