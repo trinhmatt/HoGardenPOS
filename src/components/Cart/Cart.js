@@ -132,6 +132,7 @@ const Cart = (props) => {
                     <h2>HST: {(totalPrice * 0.13).toFixed(2)}</h2>
                     <h2>Total: {(totalPrice * 1.13).toFixed(2)}</h2>
                 </Paper>
+                <Button onClick={clearCart}>Clear Cart</Button>
                 <Button className={styles.addToOrderBtn} variant='contained' onClick={checkout}>Checkout</Button>
                 </div>
             : 

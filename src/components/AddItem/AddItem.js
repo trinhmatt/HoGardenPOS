@@ -38,7 +38,7 @@ const AddItem = (props) => {
     // Section data will be from the menu when adding or from itemData when editing
     const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
 
-    const { addToCart, language, cart, updateCart } = props;
+    const { addToCart, language, cart, updateCart, auth } = props;
     const [item, setItem] = useState({
                                 qty: itemData.qty ? itemData.qty : 0, 
                                 addOn: itemData.addOn ? itemData.addOn : [],
@@ -54,7 +54,7 @@ const AddItem = (props) => {
     
     const goBackToMenu = () => {
         // cannot just use history.goBack(), the header needs to re-render to work properly
-        props.history.push(`/order/${table}`);
+        props.history.push((auth.userData ? `/admin/place-order/${table}` : `/order/${table}`));
     }
     const changeQty = (e) => {
         setItem({ ...item, qty: item.qty + parseInt(e.currentTarget.value) });
@@ -291,7 +291,8 @@ const AddItem = (props) => {
 
 const mapStateToProps = state => ({
     language: state.lang.lang,
-    cart: state.cart
+    cart: state.cart,
+    auth: state.auth
 })
 
 const mapDispatchToProps = dispatch => ({

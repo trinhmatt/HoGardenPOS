@@ -129,11 +129,14 @@ const Menu = (props) => {
                 {isCartOpen && <Cart />}
             </Modal>
             {/* Cart button */}
-            <CartButton {...props} cartOpen={setCartOpen}>
-                <Fab className={styles.cartIcon} size='large'>
-                    <ShoppingCart />
-                </Fab>
-            </CartButton>
+            {
+                !auth.userData && 
+                <CartButton {...props} cartOpen={setCartOpen}>
+                    <Fab className={styles.cartIcon} size='large'>
+                        <ShoppingCart />
+                    </Fab>
+                </CartButton>
+            }
         </React.Fragment>
     )
 }
