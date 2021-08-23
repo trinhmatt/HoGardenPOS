@@ -5,6 +5,7 @@ import cx from 'clsx';
 
 import { authConsts } from '../../static/constants/auth-constants';
 import database from '../../firebase/firebase';
+import newOrderSound from '../../static/new-order-sound.mp3';
 
 //Style imports
 import { homeStyles } from '../../static/css/homeStyles';
@@ -16,7 +17,8 @@ import Paper from '@material-ui/core/Paper';
 const Tables = (props) => {
     const styles = homeStyles();
     const [state, setState] = useState({
-                                filledTables: {}
+                                filledTables: {},
+                                isFirstRender: true
                             });
 
     const startAdminOrder = (e) => {
@@ -35,18 +37,29 @@ const Tables = (props) => {
         database.ref(`orders/${dayjs().format(authConsts.DATE)}`).on("value", (snapshot) => {
             const orders = snapshot.val();
             let filledTables = {};
+            let isFirstRender = state.isFirstRender;
 
             if (orders && orders.length > 0) {
                 for (let i = 0; i < orders.length; i++) {
                     filledTables[orders[i].table] = true;
                 }
             }
-            setState({...state, filledTables});
+            if (!isFirstRender) {
+                if (Object.keys(state.filledTables).length < Object.keys(filledTables).length) {
+                    document.getElementById('new-order-sound').play();
+                }
+            } else {
+                isFirstRender = false;
+            }
+            setState({...state, filledTables, isFirstRender});
         })
     }, [])
 
     return (
         <div className={styles.homebg}>
+            <audio id="new-order-sound">
+                <source src={newOrderSound} type="audio/mp3"/>
+            </audio>
             <div className={styles.tableLayout}>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={1}>
