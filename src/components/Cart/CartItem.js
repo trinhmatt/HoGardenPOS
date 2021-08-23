@@ -20,12 +20,13 @@ import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'
 const CartItem = (props) => {
     const styles = menuStyles();
     const { itemData, language, cart, updateCart, index, table, price } = props;
+    let hasChoices = false;
 
     const renderChoices = () => {
         let choices = [];
-        console.log(itemData)
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && itemData[itemChoices[key].menuKey] && itemData[key].length === undefined) {
+                hasChoices = true;
                 choices.push(
                     <CartItemChoice 
                         key={key}
@@ -34,6 +35,7 @@ const CartItem = (props) => {
                     />
                 )
             } else if (key === "choices" && itemData.choices.length > 0) {
+                console.log(itemData.choices)
                 for (let i = 0; i < itemData.choices.length; i++) {
                     choices.push(
                         <CartItemChoice 
@@ -44,6 +46,7 @@ const CartItem = (props) => {
                     )
                 }
             } else if (key === "selectedProtein") {
+                hasChoices = true;
                 choices.push(
                     <CartItemChoice 
                         key={`selectedProtein/${itemData.english}/${itemData.selectedProtein.english}`}
@@ -120,7 +123,7 @@ const CartItem = (props) => {
             </Grid>
             <Grid container spacing={3} onClick={editItem}>
                 <Grid item xs className={styles.cartAddonTitle}>
-                    <span><b>{(props.language === "english") ? 'Choices:' : 'chinese choices:'}</b></span>
+                    {hasChoices && <span><b>{(props.language === "english") ? 'Choices:' : 'chinese choices:'}</b></span>}
                     {renderChoices()}
                 </Grid>
                 <Grid item xs className={styles.cartAddonTitle}>

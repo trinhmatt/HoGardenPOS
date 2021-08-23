@@ -6,11 +6,11 @@ export const itemChoices = {
         "soupChoice": [
             {
                 "english": "Chinese soup",
-                "chinese": "ch"
+                "chinese": "例湯"
             },
             {
                 "english": "Borscht",
-                "chinese": "Borscht-ch"
+                "chinese": "羅宋湯"
             }
         ]
     },

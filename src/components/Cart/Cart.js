@@ -99,8 +99,7 @@ const Cart = (props) => {
                         .then( () => {
                             clearCart();
                             props.history.push({
-                                pathname: isTakeout ? `/order/${takeoutNumber}/takeout` : `/order/${table}/review`,
-                                state: {order}
+                                pathname: isTakeout ? `/order/${takeoutNumber}/takeout` : `/order/${table}/review`
                             });
                         })
                         .catch( err => console.log(err))

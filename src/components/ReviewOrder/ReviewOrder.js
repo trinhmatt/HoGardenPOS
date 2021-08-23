@@ -8,9 +8,13 @@ import { authConsts } from '../../static/constants/auth-constants';
 
 
 const ReviewOrder = (props) => {
-    const { language } = props;
-    const [errorMsg, setError] = useState(null);
-    const [itemElements, setItemElements] = useState([]);
+    const { language, auth } = props;
+    const [state, setState] = useState({
+                                        errorMsg: null,
+                                        itemElements: [],
+                                        allOrders: [],
+                                        indexOfOrder: -1
+                            });
     const currentDayStr = dayjs().format(authConsts.DATE);
 
     const fetchOrder = () => {
@@ -21,9 +25,10 @@ const ReviewOrder = (props) => {
                     const tableNum = props.match.params.number.indexOf("C") > -1 ? props.match.params.number.replace("C","門口") : props.match.params.number;
                     const isTakeout = props.location.pathname.indexOf("takeout") > -1;
                     if (orders) {
+                        
                         for (let i = 0; i < orders.length; i++) {
                             if ( (tableNum === orders[i].table && !isTakeout) || (isTakeout && tableNum === orders[i].takeoutNumber.toString()) ) {
-                                resolve(orders[i]);
+                                resolve({orderData: orders[i], allOrders: orders, index: i});
                             } 
                         }
                     }
@@ -33,24 +38,45 @@ const ReviewOrder = (props) => {
         })
     }
     const renderOrder = () => {
-        if (props.location.state) {
-            return buildItemElements(props.location.state.order.orderItems);
-        } else {
-            fetchOrder().then( fetchedOrder => {
-                return buildItemElements(fetchedOrder.orderItems);
-            }).catch( (err) => {
-                if (err === "no order") {
-                    setError("No order exists!");
-                }
-            })
-        }
+        fetchOrder().then( (fetchedData) => {
+            if (auth.userData) {
+                return buildItemElements(fetchedData.orderData, fetchedData.allOrders, fetchedData.index);
+            } else {
+                return buildItemElements(fetchedData.orderData);
+            }
+        }).catch( (err) => {
+            if (err === "no order") {
+                setState({...state, errorMsg: "No order exists!"});
+            }
+        })
     }
-    const buildItemElements = (orders) => {
+    const buildItemElements = (order, allOrders = [], index = -1) => {
         let itemElements = [];
-        for (let i = 0; i < orders.length; i++) {
-            itemElements.push(<CustOrderItem key={`${i}/item`} language={language} itemData={orders[i]}/>);
+        for (let i = 0; i < order.orderItems.length; i++) {
+            itemElements.push(<CustOrderItem key={`${i}/item`} language={language} itemData={order.orderItems[i]}/>);
         }
-        setItemElements(itemElements);
+        setState({...state, itemElements, allOrders, index})
+    }
+
+    const completeOrder = () => {
+        const order = state.allOrders[state.index];
+        database.ref(`old_orders/${currentDayStr}`).once("value")
+            .then( snapshot => {
+                let orders = snapshot.val();
+                if (orders) {
+                    orders.push(order);
+                } else {
+                    orders = [order];
+                }
+                database.ref(`old_orders/${currentDayStr}`).set(orders)
+                    .then( () => {
+                        let newOrders = [...state.allOrders];
+                        newOrders.splice(state.index, 1);
+                        database.ref(`orders/${currentDayStr}`).set(newOrders)
+                            .then( () => props.history.push("/admin/tables"))
+                            .catch( err => console.log(err));
+                    })
+            })
     }
     
     useEffect(() => {
@@ -59,15 +85,22 @@ const ReviewOrder = (props) => {
     return (
         <div>
             <div>
-                <h2>{errorMsg}</h2>
-                {itemElements}
+                <h2>{state.errorMsg}</h2>
+                {state.itemElements}
+                {
+                    auth.userData && !state.errorMsg &&
+                        <div>
+                            <button onClick={completeOrder}>COMPLETE ORDER</button>
+                        </div>
+                }
             </div>
         </div>
     )
 }
 
 const mapStateToProps = state => ({
-    language: state.lang.lang
+    language: state.lang.lang,
+    auth: state.auth
 })
 
 export default withRouter(connect(mapStateToProps)(ReviewOrder));
