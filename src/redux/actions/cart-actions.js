@@ -10,6 +10,16 @@ export const updateCart = (newCart) => ({
     newCart
 })
 
+export const updateExistingOrder = (newItems) => ({
+    type: cartConsts.actions.updateExistingOrder,
+    newItems
+})
+
+export const addToExistingOrder = (newItem) => ({
+    type: cartConsts.actions.addToExistingOrder,
+    newItem
+})
+
 export const clearCart = () => ({
     type: cartConsts.actions.clear
 })

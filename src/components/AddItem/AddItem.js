@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { addToCart } from '../../redux/actions/cart-actions';
 import { itemChoices } from '../../static/constants/menu-constants';
 import { changeLanguage } from "../../redux/actions/lang-actions";
-import { updateCart } from "../../redux/actions/cart-actions";
+import { addToCart, updateCart, addToExistingOrder, updateExistingOrder } from "../../redux/actions/cart-actions";
 import ItemChoiceSection from "./ItemChoiceSection";
 
 //Style imports
@@ -30,7 +29,6 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 //Subcomponent imports
 import ElevationScroll from '../subcomponents/ElevationScroll';
 
-// need to include functionality for if they want more than 1 AND the item has options
 const AddItem = (props) => {
     const styles = menuStyles();
     const { itemData, table, index } = props.location.state;
@@ -38,7 +36,18 @@ const AddItem = (props) => {
     // Section data will be from the menu when adding or from itemData when editing
     const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
 
-    const { addToCart, language, cart, updateCart, auth } = props;
+    const { 
+        addToCart, 
+        language, 
+        updateCart, 
+        auth, 
+        addToExistingOrder, 
+        updateExistingOrder } = props;
+    
+   
+    
+    const isAdminUpdate = !!props.cart.orderItems; //if orderItems exist, it is an existing order and the admin is updating  
+    const cart = isAdminUpdate ? props.cart.orderItems : props.cart;
     const [item, setItem] = useState({
                                 qty: itemData.qty ? itemData.qty : 0, 
                                 addOn: itemData.addOn ? itemData.addOn : [],
@@ -65,7 +74,7 @@ const AddItem = (props) => {
             ...item,
             sectionData
         }
-        addToCart(orderItem);
+        isAdminUpdate ? addToExistingOrder(orderItem) : addToCart(orderItem);
         goBackToMenu();
     }
     const startUpdateCart = () => {
@@ -75,7 +84,7 @@ const AddItem = (props) => {
         } else {
             cartItems.splice(index, 1);
         }
-        updateCart(cartItems);
+        isAdminUpdate ? updateExistingOrder(cartItems) : updateCart(cartItems);
         goBackToMenu()
     }
     const selectChoice = (choiceData) => {
@@ -274,7 +283,10 @@ const AddItem = (props) => {
                             </div>
                             <br />
                         </Paper>
-                        <Button className={language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn} variant='contained' disabled={checkRequiredChoices()} onClick={index !== undefined ? startUpdateCart : addToOrder}>
+                        <Button 
+                            className={language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn} 
+                            variant='contained' disabled={checkRequiredChoices()} 
+                            onClick={index !== undefined ? startUpdateCart : addToOrder}>
                             {
                             index !== undefined ? 
                                 (language === 'english' ? engUpdateBtnText : chinUpdateBtnText)
@@ -298,7 +310,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     addToCart: (item) => dispatch(addToCart(item)),
     changeLanguage: (lang) => dispatch(changeLanguage(lang)),
-    updateCart: (updatedCart) => dispatch(updateCart(updatedCart))
+    updateCart: (updatedCart) => dispatch(updateCart(updatedCart)),
+    addToExistingOrder: item => dispatch(addToExistingOrder(item)),
+    updateExistingOrder: updatedCart => dispatch(updateExistingOrder(updatedCart))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddItem));

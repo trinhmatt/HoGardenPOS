@@ -10,6 +10,10 @@ export const cartReducer = (state = initState, action) => {
             return action.newCart;
         case cartConsts.actions.clear:
             return initState;
+        case cartConsts.actions.updateExistingOrder:
+            return {...state, orderItems: action.newItems};
+        case cartConsts.actions.addToExistingOrder:
+            return {...state, orderItems: [...state.orderItems, action.newItem]}
         default:
             return state;
     }

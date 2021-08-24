@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { itemChoices } from "../../static/constants/menu-constants";
-import { updateCart } from '../../redux/actions/cart-actions';
+import { updateCart, updateExistingOrder } from '../../redux/actions/cart-actions';
 import CartItemChoice from './CartItemChoice';
 
 //Style imports
@@ -19,7 +19,9 @@ import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'
 
 const CartItem = (props) => {
     const styles = menuStyles();
-    const { itemData, language, cart, updateCart, index, table, price } = props;
+    const { itemData, language, updateCart, updateExistingOrder, index, table, price } = props;
+    const isAdminUpdate = !!props.cart.orderItems; //if orderItems exist, it is an existing order and the admin is updating  
+    const cart = isAdminUpdate ? props.cart.orderItems : props.cart;
     let hasChoices = false;
 
     const renderChoices = () => {
@@ -35,7 +37,6 @@ const CartItem = (props) => {
                     />
                 )
             } else if (key === "choices" && itemData.choices.length > 0) {
-                console.log(itemData.choices)
                 for (let i = 0; i < itemData.choices.length; i++) {
                     choices.push(
                         <CartItemChoice 
@@ -88,7 +89,8 @@ const CartItem = (props) => {
         } else {
             cartItems.splice(index, 1);
         }
-        updateCart(cartItems);
+        
+        isAdminUpdate ? updateExistingOrder(cartItems) : updateCart(cartItems);
     }
 
     const editItem = () => {
@@ -142,7 +144,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    updateCart: (newCart) => dispatch(updateCart(newCart))
+    updateCart: (newCart) => dispatch(updateCart(newCart)),
+    updateExistingOrder: newCart => dispatch(updateExistingOrder(newCart))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CartItem));

@@ -22,7 +22,8 @@ import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
 const Cart = (props) => {
     const styles = menuStyles();
     const table = props.match.params.number;
-    const { cart, language, clearCart } = props;
+    const { cart, language, auth, clearCart } = props;
+    const isAdminUpdate = !!cart.orderItems; // If cart = array, new order; if cart = object, update existing order (for admin)
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -40,10 +41,11 @@ const Cart = (props) => {
     useEffect(() => {
         let cartItems = [];
         let totalPrice = 0;
-        for (let i = 0; i < cart.length; i++) {
-            let price = calculatePrice(cart[i]);
+        const cartData = isAdminUpdate ? cart.orderItems : cart;
+        for (let i = 0; i < cartData.length; i++) {
+            let price = calculatePrice(cartData[i]);
             totalPrice += price;
-            cartItems.push(<CartItem price={price} table={props.match.params.number} key={`cartItem/${i}`} index={i} language={language} itemData={cart[i]} />)
+            cartItems.push(<CartItem price={price} table={props.match.params.number} key={`cartItem/${i}`} index={i} language={language} itemData={cartData[i]} />)
         }
         setCartItems(cartItems);
         setTotalPrice(totalPrice);
@@ -53,7 +55,9 @@ const Cart = (props) => {
         const currentDayStr = dayjs().format(authConsts.DATE);
         const isTakeout = table === "takeout";
 
-        if (isTakeout) {
+        if (isAdminUpdate) {
+            updateOrderInDatabase(currentDayStr);
+        } else if (isTakeout) {
             database.ref(`takeoutNumber/${currentDayStr}`).once("value")
                 .then( snapshot => {
                     const takeoutNumber = snapshot.val() === null ? 1 : snapshot.val()+1;
@@ -62,6 +66,7 @@ const Cart = (props) => {
         } else {
             pushOrderToDatabase(currentDayStr);
         }
+        
         
     }
 
@@ -106,10 +111,34 @@ const Cart = (props) => {
             })
             .catch( err => console.log(err))
     }
+    const updateOrderInDatabase = (dayStr) => {
+        database.ref(`orders/${dayStr}`).once("value")
+            .then( snapshot => {
+                let orders = snapshot.val();
+                let indexOfOrder = -1;
+                if (orders) {
+                    for (let i = 0; i < orders.length; i++) {
+                        if (orders[i].table === cart.table || (orders[i].table === "takeout" && orders[i].takeoutNumber === cart.takeoutNumber)) {
+                            indexOfOrder = i;
+                        }
+                    }
+                    if (indexOfOrder > -1) {
+                        database.ref(`orders/${dayStr}`).update({[indexOfOrder]: cart})
+                            .then( () => {
+                                clearCart();
+                                props.history.push({
+                                    pathname: cart.takeoutNumber ? `/order/${cart.takeoutNumber}/takeout` : `/order/${table}/review`
+                                });
+                            })
+                    }
+                }
+
+            })
+    }
     return (
         <div style={{backgroundColor: "white"}}>
             {
-            cart.length > 0 ? 
+            cart.length > 0 || cart.orderItems && cart.orderItems.length > 0 ? 
             <div className={styles.cartLayout}>
                 <Paper elevation={3} className={styles.cartBox}>
                     <div>
@@ -132,8 +161,10 @@ const Cart = (props) => {
                     <h2>HST: {(totalPrice * 0.13).toFixed(2)}</h2>
                     <h2>Total: {(totalPrice * 1.13).toFixed(2)}</h2>
                 </Paper>
-                <Button onClick={clearCart}>Clear Cart</Button>
-                <Button className={styles.addToOrderBtn} variant='contained' onClick={checkout}>Checkout</Button>
+                {isAdminUpdate && <Button onClick={clearCart}>Clear Cart</Button>}
+                <Button className={styles.addToOrderBtn} variant='contained' onClick={checkout}>
+                    {cart.orderItems ? "UPDATE" : "Checkout"}
+                </Button>
                 </div>
             : 
                 <Paper elevation={3} className={styles.emptyCartBox}>
@@ -150,7 +181,8 @@ const Cart = (props) => {
 
 const mapStateToProps = state => ({
     cart: state.cart,
-    language: state.lang.lang
+    language: state.lang.lang,
+    auth: state.auth
 })
 
 const mapDispatchToProps = dispatch => ({

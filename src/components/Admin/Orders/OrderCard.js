@@ -1,5 +1,8 @@
 import React from 'react'; 
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import { itemChoices } from '../../../static/constants/menu-constants';
+import { updateCart } from '../../../redux/actions/cart-actions';
 
 //Style imports
 import { homeStyles } from '../../../static/css/homeStyles';
@@ -15,7 +18,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const OrderCard = (props) => {
     const styles = homeStyles();
-    const { orderData, completeOrder, index } = props;
+    const { orderData, completeOrder, index, updateCart } = props;
     const renderChoices = (order) => {
         let choicesElements = [];
         if (order.length !== undefined && order.length > 0) {
@@ -59,7 +62,7 @@ const OrderCard = (props) => {
                             </div>
                         </Grid>
                         <Grid item xs={9} style={{wordBreak: 'break-word'}}>
-                            <h2>项目名: {orderData.orderItems[i].restName}</h2>
+                            {orderData.orderItems[i].restName && <h2>项目名: {orderData.orderItems[i].restName}</h2>}
                             <h2>{`${orderData.orderItems[i].chinese}/${orderData.orderItems[i].english}`}</h2>
                             <div>
                                 {renderChoices(choicesData)}
@@ -75,8 +78,13 @@ const OrderCard = (props) => {
     const startCompleteOrder = () => {
         completeOrder(index);
     }
+    const startEditOrder = () => {
+        updateCart(orderData);
+        props.history.push(`/admin/place-order/${orderData.table}`);
+    }
     return (
         <Paper elevation={3} className={styles.orderCard}>
+            <Button onClick={startEditOrder}>EDIT</Button>
             <h1 className={styles.orderTable}>{orderData.table === 'takeout' ? `Takeout/外賣 #${orderData.takeoutNumber}` : `table/桌 ${orderData.table}`}</h1>
             {renderOrders()}
             <Button 
@@ -92,4 +100,8 @@ const OrderCard = (props) => {
     )
 }
 
-export default OrderCard;
+const mapDispatchToProps = dispatch => ({
+    updateCart: orderData => dispatch(updateCart(orderData))
+})
+
+export default withRouter(connect(undefined, mapDispatchToProps)(OrderCard));

@@ -31,6 +31,8 @@ export const cartConsts = {
     actions: {
         add: "ADD_TO_CART",
         update: "UPDATE_CART",
-        clear: "CLEAR_CART"
+        clear: "CLEAR_CART",
+        updateExistingOrder: "UPDATE_EXISTING_ORDER",
+        addToExistingOrder: "ADD_TO_EXISTING_ORDER"
     }
 };
