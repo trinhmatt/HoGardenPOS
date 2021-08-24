@@ -94,6 +94,7 @@ const TimeSheet = () => {
                     <DatePicker
                         value={state.dayObj}
                         onChange={handleDateChange}
+                        disableFuture={true}
                         format='YYYY/MM/DD'
                     />
                 </MuiPickersUtilsProvider>

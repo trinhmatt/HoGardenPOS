@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from 'react-router';
 
 //Style imports
 import { mainStyles } from "../static/css/mainStyles";
@@ -71,7 +72,7 @@ const Home = (props) => {
                                         onClose={handleClose}
                                     >
                                         <MenuItem onClick={scrollToMenu}>MENU/菜單</MenuItem>
-                                        <MenuItem >ORDER PICKUP/取貨訂單</MenuItem>
+                                        <MenuItem onClick={() => props.history.push("/order/takeout")}>ORDER PICKUP/取貨訂單</MenuItem>
                                     </Menu>
                                 </Grid>
                                 <Grid item xs={5} className={styles.centered}>
@@ -167,4 +168,4 @@ const Home = (props) => {
     )
 }
 
-export default Home;
+export default withRouter(Home);
