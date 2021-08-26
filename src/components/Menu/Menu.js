@@ -47,6 +47,9 @@ const Menu = (props) => {
                                 errorMsg: "",
                                 validationFinished: false
                             });
+    
+    // Need this because when headerSections are created the callback that sets the new state has an old reference to state 
+    // useRef() allows me to have access to the most current state no matter when the callback was assigned 
     const currentMenuSections = useRef();
     currentMenuSections.current = state.menuSections;
 
