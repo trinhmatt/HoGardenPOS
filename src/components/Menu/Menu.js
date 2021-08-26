@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import dayjs from 'dayjs';
+import isBetween from 'dayjs/plugin/isBetween';
 
 import MenuSection from './MenuSection'
 import menuJSON from '../../static/constants/menu.json';
@@ -34,45 +35,72 @@ import CartButton from '../subcomponents/CartButton';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 
 const Menu = (props) => {
+    dayjs.extend(isBetween);
     const styles = menuStyles();
     const numSections = Object.keys(menuJSON).length;
     const { language, changeLanguage, auth, cart } = props;
     const isAdminUpdate = !!cart.orderItems;
-    const [menuSections, setMenuSections] = useState([]);
-    const [headerSections, setHeaderSections] = useState([]);
-    const [isCartOpen, setCartOpen] = useState(false);
+    const [state, setState] = useState({
+                                menuSections: [],
+                                headerSections: [],
+                                isCartOpen: false,
+                                errorMsg: "",
+                                validationFinished: false
+                            });
+    const currentMenuSections = useRef();
+    currentMenuSections.current = state.menuSections;
 
     useEffect(() => {
-        if (props.match.params.number !== "takeout") {
-            database.ref(`orders/${dayjs().format(authConsts.DATE)}`).once("value")
-            .then( (snapshot) => {
-                const orders = snapshot.val(); 
-
-                if (orders) {
-                    for (let i = 0; i < orders.length; i++) {
-                        if (orders[i].table === props.match.params.number && !isAdminUpdate) {
-                            props.history.push(`${props.match.params.number}/review`);
-                        }
-                    }
-                }
-            })
+        if (state.validationFinished) {
+            renderHeader();
         }
-    }, [])
+    }, [language])
 
     useEffect(() => {
-        if (!!cartConsts.tables[props.match.params.number] || props.match.params.number === "takeout") {
+        database.ref('hoursOfOperation').once('value')
+            .then( snapshot => {
+                const hours = snapshot.val();
+                const open = dayjs(hours.open, authConsts['24_HOUR_TIME']);
+                const close = dayjs(hours.close, authConsts['24_HOUR_TIME']);
+
+                if (dayjs().isBetween(open, close, null, '[]') && hours[dayjs().format('dddd').toUpperCase()]) {
+                    renderHeader();
+                    if (props.match.params.number !== "takeout") {
+                        database.ref(`orders/${dayjs().format(authConsts.DATE)}`).once("value")
+                            .then( (snapshot) => {
+                                const orders = snapshot.val(); 
+            
+                                if (orders) {
+                                    for (let i = 0; i < orders.length; i++) {
+                                        if (orders[i].table === props.match.params.number && !isAdminUpdate) {
+                                            props.history.push(`${props.match.params.number}/review`);
+                                        }
+                                    }
+                                }
+                            })
+                    }
+                } else {
+                    setState({...state, errorMsg: "We are currently closed! Please come back again."});
+                }
+
+            })
+            .catch( err => setState({...state, errorMsg: err}))
+        
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    const renderHeader = () => {
+        if ((!!cartConsts.tables[props.match.params.number] || props.match.params.number === "takeout") && state.errorMsg.length === 0) {
             let menuSections = [];
             let headers = [];
             // This function is called every time a MenuSection is created (inside of useEffect)
             // The Section component calls this function after rendering menu items which sets the header section
             const returnTopPosition = (top, sectionTitle) => {
                 headers.push(
-                    <Container className={styles.scrollContainer}>
+                    <Container key={sectionTitle} className={styles.scrollContainer}>
                         <span className={(language === 'chinese') ? styles.chinScrollItem : styles.engScrollItem} onClick={() => focusSection(top)} key={`headerSection/${top}`}>{sectionTitle}</span>
                     </Container>
                 );
                 if (headers.length === numSections) {
-                    setHeaderSections(headers);
+                    setState({...state, headerSections: headers, menuSections: currentMenuSections.current});
                 }
             }
             const focusSection = (topPosition) => {
@@ -82,57 +110,62 @@ const Menu = (props) => {
             for (const section in menuJSON) {
                 menuSections.push(<MenuSection lang={language} returnTopPosition={returnTopPosition} key={`menuSection/${section}`} data={menuJSON[section]} />);
             }
-            setMenuSections(menuSections);
+            setState({...state, menuSections})
         } else {
             props.history.push("/error");
         }
-    }, [language]) // eslint-disable-line react-hooks/exhaustive-deps
+    }
     const closeCart = () => {
-        setCartOpen(false);
+        setState({...state, isCartOpen: false});
+    }
+    const openCart = () => {
+        setState({...state, isCartOpen: true});
     }
     return (
         <React.Fragment>
-            <Container className={styles.menuLayout}>
-                {/* Header */}
-                <ElevationScroll {...props}>
-                    <AppBar id='menu-header'>
-                        <Toolbar className={styles.header}>
-                            <FormGroup className={styles.switchLayout}>
-                                <FormControlLabel
-                                    control={<Switch size="medium" checked={language === "chinese"} onChange={() => {
-                                        (language === "chinese") ?
-                                            changeLanguage("english") : changeLanguage("chinese")
-                                    }}
-                                    />}
-                                    label={<b className={styles.chinLanguage}>中文</b>}
-                                />
-                            </FormGroup>
-                            <Typography className={styles.menuScroll}>
-                                {headerSections}
-                            </Typography>
-                        </Toolbar>
-                    </AppBar>
-                </ElevationScroll>
-                <Toolbar />
-                <Container className={styles.foodLayout}>
-                    {/* Menu sections */}
-                    {menuSections}
-                </Container>
-            </Container>
+            {state.errorMsg.length > 0 && <p>{state.errorMsg}</p>}
+            {!state.errorMsg && state.menuSections.length === numSections && 
+                <Container className={styles.menuLayout}>
+                    {/* Header */}
+                    <ElevationScroll {...props}>
+                        <AppBar id='menu-header'>
+                            <Toolbar className={styles.header}>
+                                <FormGroup className={styles.switchLayout}>
+                                    <FormControlLabel
+                                        control={<Switch size="medium" checked={language === "chinese"} onChange={() => {
+                                            (language === "chinese") ?
+                                                changeLanguage("english") : changeLanguage("chinese")
+                                        }}
+                                        />}
+                                        label={<b className={styles.chinLanguage}>中文</b>}
+                                    />
+                                </FormGroup>
+                                <Typography className={styles.menuScroll}>
+                                    {state.headerSections}
+                                </Typography>
+                            </Toolbar>
+                        </AppBar>
+                    </ElevationScroll>
+                    <Toolbar />
+                    <Container className={styles.foodLayout}>
+                        {/* Menu sections */}
+                        {state.menuSections}
+                    </Container>
+                </Container>}
             {/* Cart modal */}
             <Modal
                 className={styles.modal}
-                open={isCartOpen}
+                open={state.isCartOpen}
                 onClose={closeCart}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                {isCartOpen && <Cart />}
+                {state.isCartOpen && <Cart />}
             </Modal>
             {/* Cart button */}
             {
-                !auth.userData && 
-                <CartButton {...props} cartOpen={setCartOpen}>
+                !auth.userData && !state.errorMsg && state.headerSections.length === numSections &&
+                <CartButton {...props} cartOpen={openCart}>
                     <Fab className={styles.cartIcon} size='large'>
                         <ShoppingCart />
                     </Fab>

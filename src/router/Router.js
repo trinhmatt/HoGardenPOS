@@ -22,6 +22,7 @@ import AdminPlaceOrder from "../components/Admin/AdminPlaceOrder";
 import WeeklyTimeSheet from "../components/Admin/TimeSheet/WeeklyTimeSheet";
 import EmployeeWeeklyTimeSheet from "../components/Admin/TimeSheet/EmployeeWeeklyTimeSheet";
 import Takeout from "../components/Admin/Takeout";
+import Settings from "../components/Admin/Settings";
 
 const AppRouter = (props) => {
   return (
@@ -64,6 +65,10 @@ const AppRouter = (props) => {
 
         <PrivateRoute path="/admin/takeout">
           <Takeout />
+        </PrivateRoute>
+
+        <PrivateRoute path="/admin/settings">
+          <Settings />
         </PrivateRoute>
 
         <PrivateRoute path="/admin/place-order/:number">

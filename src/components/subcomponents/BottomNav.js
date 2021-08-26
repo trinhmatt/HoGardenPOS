@@ -16,11 +16,13 @@ import Schedule from '@material-ui/icons/Schedule';
 import Create from '@material-ui/icons/Create';
 import DateRange from '@material-ui/icons/DateRange';
 import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const BottomNav = (props) => {
     const styles = homeStyles();
     const { history } = props;
-    const [value, setValue] = useState('orders');
+    // Each nav item's value = the last word in the route (tables, takeout, orders, etc.)
+    const [value, setValue] = useState( (history.location.pathname.substring(history.location.pathname.lastIndexOf("/")+1)) );
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -45,10 +47,11 @@ const BottomNav = (props) => {
             className={styles.bottomNav}
         >
             <BottomNavigationAction value='tables' onClick={() => navigateTo('/admin/tables')} label='TABLES/桌' icon={<DesktopWindowsIcon />} />
-            <BottomNavigationAction onClick={() => navigateTo('/admin/takeout')} label='TAKEOUT/外賣' icon={<Create />} />
+            <BottomNavigationAction value='takeout' onClick={() => navigateTo('/admin/takeout')} label='TAKEOUT/外賣' icon={<Create />} />
             <BottomNavigationAction value='orders' onClick={() => navigateTo('/admin/orders')} label='ORDERS/订单' icon={<Fastfood />} />
             <BottomNavigationAction value='timesheet'  onClick={() => navigateTo('/admin/timesheet')} label='SIGNIN/登录和退出' icon={<Schedule />} />
-            <BottomNavigationAction onClick={() => navigateTo('/admin/timesheet/weekly')} label='HOURS/员工工作时间' icon={<DateRange />} />
+            <BottomNavigationAction value='weekly' onClick={() => navigateTo('/admin/timesheet/weekly')} label='HOURS/员工工作时间' icon={<DateRange />} />
+            <BottomNavigationAction value='settings' onClick={() => navigateTo('/admin/settings')} label='SETTINGS/設置' icon={<SettingsIcon />} />
             <BottomNavigationAction onClick={signOut} label='SIGN OUT/登出' icon={<ExitToAppIcon />}/>
             
         </BottomNavigation>

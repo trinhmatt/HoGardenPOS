@@ -84,7 +84,8 @@ const Cart = (props) => {
                 let order = {
                     id: orders ? orders.length : 0,
                     table: tableVal, 
-                    orderItems: cart
+                    orderItems: cart,
+                    time: dayjs().format()
                 };
 
                 if (isTakeout) {
