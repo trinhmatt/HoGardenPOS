@@ -35,6 +35,7 @@ import CartButton from '../subcomponents/CartButton';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 
 const Menu = (props) => {
+
     dayjs.extend(isBetween);
     const styles = menuStyles();
     const numSections = Object.keys(menuJSON).length;
@@ -52,7 +53,6 @@ const Menu = (props) => {
     // useRef() allows me to have access to the most current state no matter when the callback was assigned 
     const currentMenuSections = useRef();
     currentMenuSections.current = state.menuSections;
-
     useEffect(() => {
         if (state.validationFinished) {
             renderHeader();
@@ -102,8 +102,9 @@ const Menu = (props) => {
                         <span className={(language === 'chinese') ? styles.chinScrollItem : styles.engScrollItem} onClick={() => focusSection(top)} key={`headerSection/${top}`}>{sectionTitle}</span>
                     </Container>
                 );
-                if (headers.length === numSections) {
+                if (headers.length === numSections && headers.length > 0) {
                     setState({...state, headerSections: headers, menuSections: currentMenuSections.current});
+                    headers = []; // renderHeader stays in memory after execution so the arrays persist too, need to reset after state is set
                 }
             }
             const focusSection = (topPosition) => {

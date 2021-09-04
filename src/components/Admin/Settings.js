@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux'; 
-import dayjs from 'dayjs';
 import TextField from '@material-ui/core/TextField';
 import database from '../../firebase/firebase';
 import { authConsts } from '../../static/constants/auth-constants';
