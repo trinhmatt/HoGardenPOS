@@ -6,8 +6,14 @@ import database from '../../firebase/firebase';
 import CustOrderItem from './CustOrderItem';
 import { authConsts } from '../../static/constants/auth-constants';
 
+//Style imports
+import { menuStyles } from '../../static/css/menuStyles';
+
+//Material ui imports
+import Paper from '@material-ui/core/Paper';
 
 const ReviewOrder = (props) => {
+    const styles = menuStyles();
     const { language, auth } = props;
     const [state, setState] = useState({
                                         errorMsg: null,
@@ -83,9 +89,10 @@ const ReviewOrder = (props) => {
         renderOrder();
     }, [])
     return (
-        <div>
-            <div>
-                <h2>{state.errorMsg}</h2>
+        <div className={styles.reviewLayout}>
+        <h2>{state.errorMsg}</h2>
+        <h2 className={styles.reviewTitle}>Thank you for your order</h2>
+            <Paper className={styles.reviewBox} elevation={3}>
                 {state.itemElements}
                 {
                     auth.userData && !state.errorMsg &&
@@ -93,7 +100,7 @@ const ReviewOrder = (props) => {
                             <button onClick={completeOrder}>COMPLETE ORDER</button>
                         </div>
                 }
-            </div>
+            </Paper>
         </div>
     )
 }
