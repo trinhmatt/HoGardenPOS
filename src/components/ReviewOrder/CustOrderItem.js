@@ -1,8 +1,17 @@
 import React from 'react';
 import CartItemChoice from '../Cart/CartItemChoice';
 import { itemChoices } from '../../static/constants/menu-constants';
+import { styles } from '@material-ui/pickers/views/Calendar/Calendar';
+
+//Style imports
+import { menuStyles } from '../../static/css/menuStyles';
+
+//Material ui imports
+import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
 
 const CustOrderItem = (props) => {
+    const styles = menuStyles();
     const { itemData, language } = props;
     const renderChoices = () => {
         let choices = [];
@@ -66,10 +75,22 @@ const CustOrderItem = (props) => {
     }
     return (
         <div>
-            <h2>{itemData[language]}</h2>
-            <p>{itemData.price}</p>
-            {renderChoices()}
-            {renderAddOns()}
+            <Divider />
+            <Grid container spacing={3} className={styles.cartItemSection}>
+                <Grid item xs={2}>
+                    <span className={styles.cartQty}>qty</span>
+                </Grid>
+                <Grid item xs={7} className={(language === 'chinese') && styles.chinCartItem}>
+                    <p><b>{itemData[language]}</b></p>
+                </Grid>
+                <Grid item xs className={styles.cartPrice}>
+                    <span className={(language === 'chinese') && styles.chinCartItem}>${itemData.price}</span>
+                </Grid>
+            </Grid>
+            <div className={(language === 'english') ? styles.cartAddonTitle : styles.chinCartAddonTitle}>
+                {renderChoices()}
+                {renderAddOns()}
+            </div>
         </div>
     )
 }

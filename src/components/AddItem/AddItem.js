@@ -256,11 +256,10 @@ const AddItem = (props) => {
                     </AppBar>
                 </ElevationScroll>
                 <Toolbar />
-                <Container>
+                <Container className={styles.addItemContainer}>
                     <Box className={styles.centered}>
                         {/* food item */}
                         <Paper className={styles.addItemSection} elevation={3}>
-                            <br /><br /><br />
                             <h1 className={(language === 'english') ? styles.itemTitle : styles.chinItemTitle}>{itemData[language]}</h1>
                             {/* Item choices */}
                             <div>

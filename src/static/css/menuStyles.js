@@ -1,5 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+// orange= #fdb678
+// green= #7f9877
 const menuStyles = makeStyles(() => ({
     //GLOBALS
     red: {
@@ -431,20 +433,50 @@ const menuStyles = makeStyles(() => ({
         wordBreak: 'break-word',
         backgroundColor: '#dee4db',
     },
+    chinCartAddonTitle: {
+        padding: '2% !important',
+        textAlign: 'center',
+        wordBreak: 'break-word',
+        backgroundColor: '#dee4db',
+        fontSize: '20px',
+        lineHeight: '1.2em',
+    },
+    chinCartItem: {
+        fontSize: '20px',
+    },
     cartSubtitle: {
         fontSize: '12px',
         color: '#DE6434',
     },
-
-    //ADD ITEM 
-    addItemSection: {
-        width: '100%',
+    cartTotals: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        overflow: 'auto',
+        alignItems: 'flex-end',
+        width: '95%',
         padding: '5%',
+        backgroundColor: 'gainsboro',
+    },
+    chinCartTotals: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        width: '95%',
+        padding: '5%',
+        backgroundColor: 'gainsboro',
+        fontSize: '20px',
+    },
+    cartBorder: {
+        border: '1px solid #000',
+        borderTop: 'transparent',
+        borderLeft: 'transparent',
+        borderRight: 'transparent',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+    },
+
+    //ADD ITEM 
+    addItemContainer: {
         //phone
         '@media (min-width: 375px)': {
             height: '65vh',
@@ -453,6 +485,15 @@ const menuStyles = makeStyles(() => ({
         '@media (min-width: 760px)': {
             height: '60vh',
         },
+    },
+    addItemSection: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'auto',
+        padding: '5%',
     },
     itemTitle: {
         padding: '5%',
@@ -474,19 +515,16 @@ const menuStyles = makeStyles(() => ({
     },
     chinItemTitle: {
         padding: '5%',
-        marginTop: '30%',
         textAlign: 'center',
         wordBreak: 'break-word',
         border: '2px dashed #7f9877',
-        marginTop: '35%',
         //phone
         '@media (min-width: 375px)': {
-            fontSize: '30px',
+            fontSize: '25px',
         },
         //ipad
         '@media (min-width: 760px)': {
-            fontSize: '55px',
-            marginTop: '45%',
+            fontSize: '50px',
         },
         //desktop
         '@media (min-width: 960px)': {
@@ -495,6 +533,8 @@ const menuStyles = makeStyles(() => ({
     },
     itemChoices: {
         color: '#000',
+        lineHeight: '1em',
+        wordBreak: 'break-word',
         //ipad
         '@media (min-width: 760px)': {
             fontSize: '20px',
@@ -503,6 +543,7 @@ const menuStyles = makeStyles(() => ({
     chinItemChoices: {
         color: '#000',
         fontSize: '20px',
+        lineHeight: '1em',
         //ipad
         '@media (min-width: 760px)': {
             fontSize: '30px',
@@ -545,7 +586,7 @@ const menuStyles = makeStyles(() => ({
     addToOrderBtn: {
         width: '75%',
         position: 'absolute',
-        bottom: '5%',
+        bottom: '2%',
         backgroundColor: '#000',
         color: '#fff',
         //ipad
@@ -556,10 +597,36 @@ const menuStyles = makeStyles(() => ({
     chinAddToOrderBtn: {
         width: '75%',
         position: 'absolute',
-        bottom: '5%',
+        bottom: '2%',
         backgroundColor: '#000',
         color: '#fff',
         fontSize: '25px',
+    },
+
+    //REVIEW ORDER
+    reviewLayout: {
+        backgroundImage: 'linear-gradient(130deg, #fdb678 25%, #fabf8c 25%, #fabf8c 50%, #fdb678 50%, #fdb678 75%, #fabf8c 75%, #fabf8c 100%)',
+        backgroundSize: '52.22px 62.23px',
+        height: '100vh',
+        width: '100vw',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    reviewBox: {
+        height: '70%',
+        width: '80%',
+        overflow: 'auto',
+        padding: '5%',
+    },
+    reviewTitle: {
+        color: '#7f9877',
+        backgroundColor: '#fff',
+        paddingTop: '2%',
+        paddingBottom: '2%',
+        paddingLeft: '1.5%',
+        paddingRight: '1.5%',
+        boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
     },
 }));
 

@@ -15,6 +15,7 @@ import { menuStyles } from '../../static/css/menuStyles';
 //Material ui imports
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
 
 //Material ui icons
 import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
@@ -158,9 +159,34 @@ const Cart = (props) => {
                     }
                     {cartItems}
                     </div> 
-                    <h2>Sub-total: {totalPrice.toFixed(2)}</h2>
-                    <h2>HST: {(totalPrice * 0.13).toFixed(2)}</h2>
-                    <h2>Total: {(totalPrice * 1.13).toFixed(2)}</h2>
+                    <div style={{width: '100%'}}>
+                        <Divider />
+                    </div>
+                    <br />
+                    <div className={(language === 'english') ? styles.cartTotals : styles.chinCartTotals}>
+                    { (props.language === "english") ?
+                        <div>
+                            <div className={styles.cartBorder}>
+                                <span>Subtotal: ${totalPrice.toFixed(2)}</span>
+                                <span>HST: ${(totalPrice * 0.13).toFixed(2)}</span>
+                            </div>
+                            <div className={styles.cartBorder}>
+                                <span><b>Total: ${(totalPrice * 1.13).toFixed(2)}</b></span>
+                            </div>
+                        </div>
+                        :
+                        <div>
+                            <div className={styles.cartBorder}>
+                                <span>小計: ${totalPrice.toFixed(2)}</span>
+                                <span>HST: ${(totalPrice * 0.13).toFixed(2)}</span>
+                            </div>
+                            <div className={styles.cartBorder}>
+                                <span><b>全部的: ${(totalPrice * 1.13).toFixed(2)}</b></span>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                    <br /><br /><br />
                 </Paper>
                 {isAdminUpdate && <Button onClick={clearCart}>Clear Cart</Button>}
                 <Button className={styles.addToOrderBtn} variant='contained' onClick={checkout}>

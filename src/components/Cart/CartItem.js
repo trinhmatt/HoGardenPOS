@@ -103,16 +103,16 @@ const CartItem = (props) => {
     return (
         <div>
             <br />
-        <Divider />
+            <Divider />
             <Grid container spacing={3} className={styles.cartItemSection}>
                 <Grid onClick={editItem} item xs={2}>
                     <span className={styles.cartQty}>{itemData.qty}</span>
                 </Grid>
-                <Grid onClick={editItem} item xs={7}>
+                <Grid onClick={editItem} item xs={7} className={(language === 'chinese') && styles.chinCartItem}>
                     <p>{(itemData.maxChoices ? "Set Dinner:" : "") + ` ${itemData[language]}`} </p>
                 </Grid>
                 <Grid item xs className={styles.cartPrice}>
-                    <span onClick={editItem}>${price.toFixed(2)}</span>
+                    <span onClick={editItem} className={(language === 'chinese') && styles.chinCartItem}>${price.toFixed(2)}</span>
                     <div className={styles.row}>
                         <IconButton className={styles.cartQtyBtns} value={-1} onClick={changeQty}>
                             <IndeterminateCheckBoxIcon className={styles.qtyBtnColor} />
@@ -123,18 +123,22 @@ const CartItem = (props) => {
                     </div>
                 </Grid>
             </Grid>
-            <Grid container spacing={3} onClick={editItem}>
-                <Grid item xs className={styles.cartAddonTitle}>
-                    {hasChoices && <span><b>{(props.language === "english") ? 'Choices:' : 'chinese choices:'}</b></span>}
-                    {renderChoices()}
+            {
+                (renderChoices().length > 0 || itemData.addOn.length > 0) ?
+                <Grid container spacing={3} onClick={editItem}>
+                    <Grid item xs className={(language === 'english') ? styles.cartAddonTitle : styles.chinCartAddonTitle}>
+                        {hasChoices && <span><b>{(props.language === "english") ? 'Choices:' : '選擇:'}</b></span>}
+                        {renderChoices()}
+                    </Grid>
+                    <Grid item xs className={(language === 'english') ? styles.cartAddonTitle : styles.chinCartAddonTitle}>
+                        {itemData.addOn && itemData.addOn.length > 0 && <span><b>{(props.language === "english") ? 'Add ons:' : '附加項目:'}</b></span>}
+                        {renderAddOns()}
+                    </Grid>
                 </Grid>
-                <Grid item xs className={styles.cartAddonTitle}>
-                    {itemData.addOn && itemData.addOn.length > 0 && <span><b>{(props.language === "english") ? 'Add ons:' : '附加項目:'}</b></span>}
-                    {renderAddOns()}
-                </Grid>
-            </Grid>
+            :
+            <div></div>
+            }
             <br /><br />
-            <Divider />
         </div>
     )
 }
