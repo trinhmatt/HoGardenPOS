@@ -31,20 +31,22 @@ const ReviewOrder = (props) => {
                     const tableNum = props.match.params.number.indexOf("C") > -1 ? props.match.params.number.replace("C", "門口") : props.match.params.number;
                     const isTakeout = props.location.pathname.indexOf("takeout") > -1;
                     if (orders) {
-
                         for (let i = 0; i < orders.length; i++) {
-                            if ((tableNum === orders[i].table && !isTakeout) || (isTakeout && tableNum === orders[i].takeoutNumber.toString())) {
-                                resolve({ orderData: orders[i], allOrders: orders, index: i });
-                            }
+                            if ( (tableNum === orders[i].table && !isTakeout) || (isTakeout && orders[i].takeoutNumber && tableNum === orders[i].takeoutNumber.toString()) ) {
+                                resolve({orderData: orders[i], allOrders: orders, index: i});
+                            } 
                         }
+                    } else {
+                        reject("no order");
                     }
-                    reject("no order")
+                    
                 })
                 .catch(err => reject(err));
         })
     }
     const renderOrder = () => {
-        fetchOrder().then((fetchedData) => {
+        fetchOrder().then( (fetchedData) => {
+            console.log(fetchedData)
             if (auth.userData) {
                 return buildItemElements(fetchedData.orderData, fetchedData.allOrders, fetchedData.index);
             } else {
