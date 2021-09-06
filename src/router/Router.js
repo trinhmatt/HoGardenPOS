@@ -23,6 +23,7 @@ import WeeklyTimeSheet from "../components/Admin/TimeSheet/WeeklyTimeSheet";
 import EmployeeWeeklyTimeSheet from "../components/Admin/TimeSheet/EmployeeWeeklyTimeSheet";
 import Takeout from "../components/Admin/Takeout";
 import Settings from "../components/Admin/Settings";
+import PastOrders from "../components/Admin/PastOrders/PastOrders";
 
 const AppRouter = (props) => {
   return (
@@ -57,6 +58,10 @@ const AppRouter = (props) => {
 
         <PrivateRoute path="/admin/orders">
           <Orders />
+        </PrivateRoute>
+
+        <PrivateRoute path="/admin/past-orders">
+          <PastOrders />
         </PrivateRoute>
 
         <PrivateRoute path="/admin/tables">

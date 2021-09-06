@@ -19,8 +19,9 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 const OrderCard = (props) => {
     const styles = homeStyles();
     const { orderData, completeOrder, index, updateCart } = props;
-    const renderChoices = (order) => {
+    const renderChoices = (order, itemIndex) => {
         let choicesElements = [];
+        //FOR SET DINNER - ORDER == ARRAY
         if (order.length !== undefined && order.length > 0) {
             for (let i = 0; i < order.length; i++) {
                 choicesElements.push(
@@ -29,7 +30,8 @@ const OrderCard = (props) => {
                     </div>
                 )
             }
-        } 
+        }
+        //FOR EVERYTHING ELSE, ORDER == DICT 
         for (const key in order) {
             if (itemChoices[key] && order[key]) {
                 choicesElements.push(
@@ -45,6 +47,15 @@ const OrderCard = (props) => {
                     <p className={styles.orderAddOns}>{`- ${order.selectedProtein.chinese}/${order.selectedProtein.english}`}</p>
                 </div>
             )
+        }
+        if (orderData.orderItems[itemIndex].addOn && orderData.orderItems[itemIndex].addOn.length > 0) {
+            for (let i = 0; i < orderData.orderItems[itemIndex].addOn.length; i++) {
+                choicesElements.push(
+                    <div>
+                        <p className={styles.orderAddOns}>{`- ${orderData.orderItems[itemIndex].addOn[i].qty ? orderData.orderItems[itemIndex].addOn[i].qty.toString()+" " : ""}${orderData.orderItems[itemIndex].addOn[i].chinese}/${orderData.orderItems[itemIndex].addOn[i].english}`}</p>
+                    </div>
+                )
+            }
         }
         return choicesElements;
     }
@@ -65,7 +76,7 @@ const OrderCard = (props) => {
                             {orderData.orderItems[i].restName && <h2>项目名: {orderData.orderItems[i].restName}</h2>}
                             <h2>{`${orderData.orderItems[i].chinese}/${orderData.orderItems[i].english}`}</h2>
                             <div>
-                                {renderChoices(choicesData)}
+                                {renderChoices(choicesData, i)}
                             </div>
                         </Grid>
                     </Grid>

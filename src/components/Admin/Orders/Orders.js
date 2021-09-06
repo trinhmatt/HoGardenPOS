@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
+import { withRouter } from 'react-router';
+
 import database from '../../../firebase/firebase';
 import OrderCard from './OrderCard';
 import { authConsts } from '../../../static/constants/auth-constants';
@@ -11,30 +13,33 @@ const Orders = (props) => {
     const { isTakeout } = props;
     const styles = homeStyles();
     const currentDayStr = dayjs().format(authConsts.DATE);
-    const [orderObjs, setOrders] = useState([]);
+    const [state, setState] = useState({
+                                orderObjs: [],
+                            });
     useEffect(() => {
         database.ref(`orders/${currentDayStr}`).on("value", (snapshot) => {
-            const orders = snapshot.val();
-            setOrders(orders);
+            let orders = snapshot.val();
+            orders.reverse();
+            setState({...state, orderObjs: orders});
         })
     }, [])
     const renderOrders = () => {
-        if (orderObjs && orderObjs.length > 0) {
+        if (state.orderObjs && state.orderObjs.length > 0) {
             let orderCards = [];
-            for (let i = 0; i < orderObjs.length; i++) {
+            for (let i = 0; i < state.orderObjs.length; i++) {
                 if (isTakeout) {
-                    if (orderObjs[i].table === "takeout") {
-                        orderCards.push(<OrderCard key={`i/${orderObjs[i].takeoutNumber}`} index={i} completeOrder={completeOrder} orderData={orderObjs[i]} />);
+                    if (state.orderObjs[i].table === "takeout") {
+                        orderCards.push(<OrderCard key={`i/${state.orderObjs[i].takeoutNumber}`} index={i} completeOrder={completeOrder} orderData={state.orderObjs[i]} />);
                     }
                 } else {
-                    orderCards.push(<OrderCard key={`i/${orderObjs[i].table}/${orderObjs[i].takeoutNumber}`} index={i} completeOrder={completeOrder} orderData={orderObjs[i]} />);
+                    orderCards.push(<OrderCard key={`i/${state.orderObjs[i].table}/${state.orderObjs[i].takeoutNumber}`} index={i} completeOrder={completeOrder} orderData={state.orderObjs[i]} />);
                 }
             }
             return orderCards;
         }
     }
     const completeOrder = (index) => {
-        const order = orderObjs[index];
+        const order = state.orderObjs[index];
         database.ref(`old_orders/${currentDayStr}`).once("value")
             .then( snapshot => {
                 let orders = snapshot.val();
@@ -45,7 +50,7 @@ const Orders = (props) => {
                 }
                 database.ref(`old_orders/${currentDayStr}`).set(orders)
                     .then( () => {
-                        let newOrders = [...orderObjs];
+                        let newOrders = [...state.orderObjs];
                         newOrders.splice(index, 1);
                         database.ref(`orders/${currentDayStr}`).set(newOrders)
                             .catch( err => console.log(err));
@@ -57,6 +62,10 @@ const Orders = (props) => {
             <div className={styles.header}>
                 <h1 className={styles.ordersTitle}>{isTakeout ? "Takeout" : "orders"}</h1>
                 <h2 className={styles.ordersTitle2}>{isTakeout ? "外賣" : "订单"}</h2>
+                <div>
+                    <button onClick={() => props.history.push('/admin/past-orders')}>VIEW PAST ORDERS</button>
+                </div>
+                
             </div>
             <div className={styles.orderLayout}>
                 {renderOrders()}
@@ -65,4 +74,4 @@ const Orders = (props) => {
     )
 }
 
-export default Orders;
+export default withRouter(Orders);
