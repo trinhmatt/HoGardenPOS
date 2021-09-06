@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 const MenuSection = (props) => {
     const styles = menuStyles();
     const ref = useRef(null);
-    const { data, language, cart } = props;
+    const { data, language, cart, auth } = props;
     const [items, setItems] = useState([]);
     const [itemElements, setItemElements] = useState([]);
 
@@ -76,7 +76,7 @@ const MenuSection = (props) => {
         return extraInfoElements;
     }
     return (
-        <Paper className={styles.menuSection} elevation={3} ref={ref}>
+        <Paper className={auth.userData ? styles.authMenuSection : styles.menuSection} elevation={3} ref={ref}>
             <h1 className={styles.menuSectionTitle}>{data.title[language]}</h1>
             <div className={styles.centered} style={{textAlign: 'center', flexDirection: 'column'}}>{renderExtraInfo()}</div>
                 {itemElements}
@@ -86,6 +86,7 @@ const MenuSection = (props) => {
 
 const mapStateToProps = (state) => ({
     language: state.lang.lang,
+    auth: state.auth,
     cart: state.cart
 })
 

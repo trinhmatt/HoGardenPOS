@@ -98,8 +98,8 @@ const Menu = (props) => {
             // The Section component calls this function after rendering menu items which sets the header section
             const returnTopPosition = (top, sectionTitle) => {
                 headers.push(
-                    <Container key={sectionTitle} className={styles.scrollContainer}>
-                        <span className={(language === 'chinese') ? styles.chinScrollItem : styles.engScrollItem} onClick={() => focusSection(top)} key={`headerSection/${top}`}>{sectionTitle}</span>
+                    <Container key={sectionTitle} className={!auth.userData && styles.scrollContainer}>
+                        <span className={auth.userData ? styles.authScrollItem : language === 'chinese' ? styles.chinScrollItem : styles.engScrollItem} onClick={() => focusSection(top)} key={`headerSection/${top}`}>{sectionTitle}</span>
                     </Container>
                 );
                 if (headers.length === numSections && headers.length > 0) {
@@ -109,6 +109,7 @@ const Menu = (props) => {
             }
             const focusSection = (topPosition) => {
                 const header = document.getElementById('menu-header').offsetHeight;
+                console.log(topPosition)
                 window.scrollTo({ top: (topPosition - header), behavior: 'smooth' });
             }
             for (const section in menuJSON) {
@@ -131,27 +132,48 @@ const Menu = (props) => {
             {!state.errorMsg && state.menuSections.length === numSections && 
                 <Container className={styles.menuLayout}>
                     {/* Header */}
-                    <ElevationScroll {...props}>
-                        <AppBar id='menu-header'>
-                            <Toolbar className={styles.header}>
-                                <FormGroup className={styles.switchLayout}>
-                                    <FormControlLabel
-                                        control={<Switch size="medium" checked={language === "chinese"} onChange={() => {
-                                            (language === "chinese") ?
-                                                changeLanguage("english") : changeLanguage("chinese")
-                                        }}
-                                        />}
-                                        label={<b className={styles.chinLanguage}>中文</b>}
-                                    />
-                                </FormGroup>
-                                <Typography className={styles.menuScroll}>
-                                    {state.headerSections}
-                                </Typography>
-                            </Toolbar>
-                        </AppBar>
-                    </ElevationScroll>
-                    <Toolbar />
-                    <Container className={styles.foodLayout}>
+                    {
+                        !auth.userData ?
+                        <div>
+                            <ElevationScroll {...props}>
+                                <AppBar id='menu-header'>
+                                    <Toolbar className={styles.header}>
+                                        <FormGroup className={styles.switchLayout}>
+                                            <FormControlLabel
+                                                control={<Switch size="medium" checked={language === "chinese"} onChange={() => {
+                                                    (language === "chinese") ?
+                                                        changeLanguage("english") : changeLanguage("chinese")
+                                                }}
+                                                />}
+                                                label={<b className={styles.chinLanguage}>中文</b>}
+                                            />
+                                        </FormGroup>
+                                        <Typography className={styles.menuScroll}>
+                                            {state.headerSections}
+                                        </Typography>
+                                    </Toolbar>
+                                </AppBar>
+                            </ElevationScroll>
+                            <Toolbar />
+                        </div>
+                        :
+                        <div id='menu-header'>
+                            <FormGroup className={styles.authSwitchLayout}>
+                                <FormControlLabel
+                                    control={<Switch size="medium" checked={language === "chinese"} onChange={() => {
+                                        (language === "chinese") ?
+                                            changeLanguage("english") : changeLanguage("chinese")
+                                    }}
+                                    />}
+                                    label={<b className={styles.chinLanguage}>中文</b>}
+                                />
+                            </FormGroup>
+                            <div className={styles.authMenuScroll}>
+                                {state.headerSections}
+                            </div>
+                        </div>
+                    }
+                    <Container className={auth.userData ? styles.authFoodLayout : styles.foodLayout}>
                         {/* Menu sections */}
                         {state.menuSections}
                     </Container>

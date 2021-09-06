@@ -257,7 +257,7 @@ const AddItem = (props) => {
                 </ElevationScroll>
                 <Toolbar />
                 <Container className={styles.addItemContainer}>
-                    <Box className={styles.centered}>
+                    <Box className={styles.centered} style={{flexDirection: 'column'}}>
                         {/* food item */}
                         <Paper className={styles.addItemSection} elevation={3}>
                             <h1 className={(language === 'english') ? styles.itemTitle : styles.chinItemTitle}>{itemData[language]}</h1>
@@ -282,8 +282,8 @@ const AddItem = (props) => {
                             </div>
                             <br />
                         </Paper>
-                        <Button 
-                            className={language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn} 
+                        <Button
+                            className={ auth.userData ? styles.authAddToOrderBtn : language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn}
                             variant='contained' disabled={checkRequiredChoices()} 
                             onClick={index !== undefined ? startUpdateCart : addToOrder}>
                             {

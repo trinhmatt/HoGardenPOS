@@ -138,7 +138,7 @@ const Cart = (props) => {
             })
     }
     return (
-        <div style={{backgroundColor: "white"}}>
+        <div className={styles.cartLayoutBox}>
             {
             cart.length > 0 || cart.orderItems && cart.orderItems.length > 0 ? 
             <div className={styles.cartLayout}>
@@ -189,7 +189,7 @@ const Cart = (props) => {
                     <br /><br /><br />
                 </Paper>
                 {isAdminUpdate && <Button onClick={clearCart}>Clear Cart</Button>}
-                <Button className={styles.addToOrderBtn} variant='contained' onClick={checkout}>
+                <Button className={auth.userData ? styles.authAddToOrderBtn : styles.addToOrderBtn} variant='contained' onClick={checkout}>
                     {cart.orderItems ? "UPDATE" : "Checkout"}
                 </Button>
                 </div>

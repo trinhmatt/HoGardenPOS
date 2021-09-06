@@ -7,6 +7,9 @@ const menuStyles = makeStyles(() => ({
     red: {
         color: '#F50157',
     },
+    greenBackground: {
+        backgroundColor: '#7f9877',
+    },
 
     //LAYOUT
     row: {
@@ -18,6 +21,10 @@ const menuStyles = makeStyles(() => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    kindaCentered: {
+        display: 'flex',
+        justifyContent: 'center',
     },
     menuLayout: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
@@ -79,11 +86,20 @@ const menuStyles = makeStyles(() => ({
             padding: '0',
         },
     },
+    authFoodLayout: {
+        width: '100%',
+    },
     switchLayout: {
         display: 'flex',
         alignItems: 'flex-end',
         width: '100%',
         marginTop: '-3vh',
+        marginRight: '-5vh',
+    },
+    authSwitchLayout: {
+        display: 'flex',
+        alignItems: 'flex-end',
+        width: '100%',
         marginRight: '-5vh',
     },
     switchAddItemLayout: {
@@ -153,8 +169,10 @@ const menuStyles = makeStyles(() => ({
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center',
+        width: '100%',
+        height: '100%',
     },
 
     //HEADERS
@@ -208,6 +226,13 @@ const menuStyles = makeStyles(() => ({
         display: 'flex',
         justifyContent: 'flex-start'
     },
+    authMenuScroll: {
+        width: '100%',
+        backgroundColor: '#fff',
+        border: '2px solid #000',
+        height: '20vh',
+        overflow: 'auto',
+    },
     engScrollItem: {
         backgroundColor: '#000',
         color: '#fff',
@@ -223,6 +248,15 @@ const menuStyles = makeStyles(() => ({
         padding: '10px 15px 10px 15px',
         textTransform: 'uppercase',
         fontSize: '18px',
+    },
+    authScrollItem: {
+        backgroundColor: '#000',
+        color: '#fff',
+        padding: '10px 15px 10px 15px',
+        textTransform: 'uppercase',
+        fontSize: '18px',
+        margin: '2px',
+        float: 'left',
     },
     scrollContainer: {
         padding: '2px !important',
@@ -241,6 +275,10 @@ const menuStyles = makeStyles(() => ({
         '@media screen and (orientation: landscape)': {
             width: '85vw'
         },
+    },
+    authMenuSection: {
+        paddingLeft: '5%',
+        paddingRight: '5%',
     },
     menuItemSection: {
         padding: '3%',
@@ -353,8 +391,7 @@ const menuStyles = makeStyles(() => ({
     },
     cartBox: {
         backgroundColor: '#fff',
-        width: '95vw',
-        height: '80vh',
+        width: '95%',
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         display: 'flex',
         flexDirection: 'column',
@@ -364,13 +401,17 @@ const menuStyles = makeStyles(() => ({
         overflowY: 'auto',
     },
     emptyCartBox: {
-        width: '70vw',
-        height: '20vh',
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         textTransform: 'uppercase',
+    },
+    cartLayoutBox: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
     },
     chinCartText: {
         fontSize: '5vw'
@@ -602,6 +643,17 @@ const menuStyles = makeStyles(() => ({
         color: '#fff',
         fontSize: '25px',
     },
+    authAddToOrderBtn: {
+        width: '75%',
+        backgroundColor: '#000',
+        color: '#fff',
+        marginTop: '-5%',
+        marginBottom: '25%',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '20px',
+        },
+    },
 
     //REVIEW ORDER
     reviewLayout: {
@@ -612,21 +664,59 @@ const menuStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        position: 'fixed',
+        zIndex: '-2',
     },
     reviewBox: {
         height: '70%',
         width: '80%',
         overflow: 'auto',
         padding: '5%',
+        margin: '20% auto',
     },
-    reviewTitle: {
-        color: '#7f9877',
-        backgroundColor: '#fff',
-        paddingTop: '2%',
-        paddingBottom: '2%',
-        paddingLeft: '1.5%',
-        paddingRight: '1.5%',
-        boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
+    authTableNumber: {
+        fontSize: '30px',
+        textAlign: 'center',
+        backgroundColor: '#000',
+        width: '100%',
+        color: '#fff',
+    },
+
+    //RIBBON
+    ribbon: {
+        width: '280px',
+        height: '40px',
+        position: 'absolute',
+        margin: '12% auto',
+        color: '#fff',
+        border: '1px solid #5a6f54',
+        textTransform: 'uppercase',
+        backgroundColor: '#7f9877',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        boxShadow: '0 0 30px rgba(0,0,0,0.2) inset, 0 6px 10px rgba(0,0,0,0.2)',
+
+        '&:before, &:after': {
+            content: "''",
+            position: 'absolute',
+            zIndex: '-1',
+            left: '-25px',
+            top: '25px',
+            width: '12px',
+            border: '15px solid #829877',
+            borderRight: '8px solid #374333',
+            borderBottomColor: '#667d5f',
+            borderLeftColor: 'transparent',
+            transform: 'rotate(-5deg)',
+        },
+        '&:after': {
+            left: 'auto',
+            right: '-20px',
+            borderLeft: '8px solid #374333',
+            borderRight: '8px solid transparent',
+            transform: 'rotate(5deg)',
+        },
     },
 }));
 
