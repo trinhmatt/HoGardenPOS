@@ -16,7 +16,7 @@ const CustOrderItem = (props) => {
     const renderChoices = () => {
         let choices = [];
         for (const key in itemData) {
-            if (itemData[key] && itemChoices[key] && key !== "hasEgg" && itemData[key].length === undefined) {
+            if (itemData[key] && itemChoices[key] && itemData[key].length === undefined) {
                 choices.push(
                     <CartItemChoice 
                         key={key}
@@ -45,15 +45,6 @@ const CustOrderItem = (props) => {
                 />
             )
         }
-        if (itemData.hasEgg) {
-            choices.push(
-                <CartItemChoice 
-                    key={'eggChoice'}
-                    title={itemChoices.hasEgg[language]} 
-                    choice={itemData.eggChoice[language]} 
-                />
-            )
-        }
         return choices;
     }
     const renderAddOns = () => {
@@ -78,7 +69,7 @@ const CustOrderItem = (props) => {
             <Divider />
             <Grid container spacing={3} className={styles.cartItemSection}>
                 <Grid item xs={2}>
-                    <span className={styles.cartQty}>qty</span>
+                    <span className={styles.cartQty}>{itemData.qty}</span>
                 </Grid>
                 <Grid item xs={7} className={(language === 'chinese') && styles.chinCartItem}>
                     <p><b>{itemData[language]}</b></p>

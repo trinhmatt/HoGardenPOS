@@ -19,7 +19,8 @@ const ReviewOrder = (props) => {
         errorMsg: null,
         itemElements: [],
         allOrders: [],
-        indexOfOrder: -1
+        indexOfOrder: -1,
+        orderSubtotal: 0.0
     });
     const currentDayStr = dayjs().format(authConsts.DATE);
 
@@ -46,7 +47,6 @@ const ReviewOrder = (props) => {
     }
     const renderOrder = () => {
         fetchOrder().then( (fetchedData) => {
-            console.log(fetchedData)
             if (auth.userData) {
                 return buildItemElements(fetchedData.orderData, fetchedData.allOrders, fetchedData.index);
             } else {
@@ -58,12 +58,24 @@ const ReviewOrder = (props) => {
             }
         })
     }
+    const calculatePrice = (orderItem) => {
+        let price = 0.0;
+        price += orderItem.price;
+        if (orderItem.addOn && orderItem.addOn.length > 0) {
+            for (let n = 0; n < orderItem.addOn.length; n++) {
+                price += orderItem.addOn[n].price;
+            }
+        }
+        return price;
+    }
     const buildItemElements = (order, allOrders = [], index = -1) => {
         let itemElements = [];
+        let orderSubtotal = 0.0;
         for (let i = 0; i < order.orderItems.length; i++) {
             itemElements.push(<CustOrderItem key={`${i}/item`} language={language} itemData={order.orderItems[i]} />);
+            orderSubtotal += calculatePrice(order.orderItems[i])
         }
-        setState({ ...state, itemElements, allOrders, index })
+        setState({ ...state, itemElements, allOrders, index, orderSubtotal })
     }
 
     const completeOrder = () => {
@@ -103,6 +115,11 @@ const ReviewOrder = (props) => {
             <div className={styles.reviewLayout}>
                 <Paper className={styles.reviewBox} elevation={3}>
                     {state.itemElements}
+                    <div>
+                        <p>Subtotal: {state.orderSubtotal.toFixed(2)}</p>
+                        <p>HST: {(state.orderSubtotal * 0.13).toFixed(2)}</p>
+                        <p>TOTAL: {(state.orderSubtotal * 1.13).toFixed(2)}</p>
+                    </div>
                     {
                         auth.userData && !state.errorMsg &&
                         <div>

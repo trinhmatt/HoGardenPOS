@@ -19,7 +19,9 @@ const Orders = (props) => {
     useEffect(() => {
         database.ref(`orders/${currentDayStr}`).on("value", (snapshot) => {
             let orders = snapshot.val();
-            orders.reverse();
+            if (orders !== null) {
+                orders.reverse();
+            }
             setState({...state, orderObjs: orders});
         })
     }, [])
