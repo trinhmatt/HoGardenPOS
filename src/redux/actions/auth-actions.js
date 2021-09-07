@@ -8,3 +8,7 @@ export const loginSuccess = (userData) => ({
 export const loginFail = () => ({
     type: authConsts.LOGIN_FAIL
 })
+
+export const logOut = () => ({
+    type: authConsts.LOGOUT
+})

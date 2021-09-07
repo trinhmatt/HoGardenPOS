@@ -13,6 +13,11 @@ export const authReducer = (state = initState, action) => {
             return {
                 ...state
             };
+        case authConsts.LOGOUT:
+            return {
+                ...state,
+                userData: null
+            }
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router';
 import dayjs from 'dayjs';
 import cx from 'clsx';
@@ -20,6 +20,11 @@ const Tables = (props) => {
                                 filledTables: {},
                                 isFirstRender: true
                             });
+    const currentIsFirstRender = useRef();
+    currentIsFirstRender.current = state.isFirstRender;
+
+    const currentTables = useRef();
+    currentTables.current = state.filledTables;
 
     const startAdminOrder = (e) => {
         let tableNumber = e.currentTarget.id;
@@ -37,22 +42,18 @@ const Tables = (props) => {
         database.ref(`orders/${dayjs().format(authConsts.DATE)}`).on("value", (snapshot) => {
             const orders = snapshot.val();
             let filledTables = {};
-            let isFirstRender = state.isFirstRender;
+            let isFirstRender = currentIsFirstRender.current;
 
             if (orders && orders.length > 0) {
                 for (let i = 0; i < orders.length; i++) {
                     filledTables[orders[i].table] = {filled: true};
-                    if (!state.filledTables[orders[i].table] && !isFirstRender) {
+                    if (!currentTables.current[orders[i].table] && !currentIsFirstRender.current) {
                         filledTables[orders[i].table].isNew = true;
                     }
                     
                 }
             }
-            if (!isFirstRender) {
-                if (Object.keys(state.filledTables).length < Object.keys(filledTables).length) {
-                    document.getElementById('new-order-sound').play();
-                }
-            } else {
+            if (currentIsFirstRender.current) {
                 isFirstRender = false;
             }
             setState({...state, filledTables, isFirstRender});
@@ -61,9 +62,6 @@ const Tables = (props) => {
 
     return (
         <div className={styles.homebg}>
-            <audio id="new-order-sound">
-                <source src={newOrderSound} type="audio/mp3"/>
-            </audio>
             <div className={styles.tableLayout}>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={1}>

@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from "react-router";
 import { firebase } from '../../firebase/firebase';
 import { connect } from 'react-redux';
-import { loginSuccess } from '../../redux/actions/auth-actions';
 
 // style imports
 import '../../static/css/home.css';
@@ -21,12 +20,17 @@ const Login = (props) => {
     // style consts
     const styles = homeStyles();
 
-    const { loginSuccess, history } = props;
+    const { history } = props;
     const [state, setState] = useState({
         email: "",
         password: ""
     });
 
+    useEffect(() => {
+        if (props.auth.userData) {
+            history.push('/admin/orders');
+        }
+    }, [props.auth])
     const handleInputChange = (e) => {
         setState({ ...state, [e.currentTarget.id]: e.currentTarget.value })
     }
@@ -36,8 +40,7 @@ const Login = (props) => {
             .then(() => {
                 firebase.auth().signInWithEmailAndPassword(state.email, state.password)
                     .then((userData) => {
-                        loginSuccess(userData.user.email);
-                        history.push("admin/orders");
+                        console.log('logged in');
                     })
                     .catch((err) => {
                         if (err.code.indexOf("user-not-found") > -1) {
@@ -99,8 +102,9 @@ const Login = (props) => {
     )
 }
 
-const mapDispatchToProps = dispatch => ({
-    loginSuccess: (userData) => dispatch(loginSuccess(userData))
+const mapStateToProps = state => ({
+    auth: state.auth
 })
 
-export default connect(undefined, mapDispatchToProps)(withRouter((Login)));
+
+export default connect(mapStateToProps)(withRouter((Login)));

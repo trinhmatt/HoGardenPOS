@@ -1,6 +1,7 @@
 export const authConsts = {
     LOGIN_SUCCESS: "LOGIN_SUCCESS",
     LOGIN_FAIL: "LOGIN_FAIL",
+    LOGOUT: "LOGOUT",
     DATE: "YYYY_MM_DD",
     "24_HOUR_TIME": "HH:mm",
     "12_HOUR_TIME": "hh:mm A",

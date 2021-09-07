@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { withRouter } from "react-router";
 import { firebase } from '../../firebase/firebase';
+import { connect } from 'react-redux';
+import { logOut } from '../../redux/actions/auth-actions';
 
 //Style imports
 import {homeStyles} from '../../static/css/homeStyles';
@@ -35,7 +37,8 @@ const BottomNav = (props) => {
     const signOut = () => {
         firebase.auth().signOut()
             .then(() => {
-                history.push('/admin')
+                props.logout();
+                history.push('/admin');
             })
             .catch(err => console.log(err));
     }
@@ -58,4 +61,8 @@ const BottomNav = (props) => {
     )
 }
 
-export default withRouter(BottomNav);
+const mapDispatchToProps = dispatch => ({
+    logout: () => dispatch(logOut())
+})
+
+export default connect(undefined, mapDispatchToProps)(withRouter(BottomNav));

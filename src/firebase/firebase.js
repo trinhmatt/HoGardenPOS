@@ -1,4 +1,5 @@
 import firebase from "firebase";
+//import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -19,5 +20,6 @@ if (!firebase.apps.length) {
 firebase.analytics();
 
 const database = firebase.database();
+
 
 export {firebase, database as default}

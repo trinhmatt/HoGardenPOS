@@ -8,12 +8,15 @@ import { Provider } from 'react-redux';
 import { firebase } from './firebase/firebase';
 import { loginSuccess } from './redux/actions/auth-actions';
 
+
 firebase.auth().onAuthStateChanged((user) => {
-  store.dispatch(loginSuccess(user));
+  if (user) {
+    store.dispatch(loginSuccess(user));
+  }
   ReactDOM.render(
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <App user={user} />
       </Provider>
     </React.StrictMode>,
     document.getElementById('root')

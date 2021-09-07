@@ -102,7 +102,7 @@ const Cart = (props) => {
                 }
 
                 // Update order table
-                database.ref(`orders/${dayStr}`).set(orders)
+                database.ref(`orders/${dayStr}`).update({[order.id]: order})
                         .then( () => {
                             clearCart();
                             props.history.push({

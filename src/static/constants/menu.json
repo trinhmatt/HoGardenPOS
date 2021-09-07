@@ -847,11 +847,11 @@
             },
             {
                 "english": "Chinese soup",
-                "chinese": "ch"
+                "chinese": "例湯"
             },
             {
                 "english": "Borscht",
-                "chinese": "Borscht-ch"
+                "chinese": "羅宋湯"
             }
         ],
         "menuItems": {
@@ -1505,11 +1505,11 @@
         "drinkChoice": [
             {
                 "english": "Chinese Soup",
-                "chinese": "湯 或"
+                "chinese": "例湯"
             },
             {
                 "english": "Borscht",
-                "chinese": ""
+                "chinese": "羅宋湯"
             },
             {
                 "english": "HK Milk Tea",
@@ -1852,11 +1852,11 @@
         "drinkChoice": [
             {
                 "english": "Chinese soup",
-                "chinese": "ch"
+                "chinese": "例湯"
             },
             {
                 "english": "Borscht",
-                "chinese": "Borscht-ch"
+                "chinese": "羅宋湯"
             },
             {
                 "english": "HK Milk Tea",
