@@ -84,8 +84,8 @@ const TimeSheet = () => {
     return (
         <div className={styles.homebg}>
             <div className='header'>
-                <h1 className={styles.subTitle}>timetable</h1>
-                <h2 className={styles.subTitle2}>时间表</h2>
+                <h1 className={styles.subTitle}>sign in</h1>
+                <h2 className={styles.subTitle2}>登入</h2>
                 <h1 className={styles.subTitle} style={{marginTop: '-3%'}}>today/今天: <b>{state.dayObj.format("YYYY/MM/DD")}</b></h1>
             <div className={styles.dateRangeWrapper}>
                 <MuiPickersUtilsProvider utils={DayJSUtils}>

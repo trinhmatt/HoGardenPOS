@@ -6,11 +6,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 //Style imports
-import { StyledTableRow, StyledTableCell } from '../../../static/css/homeStyles';
+import { homeStyles, StyledTableRow, StyledTableCell } from '../../../static/css/homeStyles';
+
+//Material ui imports
+import Paper from '@material-ui/core/Paper';
 
 import { itemChoices } from '../../../static/constants/menu-constants';
 
 const PastOrderTable = (props) => {
+    const styles = homeStyles();
     const { data } = props;
     const [state, setState] = useState({
                                 tableRows: [],
@@ -29,9 +33,9 @@ const PastOrderTable = (props) => {
                 let orderCells = [];
                 let itemTotal = 0.0;
 
-                orderCells.push(<StyledTableCell key={`title/${i}-${n}`}>{n === 0 ? `${data.orders[i].table} ${data.orders[i].takeoutNumber ? data.orders[i].takeoutNumber : ""}` : ""}</StyledTableCell>);
-                orderCells.push(<StyledTableCell key={`item/${i}-${n}`}>{data.orders[i].orderItems[n].chinese}/{data.orders[i].orderItems[n].english}</StyledTableCell>);
-                orderCells.push(<StyledTableCell align="center" key={`price/${i}-${n}`}>{data.orders[i].orderItems[n].price.toFixed(2)}</StyledTableCell>);
+                orderCells.push(<StyledTableCell key={`title/${i}-${n}`}><b className={styles.pastOrderTableCell}>{n === 0 ? `${data.orders[i].table} ${data.orders[i].takeoutNumber ? data.orders[i].takeoutNumber : ""}` : ""}</b></StyledTableCell>);
+                orderCells.push(<StyledTableCell key={`item/${i}-${n}`}><span className={styles.pastOrderItem}>{data.orders[i].orderItems[n].chinese}/{data.orders[i].orderItems[n].english}</span></StyledTableCell>);
+                orderCells.push(<StyledTableCell align="center" key={`price/${i}-${n}`}>${data.orders[i].orderItems[n].price.toFixed(2)}</StyledTableCell>);
 
                 itemTotal += data.orders[i].orderItems[n].price;
                 dailyTotal += data.orders[i].orderItems[n].price;
@@ -45,7 +49,7 @@ const PastOrderTable = (props) => {
                         tableRows.push(
                             <TableRow>
                                 <StyledTableCell></StyledTableCell>
-                                <StyledTableCell>{`- ${data.orders[i].orderItems[n][itemChoices[key].menuKey].chinese}/${data.orders[i].orderItems[n][itemChoices[key].menuKey].english}`}</StyledTableCell>
+                                <StyledTableCell><span className={styles.pastOrderAddOn}>{`- ${data.orders[i].orderItems[n][itemChoices[key].menuKey].chinese}/${data.orders[i].orderItems[n][itemChoices[key].menuKey].english}`}</span></StyledTableCell>
                                 <StyledTableCell></StyledTableCell>
                                 <StyledTableCell></StyledTableCell>
                             </TableRow>
@@ -55,7 +59,7 @@ const PastOrderTable = (props) => {
                             tableRows.push(
                                 <TableRow>
                                     <StyledTableCell></StyledTableCell>
-                                    <StyledTableCell>{`- ${data.orders[i].orderItems[n][key][a].chinese}/${data.orders[i].orderItems[n][key][a].english}`}</StyledTableCell>
+                                    <StyledTableCell><span className={styles.pastOrderAddOn}>{`- ${data.orders[i].orderItems[n][key][a].chinese}/${data.orders[i].orderItems[n][key][a].english}`}</span></StyledTableCell>
                                     <StyledTableCell></StyledTableCell>
                                     <StyledTableCell></StyledTableCell>
                                 </TableRow>
@@ -68,7 +72,7 @@ const PastOrderTable = (props) => {
                     tableRows.push(
                         <TableRow>
                                 <StyledTableCell></StyledTableCell>
-                                <StyledTableCell>{`- ${data.orders[i].orderItems[n].selectedProtein.chinese}/${data.orders[i].orderItems[n].selectedProtein.english}`}</StyledTableCell>
+                                <StyledTableCell><span className={styles.pastOrderAddOn}>{`- ${data.orders[i].orderItems[n].selectedProtein.chinese}/${data.orders[i].orderItems[n].selectedProtein.english}`}</span></StyledTableCell>
                                 <StyledTableCell></StyledTableCell>
                                 <StyledTableCell></StyledTableCell>
                         </TableRow>
@@ -81,8 +85,8 @@ const PastOrderTable = (props) => {
                         tableRows.push(
                             <TableRow>
                                 <StyledTableCell></StyledTableCell>
-                                <StyledTableCell>{`- ${data.orders[i].orderItems[n].addOn[x].chinese}/${data.orders[i].orderItems[n].addOn[x].english}`}</StyledTableCell>
-                                <StyledTableCell align="center">{data.orders[i].orderItems[n].addOn[x].price.toFixed(2)}</StyledTableCell>
+                                <StyledTableCell><span className={styles.pastOrderAddOn}>{`- ${data.orders[i].orderItems[n].addOn[x].chinese}/${data.orders[i].orderItems[n].addOn[x].english}`}</span></StyledTableCell>
+                                <StyledTableCell align="center">${data.orders[i].orderItems[n].addOn[x].price.toFixed(2)}</StyledTableCell>
                                 <StyledTableCell></StyledTableCell>
                             </TableRow>
                         )
@@ -92,39 +96,50 @@ const PastOrderTable = (props) => {
 
                 if (itemTotal !== data.orders[i].orderItems[n].price) {
                     tableRows.push(
-                        <TableRow key={`itemTotal/${i}/${n}`}>
+                        <TableRow key={`itemTotal/${i}/${n}`} style={{backgroundColor: '#ededed'}}>
                             <StyledTableCell>ITEM TOTAL</StyledTableCell>
                             <StyledTableCell></StyledTableCell>
-                            <StyledTableCell align="center">{itemTotal.toFixed(2)}</StyledTableCell>
+                            <StyledTableCell align="center">${itemTotal.toFixed(2)}</StyledTableCell>
                             <StyledTableCell></StyledTableCell>
                         </TableRow>
                     )
                 }
                 
             }
+
             tableRows.push(
                 <TableRow>
-                    <StyledTableCell>ORDER TOTAL</StyledTableCell>
+                    <StyledTableCell>HST</StyledTableCell>
+                    <StyledTableCell></StyledTableCell>
+                    <StyledTableCell align="center">${(orderTotal * 0.13).toFixed(2)}</StyledTableCell>
+                    <StyledTableCell></StyledTableCell>
+                </TableRow>
+            )
+            tableRows.push(
+                <TableRow className={styles.pastOrderTotal}>
+                    <StyledTableCell><b>ORDER TOTAL</b></StyledTableCell>
                     <StyledTableCell></StyledTableCell>
                     <StyledTableCell></StyledTableCell>
-                    <StyledTableCell align="center">{orderTotal.toFixed(2)}</StyledTableCell>
+                    <StyledTableCell align="center"><b className={styles.pastOrderItem}>${(orderTotal * 1.13).toFixed(2)}</b></StyledTableCell>
                 </TableRow>
             )
         }
         setState({tableRows, dailyTotal});
     }
     return (
-        <div>
-            <h2>{data.date.replaceAll("_", "/")}</h2>
-            <p>DAILY TOTAL: {state.dailyTotal.toFixed(2)}</p>
-            <TableContainer>
+        <div className={styles.tableWrapper}>
+            <div className={styles.pastOrderHeader}>
+                <h1>{data.date.replaceAll("_", "/")}</h1>
+                <h2>DAILY TOTAL/每日總計: ${(state.dailyTotal * 1.13).toFixed(2)}</h2>
+            </div>
+            <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>TABLE/TAKEOUT #</StyledTableCell>
-                            <StyledTableCell align="center">ITEM</StyledTableCell>
-                            <StyledTableCell align="center">ITEM SUBTOTAL</StyledTableCell>
-                            <StyledTableCell align="center">ORDER TOTAL</StyledTableCell>
+                            <StyledTableCell>TABLE/TAKEOUT#<br />餐桌/外賣#</StyledTableCell>
+                            <StyledTableCell align="center">ITEM<br />菜單項</StyledTableCell>
+                            <StyledTableCell align="center">SUBTOTAL<br />小計</StyledTableCell>
+                            <StyledTableCell align="center">ORDER TOTAL<br />全部的</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

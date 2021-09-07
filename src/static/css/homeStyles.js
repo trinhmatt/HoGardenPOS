@@ -23,7 +23,10 @@ const homeStyles = makeStyles(() => ({
     tableBg: {
         background: 'linear-gradient(to top, #f46b45, #eea849)',
         width: '100vw',
-        height: '100vh',
+        height: '110vh',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'auto',
     },
     loginbg: {
         backgroundImage: `url(${home})`,
@@ -148,13 +151,14 @@ const homeStyles = makeStyles(() => ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        overflow: 'auto',
         '@media screen and (orientation: portrait)': {
             width: '80vw',
             height: '50vh',
         },
         '@media screen and (orientation: landscape)': {
-            width: '55vw',
-            height: '80vh',
+            width: '60vw',
+            height: '82vh',
         },
         '@media screen and (min-width: 760px) and (orientation: portrait)': {
             width: '55vw',
@@ -162,7 +166,7 @@ const homeStyles = makeStyles(() => ({
         },
         '@media screen and (min-width: 760px) and (orientation: landscape)': {
             width: '40vw',
-            height: '42vh',
+            height: '52vh',
         },
     },
     loginAction: {
@@ -261,6 +265,28 @@ const homeStyles = makeStyles(() => ({
     completeButton: {
         color: '#32cd59',
     },
+    pastOrderTableCell: {
+        backgroundColor: '#000',
+        color: '#fff',
+        textTransform: 'uppercase',
+        padding: '10px',
+    },
+    pastOrderHeader: {
+        color: '#fff',
+    },
+    pastOrderTotal: {
+        backgroundColor: 'lightgrey',
+        border: '2px solid #000',
+        borderTop: 'transparent',
+        borderLeft: 'transparent',
+        borderRight: 'transparent',
+    },
+    pastOrderItem: {
+        fontSize: '25px',
+    },
+    pastOrderAddOn: {
+        fontSize: '20px',
+    },
 
     //TAKEOUT
     takeoutBtnWrapper: {
@@ -296,7 +322,7 @@ const homeStyles = makeStyles(() => ({
     },
     vTable: {
         width: '50px',
-        height: '100px',
+        height: '70px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -305,8 +331,8 @@ const homeStyles = makeStyles(() => ({
     },
     roundTable: {
         borderRadius: '50%',
-        width: '100px',
-        height: '100px',
+        width: '80px',
+        height: '80px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

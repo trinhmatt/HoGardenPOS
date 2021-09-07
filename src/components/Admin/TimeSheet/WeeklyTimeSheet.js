@@ -172,8 +172,8 @@ const WeeklyTimeSheet = () => {
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>EMPLOYEE/员工姓名</StyledTableCell>
-                                <StyledTableCell align="center">HOURS</StyledTableCell>
-                                <StyledTableCell align="center">Flagged</StyledTableCell>
+                                <StyledTableCell align="center">HOURS/時刻</StyledTableCell>
+                                <StyledTableCell align="center">Flagged/被標記的</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
