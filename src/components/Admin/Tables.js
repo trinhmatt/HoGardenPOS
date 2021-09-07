@@ -13,7 +13,7 @@ import { homeStyles } from '../../static/css/homeStyles';
 //Material ui imports
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { updateCart } from '../../redux/actions/cart-actions';
+import { updateCart, clearCart } from '../../redux/actions/cart-actions';
 
 const Tables = (props) => {
     const styles = homeStyles();
@@ -33,9 +33,10 @@ const Tables = (props) => {
             tableNumber = tableNumber.replace("C", "門");
         }
         if (state.filledTables[tableNumber]) {
-            props.updateCart(state.filledTables[tableNumber].data)
+            props.updateCart(state.filledTables[tableNumber].data);
             props.history.push(`/admin/place-order/${tableNumber}`);
         } else {
+            props.clearCart();
             props.history.push(`/admin/place-order/${e.currentTarget.id}`);
         }
     }
@@ -201,7 +202,8 @@ const Tables = (props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    updateCart: (orderData) => dispatch(updateCart(orderData))
+    updateCart: (orderData) => dispatch(updateCart(orderData)),
+    clearCart: () => dispatch(clearCart())
 })
 
 export default connect(undefined, mapDispatchToProps)(withRouter(Tables));
