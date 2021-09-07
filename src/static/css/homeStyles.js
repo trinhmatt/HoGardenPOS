@@ -9,11 +9,21 @@ const homeStyles = makeStyles(() => ({
 
     // BACKGROUND
     homebg: {
-        background: 'linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6)',   
+        //background: 'linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6)',   
+        background: 'linear-gradient(to bottom, #000428, #004e92)',
         overflow: 'auto',
         width: '100vw',
         height: '100vh',
-        fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(',')
+        fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(','),
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'nowrap',
+        alignItems: 'center',
+    },
+    tableBg: {
+        background: 'linear-gradient(to top, #f46b45, #eea849)',
+        width: '100vw',
+        height: '100vh',
     },
     loginbg: {
         backgroundImage: `url(${home})`,
@@ -31,6 +41,11 @@ const homeStyles = makeStyles(() => ({
     // LAYOUT
     header: {
         textAlign: 'center',
+        width: '25%',
+        padding: '5%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     centerWrapper: {
         textAlign: 'center',
@@ -166,9 +181,8 @@ const homeStyles = makeStyles(() => ({
 
     //TIMETABLE
     tableWrapper: {
-        transform: 'scale(0.8)',
+        transform: 'scale(0.85)',
         margin: '0 auto',
-        marginTop: '-5%'
     },
     dateWrapper: {
         position: 'fixed',
@@ -176,6 +190,16 @@ const homeStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'row',
         padding: '1%',
+        backgroundColor: '#fff',
+        border: '2px solid #000',
+    },
+    dateRangeWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: '1%',
+        backgroundColor: '#fff',
+        border: '3px solid #000',
     },
 
     //NAV
@@ -195,6 +219,8 @@ const homeStyles = makeStyles(() => ({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-evenly',
+        alignItems: 'center',
+        overflow: 'auto',
     },
     orderCard: {
         width: '40%',
@@ -236,6 +262,19 @@ const homeStyles = makeStyles(() => ({
         color: '#32cd59',
     },
 
+    //TAKEOUT
+    takeoutBtnWrapper: {
+        position: 'fixed',
+        top: '1%',
+        left: '1%',
+    },
+    takeoutBtn: {
+        backgroundColor: '#32cd59 !important',
+        color: '#000 !important',
+        fontWeight: 'bold',
+        fontSize: '20px'
+    },
+
     //TABLES
     hTable: {
         width: '100px',
@@ -243,6 +282,8 @@ const homeStyles = makeStyles(() => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '20px',
     },
     smolhTable: {
         width: '80px',
@@ -250,6 +291,8 @@ const homeStyles = makeStyles(() => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '20px',
     },
     vTable: {
         width: '50px',
@@ -257,6 +300,8 @@ const homeStyles = makeStyles(() => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '20px',
     },
     roundTable: {
         borderRadius: '50%',
@@ -265,9 +310,12 @@ const homeStyles = makeStyles(() => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '20px',
     },
     orderTakenTable: {
-        backgroundColor: '#ffaa00'
+        backgroundColor: '#32cd59',
+        border: '2px solid #000',
     }
     
 }));

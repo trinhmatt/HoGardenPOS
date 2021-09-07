@@ -60,7 +60,7 @@ const Tables = (props) => {
     }, [])
 
     return (
-        <div className={styles.homebg}>
+        <div className={styles.tableBg}>
             <audio id="new-order-sound">
                 <source src={newOrderSound} type="audio/mp3"/>
             </audio>

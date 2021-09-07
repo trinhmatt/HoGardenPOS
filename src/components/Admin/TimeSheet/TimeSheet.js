@@ -83,21 +83,23 @@ const TimeSheet = () => {
     const styles = homeStyles();
     return (
         <div className={styles.homebg}>
-            <div className="header">
+            <div className='header'>
                 <h1 className={styles.subTitle}>timetable</h1>
                 <h2 className={styles.subTitle2}>时间表</h2>
                 <h1 className={styles.subTitle} style={{marginTop: '-3%'}}>today/今天: <b>{state.dayObj.format("YYYY/MM/DD")}</b></h1>
-            </div>
-            <div className={styles.dateWrapper}>
-                <TodayIcon fontSize='large'/>
+            <div className={styles.dateRangeWrapper}>
                 <MuiPickersUtilsProvider utils={DayJSUtils}>
+                    <TodayIcon fontSize='large'/>
                     <DatePicker
                         value={state.dayObj}
                         onChange={handleDateChange}
                         disableFuture={true}
                         format='YYYY/MM/DD'
+                        label='查看上一個日期'
+                        variant='inline'
                     />
                 </MuiPickersUtilsProvider>
+            </div>
             </div>
             <div className={styles.tableWrapper}>
                 <TableContainer component={Paper}>

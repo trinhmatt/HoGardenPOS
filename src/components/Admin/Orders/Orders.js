@@ -9,6 +9,9 @@ import { authConsts } from '../../../static/constants/auth-constants';
 //Style imports
 import { homeStyles } from '../../../static/css/homeStyles';
 
+//Material ui imports
+import Button from '@material-ui/core/Button';
+
 const Orders = (props) => {
     const { isTakeout } = props;
     const styles = homeStyles();
@@ -60,12 +63,16 @@ const Orders = (props) => {
     return (
         <div className={styles.homebg}>
             <div className={styles.header}>
-                <h1 className={styles.ordersTitle}>{isTakeout ? "Takeout" : "orders"}</h1>
-                <h2 className={styles.ordersTitle2}>{isTakeout ? "外賣" : "订单"}</h2>
-                <div>
-                    <button onClick={() => props.history.push('/admin/past-orders')}>VIEW PAST ORDERS</button>
-                </div>
-                
+                <h1 className={styles.subTitle}>{isTakeout ? "takeout" : "orders"}</h1>
+                <h2 className={styles.subTitle2}>{isTakeout ? "外賣" : "订单"}</h2>
+                <Button
+                    onClick={() => props.history.push('/admin/past-orders')}
+                    variant='contained'
+                    size='large'
+                >
+                    VIEW PAST ORDERS <br />
+                    查看過去的訂單
+                </Button>
             </div>
             <div className={styles.orderLayout}>
                 {renderOrders()}

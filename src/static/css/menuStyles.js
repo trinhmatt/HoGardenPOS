@@ -310,7 +310,7 @@ const menuStyles = makeStyles(() => ({
         paddingRight: '5%',
         //ipad
         '@media (min-width: 760px)': {
-            fontSize:'25px',
+            fontSize:'20px',
         },
     },
     chinMenuItem: {
