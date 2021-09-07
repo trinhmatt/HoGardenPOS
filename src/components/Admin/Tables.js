@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router';
 import dayjs from 'dayjs';
 import cx from 'clsx';
+import { connect } from 'react-redux';
+import database from '../../firebase/firebase';
 
 import { authConsts } from '../../static/constants/auth-constants';
-import database from '../../firebase/firebase';
-import newOrderSound from '../../static/new-order-sound.mp3';
 
 //Style imports
 import { homeStyles } from '../../static/css/homeStyles';
@@ -13,6 +13,7 @@ import { homeStyles } from '../../static/css/homeStyles';
 //Material ui imports
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { updateCart } from '../../redux/actions/cart-actions';
 
 const Tables = (props) => {
     const styles = homeStyles();
@@ -32,7 +33,8 @@ const Tables = (props) => {
             tableNumber = tableNumber.replace("C", "門");
         }
         if (state.filledTables[tableNumber]) {
-            props.history.push(`/order/${tableNumber}/review`);
+            props.updateCart(state.filledTables[tableNumber].data)
+            props.history.push(`/admin/place-order/${tableNumber}`);
         } else {
             props.history.push(`/admin/place-order/${e.currentTarget.id}`);
         }
@@ -46,7 +48,7 @@ const Tables = (props) => {
 
             if (orders && orders.length > 0) {
                 for (let i = 0; i < orders.length; i++) {
-                    filledTables[orders[i].table] = {filled: true};
+                    filledTables[orders[i].table] = {filled: true, data: orders[i]};
                     if (!currentTables.current[orders[i].table] && !currentIsFirstRender.current) {
                         filledTables[orders[i].table].isNew = true;
                     }
@@ -198,4 +200,8 @@ const Tables = (props) => {
     )
 }
 
-export default withRouter(Tables);
+const mapDispatchToProps = dispatch => ({
+    updateCart: (orderData) => dispatch(updateCart(orderData))
+})
+
+export default connect(undefined, mapDispatchToProps)(withRouter(Tables));
