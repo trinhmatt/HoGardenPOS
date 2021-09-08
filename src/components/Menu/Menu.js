@@ -53,7 +53,14 @@ const Menu = (props) => {
             let headerSections = [];
             const focusSection = (sectionId) => {
                 const section = document.getElementById(sectionId);
-                section.scrollIntoView();
+                
+                // Admin and customer have different headers which require different scroll to logic
+                if (props.location.pathname.indexOf("admin") > -1) {
+                    section.scrollIntoView();
+                } else {
+                    const header = document.getElementById('menu-header').offsetHeight;
+                    window.scrollTo({ top: (section.offsetTop - header), behavior: 'smooth' });
+                }
             }
             for (let i = 0; i < state.menuSections.length; i++) {
                 headerSections.push(
