@@ -57,13 +57,6 @@ const MenuSection = (props) => {
         }
     }, [items, language, cart]) // eslint-disable-line react-hooks/exhaustive-deps
 
-    // This needs to run after itemElements is set so that getBoundingClientRect() returns the correct position of the parent
-    useEffect(() => {
-        if (!!ref.current.getBoundingClientRect().y && itemElements.length > 0) {
-            props.returnTopPosition(ref.current.getBoundingClientRect().y, data.title[language]);
-        }
-    }, [itemElements]) // eslint-disable-line react-hooks/exhaustive-deps
-
     const renderExtraInfo = () => {
         let extraInfoElements = [];
         if (data.extraInfo && data.extraInfo.length > 0) {
@@ -76,7 +69,7 @@ const MenuSection = (props) => {
         return extraInfoElements;
     }
     return (
-        <Paper className={auth.userData ? styles.authMenuSection : styles.menuSection} elevation={3} ref={ref}>
+        <Paper id={data.title[language]} className={auth.userData ? styles.authMenuSection : styles.menuSection} elevation={3} ref={ref}>
             <h1 className={styles.menuSectionTitle}>{data.title[language]}</h1>
             <div className={styles.centered} style={{textAlign: 'center', flexDirection: 'column'}}>{renderExtraInfo()}</div>
                 {itemElements}

@@ -45,19 +45,31 @@ const Menu = (props) => {
                                 menuSections: [],
                                 headerSections: [],
                                 isCartOpen: false,
-                                errorMsg: "",
-                                validationFinished: false
+                                errorMsg: ""
                             });
-    
-    // Need this because when headerSections are created the callback that sets the new state has an old reference to state 
-    // useRef() allows me to have access to the most current state no matter when the callback was assigned 
-    const currentMenuSections = useRef();
-    currentMenuSections.current = state.menuSections;
+
     useEffect(() => {
-        if (state.validationFinished) {
-            renderHeader();
+        if (state.menuSections.length > 0) {
+            let headerSections = [];
+            const focusSection = (sectionId) => {
+                const section = document.getElementById(sectionId);
+                section.scrollIntoView();
+            }
+            for (let i = 0; i < state.menuSections.length; i++) {
+                headerSections.push(
+                    <Container key={state.menuSections[i].props.data.title[language]} className={!auth.userData && styles.scrollContainer}>
+                        <span 
+                            className={auth.userData ? styles.authScrollItem : language === 'chinese' ? styles.chinScrollItem : styles.engScrollItem} 
+                            onClick={() => focusSection(state.menuSections[i].props.data.title[language])} 
+                            key={`headerSection/${state.menuSections[i].props.data.title[language]}`}>
+                                {state.menuSections[i].props.data.title[language]}
+                        </span>
+                    </Container>
+                )
+            }
+            setState({...state, headerSections});
         }
-    }, [language])
+    }, [state.menuSections, language])
 
     useEffect(() => {
         database.ref('hoursOfOperation').once('value')
@@ -93,28 +105,11 @@ const Menu = (props) => {
     const renderHeader = () => {
         if ((!!cartConsts.tables[props.match.params.number] || props.match.params.number === "takeout") && state.errorMsg.length === 0) {
             let menuSections = [];
-            let headers = [];
-            // This function is called every time a MenuSection is created (inside of useEffect)
-            // The Section component calls this function after rendering menu items which sets the header section
-            const returnTopPosition = (top, sectionTitle) => {
-                headers.push(
-                    <Container key={sectionTitle} className={!auth.userData && styles.scrollContainer}>
-                        <span className={auth.userData ? styles.authScrollItem : language === 'chinese' ? styles.chinScrollItem : styles.engScrollItem} onClick={() => focusSection(top)} key={`headerSection/${top}`}>{sectionTitle}</span>
-                    </Container>
-                );
-                if (headers.length === numSections && headers.length > 0) {
-                    setState({...state, headerSections: headers, menuSections: currentMenuSections.current});
-                    headers = []; // renderHeader stays in memory after execution so the arrays persist too, need to reset after state is set
-                }
-            }
-            const focusSection = (topPosition) => {
-                const header = document.getElementById('menu-header').offsetHeight;
-                console.log(topPosition)
-                window.scrollTo({ top: (topPosition - header), behavior: 'smooth' });
-            }
+            
             for (const section in menuJSON) {
-                menuSections.push(<MenuSection lang={language} returnTopPosition={returnTopPosition} key={`menuSection/${section}`} data={menuJSON[section]} />);
+                menuSections.push(<MenuSection lang={language} key={`menuSection/${section}`} data={menuJSON[section]} />);
             }
+
             setState({...state, menuSections})
         } else {
             props.history.push("/error");
