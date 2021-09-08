@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import dayjs from 'dayjs';
 
+import { authConsts } from '../../static/constants/auth-constants';
+import database from '../../firebase/firebase';
 import Menu from '../Menu/Menu';
 import Cart from '../Cart/Cart';
 
@@ -14,6 +17,14 @@ import Grid from '@material-ui/core/Grid';
 const AdminPlaceOrder = (props) => {
     const styles = menuStyles();
     let tableNumber = props.match.params.number;
+    const { cart } = props;
+    const isNewOrder = cart.id === undefined;
+    console.log(cart);
+    const completeOrder = () => {
+        database.ref(`orders/${dayjs().format(authConsts.DATE)}`).update({[cart.id]: ""})
+            .then( () => props.history.push('/admin/tables'))
+            .catch( err => console.log(err));
+    }
     return (
         <div>
             <Grid container spacing={0} style={{}}>
@@ -22,6 +33,7 @@ const AdminPlaceOrder = (props) => {
                     <div item className={styles.authTableNumber}>
                         table {tableNumber}
                     </div>
+                    {!isNewOrder && <button onClick={completeOrder}>COMPLETE</button>}
                     <Cart />
                 </Grid>
                 <Grid item xs={8} container spacing={0} style={{overflow: 'auto', height: '100vh'}}>
@@ -34,4 +46,8 @@ const AdminPlaceOrder = (props) => {
     )
 }
 
-export default withRouter(connect()(AdminPlaceOrder));
+const mapStateToProps = state => ({
+    cart: state.cart
+})
+
+export default withRouter(connect(mapStateToProps)(AdminPlaceOrder));
