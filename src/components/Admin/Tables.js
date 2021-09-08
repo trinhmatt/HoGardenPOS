@@ -64,7 +64,7 @@ const Tables = (props) => {
     }, [])
 
     return (
-        <div className={styles.homebg}>
+        <div className={styles.tableBg}>
             <div className={styles.tableLayout}>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={1}>

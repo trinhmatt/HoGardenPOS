@@ -95,7 +95,7 @@ const OrderCard = (props) => {
     }
     return (
         <Paper elevation={3} className={styles.orderCard}>
-            <Button onClick={startEditOrder}>EDIT</Button>
+            <Button onClick={startEditOrder}>EDIT/編輯</Button>
             <h1 className={styles.orderTable}>{orderData.table === 'takeout' ? `Takeout/外賣 #${orderData.takeoutNumber}` : `table/桌 ${orderData.table}`}</h1>
             {renderOrders()}
             <Button 

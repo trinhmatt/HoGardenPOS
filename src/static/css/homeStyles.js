@@ -9,11 +9,24 @@ const homeStyles = makeStyles(() => ({
 
     // BACKGROUND
     homebg: {
-        background: 'linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6)',   
+        //background: 'linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6)',   
+        background: 'linear-gradient(to bottom, #000428, #004e92)',
         overflow: 'auto',
         width: '100vw',
         height: '100vh',
-        fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(',')
+        fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(','),
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'nowrap',
+        alignItems: 'center',
+    },
+    tableBg: {
+        background: 'linear-gradient(to top, #f46b45, #eea849)',
+        width: '100vw',
+        height: '110vh',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'auto',
     },
     loginbg: {
         backgroundImage: `url(${home})`,
@@ -31,6 +44,11 @@ const homeStyles = makeStyles(() => ({
     // LAYOUT
     header: {
         textAlign: 'center',
+        width: '25%',
+        padding: '5%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     centerWrapper: {
         textAlign: 'center',
@@ -133,13 +151,14 @@ const homeStyles = makeStyles(() => ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        overflow: 'auto',
         '@media screen and (orientation: portrait)': {
             width: '80vw',
             height: '50vh',
         },
         '@media screen and (orientation: landscape)': {
-            width: '55vw',
-            height: '80vh',
+            width: '60vw',
+            height: '82vh',
         },
         '@media screen and (min-width: 760px) and (orientation: portrait)': {
             width: '55vw',
@@ -147,7 +166,7 @@ const homeStyles = makeStyles(() => ({
         },
         '@media screen and (min-width: 760px) and (orientation: landscape)': {
             width: '40vw',
-            height: '42vh',
+            height: '52vh',
         },
     },
     loginAction: {
@@ -166,9 +185,8 @@ const homeStyles = makeStyles(() => ({
 
     //TIMETABLE
     tableWrapper: {
-        transform: 'scale(0.8)',
+        transform: 'scale(0.85)',
         margin: '0 auto',
-        marginTop: '-5%'
     },
     dateWrapper: {
         position: 'fixed',
@@ -176,6 +194,16 @@ const homeStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'row',
         padding: '1%',
+        backgroundColor: '#fff',
+        border: '2px solid #000',
+    },
+    dateRangeWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: '1%',
+        backgroundColor: '#fff',
+        border: '3px solid #000',
     },
 
     //NAV
@@ -195,6 +223,8 @@ const homeStyles = makeStyles(() => ({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-evenly',
+        alignItems: 'center',
+        overflow: 'auto',
     },
     orderCard: {
         width: '40%',
@@ -235,6 +265,41 @@ const homeStyles = makeStyles(() => ({
     completeButton: {
         color: '#32cd59',
     },
+    pastOrderTableCell: {
+        backgroundColor: '#000',
+        color: '#fff',
+        textTransform: 'uppercase',
+        padding: '10px',
+    },
+    pastOrderHeader: {
+        color: '#fff',
+    },
+    pastOrderTotal: {
+        backgroundColor: 'lightgrey',
+        border: '2px solid #000',
+        borderTop: 'transparent',
+        borderLeft: 'transparent',
+        borderRight: 'transparent',
+    },
+    pastOrderItem: {
+        fontSize: '25px',
+    },
+    pastOrderAddOn: {
+        fontSize: '20px',
+    },
+
+    //TAKEOUT
+    takeoutBtnWrapper: {
+        position: 'fixed',
+        top: '1%',
+        left: '1%',
+    },
+    takeoutBtn: {
+        backgroundColor: '#32cd59 !important',
+        color: '#000 !important',
+        fontWeight: 'bold',
+        fontSize: '20px'
+    },
 
     //TABLES
     hTable: {
@@ -243,6 +308,8 @@ const homeStyles = makeStyles(() => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '20px',
     },
     smolhTable: {
         width: '80px',
@@ -250,24 +317,31 @@ const homeStyles = makeStyles(() => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '20px',
     },
     vTable: {
         width: '50px',
-        height: '100px',
+        height: '70px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '20px',
     },
     roundTable: {
         borderRadius: '50%',
-        width: '100px',
-        height: '100px',
+        width: '80px',
+        height: '80px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        fontWeight: 'bold',
+        fontSize: '20px',
     },
     orderTakenTable: {
-        backgroundColor: '#ffaa00'
+        backgroundColor: '#32cd59',
+        border: '2px solid #000',
     }
     
 }));

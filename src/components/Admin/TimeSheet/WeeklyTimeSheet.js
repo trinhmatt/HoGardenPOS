@@ -15,7 +15,7 @@ import { authConsts } from '../../../static/constants/auth-constants';
 import EmployeeWeeklyTimeSheet from './EmployeeWeeklyTimeSheet';
 
 //Style imports
-import { StyledTableRow, StyledTableCell } from '../../../static/css/homeStyles';
+import { homeStyles, StyledTableRow, StyledTableCell } from '../../../static/css/homeStyles';
 
 //Material ui imports
 import Table from '@material-ui/core/Table';
@@ -24,8 +24,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Modal from '@material-ui/core/Modal';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 const WeeklyTimeSheet = () => {
+    const styles = homeStyles();
     dayjs.extend(isBetween);
     dayjs.extend(duration); 
     const [state, setState] = useState({
@@ -125,13 +128,15 @@ const WeeklyTimeSheet = () => {
     }
     const closeSingleEmployeeModal = () => setState({...state, isSingleEmployeeOpen: false});
     return (
-        <div>
-            <h2>Weekly Time Sheet</h2>
-            <div>{state.error}</div>
-            <div>
+        <div className={styles.homebg}>
+             <div className="header">
+                <h1 className={styles.subTitle}>past time sheets</h1>
+                <h2 className={styles.subTitle2}>過去的時間表</h2>
+                <div>
+                <div className={styles.dateRangeWrapper}>
                 <MuiPickersUtilsProvider utils={DayJSUtils}>
                     <DatePicker
-                        label={"Start"}
+                        label={"Start Date/開始日期"}
                         value={state.startDate}
                         onChange={handleStartDate}
                         disableFuture={true}
@@ -141,23 +146,34 @@ const WeeklyTimeSheet = () => {
                 </MuiPickersUtilsProvider>
                 <MuiPickersUtilsProvider utils={DayJSUtils}>
                     <DatePicker
-                        label={"End"}
+                        label={"End Date/結束日期"}
                         value={state.endDate}
                         onChange={handleEndDate}
                         disableFuture={true}
                         format='YYYY/MM/DD'
                     />
                 </MuiPickersUtilsProvider>
-                <button disabled={state.endDate.isBefore(state.startDate)} onClick={getHours}>Get Hours</button>
+                <Button 
+                    disabled={state.endDate.isBefore(state.startDate)} 
+                    onClick={getHours}
+                    variant='contained'
+                >
+                    Get Hours<br />
+                    得到小時
+                </Button>
+                </div>
             </div>
-            <div>
-                <TableContainer>
+            </div>
+            <div>{state.error}</div>
+            
+            <div className={styles.tableWrapper}>
+                <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>EMPLOYEE/员工姓名</StyledTableCell>
-                                <StyledTableCell align="center">HOURS</StyledTableCell>
-                                <StyledTableCell align="center">Flagged</StyledTableCell>
+                                <StyledTableCell align="center">HOURS/時刻</StyledTableCell>
+                                <StyledTableCell align="center">Flagged/被標記的</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

@@ -134,7 +134,7 @@ const menuStyles = makeStyles(() => ({
     itemChoiceLayout: {
         textAlign: 'center',
         lineHeight: '0.5em',
-        marginBottom: '10%',
+        marginBottom: '40px',
         //phone
         '@media (min-width: 375px)': {
             fontSize: '12px',
@@ -151,7 +151,7 @@ const menuStyles = makeStyles(() => ({
     chinItemChoiceLayout: {
         textAlign: 'center',
         lineHeight: '0.5em',
-        marginBottom: '10%',
+        marginBottom: '40px',
         //phone
         '@media (min-width: 375px)': {
             fontSize: '18px',
@@ -310,7 +310,7 @@ const menuStyles = makeStyles(() => ({
         paddingRight: '5%',
         //ipad
         '@media (min-width: 760px)': {
-            fontSize:'25px',
+            fontSize:'20px',
         },
     },
     chinMenuItem: {
@@ -527,6 +527,10 @@ const menuStyles = makeStyles(() => ({
             height: '60vh',
         },
     },
+    addItemChoices: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
     addItemSection: {
         width: '100%',
         display: 'flex',
@@ -576,6 +580,8 @@ const menuStyles = makeStyles(() => ({
         color: '#000',
         lineHeight: '1em',
         wordBreak: 'break-word',
+        borderRadius: '5px !important',
+        border: '1px solid #000 !important',
         //ipad
         '@media (min-width: 760px)': {
             fontSize: '20px',
@@ -593,11 +599,19 @@ const menuStyles = makeStyles(() => ({
     selectedChoice: {
         backgroundColor: '#000',
         color: '#fff',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '20px',
+        }
     },
     chinSelectedChoice: {
         backgroundColor: '#000',
         color: '#fff',
         fontSize: '20px',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '30px',
+        }
     },
     itemChoiceGroup: {
         backgroundColor: '#fff',
