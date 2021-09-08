@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { itemChoices } from '../../../static/constants/menu-constants';
@@ -12,15 +12,22 @@ import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-
 //Icon imports
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const OrderCard = (props) => {
     const styles = homeStyles();
     const { orderData, completeOrder, index, updateCart } = props;
+    const [state, setState] = useState({
+                                itemElements: [],
+                                orderTotal: 0.0
+                            });
+    useEffect(() => {
+        renderOrderItems();
+    }, []);
     const renderChoices = (order, itemIndex) => {
         let choicesElements = [];
+        let addOnTotal = 0.0;
         //FOR SET DINNER - ORDER == ARRAY
         if (order.length !== undefined && order.length > 0) {
             for (let i = 0; i < order.length; i++) {
@@ -50,6 +57,7 @@ const OrderCard = (props) => {
         }
         if (orderData.orderItems[itemIndex].addOn && orderData.orderItems[itemIndex].addOn.length > 0) {
             for (let i = 0; i < orderData.orderItems[itemIndex].addOn.length; i++) {
+                addOnTotal += orderData.orderItems[itemIndex].addOn[i].price;
                 choicesElements.push(
                     <div>
                         <p className={styles.orderAddOns}>{`- ${orderData.orderItems[itemIndex].addOn[i].qty ? orderData.orderItems[itemIndex].addOn[i].qty.toString()+" " : ""}${orderData.orderItems[itemIndex].addOn[i].chinese}/${orderData.orderItems[itemIndex].addOn[i].english}`}</p>
@@ -57,12 +65,16 @@ const OrderCard = (props) => {
                 )
             }
         }
-        return choicesElements;
+        return {choicesElements, addOnTotal};
     }
-    const renderOrders = () => {
+    const renderOrderItems = () => {
         let itemElements = [];
+        let orderTotal = 0.0;
         for (let i = 0; i < orderData.orderItems.length; i++) {
+            orderTotal += orderData.orderItems[i].price;
             let choicesData = orderData.orderItems[i].choices && orderData.orderItems[i].choices.length > 0 ? orderData.orderItems[i].choices : orderData.orderItems[i];
+            const itemChoicesData = renderChoices(choicesData, i);
+            orderTotal += itemChoicesData.addOnTotal;
                 itemElements.push(
                     <div>
                     <Divider />
@@ -76,7 +88,7 @@ const OrderCard = (props) => {
                             {orderData.orderItems[i].restName && <h2>项目名: {orderData.orderItems[i].restName}</h2>}
                             <h2>{`${orderData.orderItems[i].chinese}/${orderData.orderItems[i].english}`}</h2>
                             <div>
-                                {renderChoices(choicesData, i)}
+                                {itemChoicesData.choicesElements}
                             </div>
                         </Grid>
                     </Grid>
@@ -84,7 +96,7 @@ const OrderCard = (props) => {
                     </div>
                 )
         }
-        return itemElements;
+        setState({itemElements, orderTotal});
     }
     const startCompleteOrder = () => {
         completeOrder(index);
@@ -97,7 +109,8 @@ const OrderCard = (props) => {
         <Paper elevation={3} className={styles.orderCard}>
             <Button onClick={startEditOrder}>EDIT/編輯</Button>
             <h1 className={styles.orderTable}>{orderData.table === 'takeout' ? `Takeout/外賣 #${orderData.takeoutNumber}` : `table/桌 ${orderData.table}`}</h1>
-            {renderOrders()}
+            {state.itemElements}
+            <p>ORDER TOTAL: ${state.orderTotal}</p>
             <Button 
                 onClick={startCompleteOrder} 
                 variant='contained' 
