@@ -29,12 +29,14 @@ const Orders = (props) => {
         if (state.orderObjs && state.orderObjs.length > 0) {
             let orderCards = [];
             for (let i = 0; i < state.orderObjs.length; i++) {
-                if (isTakeout) {
-                    if (state.orderObjs[i].table === "takeout") {
-                        orderCards.push(<OrderCard key={`i/${state.orderObjs[i].takeoutNumber}`} index={i} completeOrder={completeOrder} orderData={state.orderObjs[i]} />);
+                if (state.orderObjs[i]) {
+                    if (isTakeout) {
+                        if (state.orderObjs[i].table === "takeout") {
+                            orderCards.push(<OrderCard key={`i/${state.orderObjs[i].takeoutNumber}`} index={i} completeOrder={completeOrder} orderData={state.orderObjs[i]} />);
+                        }
+                    } else {
+                        orderCards.push(<OrderCard key={`i/${state.orderObjs[i].table}/${state.orderObjs[i].takeoutNumber}`} index={i} completeOrder={completeOrder} orderData={state.orderObjs[i]} />);
                     }
-                } else {
-                    orderCards.push(<OrderCard key={`i/${state.orderObjs[i].table}/${state.orderObjs[i].takeoutNumber}`} index={i} completeOrder={completeOrder} orderData={state.orderObjs[i]} />);
                 }
             }
             return orderCards;
@@ -52,9 +54,11 @@ const Orders = (props) => {
                 }
                 database.ref(`old_orders/${currentDayStr}`).set(orders)
                     .then( () => {
-                        let newOrders = [...state.orderObjs];
-                        newOrders.splice(index, 1);
-                        database.ref(`orders/${currentDayStr}`).set(newOrders)
+                        // let newOrders = [...state.orderObjs];
+                        // newOrders.splice(index, 1);
+                        const actualIndex = (state.orderObjs.length-1)-index;
+                        console.log(index)
+                        database.ref(`orders/${currentDayStr}`).update({[actualIndex]: ""})
                             .catch( err => console.log(err));
                     })
             })
