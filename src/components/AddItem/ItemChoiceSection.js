@@ -156,7 +156,7 @@ const ItemChoiceSection = (props) => {
                     )
                 }
             }
-        } else {
+        } else if (choicesArr) {
             for (let i = 0; i < choicesArr.length; i++) {
                 choices.push(
                     <Button

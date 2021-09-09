@@ -95,6 +95,9 @@ const AddItem = (props) => {
 
         if (choiceType === "addOn" || choiceType === "choices") {
             choiceValue = choiceType === "addOn" ? item.addOn : item.choices;
+            if (choiceValue === undefined) {
+                choiceValue = [];
+            }
             let didChange = false;
             for (let i = 0; i < choiceValue.length; i++) {
                 if (choiceValue[i].english === returnObj.english) {
@@ -124,6 +127,7 @@ const AddItem = (props) => {
         for (const key in itemData) {
             // Item specific choices (protein, saunce, carb, etc)
             if (( itemData[key] && itemChoices[key] && sectionData[itemChoices[key].menuKey]) || (itemChoices[key] && itemChoices[key][itemChoices[key].menuKey])) {
+                const choicesArr = sectionData[itemChoices[key].menuKey] ? sectionData[itemChoices[key].menuKey] : itemChoices[key][itemChoices[key].menuKey];
                 choiceSections.push(
                     <ItemChoiceSection 
                         selectedObj={itemData[itemChoices[key].menuKey]} 
@@ -132,7 +136,7 @@ const AddItem = (props) => {
                         language={language} 
                         selectChoice={selectChoice} 
                         choiceType={itemChoices[key].menuKey} 
-                        choicesArr={sectionData[itemChoices[key].menuKey]}
+                        choicesArr={choicesArr}
                     />);
             } 
         }

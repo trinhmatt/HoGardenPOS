@@ -50,7 +50,7 @@ const Cart = (props) => {
         }
         setCartItems(cartItems);
         setTotalPrice(totalPrice);
-    }, [cart])
+    }, [cart, language])
 
     const checkout = () => {
         const currentDayStr = dayjs().format(authConsts.DATE);

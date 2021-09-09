@@ -33,7 +33,8 @@ const CartItem = (props) => {
                     <CartItemChoice 
                         key={key}
                         choice={itemData[itemChoices[key].menuKey][language]} 
-                        editItem={editItem} 
+                        editItem={editItem}
+                        language={language} 
                     />
                 )
             } else if (key === "choices" && itemData.choices.length > 0) {
@@ -43,6 +44,7 @@ const CartItem = (props) => {
                             key={`choice/${i}`}
                             choice={itemData.choices[i][language]}
                             editItem={editItem}
+                            language={language}
                         />
                     )
                 }
@@ -53,6 +55,7 @@ const CartItem = (props) => {
                         key={`selectedProtein/${itemData.english}/${itemData.selectedProtein.english}`}
                         choice={itemData.selectedProtein[language]}
                         editItem={editItem}
+                        language={language}
                     />
                 )
             }
@@ -72,6 +75,7 @@ const CartItem = (props) => {
                         type={itemData.addOn[i].type}
                         price={itemData.addOn[i].price}
                         qty={itemData.addOn[i].qty}
+                        language={language}
                         editItem={editItem}
                     />
                 )
