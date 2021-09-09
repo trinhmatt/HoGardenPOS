@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -11,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 
 const MenuSectionItem = (props) => {
     const styles = menuStyles();
-    const { data, language, table, sectionData, qty, auth } = props;
+    const { data, language, table, sectionData, qty, itemKey } = props;
     const pushToAdd = () => {
         props.history.push({
             pathname: "/add-item",
@@ -56,7 +55,7 @@ const MenuSectionItem = (props) => {
         <div>
             <Grid container spacing={0} className={qty > 0 ? styles.menuItemSectionQty : styles.menuItemSection} onClick={pushToAdd}>
                 <Grid item xs={8} className={(language === 'chinese') ? styles.chinMenuItem : styles.engMenuItem}>
-                    {auth.userData ? data.restName ? `${data.restName}. ${data[language]}` : `${data[language]}` : `${data[language]}`}
+                    {`${data.restName ? data.restName : itemKey}. ${data[language]}`}
                 </Grid>
                 {
                     qty > 0 ? 
@@ -76,8 +75,4 @@ const MenuSectionItem = (props) => {
     )
 }
 
-const mapStateToProps = state => ({
-    auth: state.auth
-})
-
-export default withRouter(connect(mapStateToProps)(MenuSectionItem));
+export default withRouter(MenuSectionItem);

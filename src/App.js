@@ -14,14 +14,24 @@ function App(props) {
   currentState.current = isFirstRender;
   useEffect(() => {
     if (props.auth.userData) {
-      database.ref(`orders/${dayjs().format(authConsts.DATE)}`).limitToLast(1).on('child_added', (snapshot) => {
-        if (currentState.current) {
-          setIsFirst(false);
-        } else {
-          const orderSound = new Audio(newOrderSound);
-          orderSound.play();
-        }
-      })
+      database.ref(`orders/${dayjs().format(authConsts.DATE)}`).once("value")
+        .then( snapshot => {
+          const orders = snapshot.val();
+
+          // If there are no orders and its the first render, set flag to false 
+          if (!orders && isFirstRender) {
+            setIsFirst(false);
+          } 
+          database.ref(`orders/${dayjs().format(authConsts.DATE)}`).limitToLast(1).on('child_added', (snapshot) => {
+            if (currentState.current) {
+              setIsFirst(false);
+            } else {
+              const orderSound = new Audio(newOrderSound);
+              orderSound.play();
+            }
+          })
+          
+        })
     } else {
       setIsFirst(true);
     }

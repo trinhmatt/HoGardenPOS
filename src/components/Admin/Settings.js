@@ -65,7 +65,6 @@ const Settings = (props) => {
                                 id={`open/${day}`}
                                 type="time"
                                 value={state.newValues[day].open}
-                                defaultValue={state.newValues[day].open}
                                 onChange={changeTime}
                                 disabled={!state.newValues[day].isOpen}
                             />
@@ -76,7 +75,6 @@ const Settings = (props) => {
                                 id={`close/${day}`}
                                 type="time"
                                 value={state.newValues[day].close}
-                                defaultValue={state.newValues[day].close}
                                 onChange={changeTime}
                                 disabled={!state.newValues[day].isOpen}
                             />
