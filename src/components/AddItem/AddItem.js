@@ -265,7 +265,7 @@ const AddItem = (props) => {
                             <div>
                                 {renderChoices()}
                             </div>
-                            <div className={styles.row}>
+                            <div className={styles.row} style={{marginTop: '-25px'}}>
                                 {item.qty > 0 ?
                                     <IconButton value="-1" onClick={changeQty}>
                                         <RemoveCircleIcon className={styles.addItemQtyBtn} />
@@ -280,7 +280,7 @@ const AddItem = (props) => {
                                     <AddCircleIcon className={styles.addItemQtyBtn} />
                                 </IconButton>
                             </div>
-                            <br />
+                            <br /><br /><br /><br /><br />
                         </Paper>
                         <Button
                             className={ auth.userData ? styles.authAddToOrderBtn : language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn}
