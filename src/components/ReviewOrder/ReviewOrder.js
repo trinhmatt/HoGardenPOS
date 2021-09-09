@@ -115,11 +115,28 @@ const ReviewOrder = (props) => {
             <div className={styles.reviewLayout}>
                 <Paper className={styles.reviewBox} elevation={3}>
                     {state.itemElements}
-                    <div>
-                        <p>Subtotal: {state.orderSubtotal.toFixed(2)}</p>
-                        <p>HST: {(state.orderSubtotal * 0.13).toFixed(2)}</p>
-                        <p>TOTAL: {(state.orderSubtotal * 1.13).toFixed(2)}</p>
-                    </div>
+                    {
+                        (props.language === "english") ?
+                        <div className={styles.reviewTotal}>
+                            <div className={styles.cartBorder}>
+                                <span>Subtotal: ${state.orderSubtotal.toFixed(2)}</span>
+                                <span>HST: ${(state.orderSubtotal * 0.13).toFixed(2)}</span>
+                            </div>
+                            <div className={styles.cartBorder}>
+                                <span><b>Total: ${(state.orderSubtotal * 1.13).toFixed(2)}</b></span>
+                            </div>
+                        </div>
+                        :
+                        <div className={styles.reviewTotal}>
+                            <div className={styles.cartBorder}>
+                                <span>小計: ${state.orderSubtotal.toFixed(2)}</span>
+                                <span>HST: ${(state.orderSubtotal * 0.13).toFixed(2)}</span>
+                            </div>
+                            <div className={styles.cartBorder}>
+                                <span><b>全部的: ${(state.orderSubtotal * 1.13).toFixed(2)}</b></span>
+                            </div>
+                        </div>
+                    }
                     {
                         auth.userData && !state.errorMsg &&
                         <div>

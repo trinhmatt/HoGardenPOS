@@ -30,10 +30,14 @@ const menuStyles = makeStyles(() => ({
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflowX: 'hidden',
         backgroundColor: '#fdb678',
+        //desktop
+        '@media (min-width: 960px)': {
+            maxWidth: 'none !important',
+        },
     },
     addItemLayout: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
-        overflowX: 'hidden',
+        overflow: 'hidden',
         backgroundColor: '#fdb678',
         display: 'flex !important',
         flexDirection: 'column',
@@ -65,20 +69,19 @@ const menuStyles = makeStyles(() => ({
         },
     },
     foodLayout: {
-        width: '110%',
+        width: '100%',
+        paddingLeft: '0% !important',
+        paddingRight: '0% !important',
         //phone
         '@media (min-width: 375px)': {
-            marginTop: '18vh',
-            marginLeft: '-5vw',
+            marginTop: '17vh',
         },
         //ipad
         '@media (min-width: 760px)': {
             marginTop: '20vh',
-            marginLeft: '-5vw',
         },
         //desktop
         '@media (min-width: 960px)': {
-            marginTop: '25vh',
             marginLeft: 'auto',
             marginRight: 'auto',
         },
@@ -272,9 +275,6 @@ const menuStyles = makeStyles(() => ({
     menuSection: {
         paddingLeft: '5%',
         paddingRight: '5%',
-        '@media screen and (orientation: landscape)': {
-            width: '85vw'
-        },
     },
     authMenuSection: {
         paddingLeft: '5%',
@@ -327,6 +327,7 @@ const menuStyles = makeStyles(() => ({
         right: '0',
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#7f9877',
         color: '#fff',
         fontWeight: 'bold',
@@ -341,7 +342,8 @@ const menuStyles = makeStyles(() => ({
         //ipad
         '@media (min-width: 760px)': {
             fontSize:'18px',
-            width: '40px',
+            width: '35px',
+            height: '10px',
         },
         //desktop
         '@media (min-width: 960px)': {
@@ -399,6 +401,7 @@ const menuStyles = makeStyles(() => ({
         textAlign: 'center',
         paddingTop: '5%',
         overflowY: 'auto',
+        overflowX: 'hidden',
     },
     emptyCartBox: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
@@ -411,7 +414,7 @@ const menuStyles = makeStyles(() => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%',
+        height: '70%',
     },
     chinCartText: {
         fontSize: '5vw'
@@ -518,13 +521,14 @@ const menuStyles = makeStyles(() => ({
 
     //ADD ITEM 
     addItemContainer: {
+        overflow: 'auto',
         //phone
         '@media (min-width: 375px)': {
-            height: '65vh',
+            height: '70%',
         },
         //ipad
         '@media (min-width: 760px)': {
-            height: '60vh',
+            height: '65%',
         },
     },
     addItemChoices: {
@@ -545,6 +549,7 @@ const menuStyles = makeStyles(() => ({
         textAlign: 'center',
         wordBreak: 'break-word',
         border: '2px dashed #7f9877',
+        margin: '0',
         //phone
         '@media (min-width: 375px)': {
             fontSize: '20px',
@@ -563,6 +568,7 @@ const menuStyles = makeStyles(() => ({
         textAlign: 'center',
         wordBreak: 'break-word',
         border: '2px dashed #7f9877',
+        margin: '0',
         //phone
         '@media (min-width: 375px)': {
             fontSize: '25px',
@@ -591,6 +597,8 @@ const menuStyles = makeStyles(() => ({
         color: '#000',
         fontSize: '20px',
         lineHeight: '1em',
+        borderRadius: '5px !important',
+        border: '1px solid #000 !important',
         //ipad
         '@media (min-width: 760px)': {
             fontSize: '30px',
@@ -640,8 +648,8 @@ const menuStyles = makeStyles(() => ({
     },
     addToOrderBtn: {
         width: '75%',
-        position: 'absolute',
-        bottom: '2%',
+        position: 'fixed',
+        bottom: '10px',
         backgroundColor: '#000',
         color: '#fff',
         //ipad
@@ -651,11 +659,11 @@ const menuStyles = makeStyles(() => ({
     },
     chinAddToOrderBtn: {
         width: '75%',
-        position: 'absolute',
-        bottom: '2%',
+        position: 'fixed',
+        bottom: '10px',
         backgroundColor: '#000',
         color: '#fff',
-        fontSize: '25px',
+        fontSize: '20px',
     },
     authAddToOrderBtn: {
         width: '75%',
@@ -682,11 +690,28 @@ const menuStyles = makeStyles(() => ({
         zIndex: '-2',
     },
     reviewBox: {
-        height: '70%',
+        height: '65%',
         width: '80%',
         overflow: 'auto',
         padding: '5%',
         margin: '20% auto',
+        //ipad
+        '@media (min-width: 760px)': {
+            height: '80%',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
+            height: '500px',
+            margin: '200px auto',
+        },
+    },
+    reviewTotal: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
+        fontSize: '2.2vh',
+        marginTop: '10%',
     },
     authTableNumber: {
         fontSize: '30px',

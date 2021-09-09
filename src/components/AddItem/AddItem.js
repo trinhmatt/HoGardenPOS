@@ -243,7 +243,7 @@ const AddItem = (props) => {
                 <Container className={styles.addItemContainer}>
                     <Box className={styles.centered} style={{flexDirection: 'column'}}>
                         {/* food item */}
-                        <Paper className={styles.addItemSection} elevation={3}>
+                        <Paper className={styles.addItemSection} elevation={10}>
                             <h1 className={(language === 'english') ? styles.itemTitle : styles.chinItemTitle}>{itemData[language]}</h1>
                             {/* Item choices */}
                             <div>

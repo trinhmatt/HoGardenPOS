@@ -106,11 +106,11 @@ const OrderCard = (props) => {
         props.history.push(`/admin/place-order/${orderData.table}`);
     }
     return (
-        <Paper elevation={3} className={styles.orderCard}>
+        <Paper elevation={10} className={styles.orderCard}>
             <Button onClick={startEditOrder}>EDIT/編輯</Button>
             <h1 className={styles.orderTable}>{orderData.table === 'takeout' ? `Takeout/外賣 #${orderData.takeoutNumber}` : `table/桌 ${orderData.table}`}</h1>
             {state.itemElements}
-            <p>ORDER TOTAL: ${state.orderTotal.toFixed(2)}</p>
+            <h3 className={styles.orderCardTotal}>ORDER TOTAL/合計訂單: ${state.orderTotal.toFixed()}</h3>
             <Button 
                 onClick={startCompleteOrder} 
                 variant='contained' 

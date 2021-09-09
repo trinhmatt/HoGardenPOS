@@ -545,7 +545,7 @@
                 "chinese": "炸春卷(6條)",
                 "price": 4.95
             },
-            "SN": {
+            "SN8": {
                 "english": "Chicken Wings Basket (10 pcs)",
                 "chinese": "雞翼籃(10件)",
                 "price": 13.95
@@ -2328,7 +2328,9 @@
                 "english": "Lemon with Honey",
                 "chinese": "檸蜜",
                 "hotPrice": 4.00,
-                "coldPrice": 4.00
+                "coldPrice": 4.00,
+                "comboHot": 1.50,
+                "comboCold": 2.00
             },
             "D5": {
                 "english": "Lemon Tea / Water",
@@ -2362,13 +2364,16 @@
             "D10": {
                 "english": "Poached Egg with Milk",
                 "chinese": "鮮奶加蛋",
-                "hotPrice": 3.00
+                "hotPrice": 3.00,
+                "comboHot": 1.50
             },
             "D11": {
                 "english": "Soya Milk",
                 "chinese": "豆漿",
                 "hotPrice": 2.50,
-                "coldPrice": 3.00
+                "coldPrice": 3.00,
+                "comboHot": 1.50,
+                "comboCold": 1.50
             },
             "D12": {
                 "english": "Almond Milk",
@@ -2380,13 +2385,17 @@
                 "english": "Milk",
                 "chinese": "鮮奶",
                 "hotPrice": 2.50,
-                "coldPrice": 3.00
+                "coldPrice": 3.00,
+                "comboHot": 1.50,
+                "comboCold": 1.50
             },
             "D14": {
                 "english": "Coke with Lemon",
                 "chinese": "檸檬可樂",
                 "hotPrice": 3.00,
-                "coldPrice": 4.00
+                "coldPrice": 4.00,
+                "comboHot": 1.50,
+                "comboCold": 2.00
             },
             "D15": {
                 "english": "Soft Drinks",

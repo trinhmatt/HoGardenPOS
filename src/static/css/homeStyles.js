@@ -262,6 +262,12 @@ const homeStyles = makeStyles(() => ({
     orderAddOns: {
         fontSize: '20px',
     },
+    orderCardTotal: {
+        padding: '10px',
+        display: 'flex',
+        justifyContent: 'flex-end',
+        backgroundColor: 'grey',
+    },
     completeButton: {
         color: '#32cd59',
     },
