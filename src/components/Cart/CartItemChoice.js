@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { addOnTypes } from '../../static/constants/menu-constants';
 
 const CartItemChoice = (props) => {
-    const { title, choice, editItem, qty, price, type } = props;
+    const { title, choice, editItem, qty, price, type, language } = props;
     const [state, setState] = useState({
-                                choiceBody: choice
+                                choiceBody: ""
                             });
     
     useEffect(() => {
@@ -13,11 +14,17 @@ const CartItemChoice = (props) => {
             setState({...state, choiceBody})
         }
     }, [])
-    
+    const parseChoice = () => {
+        let choiceValue = choice;
+        if (title === "addOn" && type !== undefined) {
+            choiceValue = `${addOnTypes[type][language]} ${choice}`;
+        }
+        return choiceValue;
+    }
     return (
         <div onClick={editItem}>
         <span>
-                <b>- </b> {state.choiceBody}
+                <b>- </b> {parseChoice()}
                 {qty && <span>Qty: {qty}</span>}
                 {price !== undefined && <span> - ${(parseFloat(qty ? qty : 1)*price).toFixed(2)}</span>}
             </span>

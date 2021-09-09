@@ -101,3 +101,14 @@ export const itemTitleEnum = {
     "selectedProtein": "hasProtein",
     "nChoices": "choices"
 }
+
+export const addOnTypes = {
+    "Change": {
+        english: "Change to",
+        chinese: "改變"
+    },
+    "Extra": {
+        english: "Extra",
+        chinese: "外加"
+    }
+}

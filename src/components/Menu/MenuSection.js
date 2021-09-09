@@ -50,7 +50,7 @@ const MenuSection = (props) => {
                 const qtyQueryKey = items[item].english.replace(" ", "");
                 const qty = itemQtyObjs[qtyQueryKey] ? itemQtyObjs[qtyQueryKey] : 0;
                 elements.push(
-                    <MenuSectionItem qty={qty} sectionData={sectionData} table={props.match.params.number} language={language} key={item} data={items[item]} />
+                    <MenuSectionItem itemKey={item} qty={qty} sectionData={sectionData} table={props.match.params.number} language={language} key={item} data={items[item]} />
                 )
             }
             setItemElements(elements)

@@ -14,80 +14,85 @@ const Settings = (props) => {
         database.ref('hoursOfOperation').once("value")
             .then( snapshot => {
                 const hours = snapshot.val();
-                setState({...hours, oldValues: hours});
+                setState({newValues: JSON.parse(JSON.stringify(hours)), oldValues: JSON.parse(JSON.stringify(hours))});
             })
     }, [])
     const changeTime = (e) => {
-        setState({...state, [e.currentTarget.id]: e.currentTarget.value});
+        //e.currentTarget.id = "typeOfTime"/"day"
+        const typeOfTime = e.currentTarget.id.substring(0, e.currentTarget.id.indexOf("/"));
+        const day = e.currentTarget.id.substring((e.currentTarget.id.indexOf("/")+1));
+        let newValues = {...state.newValues};
+        newValues[day][typeOfTime] = e.currentTarget.value;
+        setState({...state, newValues});
     }
     const changeWeekDay = (e) => {
         //value = weekday
-        setState({...state, [e.currentTarget.value]: !state[e.currentTarget.value]})
+        let newValues = {...state.newValues};
+        newValues[e.currentTarget.value].isOpen = !newValues[e.currentTarget.value].isOpen;
+        setState({...state, newValues});
     }
     const isEqual = () => {
         let objectsEqual = true;
-        for (const key in state) {
-            if (key !== "oldValues" && state[key] !== state.oldValues[key]) {
-                objectsEqual = false;
+        if (state.newValues) {
+            for (const key in state.newValues) {
+                if (state.newValues[key].open !== state.oldValues[key].open || state.newValues[key].close !== state.oldValues[key].close || state.newValues[key].isOpen !== state.oldValues[key].isOpen) {
+                    objectsEqual = false;
+                }
             }
         }
         return objectsEqual;
     }
     const renderWeekDays = () => {
-        if (state[authConsts.WEEKDAYS.MONDAY.english] !== undefined) {
+        if (state.newValues && state.newValues[authConsts.WEEKDAYS.MONDAY.english] !== undefined) {
             let weekdayElements = [];
             for (const day in authConsts.WEEKDAYS) {
                 weekdayElements.push(
-                    <FormControlLabel 
-                        control={
-                            <Checkbox 
-                                value={day}
-                                checked={state[day]}
-                                onChange={changeWeekDay}
-                                name={day}
+                    <div key={day}>
+                        <FormControlLabel 
+                            control={
+                                <Checkbox 
+                                    value={day}
+                                    checked={state.newValues[day].isOpen}
+                                    onChange={changeWeekDay}
+                                    name={day}
+                                />
+                            }
+                            label={authConsts.WEEKDAYS[day][props.language]}
+                        />
+                        <div>
+                            <p>Open</p>
+                            <TextField 
+                                id={`open/${day}`}
+                                type="time"
+                                value={state.newValues[day].open}
+                                onChange={changeTime}
+                                disabled={!state.newValues[day].isOpen}
                             />
-                        }
-                        label={authConsts.WEEKDAYS[day][props.language]}
-                        key={day}
-                    />
+                        </div>
+                        <div>
+                            <p>Close</p>
+                            <TextField 
+                                id={`close/${day}`}
+                                type="time"
+                                value={state.newValues[day].close}
+                                onChange={changeTime}
+                                disabled={!state.newValues[day].isOpen}
+                            />
+                        </div>
+                    </div>
                 )
             }
             return weekdayElements;
         }
     }
     const saveSettings = () => {
-        let newSettings = {...state};
-        delete newSettings.oldValues;
-        database.ref('hoursOfOperation').set(newSettings)
+        database.ref('hoursOfOperation').set(state.newValues)
             .then( () => window.location.reload())
             .catch( err => console.log(err));
     }
     return (
         <div>
             <h2>Settings</h2>
-            <div>
-                <h2>Open/Close</h2>
-                <div>
-                    <p>Open</p>
-                    <TextField 
-                        id="open"
-                        type="time"
-                        value={state.open}
-                        defaultValue={state.open}
-                        onChange={changeTime}
-                    />
-                </div>
-                <div>
-                    <p>Close</p>
-                    <TextField 
-                        id="close"
-                        type="time"
-                        value={state.close}
-                        defaultValue={state.close}
-                        onChange={changeTime}
-                    />
-                </div>
-            </div>
             <div>
                 <h2>Days of week</h2>
                 <FormGroup row>

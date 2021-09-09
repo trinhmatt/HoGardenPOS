@@ -19,7 +19,6 @@ const AdminPlaceOrder = (props) => {
     let tableNumber = props.match.params.number;
     const { cart } = props;
     const isNewOrder = cart.id === undefined;
-    console.log(cart);
     const completeOrder = () => {
         database.ref(`orders/${dayjs().format(authConsts.DATE)}`).update({[cart.id]: ""})
             .then( () => props.history.push('/admin/tables'))
@@ -29,7 +28,6 @@ const AdminPlaceOrder = (props) => {
         <div>
             <Grid container spacing={0} style={{}}>
                 <Grid item xs={4} spacing={0} style={{overflow: 'auto', height: '100vh',backgroundColor: '#7f9877'}}>
-                   
                     <div item className={styles.authTableNumber}>
                         table {tableNumber}
                     </div>

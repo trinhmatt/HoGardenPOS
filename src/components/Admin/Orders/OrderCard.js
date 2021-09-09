@@ -110,7 +110,7 @@ const OrderCard = (props) => {
             <Button onClick={startEditOrder}>EDIT/編輯</Button>
             <h1 className={styles.orderTable}>{orderData.table === 'takeout' ? `Takeout/外賣 #${orderData.takeoutNumber}` : `table/桌 ${orderData.table}`}</h1>
             {state.itemElements}
-            <h3 className={styles.orderCardTotal}>ORDER TOTAL/合計訂單: ${state.orderTotal}</h3>
+            <h3 className={styles.orderCardTotal}>ORDER TOTAL/合計訂單: ${state.orderTotal.toFixed()}</h3>
             <Button 
                 onClick={startCompleteOrder} 
                 variant='contained' 
