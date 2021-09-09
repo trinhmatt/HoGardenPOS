@@ -38,6 +38,7 @@ const Home = (props) => {
     const styles = mainStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const [isMenuOpen, setMenuOpen] = useState(false);
     
     const scrollToMenu = () => {
         const menu = document.getElementById('menu');
@@ -71,8 +72,8 @@ const Home = (props) => {
                                         open={open}
                                         onClose={handleClose}
                                     >
-                                        <MenuItem onClick={scrollToMenu}>MENU/菜單</MenuItem>
-                                        <MenuItem onClick={() => props.history.push("/order/takeout")}>ORDER PICKUP/取貨訂單</MenuItem>
+                                        <MenuItem onClick={scrollToMenu}>MENU<br />菜單</MenuItem>
+                                        <MenuItem onClick={() => props.history.push("/order/takeout")}>ORDER PICKUP<br />取貨訂單</MenuItem>
                                     </Menu>
                                 </Grid>
                                 <Grid item xs={5} className={styles.centered}>
