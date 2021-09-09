@@ -19,6 +19,8 @@ function App(props) {
           const orders = snapshot.val();
 
           // If there are no orders and its the first render, set flag to false 
+          // Need this check because if there are no orders the listener's callback will not run 
+          // Which means that the flag is true when the first order comes in and the sound wont play
           if (!orders && isFirstRender) {
             setIsFirst(false);
           } 

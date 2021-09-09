@@ -44,16 +44,9 @@ const AddItem = (props) => {
         addToExistingOrder, 
         updateExistingOrder } = props;
     
-   
-    
     const isAdminUpdate = !!props.cart.orderItems; //if orderItems exist, it is an existing order and the admin is updating  
     const cart = isAdminUpdate ? props.cart.orderItems : props.cart;
-    const [item, setItem] = useState({
-                                qty: itemData.qty ? itemData.qty : 0, 
-                                addOn: itemData.addOn ? itemData.addOn : [],
-                                maxChoices: itemData.nChoices ? itemData.nChoices : 0,
-                                choices: itemData.choices ? itemData.choices : []
-                            });
+    const [item, setItem] = useState({...itemData});
 
     // Constants for add to order button text
     const engUpdateBtnText = "Update Order";
@@ -130,7 +123,7 @@ const AddItem = (props) => {
         //Check if item hasDrink, hasNoodle, hasSauce, etc.
         for (const key in itemData) {
             // Item specific choices (protein, saunce, carb, etc)
-            if (itemData[key] && itemChoices[key] && sectionData[itemChoices[key].menuKey]) {
+            if (( itemData[key] && itemChoices[key] && sectionData[itemChoices[key].menuKey]) || (itemChoices[key] && itemChoices[key][itemChoices[key].menuKey])) {
                 choiceSections.push(
                     <ItemChoiceSection 
                         selectedObj={itemData[itemChoices[key].menuKey]} 
@@ -141,19 +134,7 @@ const AddItem = (props) => {
                         choiceType={itemChoices[key].menuKey} 
                         choicesArr={sectionData[itemChoices[key].menuKey]}
                     />);
-            // General choices (egg, daily soup)
-            } else if (itemChoices[key] && itemChoices[key][itemChoices[key].menuKey]) {
-                choiceSections.push(
-                    <ItemChoiceSection 
-                        selectedObj={itemData[itemChoices[key].menuKey]} 
-                        key={key} 
-                        constKey={key} 
-                        language={language} 
-                        selectChoice={selectChoice} 
-                        choiceType={itemChoices[key].menuKey} 
-                        choicesArr={itemChoices[key][itemChoices[key].menuKey]}
-                    />);
-            }
+            } 
         }
         if (itemData.hasProteinChoice) {
             choiceSections.push(
@@ -213,7 +194,6 @@ const AddItem = (props) => {
     const checkRequiredChoices = () => {
         let allRequiredChosen = true;
         for (const key in itemData) {
-
             if (
                 (itemData[key] && itemChoices[key] && !item[itemChoices[key].menuKey]) || 
                 (key === "hasProteinChoice" && !item.selectedProtein) || 
@@ -284,7 +264,8 @@ const AddItem = (props) => {
                         </Paper>
                         <Button
                             className={ auth.userData ? styles.authAddToOrderBtn : language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn}
-                            variant='contained' disabled={checkRequiredChoices()} 
+                            variant='contained' 
+                            disabled={checkRequiredChoices()} 
                             onClick={index !== undefined ? startUpdateCart : addToOrder}>
                             {
                             index !== undefined ? 
