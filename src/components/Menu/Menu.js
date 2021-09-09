@@ -81,11 +81,12 @@ const Menu = (props) => {
     useEffect(() => {
         database.ref('hoursOfOperation').once('value')
             .then( snapshot => {
-                const hours = snapshot.val();
-                const open = dayjs(hours.open, authConsts['24_HOUR_TIME']);
-                const close = dayjs(hours.close, authConsts['24_HOUR_TIME']);
+                const days = snapshot.val();
+                const currentDay = dayjs().format("dddd").toUpperCase();
+                const open = dayjs(days[currentDay].open, authConsts['24_HOUR_TIME']);
+                const close = dayjs(days[currentDay].close, authConsts['24_HOUR_TIME']);
 
-                if (dayjs().isBetween(open, close, null, '[]') && hours[dayjs().format('dddd').toUpperCase()]) {
+                if (days[currentDay].isOpen && dayjs().isBetween(open, close, null, '[]')) {
                     renderHeader();
                     if (props.match.params.number !== "takeout") {
                         database.ref(`orders/${dayjs().format(authConsts.DATE)}`).once("value")
