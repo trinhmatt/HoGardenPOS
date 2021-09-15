@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; 
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import dayjs from 'dayjs';
 import { itemChoices } from '../../../static/constants/menu-constants';
 import { updateCart } from '../../../redux/actions/cart-actions';
 
@@ -109,6 +110,7 @@ const OrderCard = (props) => {
         <Paper elevation={10} className={styles.orderCard}>
             <Button onClick={startEditOrder}>EDIT/編輯</Button>
             <h1 className={styles.orderTable}>{orderData.table === 'takeout' ? `Takeout/外賣 #${orderData.takeoutNumber}` : `table/桌 ${orderData.table}`}</h1>
+            <p>ORDER TIME: {dayjs(orderData.time).format('h:mm A')}</p>
             {state.itemElements}
             <h3 className={styles.orderCardTotal}>ORDER TOTAL/合計訂單: ${state.orderTotal.toFixed()}</h3>
             <Button 

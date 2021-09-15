@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { itemChoices } from '../../static/constants/menu-constants';
+import menuJSON from '../../static/constants/menu.json';
 import { changeLanguage } from "../../redux/actions/lang-actions";
 import { addToCart, updateCart, addToExistingOrder, updateExistingOrder } from "../../redux/actions/cart-actions";
 import ItemChoiceSection from "./ItemChoiceSection";
+import ComboDrinkSection from './ComboDrinkSection';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -45,6 +47,7 @@ const AddItem = (props) => {
         updateExistingOrder } = props;
     
     const isAdminUpdate = !!props.cart.orderItems; //if orderItems exist, it is an existing order and the admin is updating  
+    const isTakeout = props.location.pathname.indexOf("takeout") > -1;
     const cart = isAdminUpdate ? props.cart.orderItems : props.cart;
     const [item, setItem] = useState({...itemData});
 
@@ -119,11 +122,16 @@ const AddItem = (props) => {
 
         setItem({ ...item, price, [choiceType]: choiceValue });
     }
+    const selectDrinkOption = (optionData) => {
+        const drinkObj = { ...item.drinkChoice, [optionData.type]: optionData.selectedOption };
+        setItem({...item, drinkChoice: drinkObj});
+    }
     // Values for button are formatted like: choiceType:choiceValue 
     // I use : as a delimitter to separate type and value so I can set the cart object 
     const renderChoices = () => {
         let choiceSections = [];
-        //Check if item hasDrink, hasNoodle, hasSauce, etc.
+
+        //Check if item hasNoodle, hasSauce, etc.
         for (const key in itemData) {
             // Item specific choices (protein, saunce, carb, etc)
             if (( itemData[key] && itemChoices[key] && sectionData[itemChoices[key].menuKey]) || (itemChoices[key] && itemChoices[key][itemChoices[key].menuKey])) {
@@ -163,6 +171,26 @@ const AddItem = (props) => {
                     <button value={`tempChoice:${JSON.stringify(sectionData.temp.cold)}`} onClick={selectChoice}>{sectionData.temp.cold[language]}</button>
                 </div>
             )
+        }
+        //Drinks are rendered differently, any combo can have any drink so we need to use the "drinks" obj in menu.json 
+        if (itemData.hasDrink) {
+            let allDrinks = [];
+            for (const drinkKey in menuJSON.drinks.menuItems) {
+                let drinkObj = menuJSON.drinks.menuItems[drinkKey];
+                drinkObj.menuKey = drinkKey;
+                allDrinks.push(drinkObj);
+            }
+            choiceSections.push(
+                <ComboDrinkSection 
+                    selectedObj={itemData.drinkChoice}
+                    isDisabled={(isTakeout && itemData.soupChoice)}
+                    key="comboDrink"
+                    language={language}
+                    selectChoice={selectChoice}
+                    drinkArr={allDrinks}
+                    selectedAddOns={item.addOn}
+                    selectDrinkOption={selectDrinkOption}
+                />);
         }
         if (sectionData.addOns && sectionData.addOns.length > 0) {
             for (let i = 0; i < sectionData.addOns.length; i++) {

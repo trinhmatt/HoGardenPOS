@@ -84,6 +84,44 @@ export const itemChoices = {
         "english": "Choices",
         "chinese": "甄拔",
         "menuKey": "choices"
+    },
+    "drinkOptions": {
+        "sugar": [
+            {
+                "english": "No sugar",
+                "chinese": "無糖"
+            },
+            {
+                "english": "Less sugar",
+                "chinese": "少糖"
+            },
+            {
+                "english": "Normal sugar",
+                "chinese": "普通糖"
+            },
+            {
+                "english": "More sugar",
+                "chinese": "多糖"
+            }
+        ],
+        "ice": [
+            {
+                "english": "No ice",
+                "chinese": "無冰"
+            },
+            {
+                "english": "Less ice",
+                "chinese": "少冰"
+            },
+            {
+                "english": "Normal ice",
+                "chinese": "普通冰"
+            },
+            {
+                "english": "More ice",
+                "chinese": "多冰"
+            }
+        ]
     }
 };
 
