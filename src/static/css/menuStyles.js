@@ -38,6 +38,7 @@ const menuStyles = makeStyles(() => ({
     addItemLayout: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflow: 'hidden',
+        position: 'fixed',
         backgroundColor: '#fdb678',
         display: 'flex !important',
         flexDirection: 'column',
@@ -541,7 +542,8 @@ const menuStyles = makeStyles(() => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        overflow: 'auto',
+        overflowY: 'auto',
+        overflowX: 'hidden',
         padding: '5%',
     },
     itemTitle: {

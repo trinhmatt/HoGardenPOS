@@ -126,7 +126,7 @@ const ComboDrinkSection = (props) => {
         if (state.coldSelected) {
             for (let i = 0; i < itemChoices.drinkOptions.ice.length; i++) {
                 iceOptions.push(
-                    <div>
+                    <div key={'iceOptions'+i}>
                         <Button 
                             id={`${i}/ice`}
                             value={JSON.stringify(itemChoices.drinkOptions.ice[i])}

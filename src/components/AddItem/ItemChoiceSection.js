@@ -58,7 +58,7 @@ const ItemChoiceSection = (props) => {
         if (drinkChoice && selectedAddOns.length > 0) {
             let selectedAddOnsCopy = selectedAddOns;
             for (let i = 0; i < selectedAddOns.length; i++) {
-                if (choicesArr.choices[selectedAddOns[i]].english === "Iced Drink") {
+                if (choicesArr.choices[selectedAddOns[i]].english === "Iced Drink" && !drinkChoice.ice) {
                     selectedAddOnsCopy.splice(i, 1)
                 }
             }
