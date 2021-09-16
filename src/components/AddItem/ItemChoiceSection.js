@@ -13,7 +13,7 @@ import { itemChoices } from '../../static/constants/menu-constants';
 
 const ItemChoiceSection = (props) => {
     const styles = menuStyles();
-    const { choiceType, choicesArr, selectChoice, language, constKey, selectedObj, maxChoices } = props;
+    const { choiceType, choicesArr, selectChoice, language, constKey, selectedObj, maxChoices, drinkChoice } = props;
     const isAddOn = choiceType === "addOn";
     const isSetDinner = choiceType === "choices";
     const [selectedItem, setSelectedItem] = useState(-1);
@@ -54,6 +54,17 @@ const ItemChoiceSection = (props) => {
             }
         }
     }, [])
+    useEffect(() => {
+        if (drinkChoice && selectedAddOns.length > 0) {
+            let selectedAddOnsCopy = selectedAddOns;
+            for (let i = 0; i < selectedAddOns.length; i++) {
+                if (choicesArr.choices[selectedAddOns[i]].english === "Iced Drink") {
+                    selectedAddOnsCopy.splice(i, 1)
+                }
+            }
+            setSelectedAddOns(selectedAddOnsCopy);
+        }
+    }, [drinkChoice])
     const handleSingleChoice = (e) => {
         const index = parseInt(e.currentTarget.id.substring(0, e.currentTarget.id.indexOf("/")));
         // if this item has been selected, unselect it
@@ -65,7 +76,7 @@ const ItemChoiceSection = (props) => {
             if (allSelected.includes(index)) {
                 allSelected.splice(allSelected.indexOf(index), 1);
             } else {
-                returnValue = isAddOn ? returnValue.substring(0, returnValue.length-1) + `, "price": ${choicesArr.price}}` : returnValue;
+                returnValue = isAddOn && returnValue.indexOf("price") === -1 ? returnValue.substring(0, returnValue.length-1) + `, "price": ${choicesArr.price}}` : returnValue;
                 allSelected.push(index);
             }
 
@@ -115,26 +126,42 @@ const ItemChoiceSection = (props) => {
         let choices = [];
         if (isAddOn) {
             for (let i = 0; i < choicesArr.choices.length; i++) {
-                const price = '$' + (choicesArr.choices[i].price ? parsePrice(choicesArr.choices[i].price.toString()) : parsePrice(choicesArr.price.toString()));
+                let price = '$';
+
+                if (choicesArr.choices[i].english === "Iced Drink") {
+                    choicesArr.choices[i].price = drinkChoice && drinkChoice.comboCold ? drinkChoice.comboCold-drinkChoice.comboHot : 1.50;
+                    price += parsePrice(choicesArr.choices[i].price.toString());
+                } else if (choicesArr.choices[i].price) {
+                    price += parsePrice(choicesArr.choices[i].price.toString());
+                } else {
+                    price += parsePrice(choicesArr.price.toString());
+                }
 
                 // Add on choice can be change/extra or qty choice 
-                if (choicesArr.type.english === "Change" || choicesArr.type.english === "Extra") {
+                if ((choicesArr.type.english === "Change" || choicesArr.type.english === "Extra")) {
 
-                    //Save type in choice object for use later
-                    choicesArr.choices[i].type = choicesArr.type.english;
+                    if ( 
+                        !drinkChoice 
+                        || ((drinkChoice.english === "Soft Drinks" || drinkChoice.english === "Ice Cream") && choicesArr.choices[i].english !== "Iced Drink") 
+                        || (drinkChoice.english !== "Soft Drinks" && drinkChoice.english !== "Ice Cream")
+                    ) {
+                        //Save type in choice object for use later
+                        choicesArr.choices[i].type = choicesArr.type.english;
 
-                    choices.push(
-                        <Button
-                            id={`${i}/${choiceType}`} 
-                            value={`${choiceType}:${JSON.stringify(choicesArr.choices[i])}`} 
-                            key={`${i}/${choicesArr.choices[i][language]}`}
-                            onClick={handleSingleChoice}
-                            className={language === 'english' ? 
-                                cx(styles.itemChoices,(selectedAddOns.includes(i) ? styles.selectedChoice : null)) :
-                                cx(styles.chinItemChoices,(selectedAddOns.includes(i) ? styles.chinSelectedChoice : null))}
-                        >
-                            {choicesArr.choices[i][language]} (+{price})
-                        </Button>)
+                        choices.push(
+                            <Button
+                                id={`${i}/${choiceType}`} 
+                                value={`${choiceType}:${JSON.stringify(choicesArr.choices[i])}`} 
+                                key={`${i}/${choicesArr.choices[i][language]}`}
+                                onClick={handleSingleChoice}
+                                className={language === 'english' ? 
+                                    cx(styles.itemChoices,(selectedAddOns.includes(i) ? styles.selectedChoice : null)) :
+                                    cx(styles.chinItemChoices,(selectedAddOns.includes(i) ? styles.chinSelectedChoice : null))}
+                            >
+                                {choicesArr.choices[i][language]} (+{price})
+                            </Button>)
+                    }
+                    
                 } else {
                     choices.push(
                         <div key={choicesArr.choices[i].english}>

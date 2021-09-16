@@ -27,7 +27,7 @@ const ComboDrinkSection = (props) => {
                                 selectedIndex: -1,
                                 drinkSelected: false,
                                 coldSelected: false
-    })
+                            });
 
     useEffect(() => {
         if (selectedObj) {
@@ -57,7 +57,7 @@ const ComboDrinkSection = (props) => {
             }
             setState({...state, coldSelected});
         }
-    }, [selectedObj, selectedAddOns])
+    }, [props])
 
     const handleDrinkSelect = (e) => {
         const index = parseInt(e.currentTarget.id.substring(0, e.currentTarget.id.indexOf("/")));
@@ -116,8 +116,8 @@ const ComboDrinkSection = (props) => {
                 );
             }
             optionElements.push(
-                <div>
-                    <h2>Sugar Level</h2>
+                <div key="allSugar">
+                    <h2>Sugar Level<span className={styles.red}>*</span></h2>
                     {sugarOptions}
                 </div>
             );
@@ -138,8 +138,8 @@ const ComboDrinkSection = (props) => {
                 )
             }
             optionElements.push(
-                <div>
-                    <h2>Ice Level</h2>
+                <div key="allIce">
+                    <h2>Ice Level<span className={styles.red}>*</span></h2>
                     {iceOptions}
                 </div>
             )

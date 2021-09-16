@@ -38,6 +38,7 @@ const AddItem = (props) => {
     // Section data will be from the menu when adding or from itemData when editing
     const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
 
+    // Prop variables and functions 
     const { 
         addToCart, 
         language, 
@@ -46,8 +47,11 @@ const AddItem = (props) => {
         addToExistingOrder, 
         updateExistingOrder } = props;
     
+    // Bools that effect logic and rendering
     const isAdminUpdate = !!props.cart.orderItems; //if orderItems exist, it is an existing order and the admin is updating  
     const isTakeout = props.location.pathname.indexOf("takeout") > -1;
+
+    // Data used by component
     const cart = isAdminUpdate ? props.cart.orderItems : props.cart;
     const [item, setItem] = useState({...itemData});
 
@@ -81,11 +85,12 @@ const AddItem = (props) => {
             cartItems.splice(index, 1);
         }
         isAdminUpdate ? updateExistingOrder(cartItems) : updateCart(cartItems);
-        goBackToMenu()
+        goBackToMenu();
     }
     const selectChoice = (choiceData) => {
         const val = choiceData.currentTarget ? choiceData.currentTarget.value : choiceData;
         let price = itemData.price;
+        let drinkChoice = item.drinkChoice ? {...item.drinkChoice} : null;
 
         if (val.indexOf("tempChoice") > -1) {
             price = val.indexOf("hot") > - 1 ? itemData.hotPrice : itemData.coldPrice;
@@ -106,6 +111,12 @@ const AddItem = (props) => {
                 if (choiceValue[i].english === returnObj.english) {
                     //if no quantity, it is a add on that is on/off
                     if (choiceValue[i].qty === undefined) {
+
+                        // If the add on was 'change to iced drink' and the user selected an ice level, remove it
+                        if (choiceValue[i].english === "Iced Drink" && drinkChoice) {
+                            drinkChoice.ice = null;
+                        }
+
                         choiceValue.splice(i, 1);
                     } else {
                         choiceValue[i] = returnObj;
@@ -120,7 +131,22 @@ const AddItem = (props) => {
             choiceValue = returnObj;
         }
 
-        setItem({ ...item, price, [choiceType]: choiceValue });
+        let addOnCopy = item.addOn;
+        if (choiceType === "drinkChoice" && item.addOn && item.addOn.length > 0) {
+            for (let i = 0; i < item.addOn.length; i++) {
+                if (item.addOn[i].english === "Iced Drink") {
+                    addOnCopy.splice(i, 1);
+                }
+            }
+        }
+
+        setItem({ 
+            ...item,
+             price, 
+             drinkChoice, 
+             [choiceType]: choiceValue, 
+             addOn: (choiceType === "drinkChoice" ? addOnCopy : choiceValue) 
+        });
     }
     const selectDrinkOption = (optionData) => {
         const drinkObj = { ...item.drinkChoice, [optionData.type]: optionData.selectedOption };
@@ -196,6 +222,7 @@ const AddItem = (props) => {
             for (let i = 0; i < sectionData.addOns.length; i++) {
                 choiceSections.push(
                     <ItemChoiceSection 
+                        drinkChoice={item.drinkChoice}
                         selectedObj={itemData.addOn} 
                         key={`addOn/${i}`} 
                         constKey={"addOn"} 
