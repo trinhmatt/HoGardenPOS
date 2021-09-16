@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 //Material ui imports
 import Button from '@material-ui/core/Button';
@@ -13,13 +13,28 @@ import { itemChoices } from '../../static/constants/menu-constants';
 
 const ItemChoiceSection = (props) => {
     const styles = menuStyles();
-    const { choiceType, choicesArr, selectChoice, language, constKey, selectedObj, maxChoices, drinkChoice } = props;
+    const { choiceType, choicesArr, selectChoice, language, constKey, selectedObj, maxChoices, drinkChoice, addOns } = props;
     const isAddOn = choiceType === "addOn";
     const isSetDinner = choiceType === "choices";
-    const [selectedItem, setSelectedItem] = useState(-1);
-    const [selectedAddOns, setSelectedAddOns] = useState([]);
-    const [qty, setQty] = useState({});
+    const [state, setState] = useState({
+        selectedItem: -1,
+        selectedAddOns: [],
+        qty: {},
+        choiceElements: []
+    });
 
+    // Need these for drink options 
+    // I only want the "Iced Drink" add on to reset if the new drinkChoice !== prevDrinkChoice
+    function usePrevious(value) {
+        const ref = useRef();
+        useEffect(() => {
+          ref.current = value;
+        });
+        return ref.current;
+    };
+
+    const prevDrinkChoice = usePrevious(drinkChoice);
+    
     useEffect(() => {
         // If selectedObj exists, this is an edit and we need to highlight the selected items
         if (selectedObj) {
@@ -43,35 +58,39 @@ const ItemChoiceSection = (props) => {
                         }
                     }
                 }
-                setQty(qty);
-                setSelectedAddOns(selectedAddOns);
+                setState({...state, qty, selectedAddOns})
             } else {
                 for (let i = 0; i < choicesArr.length; i++) {
                     if (choicesArr[i].english === selectedObj.english) {
-                        setSelectedItem(i);
+                        setState({...state, selectedItem: i});
                     }
                 }
             }
-        }
+        } 
     }, [])
     useEffect(() => {
-        if (drinkChoice && selectedAddOns.length > 0) {
-            let selectedAddOnsCopy = selectedAddOns;
-            for (let i = 0; i < selectedAddOns.length; i++) {
-                if (choicesArr.choices[selectedAddOns[i]].english === "Iced Drink" && !drinkChoice.ice) {
-                    selectedAddOnsCopy.splice(i, 1)
+        if (drinkChoice && state.selectedAddOns.length > 0 && prevDrinkChoice.english !== drinkChoice.english) {
+            let selectedAddOnsCopy = state.selectedAddOns;
+            for (let i = 0; i < state.selectedAddOns.length; i++) {
+                if (choicesArr.choices[state.selectedAddOns[i]].english === "Iced Drink" && !drinkChoice.ice) {
+                    selectedAddOnsCopy.splice(i, 1);
+                    setState({...state, selectedAddOns: selectedAddOnsCopy});
                 }
             }
-            setSelectedAddOns(selectedAddOnsCopy);
         }
     }, [drinkChoice])
+    useEffect(() => {
+        if (state.choiceElements.length === 0) {
+            choicesBuilder(choiceType, choicesArr);
+        }
+    });
     const handleSingleChoice = (e) => {
         const index = parseInt(e.currentTarget.id.substring(0, e.currentTarget.id.indexOf("/")));
         // if this item has been selected, unselect it
         // i check for null in the returnValue string to determine if it is a deselect vs a select
-        let returnValue = selectedItem === index ? `${choiceType}:null` : e.currentTarget.value;
+        let returnValue = state.selectedItem === index ? `${choiceType}:null` : e.currentTarget.value;
         if (isAddOn || isSetDinner) {
-            let allSelected = selectedAddOns;
+            let allSelected = state.selectedAddOns;
 
             if (allSelected.includes(index)) {
                 allSelected.splice(allSelected.indexOf(index), 1);
@@ -79,11 +98,10 @@ const ItemChoiceSection = (props) => {
                 returnValue = isAddOn && returnValue.indexOf("price") === -1 ? returnValue.substring(0, returnValue.length-1) + `, "price": ${choicesArr.price}}` : returnValue;
                 allSelected.push(index);
             }
-
-            setSelectedAddOns(allSelected);
+            setState({...state, selectedAddOns: allSelected});
         } else {
-            const selectedIndex = selectedItem === index ? -1 : index;
-            setSelectedItem(selectedIndex);
+            const selectedIndex = state.selectedItem === index ? -1 : index;
+            setState({...state, selectedItem: selectedIndex});
         }
         selectChoice(returnValue);
     }
@@ -108,11 +126,11 @@ const ItemChoiceSection = (props) => {
         value = value.substring(value.indexOf(":")+1);
         const endOfObj = value.indexOf("/", value.indexOf("}"));
         const incrementNumber = parseInt(value.substring(endOfObj+1));
-        const newQty = qty[qtyObjKey] ? qty[qtyObjKey] + incrementNumber : incrementNumber;
+        const newQty = state.qty[qtyObjKey] ? state.qty[qtyObjKey] + incrementNumber : incrementNumber;
         const returnValue = `${choiceType}:` + value.substring(0, endOfObj-1) + `, "qty": ${newQty}, "price": ${choicesArr.price}}`;
 
         selectChoice(returnValue);
-        setQty({...qty, [qtyObjKey]: newQty});
+        setState({...state, qty: {...state.qty, [qtyObjKey]: newQty}})
     }
     const parsePrice = (price) => {
         if (price.indexOf(".") === -1) {
@@ -123,11 +141,12 @@ const ItemChoiceSection = (props) => {
         return price;
     }
     const choicesBuilder = (choiceType, choicesArr) => {
-        let choices = [];
+        let choiceElements = [];
         if (isAddOn) {
             for (let i = 0; i < choicesArr.choices.length; i++) {
                 let price = '$';
 
+                // If the addOn is an iced drink, the price changes based on what drink it is 
                 if (choicesArr.choices[i].english === "Iced Drink") {
                     choicesArr.choices[i].price = drinkChoice && drinkChoice.comboCold ? drinkChoice.comboCold-drinkChoice.comboHot : 1.50;
                     price += parsePrice(choicesArr.choices[i].price.toString());
@@ -140,6 +159,8 @@ const ItemChoiceSection = (props) => {
                 // Add on choice can be change/extra or qty choice 
                 if ((choicesArr.type.english === "Change" || choicesArr.type.english === "Extra")) {
 
+
+                    // This logic is just to not render the add on if it is an iced drink and if the drink is ice cream or soft drink
                     if ( 
                         !drinkChoice 
                         || ((drinkChoice.english === "Soft Drinks" || drinkChoice.english === "Ice Cream") && choicesArr.choices[i].english !== "Iced Drink") 
@@ -148,22 +169,22 @@ const ItemChoiceSection = (props) => {
                         //Save type in choice object for use later
                         choicesArr.choices[i].type = choicesArr.type.english;
 
-                        choices.push(
+                        choiceElements.push(
                             <Button
                                 id={`${i}/${choiceType}`} 
                                 value={`${choiceType}:${JSON.stringify(choicesArr.choices[i])}`} 
                                 key={`${i}/${choicesArr.choices[i][language]}`}
                                 onClick={handleSingleChoice}
                                 className={language === 'english' ? 
-                                    cx(styles.itemChoices,(selectedAddOns.includes(i) ? styles.selectedChoice : null)) :
-                                    cx(styles.chinItemChoices,(selectedAddOns.includes(i) ? styles.chinSelectedChoice : null))}
+                                    cx(styles.itemChoices,(state.selectedAddOns.includes(i) ? styles.selectedChoice : null)) :
+                                    cx(styles.chinItemChoices,(state.selectedAddOns.includes(i) ? styles.chinSelectedChoice : null))}
                             >
                                 {choicesArr.choices[i][language]} (+{price})
                             </Button>)
                     }
                     
                 } else {
-                    choices.push(
+                    choiceElements.push(
                         <div key={choicesArr.choices[i].english}>
                             <span>{choicesArr.choices[i][language]} (+{price})</span>
                             <Button 
@@ -172,7 +193,7 @@ const ItemChoiceSection = (props) => {
                             >
                                 -
                             </Button>
-                            <span>{qty[`${choiceType}${i}`] ? qty[`${choiceType}${i}`] : 0}</span>
+                            <span>{state.qty[`${choiceType}${i}`] ? state.qty[`${choiceType}${i}`] : 0}</span>
                             <Button 
                                 value={`${choiceType}${i}:${JSON.stringify(choicesArr.choices[i])}/1`} 
                                 onClick={handleQtyChoice}
@@ -185,28 +206,28 @@ const ItemChoiceSection = (props) => {
             }
         } else if (choicesArr) {
             for (let i = 0; i < choicesArr.length; i++) {
-                choices.push(
+                choiceElements.push(
                     <Button
                         id={`${i}/${choiceType}`}
-                        disabled={isSetDinner && selectedAddOns.length === maxChoices && !selectedAddOns.includes(i)} 
+                        disabled={isSetDinner && state.selectedAddOns.length === maxChoices && !state.selectedAddOns.includes(i)} 
                         value={`${choiceType}:${JSON.stringify(choicesArr[i])}`} 
                         key={`${i}/${choicesArr[i][language]}`}
                         onClick={handleSingleChoice}
                         className={language === 'english' ? 
-                            cx(styles.itemChoices,(selectedItem === i || selectedAddOns.includes(i) ? styles.selectedChoice : null)) :
-                            cx(styles.chinItemChoices,(selectedItem === i || selectedAddOns.includes(i) ? styles.chinSelectedChoice : null))}
+                            cx(styles.itemChoices,(state.selectedItem === i || state.selectedAddOns.includes(i) ? styles.selectedChoice : null)) :
+                            cx(styles.chinItemChoices,(state.selectedItem === i || state.selectedAddOns.includes(i) ? styles.chinSelectedChoice : null))}
                     >
                         {choicesArr[i][language]}
                     </Button>
                 )
             }
         }
-        return choices;
+        setState({...state, choiceElements});
     }
     return (
         <div className={(language === 'english') ? styles.itemChoiceLayout : styles.chinItemChoiceLayout}>
             <h2>{isAddOn ? choicesArr.type[language] : itemChoices[constKey][language]}{<span className={styles.red}>{!isAddOn && '*'}</span>}</h2>
-            <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{choicesBuilder(choiceType, choicesArr)}</ButtonGroup>
+            <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{state.choiceElements}</ButtonGroup>
         </div>
     )
 }

@@ -139,13 +139,12 @@ const AddItem = (props) => {
                 }
             }
         }
-
         setItem({ 
             ...item,
              price, 
              drinkChoice, 
              [choiceType]: choiceValue, 
-             addOn: (choiceType === "drinkChoice" ? addOnCopy : choiceValue) 
+             addOn: (choiceType === "drinkChoice" ? addOnCopy : choiceType === "addOn" ? choiceValue : item.addOn) 
         });
     }
     const selectDrinkOption = (optionData) => {
@@ -230,6 +229,7 @@ const AddItem = (props) => {
                         language={language} 
                         selectChoice={selectChoice} 
                         choicesArr={sectionData.addOns[i]} 
+                        addOns={item.addOn}
                     />);
             }
         }
