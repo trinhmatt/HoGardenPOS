@@ -23,6 +23,7 @@ const CartItem = (props) => {
     const isAdminUpdate = !!props.cart.orderItems; //if orderItems exist, it is an existing order and the admin is updating  
     const cart = isAdminUpdate ? props.cart.orderItems : props.cart;
     let hasChoices = false;
+    console.log(itemData)
 
     const renderChoices = () => {
         let choices = [];
@@ -128,7 +129,7 @@ const CartItem = (props) => {
                 </Grid>
             </Grid>
             {
-                (renderChoices().length > 0 || itemData.addOn.length > 0) ?
+                (renderChoices().length > 0 || (itemData.addOn && itemData.addOn.length > 0)) ?
                 <Grid container spacing={3} onClick={editItem}>
                     <Grid item xs className={(language === 'english') ? styles.cartAddonTitle : styles.chinCartAddonTitle}>
                         {hasChoices && <span><b>{(props.language === "english") ? 'Choices:' : '選擇:'}</b></span>}
