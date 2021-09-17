@@ -11,7 +11,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 //TO DO: Render drink options 
 
-const ComboDrinkSection = (props) => {
+const DrinkAndSoupSection = (props) => {
     const styles = menuStyles();
     const { 
         selectedObj, 
@@ -20,13 +20,18 @@ const ComboDrinkSection = (props) => {
         drinkArr, 
         isDisabled, 
         selectedAddOns, 
-        selectDrinkOption 
+        selectDrinkOption,
+        isTakeout,
+        hasDrink,
+        hasSoup 
     } = props;
 
     const [state, setState] = useState({    
-                                selectedIndex: -1,
+                                selectedIndex: {soup: -1, drink: -1},
                                 drinkSelected: false,
-                                coldSelected: false
+                                soupSelected: false,
+                                coldSelected: false,
+                                selectedSide: ""
                             });
 
     useEffect(() => {
@@ -59,18 +64,25 @@ const ComboDrinkSection = (props) => {
         }
     }, [props])
 
-    const handleDrinkSelect = (e) => {
+    /*
+        e: event object 
+        type: drink or soup 
+        returnValKey: drinkChoice or soupChoice 
+        typeSelected: drinkSelected or soupSelected
+    */
+    const handleSelect = (e, type, returnValKey, typeSelected) => {
         const index = parseInt(e.currentTarget.id.substring(0, e.currentTarget.id.indexOf("/")));
-        const returnValue = state.selectedIndex === index ? "drinkChoice:null" : e.currentTarget.value;
+        const returnValue = state.selectedIndex[type] === index ? `${returnValKey}:null` : e.currentTarget.value;
 
-        if (index === state.selectedIndex) {
-            setState({...state, selectedIndex: -1, drinkSelected: false});
+        if (index === state.selectedIndex[type]) {
+            setState({...state, selectedIndex: {...state.selectedIndex, [type]: -1}, [typeSelected]: false});
         } else {
-            setState({...state, selectedIndex: index, drinkSelected: true})
+            setState({...state, selectedIndex: {...state.selectedIndex, [type]: index}, [typeSelected]: true})
         }
 
         selectChoice(returnValue);
     }
+
 
     const handleDrinkOptionSelect = (e) => {
        const drinkOptionType = e.currentTarget.id.substring( (e.currentTarget.id.indexOf("/")+1) );
@@ -79,29 +91,33 @@ const ComboDrinkSection = (props) => {
        selectDrinkOption(drinkOption);
     }
 
-    const renderDrinks = () => {
-        let drinkElements = [];
-        for (let i = 0; i < drinkArr.length; i++) {
-            drinkElements.push(
+    const renderChoices = (type) => {
+        let elements = [];
+        const typeVariables = type === "drink" ? {type, returnValKey: "drinkChoice", typeSelected: "drinkSelected"} : {type, returnValKey: "soupChoice", typeSelected: "soupSelected"};
+        const choiceArray = type === "drink" ? drinkArr : itemChoices.soup.soupChoice;
+        for (let i = 0; i < choiceArray.length; i++) {
+            const buttonText = type === "drink" ? `${choiceArray[i].english !== "Soft Drinks" && choiceArray[i].english !== "Ice Cream" ? "Hot " : ""}${choiceArray[i][language]} ${choiceArray[i].comboHot ? `(+$${choiceArray[i].comboHot.toFixed(2)})` : ""}` : choiceArray[i][language]
+            elements.push(
                 <Button
-                    id={`${i}/drinkChoice`}
-                    key={drinkArr[i].english}
+                    id={`${i}/${typeVariables.returnValKey}`}
+                    key={choiceArray[i].english}
                     disabled={isDisabled}
-                    onClick={handleDrinkSelect}
-                    value={`drinkChoice:${JSON.stringify(drinkArr[i])}`}
+                    onClick={(e) => handleSelect(e, typeVariables.type, typeVariables.returnValKey, typeVariables.typeSelected)}
+                    value={`${typeVariables.returnValKey}:${JSON.stringify(choiceArray[i])}`}
                 >
-                    {`${drinkArr[i].english !== "Soft Drinks" && drinkArr[i].english !== "Ice Cream" ? "Hot " : ""}${drinkArr[i][language]} ${drinkArr[i].comboHot ? `(+$${drinkArr[i].comboHot.toFixed(2)})` : ""}`}
+                    {buttonText}
                 </Button>
             )
         }
-        return drinkElements;
+        return elements;
     }
+
     const renderDrinkOptions = () => {
         let optionElements = [];
         let sugarOptions = [];
         let iceOptions = [];
 
-        if (state.selectedIndex !== -1 && drinkArr[state.selectedIndex].hasSugar) {
+        if (state.selectedIndex.drink !== -1 && drinkArr[state.selectedIndex.drink].hasSugar) {
             for (let i = 0; i < itemChoices.drinkOptions.sugar.length; i++) {
                 sugarOptions.push(
                     <div key={`${i}/sugarOption`}>
@@ -146,13 +162,34 @@ const ComboDrinkSection = (props) => {
         }
         return optionElements;
     }
+    const selectTakeoutSide = (e) => {
+        setState({...state, selectedSide: e.currentTarget.value});
+    }
     return (
         <div className={(language === 'english') ? styles.itemChoiceLayout : styles.chinItemChoiceLayout}>
-            <h2>Drink<span className={styles.red}>*</span></h2>
-            {renderDrinks()}
+            {
+                isTakeout && hasDrink && hasSoup ? 
+                    <div>
+                        <div>
+                            <p>Comes with a drink OR soup</p>
+                            <Button value={"soup"} onClick={selectTakeoutSide}>Soup</Button>
+                            <Button value={"drink"} onClick={selectTakeoutSide}>Drink</Button>
+                        </div>
+                        <div>
+                            {state.selectedSide && state.selectedSide === "soup" && renderChoices("soup")}
+                            {state.selectedSide && state.selectedSide === "drink" && renderChoices("drink")}
+                        </div>
+                    </div> 
+                : 
+                    <div>
+                        {hasSoup && <div><h2>Soup<span className={styles.red}>*</span></h2>{renderChoices("soup")}</div>}
+                        {hasDrink && <div><h2>Drink<span className={styles.red}>*</span></h2>{renderChoices("drink")}</div>}
+                    </div>
+            }
+            
             {state.drinkSelected && renderDrinkOptions()}
         </div>
     )
 }
 
-export default ComboDrinkSection;
+export default DrinkAndSoupSection;

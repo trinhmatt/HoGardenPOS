@@ -1,6 +1,5 @@
 export const itemChoices = {
-    "hasSoup": {
-        "menuKey": "soupChoice",
+    "soup": {
         "english": "Soup",
         "chinese": "湯",
         "soupChoice": [

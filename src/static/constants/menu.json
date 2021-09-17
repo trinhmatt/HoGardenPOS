@@ -499,16 +499,6 @@
                 "chinese": "奉送 熱港式奶茶或咖啡或各式熱飲 (粥餐不連飲品)"
             }
         ],
-        "drinkChoice": [
-            {
-                "english": "Hot HK Milk Tea",
-                "chinese": "熱港式奶茶"
-            },
-            {
-                "english": "Hot Coffee",
-                "chinese": "熱咖啡"
-            }
-        ],
         "noodleChoice": [
             {
                 "english": "Macaroni",
@@ -1104,62 +1094,48 @@
                 "price": 0.25
             }
         ],
-        "drinkChoice": [
-            {
-                "english": "Coffee",
-                "chinese": "咖啡"
-            },
-            {
-                "english": "Milk Tea",
-                "chinese": "奶茶"
-            },
-            {
-                "english": "Change to Iced Drink/Honey",
-                "chinese": "改凍飲/蜜糖",
-                "price": 1.50
-            },
-            {
-                "english": "Change to Iced Lemon Water with Honey",
-                "chinese": "改凍檸蜜",
-                "price": 2.00
-            }
-        ],
         "menuItems": {
             "HC1": {
                 "english": "Hai Nan Chicken Special Rice",
                 "chinese": "海南雞飯",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             },
             "HC2": {
                 "english": "Teriyaki Chicken",
                 "chinese": "日式照燒雞扒飯",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             },
             "HC3": {
                 "english": "Thai Style Pad Thai",
                 "chinese": "泰式 Pad Thai 粉",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             },
             "HC4": {
                 "english": "House Special Pork Chop",
                 "chinese": "香茅豬扒飯",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             },
             "HC5": {
                 "english": "Pork Belly Served with Rice",
                 "chinese": "梅菜扣肉飯",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             },
             "HC6": {
                 "english": "Pork Hock with Fermented Red Bean Curd on Rice",
                 "chinese": "南乳豬手飯",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             }
         }
     },
@@ -2114,29 +2090,7 @@
                 "isSpicy": false,
                 "hasDrink": true
             }
-        },
-        "drinkChoice": [
-            {
-                "english": "Chinese Soup",
-                "chinese": "例湯"
-            },
-            {
-                "english": "Borscht",
-                "chinese": "羅宋湯"
-            },
-            {
-                "english": "HK Milk Tea",
-                "chinese": "熱港式奶茶"
-            },
-            {
-                "english": "Coffee",
-                "chinese": "咖啡"
-            },
-            {
-                "english": "Lemon Tea",
-                "chinese": "檸檬茶"
-            }
-        ]
+        }
     },
     "sizzlingPlates": {
         "title": {

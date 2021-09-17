@@ -14,7 +14,7 @@ const MenuSectionItem = (props) => {
     const pushToAdd = () => {
         props.history.push({
             pathname: "/add-item",
-            state: {itemData: data, table, sectionData}
+            state: {itemData: data, table, sectionData, isTakeout: (props.location.pathname.indexOf("takeout") > -1)}
         })
     }
     const parsePrice = (price) => {

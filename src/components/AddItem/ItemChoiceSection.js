@@ -80,7 +80,13 @@ const ItemChoiceSection = (props) => {
         }
     }, [drinkChoice])
     useEffect(() => {
-        if (state.choiceElements.length === 0) {
+        if (
+            state.choiceElements.length === 0  // initial render
+            // need the following two checks to re-render the price for iced drink add on since not all drink have the same iced drink price
+            || (prevDrinkChoice && drinkChoice.english !== prevDrinkChoice.english) // if new selection and drink was already selected
+            || (!prevDrinkChoice && drinkChoice && drinkChoice.english) // if new selection and no drink already selected
+        ) {
+            console.log('hsass')
             choicesBuilder(choiceType, choicesArr);
         }
     });
@@ -148,6 +154,7 @@ const ItemChoiceSection = (props) => {
 
                 // If the addOn is an iced drink, the price changes based on what drink it is 
                 if (choicesArr.choices[i].english === "Iced Drink") {
+                    console.log(drinkChoice)
                     choicesArr.choices[i].price = drinkChoice && drinkChoice.comboCold ? drinkChoice.comboCold-drinkChoice.comboHot : 1.50;
                     price += parsePrice(choicesArr.choices[i].price.toString());
                 } else if (choicesArr.choices[i].price) {
