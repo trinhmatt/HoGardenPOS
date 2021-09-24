@@ -69,7 +69,7 @@ const ItemChoiceSection = (props) => {
         } 
     }, [])
     useEffect(() => {
-        if (drinkChoice && state.selectedAddOns.length > 0 && prevDrinkChoice.english !== drinkChoice.english) {
+        if (drinkChoice && prevDrinkChoice && state.selectedAddOns.length > 0 && prevDrinkChoice.english !== drinkChoice.english) {
             let selectedAddOnsCopy = state.selectedAddOns;
             for (let i = 0; i < state.selectedAddOns.length; i++) {
                 if (choicesArr.choices[state.selectedAddOns[i]].english === "Iced Drink" && !drinkChoice.ice) {
@@ -79,17 +79,21 @@ const ItemChoiceSection = (props) => {
             }
         }
     }, [drinkChoice])
-    useEffect(() => {
-        if (
-            state.choiceElements.length === 0  // initial render
-            // need the following two checks to re-render the price for iced drink add on since not all drink have the same iced drink price
-            || (prevDrinkChoice && drinkChoice.english !== prevDrinkChoice.english) // if new selection and drink was already selected
-            || (!prevDrinkChoice && drinkChoice && drinkChoice.english) // if new selection and no drink already selected
-        ) {
-            console.log('hsass')
-            choicesBuilder(choiceType, choicesArr);
-        }
-    });
+    // useEffect(() => {
+    //     console.log("prev", prevState)
+    //     console.log("curr", state)
+    //     if (
+    //         state.choiceElements.length === 0  // initial render
+    //         // need the following two checks to re-render the price for iced drink add on since not all drink have the same iced drink price
+    //         || (prevDrinkChoice && drinkChoice.english !== prevDrinkChoice.english) // if new selection and drink was already selected
+    //         || (!prevDrinkChoice && drinkChoice && drinkChoice.english) // if new selection and no drink already selected
+    //         || (prevState.selectedItem !== state.selectedItem)
+    //         || (prevState.selectedAddOns.length !== state.selectedAddOns.length)
+    //         || (prevState.qty !== state.qty)
+    //     ) {
+    //         choicesBuilder(choiceType, choicesArr);
+    //     }
+    // });
     const handleSingleChoice = (e) => {
         const index = parseInt(e.currentTarget.id.substring(0, e.currentTarget.id.indexOf("/")));
         // if this item has been selected, unselect it
@@ -154,7 +158,6 @@ const ItemChoiceSection = (props) => {
 
                 // If the addOn is an iced drink, the price changes based on what drink it is 
                 if (choicesArr.choices[i].english === "Iced Drink") {
-                    console.log(drinkChoice)
                     choicesArr.choices[i].price = drinkChoice && drinkChoice.comboCold ? drinkChoice.comboCold-drinkChoice.comboHot : 1.50;
                     price += parsePrice(choicesArr.choices[i].price.toString());
                 } else if (choicesArr.choices[i].price) {
@@ -166,7 +169,6 @@ const ItemChoiceSection = (props) => {
                 // Add on choice can be change/extra or qty choice 
                 if ((choicesArr.type.english === "Change" || choicesArr.type.english === "Extra")) {
 
-
                     // This logic is just to not render the add on if it is an iced drink and if the drink is ice cream or soft drink
                     if ( 
                         !drinkChoice 
@@ -175,7 +177,6 @@ const ItemChoiceSection = (props) => {
                     ) {
                         //Save type in choice object for use later
                         choicesArr.choices[i].type = choicesArr.type.english;
-
                         choiceElements.push(
                             <Button
                                 id={`${i}/${choiceType}`} 
@@ -229,12 +230,13 @@ const ItemChoiceSection = (props) => {
                 )
             }
         }
-        setState({...state, choiceElements});
+        return choiceElements
+        //setState({...state, choiceElements});
     }
     return (
         <div className={(language === 'english') ? styles.itemChoiceLayout : styles.chinItemChoiceLayout}>
             <h2>{isAddOn ? choicesArr.type[language] : itemChoices[constKey][language]}{<span className={styles.red}>{!isAddOn && '*'}</span>}</h2>
-            <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{state.choiceElements}</ButtonGroup>
+            <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{choicesBuilder(choiceType, choicesArr)}</ButtonGroup>
         </div>
     )
 }

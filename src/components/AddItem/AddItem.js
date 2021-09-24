@@ -142,7 +142,7 @@ const AddItem = (props) => {
 
         // If user selected new drink and iced drink was already selected, un-select it
         let addOnCopy = item.addOn;
-        if (choiceType === "drinkChoice" && item.addOn && item.addOn.length > 0) {
+        if (choiceType === "drinkChoice" && item.addOn && item.addOn.length > 0 && item.drinkChoice) {
             for (let i = 0; i < item.addOn.length; i++) {
                 if (item.addOn[i].english === "Iced Drink") {
                     addOnCopy.splice(i, 1);
