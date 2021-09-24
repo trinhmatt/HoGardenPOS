@@ -9,7 +9,7 @@ import { menuStyles } from '../../static/css/menuStyles';
 import cx from 'clsx';
 
 //Constants imports
-import { itemChoices } from '../../static/constants/menu-constants';
+import { itemChoices, softDrinks } from '../../static/constants/menu-constants';
 
 const ItemChoiceSection = (props) => {
     const styles = menuStyles();
@@ -172,8 +172,8 @@ const ItemChoiceSection = (props) => {
                     // This logic is just to not render the add on if it is an iced drink and if the drink is ice cream or soft drink
                     if ( 
                         !drinkChoice 
-                        || ((drinkChoice.english === "Soft Drinks" || drinkChoice.english === "Ice Cream") && choicesArr.choices[i].english !== "Iced Drink") 
-                        || (drinkChoice.english !== "Soft Drinks" && drinkChoice.english !== "Ice Cream")
+                        || ((softDrinks.includes(drinkChoice.english) || drinkChoice.english === "Ice Cream") && choicesArr.choices[i].english !== "Iced Drink") 
+                        || (!softDrinks.includes(drinkChoice.english) && drinkChoice.english !== "Ice Cream")
                     ) {
                         //Save type in choice object for use later
                         choicesArr.choices[i].type = choicesArr.type.english;

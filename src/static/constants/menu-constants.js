@@ -149,3 +149,5 @@ export const addOnTypes = {
         chinese: "外加"
     }
 }
+
+export const softDrinks = ["Coke", "Diet Coke", "Sprite", "Ginger Ale"]

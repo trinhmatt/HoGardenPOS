@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { itemChoices } from '../../static/constants/menu-constants';
+import { itemChoices, softDrinks } from '../../static/constants/menu-constants';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -96,7 +96,7 @@ const DrinkAndSoupSection = (props) => {
         const typeVariables = type === "drink" ? {type, returnValKey: "drinkChoice", typeSelected: "drinkSelected"} : {type, returnValKey: "soupChoice", typeSelected: "soupSelected"};
         const choiceArray = type === "drink" ? drinkArr : itemChoices.soup.soupChoice;
         for (let i = 0; i < choiceArray.length; i++) {
-            const buttonText = type === "drink" ? `${choiceArray[i].english !== "Soft Drinks" && choiceArray[i].english !== "Ice Cream" ? "Hot " : ""}${choiceArray[i][language]} ${choiceArray[i].comboHot ? `(+$${choiceArray[i].comboHot.toFixed(2)})` : ""}` : choiceArray[i][language]
+            const buttonText = type === "drink" ? `${!softDrinks.includes(choiceArray[i].english) && choiceArray[i].english !== "Ice Cream" ? "Hot " : ""}${choiceArray[i][language]} ${choiceArray[i].comboHot ? `(+$${choiceArray[i].comboHot.toFixed(2)})` : ""}` : choiceArray[i][language]
             elements.push(
                 <Button
                     id={`${i}/${typeVariables.returnValKey}`}

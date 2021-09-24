@@ -3357,15 +3357,33 @@
                 "hasSugar": false
             },
             "D15": {
-                "english": "Soft Drinks",
-                "chinese": "各式汽水",
-                "coldPrice": 3.00,
-                "hasSugar": false
-            },
-            "D16": {
                 "english": "Ice Cream",
                 "chinese": "各式雪糕",
                 "coldPrice": 2.95,
+                "hasSugar": false
+            },
+            "D16": {
+                "english": "Coke",
+                "chinese": "可樂",
+                "coldPrice": 3.00,
+                "hasSugar": false
+            },
+            "D17": {
+                "english": "Diet Coke",
+                "chinese": "健怡可樂",
+                "coldPrice": 3.00,
+                "hasSugar": false
+            },
+            "D18": {
+                "english": "Sprite",
+                "chinese": "精靈",
+                "coldPrice": 3.00,
+                "hasSugar": false
+            },
+            "D19": {
+                "english": "Ginger Ale",
+                "chinese": "乾薑",
+                "coldPrice": 3.00,
                 "hasSugar": false
             }
         }
