@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import dayjs from 'dayjs';
@@ -13,24 +13,145 @@ import { menuStyles } from '../../static/css/menuStyles';
 
 //Material ui imports
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import PrintIcon from '@material-ui/icons/Print';
 
 const AdminPlaceOrder = (props) => {
     const styles = menuStyles();
     let tableNumber = props.match.params.number;
     const { cart } = props;
+    const [state, setState] = useState({
+        receiptHtml: '',
+    });
     const isNewOrder = cart.id === undefined;
     const completeOrder = () => {
         database.ref(`orders/${dayjs().format(authConsts.DATE)}`).update({[cart.id]: ""})
             .then( () => props.history.push('/admin/tables'))
             .catch( err => console.log(err));
     }
+    
+    useEffect(() => {
+        let cartItems = '';
+        console.log(window.location.href)
+        const dateTime = dayjs().format('DD/MM/YYYY HH:mm:ss');
+        let cartSubTotal = 0.0;
+        const cartCopy = cart.length === undefined ? cart.orderItems : cart;
+        for (let i = 0; i < cartCopy.length; ++i) {
+            let itemTotal = (cartCopy[i].price * cartCopy[i].qty);
+            cartSubTotal += (cartCopy[i].price * cartCopy[i].qty);
+
+            let addOns = '';
+            if (cartCopy[i].addOn && cartCopy[i].addOn.length > 0) {
+                addOns = '<u>Add-Ons/附加組件:</u> <br />';
+                for (let j = 0; j < cartCopy[i].addOn.length; ++j) {
+                    itemTotal += cartCopy[i].addOn[j].price;
+                    cartSubTotal += cartCopy[i].addOn[j].price;
+                    addOns += cartCopy[i].addOn[j].english
+                        + '/' + cartCopy[i].addOn[j].chinese
+                        + '&emsp;$' + (cartCopy[i].addOn[j].price).toFixed(2)
+                        + '<br />';
+                }
+                addOns += '<br />';
+            }
+
+            cartItems += '<div class="row"><div class="column side">'
+                + cartCopy[i].qty 
+                + ' &times;</div><div class="column middle">' + cartCopy[i].restName 
+                + '. ' + cartCopy[i].english 
+                + '/' + cartCopy[i].chinese 
+                + '</div> <div class="column side">$' 
+                + (itemTotal).toFixed(2)
+                + '</div></div>'
+                + '<div class="center25">' + addOns + '</div><br />'; 
+        }
+        let cartHST = ((cartSubTotal * 0.13).toFixed(2));
+        let cartTotal = ((cartSubTotal * 1.13).toFixed(2));
+        cartSubTotal = cartSubTotal.toFixed(2);
+        console.log(cartItems)
+        let receiptHtml = 'hi';
+        // let receiptHtml = (`
+        //     <html>
+        //         <head>
+        //             <style>
+        //                 {
+        //                     box-sizing: border-box;
+        //                 }
+        //                 .center40, .center30, .center25 {
+        //                     text-align: center;
+        //                     font-size: 40px;
+        //                 }
+        //                 .center30 {
+        //                     font-size: 30px;
+        //                 }
+        //                 .center25 {
+        //                     font-size: 25px;
+        //                 }
+        //                 .right30 {
+        //                     text-align: right;
+        //                     font-size: 30px;
+        //                 }
+        //                 .column {
+        //                     float: left;
+        //                     width: 50%;
+        //                 }
+        //                 .side {
+        //                     width: 20%;
+        //                 }
+        //                 .middle {
+        //                     width: 60%;
+        //                 }
+        //                 .row:after {
+        //                     content: '';
+        //                     display: table;
+        //                     clear: both;
+        //                 }
+        //             </style>
+        //         </head>
+        //         <body>
+        //             <div class='center40'>
+        //                 HO GARDEN CHINESE RESTAURANT
+        //                 <br />
+        //                 半島餐廳
+        //             </div>
+        //             <div class='center30'>
+        //                 TEL: 905-927-9623 <br />
+        //                 ===============================
+        //                 <br />
+        //                 TABLE ${tableNumber} &emsp; ${dateTime}
+        //                 <br />
+        //                 ===============================
+        //                 <br /><br />
+        //                 ${cartItems}
+        //                 ===============================
+        //                 <br />
+        //             </div>
+        //             <div class='right30'>
+        //                 Sub-Total &emsp;&emsp; $${cartSubTotal}
+        //                 <br />
+        //                 HST 13% &emsp;&emsp; $${cartHST}
+        //                 <br />
+        //                 Total &emsp;&emsp; $${cartTotal}
+        //             </div>
+        //         </body>
+        //     </html>
+        // `);
+        setState({receiptHtml});
+    }, []);
+    console.log(state.receiptHtml)
     return (
         <div>
-            <Grid container spacing={0} style={{}}>
-                <Grid item xs={4} spacing={0} style={{overflow: 'auto', height: '100vh',backgroundColor: '#7f9877'}}>
+            <Grid container spacing={0}>
+                <Grid item xs={4} spacing={0} style={{overflow: 'auto', height: '100vh',backgroundColor: '#7f9877', border: '2px solid #000'}}>
                     <div item className={styles.authTableNumber}>
-                        table {tableNumber}
+                        table {tableNumber} 
+                        <Button 
+                            href={`starpassprnt://v1/print/nopreview?back=${encodeURIComponent(window.location.href)}&html=${encodeURIComponent(state.receiptHtml)}`} 
+                            className={styles.printerIcon}
+                            >
+                            <PrintIcon fontSize='large'/>
+                        </Button>
                     </div>
+                    <br />
                     {!isNewOrder && <button onClick={completeOrder}>COMPLETE</button>}
                     <Cart />
                 </Grid>

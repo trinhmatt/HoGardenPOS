@@ -35,6 +35,18 @@ const menuStyles = makeStyles(() => ({
             maxWidth: 'none !important',
         },
     },
+    authMenuLayout: {
+        fontFamily: ['Roboto', 'sans-serif'].join(','),
+        overflowX: 'hidden',
+        backgroundColor: '#fdb678',
+        //desktop
+        '@media (min-width: 960px)': {
+            maxWidth: 'none !important',
+        },
+        display: 'flex !important',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+    },
     addItemLayout: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflow: 'hidden',
@@ -57,7 +69,7 @@ const menuStyles = makeStyles(() => ({
         backgroundSize: 'cover',
         //phone
         '@media (min-width: 375px)': {
-            height: '23vh',
+            height: '24vh',
         },
         //ipad
         '@media (min-width: 760px)': {
@@ -91,7 +103,8 @@ const menuStyles = makeStyles(() => ({
         },
     },
     authFoodLayout: {
-        width: '100%',
+        height: '70%',
+        overflow: 'auto',
     },
     switchLayout: {
         display: 'flex',
@@ -234,8 +247,10 @@ const menuStyles = makeStyles(() => ({
         width: '100%',
         backgroundColor: '#fff',
         border: '2px solid #000',
-        height: '20vh',
+        height: '23vh',
         overflow: 'auto',
+        boxShadow: '0 10px 10px rgba(0,0,0,0.2)',
+        borderRadius: '5px',
     },
     engScrollItem: {
         backgroundColor: '#000',
@@ -344,7 +359,7 @@ const menuStyles = makeStyles(() => ({
         '@media (min-width: 760px)': {
             fontSize:'18px',
             width: '35px',
-            height: '10px',
+            height: '20px',
         },
         //desktop
         '@media (min-width: 960px)': {
@@ -404,6 +419,19 @@ const menuStyles = makeStyles(() => ({
         overflowY: 'auto',
         overflowX: 'hidden',
     },
+    authCartBox: {
+        backgroundColor: '#fff',
+        width: '95%',
+        height: '75%',
+        fontFamily: ['Roboto', 'sans-serif'].join(','),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        paddingTop: '5%',
+        overflowY: 'auto',
+        overflowX: 'hidden',
+    },
     emptyCartBox: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         display: 'flex',
@@ -417,8 +445,14 @@ const menuStyles = makeStyles(() => ({
         justifyContent: 'center',
         height: '70%',
     },
+    authCartLayoutBox: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+    },
     chinCartText: {
-        fontSize: '5vw'
+        fontSize: '3vw'
     },
     cartIcon: {
         backgroundColor: '#7f9877 !important',
@@ -523,6 +557,7 @@ const menuStyles = makeStyles(() => ({
     //ADD ITEM 
     addItemContainer: {
         overflow: 'auto',
+        width: '95% !important',
         //phone
         '@media (min-width: 375px)': {
             height: '70%',
@@ -672,7 +707,7 @@ const menuStyles = makeStyles(() => ({
         backgroundColor: '#000',
         color: '#fff',
         marginTop: '-5%',
-        marginBottom: '25%',
+        marginBottom: '15%',
         //ipad
         '@media (min-width: 760px)': {
             fontSize: '20px',
@@ -719,8 +754,9 @@ const menuStyles = makeStyles(() => ({
         fontSize: '30px',
         textAlign: 'center',
         backgroundColor: '#000',
-        width: '100%',
+        width: '33.33%',
         color: '#fff',
+        position: 'fixed',
     },
 
     //RIBBON
@@ -758,6 +794,14 @@ const menuStyles = makeStyles(() => ({
             borderRight: '8px solid transparent',
             transform: 'rotate(5deg)',
         },
+    },
+
+    //ICONS
+    printerIcon: {
+        backgroundColor: '#fff',
+        color: '#000',
+        margin: '10px',
+        padding: '10px',
     },
 }));
 

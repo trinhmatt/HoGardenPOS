@@ -103,7 +103,7 @@ const CartItem = (props) => {
             state: {itemData, index, table}
         })
     }
-
+    
     return (
         <div>
             <br />
@@ -113,7 +113,7 @@ const CartItem = (props) => {
                     <span className={styles.cartQty}>{itemData.qty}</span>
                 </Grid>
                 <Grid onClick={editItem} item xs={7} className={(language === 'chinese') && styles.chinCartItem}>
-                    <p>{(itemData.maxChoices ? "Set Dinner:" : "") + ` ${itemData[language]}`} </p>
+                    <p>{(itemData.maxChoices ? "Set Dinner:" : "") + `${itemData.restName}. ${itemData[language]}`} </p>
                 </Grid>
                 <Grid item xs className={styles.cartPrice}>
                     <span onClick={editItem} className={(language === 'chinese') && styles.chinCartItem}>${price.toFixed(2)}</span>

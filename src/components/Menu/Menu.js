@@ -133,7 +133,7 @@ const Menu = (props) => {
         <React.Fragment>
             {state.errorMsg.length > 0 && <p>{state.errorMsg}</p>}
             {!state.errorMsg && state.menuSections.length === numSections && 
-                <Container className={styles.menuLayout}>
+                <Container className={!auth.userData ? styles.menuLayout : styles.authMenuLayout}>
                     {/* Header */}
                     {
                         !auth.userData ?
