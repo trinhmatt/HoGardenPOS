@@ -50,16 +50,6 @@
                 "price": 2.00
             }
         ],
-        "drinkChoice": [
-            {
-                "english": "Hot HK Milk Tea",
-                "chinese": "熱港式奶茶"
-            },
-            {
-                "english": "Hot Coffee",
-                "chinese": "熱咖啡"
-            }
-        ],
         "noodleChoice": [
             {
                 "english": "Noodle",
@@ -87,6 +77,7 @@
                 "hasNoodle": false,
                 "isSpicy": false,
                 "hasDrink": true,
+                "hasSoup": true,
                 "restName": "A1"
             },
             "A2": {
@@ -97,6 +88,7 @@
                 "hasNoodle": false,
                 "isSpicy": false,
                 "hasDrink": true,
+                "hasSoup": true,
                 "restName": "A2"
             },
             "A3": {
@@ -107,6 +99,7 @@
                 "hasNoodle": false,
                 "isSpicy": false,
                 "hasDrink": true,
+                "hasSoup": true,
                 "restName": "A3"
             },
             "A5": {
@@ -118,6 +111,7 @@
                 "hasEgg": true,
                 "isSpicy": false,
                 "hasDrink": true,
+                "hasSoup": true,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
@@ -140,6 +134,7 @@
                 "isSpicy": false,
                 "hasEgg": true,
                 "hasDrink": true,
+                "hasSoup": true,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
@@ -164,6 +159,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "D"
             },
@@ -174,6 +170,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "E"
             },
@@ -184,6 +181,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "F"
             },
@@ -194,6 +192,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "G"
             },
@@ -204,6 +203,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "H"
             },
@@ -214,6 +214,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "I"
             },
@@ -224,6 +225,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "J"
             },
@@ -234,6 +236,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "K"
             },
@@ -244,6 +247,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "L"
             },
@@ -254,6 +258,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "M"
             },
@@ -264,6 +269,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全1"
             },
@@ -274,6 +280,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全2"
             },
@@ -284,6 +291,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全3"
             },
@@ -294,6 +302,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全4"
             },
@@ -304,6 +313,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全5"
             },
@@ -314,6 +324,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全6"
             },
@@ -324,6 +335,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全7"
             },
@@ -334,6 +346,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全8"
             },
@@ -344,6 +357,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全9"
             },
@@ -354,6 +368,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全10"
             },
@@ -364,6 +379,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全11"
             },
@@ -374,6 +390,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全12"
             },
@@ -384,6 +401,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全13"
             },
@@ -394,6 +412,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全14"
             },
@@ -404,6 +423,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全15"
             },
@@ -414,6 +434,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全16"
             },
@@ -424,6 +445,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": true,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全17"
             },
@@ -434,6 +456,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全18"
             },
@@ -444,6 +467,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全19"
             },
@@ -454,6 +478,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
+                "hasSoup": true,
                 "hasDrink": true,
                 "restName": "全20"
             }
@@ -472,16 +497,6 @@
             {
                 "english": "Served with Hot: HK Milk Tea or Coffee or Hot Drinks (Except Congee Meal Set",
                 "chinese": "奉送 熱港式奶茶或咖啡或各式熱飲 (粥餐不連飲品)"
-            }
-        ],
-        "drinkChoice": [
-            {
-                "english": "Hot HK Milk Tea",
-                "chinese": "熱港式奶茶"
-            },
-            {
-                "english": "Hot Coffee",
-                "chinese": "熱咖啡"
             }
         ],
         "noodleChoice": [
@@ -1079,62 +1094,48 @@
                 "price": 0.25
             }
         ],
-        "drinkChoice": [
-            {
-                "english": "Coffee",
-                "chinese": "咖啡"
-            },
-            {
-                "english": "Milk Tea",
-                "chinese": "奶茶"
-            },
-            {
-                "english": "Change to Iced Drink/Honey",
-                "chinese": "改凍飲/蜜糖",
-                "price": 1.50
-            },
-            {
-                "english": "Change to Iced Lemon Water with Honey",
-                "chinese": "改凍檸蜜",
-                "price": 2.00
-            }
-        ],
         "menuItems": {
             "HC1": {
                 "english": "Hai Nan Chicken Special Rice",
                 "chinese": "海南雞飯",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             },
             "HC2": {
                 "english": "Teriyaki Chicken",
                 "chinese": "日式照燒雞扒飯",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             },
             "HC3": {
                 "english": "Thai Style Pad Thai",
                 "chinese": "泰式 Pad Thai 粉",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             },
             "HC4": {
                 "english": "House Special Pork Chop",
                 "chinese": "香茅豬扒飯",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             },
             "HC5": {
                 "english": "Pork Belly Served with Rice",
                 "chinese": "梅菜扣肉飯",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             },
             "HC6": {
                 "english": "Pork Hock with Fermented Red Bean Curd on Rice",
                 "chinese": "南乳豬手飯",
                 "price": 10.95,
-                "hasSoup": true
+                "hasSoup": true,
+                "hasDrink": true
             }
         }
     },
@@ -1183,20 +1184,6 @@
                     }
                 ],
                 "price": 1.25
-            }
-        ],
-        "drinkChoice": [
-            {
-                "english": "HK Milk Tea",
-                "chinese": "熱港式奶茶"
-            },
-            {
-                "english": "Coffee",
-                "chinese": "咖啡"
-            },
-            {
-                "english": "Lemon Tea",
-                "chinese": "檸檬茶"
             }
         ],
         "menuItems": {
@@ -1635,28 +1622,6 @@
             {
                 "english": "Served with Daily Soup OR Hot: HK Milk Tea or Coffee or Lemon Tea",
                 "chinese": "奉送餐湯 或 熱: 港式奶茶或咖啡或檸檬茶"
-            }
-        ],
-        "drinkChoice": [
-            {
-                "english": "Chinese soup",
-                "chinese": "例湯"
-            },
-            {
-                "english": "Borscht",
-                "chinese": "羅宋湯"
-            },
-            {
-                "english": "HK Milk Tea",
-                "chinese": "熱港式奶茶"
-            },
-            {
-                "english": "Coffee",
-                "chinese": "咖啡"
-            },
-            {
-                "english": "Lemon Tea",
-                "chinese": "檸檬茶"
             }
         ],
         "menuItems": {
@@ -2125,29 +2090,7 @@
                 "isSpicy": false,
                 "hasDrink": true
             }
-        },
-        "drinkChoice": [
-            {
-                "english": "Chinese Soup",
-                "chinese": "例湯"
-            },
-            {
-                "english": "Borscht",
-                "chinese": "羅宋湯"
-            },
-            {
-                "english": "HK Milk Tea",
-                "chinese": "熱港式奶茶"
-            },
-            {
-                "english": "Coffee",
-                "chinese": "咖啡"
-            },
-            {
-                "english": "Lemon Tea",
-                "chinese": "檸檬茶"
-            }
-        ]
+        }
     },
     "sizzlingPlates": {
         "title": {
@@ -3312,19 +3255,22 @@
                 "english": "Black Tea in HK Style",
                 "chinese": "西冷紅茶",
                 "hotPrice": 2.00,
-                "coldPrice": 3.00
+                "coldPrice": 3.00,
+                "hasSugar": true
             },
             "D2": {
                 "english": "Kona Coffee",
                 "chinese": "檀島咖啡",
                 "hotPrice": 2.00,
-                "coldPrice": 3.00
+                "coldPrice": 3.00,
+                "hasSugar": true
             },
             "D3": {
                 "english": "Tea and Coffee Mixture",
                 "chinese": "鴛鴦",
                 "hotPrice": 2.00,
-                "coldPrice": 3.00
+                "coldPrice": 3.00,
+                "hasSugar": true
             },
             "D4": {
                 "english": "Lemon with Honey",
@@ -3332,42 +3278,49 @@
                 "hotPrice": 4.00,
                 "coldPrice": 4.00,
                 "comboHot": 1.50,
-                "comboCold": 2.00
+                "comboCold": 2.00,
+                "hasSugar": true
             },
             "D5": {
                 "english": "Lemon Tea / Water",
                 "chinese": "檸檬茶或水",
                 "hotPrice": 2.00,
-                "coldPrice": 3.00
+                "coldPrice": 3.00,
+                "hasSugar": true
             },
             "D6": {
                 "english": "Horlick",
                 "chinese": "好立克",
                 "hotPrice": 2.00,
-                "coldPrice": 3.00
+                "coldPrice": 3.00,
+                "hasSugar": true
             },
             "D7": {
                 "english": "Ovaltine",
                 "chinese": "柯華田",
                 "hotPrice": 2.00,
-                "coldPrice": 3.00
+                "coldPrice": 3.00,
+                "hasSugar": true
             },
             "D8": {
                 "english": "Chocolate",
                 "chinese": "朱克力",
                 "hotPrice": 2.00,
-                "coldPrice": 3.00
+                "coldPrice": 3.00,
+                "hasSugar": true
             },
             "D9": {
                 "english": "Poached Egg",
                 "chinese": "滾水蛋",
-                "hotPrice": 2.00
+                "hotPrice": 2.00,
+                "hasSugar": false
             },
             "D10": {
                 "english": "Poached Egg with Milk",
                 "chinese": "鮮奶加蛋",
                 "hotPrice": 3.00,
-                "comboHot": 1.50
+                "comboHot": 1.50,
+                "hasSugar": false
             },
             "D11": {
                 "english": "Soya Milk",
@@ -3375,13 +3328,15 @@
                 "hotPrice": 2.50,
                 "coldPrice": 3.00,
                 "comboHot": 1.50,
-                "comboCold": 1.50
+                "comboCold": 1.50,
+                "hasSugar": false
             },
             "D12": {
                 "english": "Almond Milk",
                 "chinese": "杏仁霜",
                 "hotPrice": 2.00,
-                "coldPrice": 3.00
+                "coldPrice": 3.00,
+                "hasSugar": true
             },
             "D13": {
                 "english": "Milk",
@@ -3389,7 +3344,8 @@
                 "hotPrice": 2.50,
                 "coldPrice": 3.00,
                 "comboHot": 1.50,
-                "comboCold": 1.50
+                "comboCold": 1.50,
+                "hasSugar": false
             },
             "D14": {
                 "english": "Coke with Lemon",
@@ -3397,17 +3353,38 @@
                 "hotPrice": 3.00,
                 "coldPrice": 4.00,
                 "comboHot": 1.50,
-                "comboCold": 2.00
+                "comboCold": 2.00,
+                "hasSugar": false
             },
             "D15": {
-                "english": "Soft Drinks",
-                "chinese": "各式汽水",
-                "coldPrice": 3.00
-            },
-            "D16": {
                 "english": "Ice Cream",
                 "chinese": "各式雪糕",
-                "coldPrice": 2.95
+                "coldPrice": 2.95,
+                "hasSugar": false
+            },
+            "D16": {
+                "english": "Coke",
+                "chinese": "可樂",
+                "coldPrice": 3.00,
+                "hasSugar": false
+            },
+            "D17": {
+                "english": "Diet Coke",
+                "chinese": "健怡可樂",
+                "coldPrice": 3.00,
+                "hasSugar": false
+            },
+            "D18": {
+                "english": "Sprite",
+                "chinese": "精靈",
+                "coldPrice": 3.00,
+                "hasSugar": false
+            },
+            "D19": {
+                "english": "Ginger Ale",
+                "chinese": "乾薑",
+                "coldPrice": 3.00,
+                "hasSugar": false
             }
         }
     },

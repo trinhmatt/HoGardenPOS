@@ -112,7 +112,7 @@ const CartItem = (props) => {
                 <Grid onClick={editItem} item xs={2}>
                     <span className={styles.cartQty}>{itemData.qty}</span>
                 </Grid>
-                <Grid onClick={editItem} item xs={7} className={(language === 'chinese') && styles.chinCartItem}>
+                <Grid onClick={editItem} item xs={7} className={(language === 'chinese') ? styles.chinCartItem : ""}>
                     <p>{(itemData.maxChoices ? "Set Dinner:" : "") + `${itemData.restName}. ${itemData[language]}`} </p>
                 </Grid>
                 <Grid item xs className={styles.cartPrice}>
@@ -128,7 +128,7 @@ const CartItem = (props) => {
                 </Grid>
             </Grid>
             {
-                (renderChoices().length > 0 || itemData.addOn.length > 0) ?
+                (renderChoices().length > 0 || (itemData.addOn && itemData.addOn.length > 0)) ?
                 <Grid container spacing={3} onClick={editItem}>
                     <Grid item xs className={(language === 'english') ? styles.cartAddonTitle : styles.chinCartAddonTitle}>
                         {hasChoices && <span><b>{(props.language === "english") ? 'Choices:' : '選擇:'}</b></span>}

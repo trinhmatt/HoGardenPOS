@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { itemChoices } from '../../static/constants/menu-constants';
+import menuJSON from '../../static/constants/menu.json';
 import { changeLanguage } from "../../redux/actions/lang-actions";
 import { addToCart, updateCart, addToExistingOrder, updateExistingOrder } from "../../redux/actions/cart-actions";
 import ItemChoiceSection from "./ItemChoiceSection";
+import DrinkAndSoupSection from './DrinkAndSoupSection';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -31,11 +33,12 @@ import ElevationScroll from '../subcomponents/ElevationScroll';
 
 const AddItem = (props) => {
     const styles = menuStyles();
-    const { itemData, table, index } = props.location.state;
+    const { itemData, table, index, isTakeout } = props.location.state;
 
     // Section data will be from the menu when adding or from itemData when editing
     const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
 
+    // Prop variables and functions 
     const { 
         addToCart, 
         language, 
@@ -44,9 +47,15 @@ const AddItem = (props) => {
         addToExistingOrder, 
         updateExistingOrder } = props;
     
+    // Bools that effect logic and rendering
     const isAdminUpdate = !!props.cart.orderItems; //if orderItems exist, it is an existing order and the admin is updating  
+
+    // Data used by component
     const cart = isAdminUpdate ? props.cart.orderItems : props.cart;
     const [item, setItem] = useState({...itemData});
+
+    const currentItem = useRef();
+    currentItem.current = item;
 
     // Constants for add to order button text
     const engUpdateBtnText = "Update Order";
@@ -78,12 +87,19 @@ const AddItem = (props) => {
             cartItems.splice(index, 1);
         }
         isAdminUpdate ? updateExistingOrder(cartItems) : updateCart(cartItems);
-        goBackToMenu()
+        goBackToMenu();
     }
     const selectChoice = (choiceData) => {
+        // choiceData.currentTarget exists when it is an edit 
         const val = choiceData.currentTarget ? choiceData.currentTarget.value : choiceData;
         let price = itemData.price;
 
+        // Have to do these separately for takeout combo 
+        // When drink is chosen with soup already chosen I need to remove soup and vice-versa 
+        let drinkChoice = currentItem.current.drinkChoice ? {...currentItem.current.drinkChoice} : null;
+        let soupChoice = currentItem.current.soupChoice ? {...currentItem.current.soupChoice} : null;
+
+        // For single drinks
         if (val.indexOf("tempChoice") > -1) {
             price = val.indexOf("hot") > - 1 ? itemData.hotPrice : itemData.coldPrice;
         }
@@ -100,9 +116,16 @@ const AddItem = (props) => {
             }
             let didChange = false;
             for (let i = 0; i < choiceValue.length; i++) {
+                //De select add on/choice
                 if (choiceValue[i].english === returnObj.english) {
                     //if no quantity, it is a add on that is on/off
                     if (choiceValue[i].qty === undefined) {
+
+                        // If the add on was 'change to iced drink' and the user selected an ice level, remove ice level from drink choice
+                        if (choiceValue[i].english === "Iced Drink" && drinkChoice) {
+                            drinkChoice.ice = null;
+                        }
+
                         choiceValue.splice(i, 1);
                     } else {
                         choiceValue[i] = returnObj;
@@ -117,13 +140,44 @@ const AddItem = (props) => {
             choiceValue = returnObj;
         }
 
-        setItem({ ...item, price, [choiceType]: choiceValue });
+        // If user selected new drink and iced drink was already selected, un-select it
+        let addOnCopy = item.addOn;
+        if (choiceType === "drinkChoice" && item.addOn && item.addOn.length > 0 && item.drinkChoice) {
+            for (let i = 0; i < item.addOn.length; i++) {
+                if (item.addOn[i].english === "Iced Drink") {
+                    addOnCopy.splice(i, 1);
+                }
+            }
+        }
+
+        // If takeout then can only have soup OR drink
+        if (isTakeout && choiceType.indexOf("drink") > -1 && soupChoice) {
+            soupChoice = null;
+        }
+        if (isTakeout && choiceType.indexOf("soup") > -1 && drinkChoice) {
+            drinkChoice = null;
+        }
+
+        setItem({ 
+            ...item,
+             price, 
+             drinkChoice,
+             soupChoice, 
+             [choiceType]: choiceValue, 
+             addOn: (choiceType === "drinkChoice" ? addOnCopy : choiceType === "addOn" ? choiceValue : item.addOn) 
+        });
+    }
+
+    const selectDrinkOption = (optionData) => {
+        const drinkObj = { ...item.drinkChoice, [optionData.type]: optionData.selectedOption };
+        setItem({...item, drinkChoice: drinkObj});
     }
     // Values for button are formatted like: choiceType:choiceValue 
     // I use : as a delimitter to separate type and value so I can set the cart object 
     const renderChoices = () => {
         let choiceSections = [];
-        //Check if item hasDrink, hasNoodle, hasSauce, etc.
+
+        //Check if item hasNoodle, hasSauce, etc.
         for (const key in itemData) {
             // Item specific choices (protein, saunce, carb, etc)
             if (( itemData[key] && itemChoices[key] && sectionData[itemChoices[key].menuKey]) || (itemChoices[key] && itemChoices[key][itemChoices[key].menuKey])) {
@@ -164,10 +218,34 @@ const AddItem = (props) => {
                 </div>
             )
         }
+
+        //Drinks are rendered differently, any combo can have any drink so we need to use the "drinks" obj in menu.json 
+        let allDrinks = [];
+        for (const drinkKey in menuJSON.drinks.menuItems) {
+            let drinkObj = menuJSON.drinks.menuItems[drinkKey];
+            drinkObj.menuKey = drinkKey;
+            allDrinks.push(drinkObj);
+        }
+        choiceSections.push(
+            <DrinkAndSoupSection 
+                selectedObj={itemData.drinkChoice}
+                isDisabled={(isTakeout && itemData.soupChoice)}
+                key="comboDrink"
+                language={language}
+                selectChoice={selectChoice}
+                drinkArr={allDrinks}
+                selectedAddOns={item.addOn}
+                selectDrinkOption={selectDrinkOption}
+                hasDrink={itemData.hasDrink}
+                hasSoup={itemData.hasSoup}
+                isTakeout={isTakeout}
+            />);
+        
         if (sectionData.addOns && sectionData.addOns.length > 0) {
             for (let i = 0; i < sectionData.addOns.length; i++) {
                 choiceSections.push(
                     <ItemChoiceSection 
+                        drinkChoice={item.drinkChoice}
                         selectedObj={itemData.addOn} 
                         key={`addOn/${i}`} 
                         constKey={"addOn"} 
@@ -175,6 +253,7 @@ const AddItem = (props) => {
                         language={language} 
                         selectChoice={selectChoice} 
                         choicesArr={sectionData.addOns[i]} 
+                        addOns={item.addOn}
                     />);
             }
         }
