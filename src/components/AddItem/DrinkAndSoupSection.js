@@ -104,6 +104,9 @@ const DrinkAndSoupSection = (props) => {
                     disabled={isDisabled}
                     onClick={(e) => handleSelect(e, typeVariables.type, typeVariables.returnValKey, typeVariables.typeSelected)}
                     value={`${typeVariables.returnValKey}:${JSON.stringify(choiceArray[i])}`}
+                    className={language === 'english' ? 
+                                    cx(styles.itemChoices,(state.selectedIndex[type] === i ? styles.selectedChoice : null)) :
+                                    cx(styles.chinItemChoices,(state.selectedIndex[type] === i ? styles.chinSelectedChoice : null))}
                 >
                     {buttonText}
                 </Button>
@@ -125,6 +128,9 @@ const DrinkAndSoupSection = (props) => {
                             id={`${i}/sugar`}
                             value={JSON.stringify(itemChoices.drinkOptions.sugar[i])}
                             onClick={handleDrinkOptionSelect}
+                            className={language === 'english' ? 
+                                    cx(styles.itemChoices,(state.selectedIndex.drink === i ? styles.selectedChoice : null)) :
+                                    cx(styles.chinItemChoices,(state.selectedIndex.drink === i ? styles.chinSelectedChoice : null))}
                         >
                                 {itemChoices.drinkOptions.sugar[i][language]}
                         </Button>
@@ -147,6 +153,7 @@ const DrinkAndSoupSection = (props) => {
                             id={`${i}/ice`}
                             value={JSON.stringify(itemChoices.drinkOptions.ice[i])}
                             onClick={handleDrinkOptionSelect}
+                            
                         >
                             {itemChoices.drinkOptions.ice[i][language]}
                         </Button>
@@ -182,12 +189,23 @@ const DrinkAndSoupSection = (props) => {
                     </div> 
                 : 
                     <div>
-                        {hasSoup && <div><h2>Soup<span className={styles.red}>*</span></h2>{renderChoices("soup")}</div>}
-                        {hasDrink && <div><h2>Drink<span className={styles.red}>*</span></h2>{renderChoices("drink")}</div>}
+                        {hasSoup && 
+                            <div>
+                                <h2>Soup<span className={styles.red}>*</span></h2>
+                                <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{renderChoices("soup")}</ButtonGroup>
+                            </div>
+                        }
+                        <br />
+                        {hasDrink && 
+                            <div>
+                                <h2>Drink<span className={styles.red}>*</span></h2>
+                                <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{renderChoices("drink")}</ButtonGroup>
+                            </div>}
                     </div>
             }
-            
-            {state.drinkSelected && renderDrinkOptions()}
+            <br />
+            {state.drinkSelected && 
+                <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{renderDrinkOptions()}</ButtonGroup>}
         </div>
     )
 }

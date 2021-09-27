@@ -66,7 +66,6 @@ const MenuSectionItem = (props) => {
                         <span></span>
                 }
                 <Grid item xs className={styles.priceColumn}>
-                
                     <span className={styles.price}>{renderPrice()}</span>
                 </Grid>
             </Grid>

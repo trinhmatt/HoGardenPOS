@@ -24,6 +24,7 @@ import EmployeeWeeklyTimeSheet from "../components/Admin/TimeSheet/EmployeeWeekl
 import Takeout from "../components/Admin/Takeout";
 import Settings from "../components/Admin/Settings";
 import PastOrders from "../components/Admin/PastOrders/PastOrders";
+import Close from "../components/Close";
 
 const AppRouter = (props) => {
   return (
@@ -98,6 +99,10 @@ const AppRouter = (props) => {
 
         <PublicRoute path="/unauthorized">
           <Unauthorized />
+        </PublicRoute>
+
+        <PublicRoute path="/close">
+          <Close />
         </PublicRoute>
 
         <PublicRoute path="/*">

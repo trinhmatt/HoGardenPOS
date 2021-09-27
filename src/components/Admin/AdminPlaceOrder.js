@@ -29,10 +29,8 @@ const AdminPlaceOrder = (props) => {
             .then( () => props.history.push('/admin/tables'))
             .catch( err => console.log(err));
     }
-    
-    useEffect(() => {
+    const createReceipt = () => {
         let cartItems = '';
-        console.log(window.location.href)
         const dateTime = dayjs().format('DD/MM/YYYY HH:mm:ss');
         let cartSubTotal = 0.0;
         const cartCopy = cart.length === undefined ? cart.orderItems : cart;
@@ -67,7 +65,7 @@ const AdminPlaceOrder = (props) => {
         let cartHST = ((cartSubTotal * 0.13).toFixed(2));
         let cartTotal = ((cartSubTotal * 1.13).toFixed(2));
         cartSubTotal = cartSubTotal.toFixed(2);
-        console.log(cartItems)
+        
         let receiptHtml = 'hi';
         // let receiptHtml = (`
         //     <html>
@@ -136,17 +134,27 @@ const AdminPlaceOrder = (props) => {
         //     </html>
         // `);
         setState({receiptHtml});
+    };
+
+    const printerTest = () => {
+        setTimeout(window.close, 0);
+    }
+
+    
+    useEffect(() => {
+        createReceipt();
     }, []);
-    console.log(state.receiptHtml)
+    
     return (
         <div>
             <Grid container spacing={0}>
-                <Grid item xs={4} spacing={0} style={{overflow: 'auto', height: '100vh',backgroundColor: '#7f9877', border: '2px solid #000'}}>
-                    <div item className={styles.authTableNumber}>
+                <Grid item xs={4} style={{overflow: 'auto', height: '100vh',backgroundColor: '#7f9877', border: '2px solid #000'}}>
+                    <div className={styles.authTableNumber}>
                         table {tableNumber} 
                         <Button 
-                            href={`starpassprnt://v1/print/nopreview?back=${encodeURIComponent(window.location.href)}&html=${encodeURIComponent(state.receiptHtml)}`} 
+                            href={`starpassprnt://v1/print/nopreview?back=${encodeURIComponent(authConsts.CLOSE_ROUTE)}&html=${encodeURIComponent(state.receiptHtml)}`} 
                             className={styles.printerIcon}
+                            onClick={() => printerTest()}
                             >
                             <PrintIcon fontSize='large'/>
                         </Button>
@@ -155,7 +163,7 @@ const AdminPlaceOrder = (props) => {
                     {!isNewOrder && <button onClick={completeOrder}>COMPLETE</button>}
                     <Cart />
                 </Grid>
-                <Grid item xs={8} container spacing={0} style={{overflow: 'auto', height: '100vh'}}>
+                <Grid item xs={8} style={{overflow: 'auto', height: '100vh'}}>
                     <Grid item className={styles.cartLayout}>
                         <Menu />
                     </Grid>

@@ -25,7 +25,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Fab from '@material-ui/core/Fab';
 import Modal from '@material-ui/core/Modal';
-import { Container } from '@material-ui/core';
+import { Container, Divider } from '@material-ui/core';
 
 //Subcomponent imports
 import ElevationScroll from '../subcomponents/ElevationScroll';
@@ -64,7 +64,7 @@ const Menu = (props) => {
             }
             for (let i = 0; i < state.menuSections.length; i++) {
                 headerSections.push(
-                    <Container key={state.menuSections[i].props.data.title[language]} className={!auth.userData && styles.scrollContainer}>
+                    <Container key={state.menuSections[i].props.data.title[language]} className={!auth.userData ? styles.scrollContainer : ''}>
                         <span 
                             className={auth.userData ? styles.authScrollItem : language === 'chinese' ? styles.chinScrollItem : styles.engScrollItem} 
                             onClick={() => focusSection(state.menuSections[i].props.data.title[language])} 
@@ -151,9 +151,9 @@ const Menu = (props) => {
                                                 label={<b className={styles.chinLanguage}>中文</b>}
                                             />
                                         </FormGroup>
-                                        <Typography className={styles.menuScroll}>
+                                        <div className={styles.menuScroll}>
                                             {state.headerSections}
-                                        </Typography>
+                                        </div>
                                     </Toolbar>
                                 </AppBar>
                             </ElevationScroll>
@@ -186,10 +186,8 @@ const Menu = (props) => {
                 className={styles.modal}
                 open={state.isCartOpen}
                 onClose={closeCart}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
             >
-                {state.isCartOpen && <Cart />}
+                {state.isCartOpen ? <Cart /> : <div></div>}
             </Modal>
             {/* Cart button */}
             {

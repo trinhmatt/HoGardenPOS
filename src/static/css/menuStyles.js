@@ -239,7 +239,7 @@ const menuStyles = makeStyles(() => ({
         overflowY: "hidden", 
         whiteSpace: "nowrap",
         backgroundColor: '#fff',
-        padding: '2vh',
+        padding: '20px',
         display: 'flex',
         justifyContent: 'flex-start'
     },
@@ -621,6 +621,7 @@ const menuStyles = makeStyles(() => ({
     },
     itemChoices: {
         color: '#000',
+        backgroundColor: '#f8f8ff !important',
         lineHeight: '1em',
         wordBreak: 'break-word',
         borderRadius: '5px !important',
@@ -632,6 +633,7 @@ const menuStyles = makeStyles(() => ({
     },
     chinItemChoices: {
         color: '#000',
+        backgroundColor: '#f8f8ff !important',
         fontSize: '20px',
         lineHeight: '1em',
         borderRadius: '5px !important',

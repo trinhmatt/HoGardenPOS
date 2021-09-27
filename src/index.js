@@ -14,11 +14,9 @@ firebase.auth().onAuthStateChanged((user) => {
     store.dispatch(loginSuccess(user));
   }
   ReactDOM.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <App user={user} />
-      </Provider>
-    </React.StrictMode>,
+    <Provider store={store}>
+      <App user={user} />
+    </Provider>,
     document.getElementById('root')
   );
 })

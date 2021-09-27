@@ -116,7 +116,7 @@ const CartItem = (props) => {
                     <p>{(itemData.maxChoices ? "Set Dinner:" : "") + `${itemData.restName}. ${itemData[language]}`} </p>
                 </Grid>
                 <Grid item xs className={styles.cartPrice}>
-                    <span onClick={editItem} className={(language === 'chinese') && styles.chinCartItem}>${price.toFixed(2)}</span>
+                    <span onClick={editItem} className={(language === 'chinese') ? styles.chinCartItem : ''}>${price.toFixed(2)}</span>
                     <div className={styles.row}>
                         <IconButton className={styles.cartQtyBtns} value={-1} onClick={changeQty}>
                             <IndeterminateCheckBoxIcon className={styles.qtyBtnColor} />

@@ -116,7 +116,6 @@ const OrderCard = (props) => {
             <Button 
                 onClick={startCompleteOrder} 
                 variant='contained' 
-                disableElevation
                 className={styles.completeButton}
                 startIcon={<CheckCircleIcon />}
             >
