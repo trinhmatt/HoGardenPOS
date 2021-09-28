@@ -49,6 +49,7 @@ const AddItem = (props) => {
     
     // Bools that effect logic and rendering
     const isAdminUpdate = !!props.cart.orderItems; //if orderItems exist, it is an existing order and the admin is updating  
+    const isDrink = itemData.coldPrice || itemData.hotPrice;
 
     // Data used by component
     const cart = isAdminUpdate ? props.cart.orderItems : props.cart;
@@ -280,7 +281,8 @@ const AddItem = (props) => {
             if (
                 (itemData[key] && itemChoices[key] && !item[itemChoices[key].menuKey]) || 
                 (key === "hasProteinChoice" && !item.selectedProtein) || 
-                (key === "nChoices" && item.choices && itemData.nChoices !== item.choices.length)
+                (key === "nChoices" && item.choices && itemData.nChoices !== item.choices.length) || 
+                (isDrink && !item.tempChoice)
             ) {
                 allRequiredChosen = false;
             } 
