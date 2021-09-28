@@ -16,6 +16,7 @@ const ItemChoiceSection = (props) => {
     const { choiceType, choicesArr, selectChoice, language, constKey, selectedObj, maxChoices, drinkChoice, addOns } = props;
     const isAddOn = choiceType === "addOn";
     const isSetDinner = choiceType === "choices";
+    const isModification = isAddOn && choicesArr.type && choicesArr.type.english.indexOf("Modification") > -1;
     const [state, setState] = useState({
         selectedItem: -1,
         selectedAddOns: [],
@@ -104,6 +105,8 @@ const ItemChoiceSection = (props) => {
 
             if (allSelected.includes(index)) {
                 allSelected.splice(allSelected.indexOf(index), 1);
+            } else if (isModification) {
+                allSelected = [index];
             } else {
                 returnValue = isAddOn && returnValue.indexOf("price") === -1 && choicesArr.price ? returnValue.substring(0, returnValue.length-1) + `, "price": ${choicesArr.price}}` : returnValue;
                 allSelected.push(index);

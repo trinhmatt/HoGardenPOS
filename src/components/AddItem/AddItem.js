@@ -117,9 +117,9 @@ const AddItem = (props) => {
             let didChange = false;
             for (let i = 0; i < choiceValue.length; i++) {
                 //De select add on/choice
-                if (choiceValue[i].english === returnObj.english) {
+                if (choiceValue[i].english === returnObj.english || (choiceValue[i].type.indexOf("Modification") > -1 && choiceValue[i].type === returnObj.type)) {
                     //if no quantity, it is a add on that is on/off
-                    if (choiceValue[i].qty === undefined) {
+                    if (choiceValue[i].qty === undefined && choiceValue[i].english === returnObj.english) {
 
                         // If the add on was 'change to iced drink' and the user selected an ice level, remove ice level from drink choice
                         if (choiceValue[i].english === "Iced Drink" && drinkChoice) {
@@ -157,7 +157,6 @@ const AddItem = (props) => {
         if (isTakeout && choiceType.indexOf("soup") > -1 && drinkChoice) {
             drinkChoice = null;
         }
-        console.log(choiceValue)
         setItem({ 
             ...item,
              price, 
