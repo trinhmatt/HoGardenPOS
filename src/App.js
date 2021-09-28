@@ -8,6 +8,9 @@ import database from './firebase/firebase';
 import { authConsts } from './static/constants/auth-constants';
 import newOrderSound from './static/new-order-sound.mp3';
 
+//Material ui imports
+import Button from '@material-ui/core/Button';
+
 function App(props) {
   const [isFirstRender, setIsFirst] = useState(true);
   const currentState = useRef();
@@ -31,7 +34,14 @@ function App(props) {
               const orderSound = new Audio(newOrderSound);
               orderSound.play();
 
-              console.log(props.cart)
+              console.log(snapshot.val());
+
+              document.getElementById('order-click').click();
+              
+              //write to database when order comes in on order items
+              //loop thru orderItems arr in snapshot.val()
+                //table + restName + chinese + qty (food item)
+                //table + drink
             }
           })
           
@@ -43,6 +53,12 @@ function App(props) {
   return (
       <MuiPickersUtilsProvider utils={DayJSUtils}>
         <AppRouter />
+        <Button
+          id='order-click'
+          href={`starpassprnt://v1/print/nopreview?back=${encodeURIComponent(authConsts.CLOSE_ROUTE)}&html=${encodeURIComponent('<html><body><div>nu</div></body></html>')}`}
+          style={{ display: 'none' }}
+        >
+        </Button>;
       </MuiPickersUtilsProvider>
   );
 }

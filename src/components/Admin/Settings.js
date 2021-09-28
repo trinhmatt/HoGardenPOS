@@ -8,7 +8,15 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+//Style imports
+import { homeStyles } from '../../static/css/homeStyles';
+
+//Material ui imports
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+
 const Settings = (props) => {
+    const styles = homeStyles();
     const [state, setState] = useState({});
     useEffect(() => {
         database.ref('hoursOfOperation').once("value")
@@ -60,7 +68,7 @@ const Settings = (props) => {
                             label={authConsts.WEEKDAYS[day][props.language]}
                         />
                         <div>
-                            <p>Open</p>
+                            <p>營業</p>
                             <TextField 
                                 id={`open/${day}`}
                                 type="time"
@@ -70,7 +78,7 @@ const Settings = (props) => {
                             />
                         </div>
                         <div>
-                            <p>Close</p>
+                            <p>關閉</p>
                             <TextField 
                                 id={`close/${day}`}
                                 type="time"
@@ -91,15 +99,18 @@ const Settings = (props) => {
             .catch( err => console.log(err));
     }
     return (
-        <div>
-            <h2>Settings</h2>
-            <div>
-                <h2>Days of week</h2>
+        <div className={styles.homebg}>
+            <div className={styles.header}>
+                <h1 className={styles.subTitle}>settings</h1>
+                <h2 className={styles.subTitle2}>設置</h2>
+            </div>
+            <Paper elevation={3} style={{textAlign: 'center', padding: '10px'}}>
                 <FormGroup row>
                     {renderWeekDays()}
                 </FormGroup>
-            </div>
-            <button disabled={isEqual()} onClick={saveSettings}>SAVE/保存</button>
+                <br />
+                <Button variant='contained' color='secondary' disabled={isEqual()} onClick={saveSettings}>SAVE/保存</Button>
+            </Paper>
         </div>
     )
 }

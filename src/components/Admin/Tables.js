@@ -109,6 +109,8 @@ const Tables = (props) => {
                     <Paper id="CA" onClick={startAdminOrder} className={cx(styles.hTable,(state.filledTables["門A"] && styles.orderTakenTable))}>{`門A${(state.filledTables["門A"] && state.filledTables["門A"].isNew) ? "(NEW)" : ""}`}</Paper>
                 </Grid>
             </Grid>
+            <br />
+            <br />
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={2}>
                     <div></div>

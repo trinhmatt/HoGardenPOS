@@ -45,7 +45,8 @@ const Menu = (props) => {
                                 menuSections: [],
                                 headerSections: [],
                                 isCartOpen: false,
-                                errorMsg: ""
+                                errorMsg: "",
+                                cartQty: 0,
                             });
 
     useEffect(() => {
@@ -110,6 +111,7 @@ const Menu = (props) => {
             .catch( err => setState({...state, errorMsg: err}))
         
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
     const renderHeader = () => {
         if ((!!cartConsts.tables[props.match.params.number] || props.match.params.number === "takeout") && state.errorMsg.length === 0) {
             let menuSections = [];
@@ -194,6 +196,7 @@ const Menu = (props) => {
                 !auth.userData && !state.errorMsg && state.headerSections.length === numSections &&
                 <CartButton {...props} cartOpen={openCart}>
                     <Fab className={styles.cartIcon} size='large'>
+                        {cart.length}
                         <ShoppingCart />
                     </Fab>
                 </CartButton>
