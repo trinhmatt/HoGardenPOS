@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { itemChoices, softDrinks } from '../../static/constants/menu-constants';
+import { itemChoices, softDrinks, drinkOptionLabels } from '../../static/constants/menu-constants';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -108,7 +108,7 @@ const DrinkAndSoupSection = (props) => {
         const typeVariables = type === "drink" ? {type, returnValKey: "drinkChoice", typeSelected: "drinkSelected"} : {type, returnValKey: "soupChoice", typeSelected: "soupSelected"};
         const choiceArray = type === "drink" ? drinkArr : itemChoices.soup.soupChoice;
         for (let i = 0; i < choiceArray.length; i++) {
-            const buttonText = type === "drink" ? `${!softDrinks.includes(choiceArray[i].english) && choiceArray[i].english !== "Ice Cream" ? "Hot " : ""}${choiceArray[i][language]} ${choiceArray[i].comboHot ? `(+$${choiceArray[i].comboHot.toFixed(2)})` : ""}` : choiceArray[i][language];
+            const buttonText = type === "drink" ? `${!softDrinks.includes(choiceArray[i].english) && choiceArray[i].english !== "Ice Cream" ? `${drinkOptionLabels.hot[language]} ` : ""}${choiceArray[i][language]} ${choiceArray[i].comboHot ? `(+$${choiceArray[i].comboHot.toFixed(2)})` : ""}` : choiceArray[i][language];
             elements.push(
                 <Button
                     id={`${i}/${typeVariables.returnValKey}`}
@@ -189,9 +189,9 @@ const DrinkAndSoupSection = (props) => {
                 isTakeout && hasDrink && hasSoup ? 
                     <div>
                         <div>
-                            <p>Comes with a drink OR soup</p>
-                            <Button value={"soup"} onClick={selectTakeoutSide}>Soup</Button>
-                            <Button value={"drink"} onClick={selectTakeoutSide}>Drink</Button>
+                            <p>{drinkOptionLabels.takeoutDrinkOrSoupLabel[language]}</p>
+                            <Button value={"soup"} onClick={selectTakeoutSide}>{drinkOptionLabels.soup[language]}</Button>
+                            <Button value={"drink"} onClick={selectTakeoutSide}>{drinkOptionLabels.drink[language]}</Button>
                         </div>
                         <div>
                             {state.selectedSide && state.selectedSide === "soup" && renderChoices("soup")}
@@ -202,14 +202,14 @@ const DrinkAndSoupSection = (props) => {
                     <div>
                         {hasSoup && 
                             <div>
-                                <h2>Soup<span className={styles.red}>*</span></h2>
+                                <h2>{drinkOptionLabels.soup[language]}<span className={styles.red}>*</span></h2>
                                 <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{renderChoices("soup")}</ButtonGroup>
                             </div>
                         }
                         <br />
                         {hasDrink && 
                             <div>
-                                <h2>Drink<span className={styles.red}>*</span></h2>
+                                <h2>{drinkOptionLabels.drink[language]}<span className={styles.red}>*</span></h2>
                                 <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{renderChoices("drink")}</ButtonGroup>
                             </div>}
                     </div>

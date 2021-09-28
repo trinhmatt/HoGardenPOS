@@ -154,4 +154,31 @@ export const addOnTypes = {
     }
 }
 
+export const drinkOptionLabels = {
+    sugar: {
+        english: "Sugar Level",
+        chinese: "糖度"
+    },
+    ice: {
+        english: "Ice Level",
+        chinese: "冰位"
+    },
+    hot: {
+        "english": "Hot",
+        "chinese": "燙"
+    },
+    soup: {
+        english: "Soup",
+        chinese: "湯"
+    },
+    drink: {
+        english: "Drink",
+        chinese: "飲料"
+    },
+    takeoutDrinkOrSoupLabel: {
+        english: "Comes with drink OR soup",
+        chinese: "飲料或湯"
+    }
+}
+
 export const softDrinks = ["Coke", "Diet Coke", "Sprite", "Ginger Ale"]
