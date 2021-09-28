@@ -32,7 +32,9 @@ const Cart = (props) => {
         let total = itemData.price;
         if (itemData.addOn && itemData.addOn.length > 0) {
             for (let i = 0; i < itemData.addOn.length; i++) {
-                total += itemData.addOn[i].price * (itemData.addOn[i].qty ? itemData.addOn[i].qty : 1.0);
+                if (itemData.addOn.price) {
+                    total += itemData.addOn[i].price * (itemData.addOn[i].qty ? itemData.addOn[i].qty : 1.0);
+                }
             }
         }
         total *= parseFloat(itemData.qty);

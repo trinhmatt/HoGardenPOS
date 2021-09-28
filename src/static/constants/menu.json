@@ -1060,6 +1060,54 @@
         "addOns": [
             {
                 "type": {
+                    "english": "Salt Modification",
+                    "chinese": "鹽 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less salt",
+                        "chinese": "少鹽"
+                    },
+                    {
+                        "english": "No salt",
+                        "chinese": "沒有鹽"
+                    }
+                ]
+            },
+            {
+                "type": {
+                    "english": "Oil Modification",
+                    "chinese": "用油 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less oil",
+                        "chinese": "少食用油"
+                    },
+                    {
+                        "english": "No oil",
+                        "chinese": "沒有食用油"
+                    }
+                ]
+            },
+            {
+                "type": {
+                    "english": "MSG Modification",
+                    "chinese": "味精 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less MSG",
+                        "chinese": "少味精"
+                    },
+                    {
+                        "english": "No MSG",
+                        "chinese": "沒有味精"
+                    }
+                ]
+            },
+            {
+                "type": {
                     "english": "Change",
                     "chinese": "改凍飲"
                 },

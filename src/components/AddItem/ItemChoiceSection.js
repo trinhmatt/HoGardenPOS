@@ -105,7 +105,7 @@ const ItemChoiceSection = (props) => {
             if (allSelected.includes(index)) {
                 allSelected.splice(allSelected.indexOf(index), 1);
             } else {
-                returnValue = isAddOn && returnValue.indexOf("price") === -1 ? returnValue.substring(0, returnValue.length-1) + `, "price": ${choicesArr.price}}` : returnValue;
+                returnValue = isAddOn && returnValue.indexOf("price") === -1 && choicesArr.price ? returnValue.substring(0, returnValue.length-1) + `, "price": ${choicesArr.price}}` : returnValue;
                 allSelected.push(index);
             }
             setState({...state, selectedAddOns: allSelected});
@@ -143,10 +143,12 @@ const ItemChoiceSection = (props) => {
         setState({...state, qty: {...state.qty, [qtyObjKey]: newQty}})
     }
     const parsePrice = (price) => {
-        if (price.indexOf(".") === -1) {
-            price += ".00";
-        } else if (price.indexOf(".") === price.length-2) {
-            price += "0";
+        if (price) {
+            if (price.indexOf(".") === -1) {
+                price += ".00";
+            } else if (price.indexOf(".") === price.length-2) {
+                price += "0";
+            }
         }
         return price;
     }
@@ -154,20 +156,23 @@ const ItemChoiceSection = (props) => {
         let choiceElements = [];
         if (isAddOn) {
             for (let i = 0; i < choicesArr.choices.length; i++) {
-                let price = '$';
+                let price = '';
 
                 // If the addOn is an iced drink, the price changes based on what drink it is 
-                if (choicesArr.choices[i].english === "Iced Drink") {
-                    choicesArr.choices[i].price = drinkChoice && drinkChoice.comboCold ? drinkChoice.comboCold-drinkChoice.comboHot : 1.50;
-                    price += parsePrice(choicesArr.choices[i].price.toString());
-                } else if (choicesArr.choices[i].price) {
-                    price += parsePrice(choicesArr.choices[i].price.toString());
-                } else {
-                    price += parsePrice(choicesArr.price.toString());
+                if (choicesArr.choices[i].price || choicesArr.price) {
+                    price = '$';
+                    if (choicesArr.choices[i].english === "Iced Drink") {
+                        choicesArr.choices[i].price = drinkChoice && drinkChoice.comboCold ? drinkChoice.comboCold-drinkChoice.comboHot : 1.50;
+                        price += parsePrice(choicesArr.choices[i].price.toString());
+                    } else if (choicesArr.choices[i].price) {
+                        price += parsePrice(choicesArr.choices[i].price.toString());
+                    } else {
+                        price += parsePrice(choicesArr.price.toString());
+                    }
                 }
-
+                
                 // Add on choice can be change/extra or qty choice 
-                if ((choicesArr.type.english === "Change" || choicesArr.type.english === "Extra")) {
+                if (choicesArr.type !== "Add") {
 
                     // This logic is just to not render the add on if it is an iced drink and if the drink is ice cream or soft drink
                     if ( 
@@ -187,7 +192,7 @@ const ItemChoiceSection = (props) => {
                                     cx(styles.itemChoices,(state.selectedAddOns.includes(i) ? styles.selectedChoice : null)) :
                                     cx(styles.chinItemChoices,(state.selectedAddOns.includes(i) ? styles.chinSelectedChoice : null))}
                             >
-                                {choicesArr.choices[i][language]} (+{price})
+                                {choicesArr.choices[i][language]} {price.length > 0 ? `(+${price})` : ""}
                             </Button>)
                     }
                     

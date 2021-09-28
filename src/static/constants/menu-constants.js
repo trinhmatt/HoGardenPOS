@@ -147,6 +147,10 @@ export const addOnTypes = {
     "Extra": {
         english: "Extra",
         chinese: "外加"
+    },
+    "Modification": {
+        english: "Modification",
+        chinese: "修改"
     }
 }
 

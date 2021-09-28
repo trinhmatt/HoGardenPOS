@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from 'react-router';
 
 //Style imports
@@ -37,8 +37,8 @@ import hc2 from '../static/menu/hc-2.jpg';
 const Home = (props) => {
     const styles = mainStyles();
     const [anchorEl, setAnchorEl] = useState(null);
+    const [firstLoad, setLoad] = useState(false);
     const open = Boolean(anchorEl);
-    const [isMenuOpen, setMenuOpen] = useState(false);
     
     const scrollToMenu = () => {
         const menu = document.getElementById('menu');

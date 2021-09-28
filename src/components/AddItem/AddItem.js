@@ -157,7 +157,7 @@ const AddItem = (props) => {
         if (isTakeout && choiceType.indexOf("soup") > -1 && drinkChoice) {
             drinkChoice = null;
         }
-
+        console.log(choiceValue)
         setItem({ 
             ...item,
              price, 
