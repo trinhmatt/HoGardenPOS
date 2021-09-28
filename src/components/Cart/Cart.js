@@ -190,7 +190,6 @@ const Cart = (props) => {
                     </div>
                     <br /><br /><br />
                 </Paper>
-                {isAdminUpdate && <Button onClick={clearCart}>Clear Cart</Button>}
                 <Button className={auth.userData ? styles.authAddToOrderBtn : styles.addToOrderBtn} variant='contained' onClick={checkout}>
                     {cart.orderItems ? "UPDATE" : "Checkout"}
                 </Button>

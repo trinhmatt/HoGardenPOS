@@ -14,7 +14,8 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 const DrinkAndSoupSection = (props) => {
     const styles = menuStyles();
     const { 
-        selectedObj, 
+        selectedDrink, 
+        selectedSoup,
         language,
         selectChoice, 
         drinkArr, 
@@ -27,7 +28,12 @@ const DrinkAndSoupSection = (props) => {
     } = props;
 
     const [state, setState] = useState({    
-                                selectedIndex: {soup: -1, drink: -1},
+                                selectedIndex: {
+                                    soup: -1, 
+                                    drink: -1, 
+                                    sugar: (selectedDrink ? selectedDrink.sugar : {english: ""}), 
+                                    ice: (selectedDrink ? selectedDrink.ice : {english: ""})
+                                },
                                 drinkSelected: false,
                                 soupSelected: false,
                                 coldSelected: false,
@@ -35,12 +41,17 @@ const DrinkAndSoupSection = (props) => {
                             });
 
     useEffect(() => {
-        if (selectedObj) {
-            let selectedIndex = -1;
+        if (selectedDrink && selectedSoup && state.selectedIndex.soup === -1 && state.selectedIndex.drink === -1) {
+            let selectedIndex = {...state.selectedIndex};
             let coldSelected = false;
             for (let i = 0; i < drinkArr.length; i++) {
-                if (drinkArr[i].english === selectedObj.english) {
-                    selectedIndex = i;
+                if (drinkArr[i].english === selectedDrink.english) {
+                    selectedIndex.drink = i;
+                }
+            }
+            for (let i = 0; i < itemChoices.soup.soupChoice.length; i++) {
+                if (itemChoices.soup.soupChoice[i].english === selectedSoup.english) {
+                    selectedIndex.soup = i;
                 }
             }
             if (selectedAddOns) {
@@ -87,6 +98,7 @@ const DrinkAndSoupSection = (props) => {
     const handleDrinkOptionSelect = (e) => {
        const drinkOptionType = e.currentTarget.id.substring( (e.currentTarget.id.indexOf("/")+1) );
        let drinkOption = {selectedOption: JSON.parse(e.currentTarget.value)};
+       setState({...state, selectedIndex: {...state.selectedIndex, [drinkOptionType]: drinkOption.selectedOption}})
        drinkOption.type = drinkOptionType;
        selectDrinkOption(drinkOption);
     }
@@ -96,7 +108,7 @@ const DrinkAndSoupSection = (props) => {
         const typeVariables = type === "drink" ? {type, returnValKey: "drinkChoice", typeSelected: "drinkSelected"} : {type, returnValKey: "soupChoice", typeSelected: "soupSelected"};
         const choiceArray = type === "drink" ? drinkArr : itemChoices.soup.soupChoice;
         for (let i = 0; i < choiceArray.length; i++) {
-            const buttonText = type === "drink" ? `${!softDrinks.includes(choiceArray[i].english) && choiceArray[i].english !== "Ice Cream" ? "Hot " : ""}${choiceArray[i][language]} ${choiceArray[i].comboHot ? `(+$${choiceArray[i].comboHot.toFixed(2)})` : ""}` : choiceArray[i][language]
+            const buttonText = type === "drink" ? `${!softDrinks.includes(choiceArray[i].english) && choiceArray[i].english !== "Ice Cream" ? "Hot " : ""}${choiceArray[i][language]} ${choiceArray[i].comboHot ? `(+$${choiceArray[i].comboHot.toFixed(2)})` : ""}` : choiceArray[i][language];
             elements.push(
                 <Button
                     id={`${i}/${typeVariables.returnValKey}`}
@@ -119,8 +131,7 @@ const DrinkAndSoupSection = (props) => {
         let optionElements = [];
         let sugarOptions = [];
         let iceOptions = [];
-
-        if (state.selectedIndex.drink !== -1 && drinkArr[state.selectedIndex.drink].hasSugar) {
+        if (state.selectedIndex.drink !== -1 && drinkArr[state.selectedIndex.drink] && drinkArr[state.selectedIndex.drink].hasSugar) {
             for (let i = 0; i < itemChoices.drinkOptions.sugar.length; i++) {
                 sugarOptions.push(
                     <div key={`${i}/sugarOption`}>
@@ -129,8 +140,8 @@ const DrinkAndSoupSection = (props) => {
                             value={JSON.stringify(itemChoices.drinkOptions.sugar[i])}
                             onClick={handleDrinkOptionSelect}
                             className={language === 'english' ? 
-                                    cx(styles.itemChoices,(state.selectedIndex.drink === i ? styles.selectedChoice : null)) :
-                                    cx(styles.chinItemChoices,(state.selectedIndex.drink === i ? styles.chinSelectedChoice : null))}
+                                    cx(styles.itemChoices,(state.selectedIndex.sugar.english === itemChoices.drinkOptions.sugar[i].english ? styles.selectedChoice : null)) :
+                                    cx(styles.chinItemChoices,(state.selectedIndex.sugar.english === itemChoices.drinkOptions.sugar[i].english ? styles.chinSelectedChoice : null))}
                         >
                                 {itemChoices.drinkOptions.sugar[i][language]}
                         </Button>

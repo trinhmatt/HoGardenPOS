@@ -1209,6 +1209,54 @@
         "addOns": [
             {
                 "type": {
+                    "english": "Salt Modification",
+                    "chinese": "鹽 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less salt",
+                        "chinese": "少鹽"
+                    },
+                    {
+                        "english": "No salt",
+                        "chinese": "沒有鹽"
+                    }
+                ]
+            },
+            {
+                "type": {
+                    "english": "Oil Modification",
+                    "chinese": "用油 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less oil",
+                        "chinese": "少食用油"
+                    },
+                    {
+                        "english": "No oil",
+                        "chinese": "沒有食用油"
+                    }
+                ]
+            },
+            {
+                "type": {
+                    "english": "MSG Modification",
+                    "chinese": "味精 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less MSG",
+                        "chinese": "少味精"
+                    },
+                    {
+                        "english": "No MSG",
+                        "chinese": "沒有味精"
+                    }
+                ]
+            },
+            {
+                "type": {
                     "english": "Change",
                     "chinese": "改凍飲"
                 },
@@ -1768,6 +1816,56 @@
             {
                 "english": "Served with Daily Soup or Hot: HK Milk Tea or Coffee or Lemon Tea",
                 "chinese": "奉送餐湯 或 熱: 港式奶茶或咖啡或檸檬茶"
+            }
+        ],
+        "addOns": [
+            {
+                "type": {
+                    "english": "Salt Modification",
+                    "chinese": "鹽 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less salt",
+                        "chinese": "少鹽"
+                    },
+                    {
+                        "english": "No salt",
+                        "chinese": "沒有鹽"
+                    }
+                ]
+            },
+            {
+                "type": {
+                    "english": "Oil Modification",
+                    "chinese": "用油 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less oil",
+                        "chinese": "少食用油"
+                    },
+                    {
+                        "english": "No oil",
+                        "chinese": "沒有食用油"
+                    }
+                ]
+            },
+            {
+                "type": {
+                    "english": "MSG Modification",
+                    "chinese": "味精 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less MSG",
+                        "chinese": "少味精"
+                    },
+                    {
+                        "english": "No MSG",
+                        "chinese": "沒有味精"
+                    }
+                ]
             }
         ],
         "noodleChoice": [  
@@ -2369,6 +2467,54 @@
                     }
                 ],
                 "price": 2.95
+            },
+            {
+                "type": {
+                    "english": "Salt Modification",
+                    "chinese": "鹽 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less salt",
+                        "chinese": "少鹽"
+                    },
+                    {
+                        "english": "No salt",
+                        "chinese": "沒有鹽"
+                    }
+                ]
+            },
+            {
+                "type": {
+                    "english": "Oil Modification",
+                    "chinese": "用油 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less oil",
+                        "chinese": "少食用油"
+                    },
+                    {
+                        "english": "No oil",
+                        "chinese": "沒有食用油"
+                    }
+                ]
+            },
+            {
+                "type": {
+                    "english": "MSG Modification",
+                    "chinese": "味精 修改"
+                },
+                "choices": [
+                    {
+                        "english": "Less MSG",
+                        "chinese": "少味精"
+                    },
+                    {
+                        "english": "No MSG",
+                        "chinese": "沒有味精"
+                    }
+                ]
             }
         ],
         "choices": [
@@ -2630,43 +2776,43 @@
             }
         ],
         "menuItems": {
-            "two": {
+            "SD2": {
                 "english": "2 Choices",
                 "chinese": "二款",
                 "price": 23.99,
                 "nChoices": 2
             },
-            "three": {
+            "SD3": {
                 "english": "3 Choices",
                 "chinese": "三款",
                 "price": 33.99,
                 "nChoices": 3
             },
-            "four": {
+            "SD4": {
                 "english": "4 Choices",
                 "chinese": "四款",
                 "price": 43.99,
                 "nChoices": 4
             },
-            "five": {
+            "SD5": {
                 "english": "5 Choices",
                 "chinese": "五款",
                 "price": 54.99,
                 "nChoices": 5
             },
-            "six": {
+            "SD6": {
                 "english": "6 Choices",
                 "chinese": "六款",
                 "price": 64.99,
                 "nChoices": 6
             },
-            "seven": {
+            "SD7": {
                 "english": "7 Choices",
                 "chinese": "七款",
                 "price": 74.99,
                 "nChoices": 7
             },
-            "eight": {
+            "SD8": {
                 "english": "8 Choices",
                 "chinese": "八款",
                 "price": 84.99,

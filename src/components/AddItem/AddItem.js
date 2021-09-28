@@ -117,7 +117,7 @@ const AddItem = (props) => {
             let didChange = false;
             for (let i = 0; i < choiceValue.length; i++) {
                 //De select add on/choice
-                if (choiceValue[i].english === returnObj.english || (choiceValue[i].type.indexOf("Modification") > -1 && choiceValue[i].type === returnObj.type)) {
+                if (choiceValue[i].english === returnObj.english || (choiceValue[i].type && choiceValue[i].type.indexOf("Modification") > -1 && choiceValue[i].type === returnObj.type)) {
                     //if no quantity, it is a add on that is on/off
                     if (choiceValue[i].qty === undefined && choiceValue[i].english === returnObj.english) {
 
@@ -141,7 +141,7 @@ const AddItem = (props) => {
         }
 
         // If user selected new drink and iced drink was already selected, un-select it
-        let addOnCopy = item.addOn;
+        let addOnCopy = item.addOn ? item.addOn : [];
         if (choiceType === "drinkChoice" && item.addOn && item.addOn.length > 0 && item.drinkChoice) {
             for (let i = 0; i < item.addOn.length; i++) {
                 if (item.addOn[i].english === "Iced Drink") {
@@ -163,7 +163,7 @@ const AddItem = (props) => {
              drinkChoice,
              soupChoice, 
              [choiceType]: choiceValue, 
-             addOn: (choiceType === "drinkChoice" ? addOnCopy : choiceType === "addOn" ? choiceValue : item.addOn) 
+             addOn: (choiceType === "drinkChoice" || choiceType === "soupChoice" ? addOnCopy : choiceType === "addOn" ? choiceValue : item.addOn) 
         });
     }
 
@@ -227,7 +227,8 @@ const AddItem = (props) => {
         }
         choiceSections.push(
             <DrinkAndSoupSection 
-                selectedObj={itemData.drinkChoice}
+                selectedDrink={itemData.drinkChoice}
+                selectedSoup={itemData.soupChoice}
                 isDisabled={(isTakeout && itemData.soupChoice)}
                 key="comboDrink"
                 language={language}
@@ -279,7 +280,7 @@ const AddItem = (props) => {
             if (
                 (itemData[key] && itemChoices[key] && !item[itemChoices[key].menuKey]) || 
                 (key === "hasProteinChoice" && !item.selectedProtein) || 
-                (key === "nChoices" && itemData.nChoices !== item.choices.length)
+                (key === "nChoices" && item.choices && itemData.nChoices !== item.choices.length)
             ) {
                 allRequiredChosen = false;
             } 
