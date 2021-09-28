@@ -140,11 +140,11 @@ const Cart = (props) => {
             })
     }
     return (
-        <div className={styles.cartLayoutBox}>
+        <div className={!auth.userData ? styles.cartLayoutBox : styles.authCartLayoutBox}>
             {
             cart.length > 0 || cart.orderItems && cart.orderItems.length > 0 ? 
             <div className={styles.cartLayout}>
-                <Paper elevation={3} className={styles.cartBox}>
+                <Paper elevation={3} className={!auth.userData ? styles.cartBox : styles.authCartBox}>
                     <div>
                     { (props.language === "english") ?
                         <span>

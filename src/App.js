@@ -30,6 +30,8 @@ function App(props) {
             } else {
               const orderSound = new Audio(newOrderSound);
               orderSound.play();
+
+              console.log(props.cart)
             }
           })
           
@@ -46,7 +48,8 @@ function App(props) {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  cart: state.cart
 })
 
 export default connect(mapStateToProps)(App);

@@ -116,12 +116,12 @@ const OrderCard = (props) => {
             <Button 
                 onClick={startCompleteOrder} 
                 variant='contained' 
-                disableElevation
                 className={styles.completeButton}
                 startIcon={<CheckCircleIcon />}
             >
                 <h3>COMPLETE/<b>完畢</b></h3>
             </Button>
+            <Button href={`starpassprnt://v1/print/nopreview?back=${encodeURIComponent(window.location.href)}&html=${encodeURIComponent('<html><body><p>hi</p></body></html>')}`}>print</Button>
         </Paper>
     )
 }
