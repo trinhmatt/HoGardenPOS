@@ -249,7 +249,6 @@ const menuStyles = makeStyles(() => ({
         border: '2px solid #000',
         height: '23vh',
         overflow: 'auto',
-        boxShadow: '0 10px 10px rgba(0,0,0,0.2)',
         borderRadius: '5px',
     },
     engScrollItem: {
@@ -756,7 +755,7 @@ const menuStyles = makeStyles(() => ({
         fontSize: '30px',
         textAlign: 'center',
         backgroundColor: '#000',
-        width: '33.33%',
+        width: '33.1%',
         color: '#fff',
         position: 'fixed',
     },

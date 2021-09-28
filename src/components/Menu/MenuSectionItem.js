@@ -35,16 +35,16 @@ const MenuSectionItem = (props) => {
                 const hotPrice = parsePrice(data.hotPrice.toString());
                 prices.push(
                     <div key={'hot'} style={{textAlign: 'center'}}>
-                        <span>Hot</span>
-                        <p>${hotPrice}</p>
+                        <span>Hot</span><br />
+                        <span style={{color: '#ff6c4e'}}>${hotPrice}</span>
                     </div>)
             }
             if (data.coldPrice) {
                 const coldPrice = parsePrice(data.coldPrice.toString())
                 prices.push(
                     <div key={'cold'} style={{textAlign: 'center'}}>
-                        <span>Cold</span>
-                        <p>&nbsp;&nbsp;${coldPrice}</p>
+                        <span>Cold</span><br />
+                        <span style={{color: '#8c74ff'}}>&nbsp;&nbsp;${coldPrice}</span>
                     </div>
                 )
             }

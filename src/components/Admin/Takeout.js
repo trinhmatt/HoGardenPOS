@@ -24,7 +24,6 @@ const Takeout = (props) => {
                     startIcon={<CreateIcon />}
                     className={styles.takeoutBtn}
                 >
-                    TAKEOUT ORDER<br />
                     下外賣訂單
                 </Button>
             </div>

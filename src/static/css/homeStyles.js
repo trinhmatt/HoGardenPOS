@@ -8,8 +8,7 @@ import home from '../images/home.jpeg';
 const homeStyles = makeStyles(() => ({
 
     // BACKGROUND
-    homebg: {
-        //background: 'linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6)',   
+    homebg: { 
         background: 'linear-gradient(to bottom, #000428, #004e92)',
         overflow: 'auto',
         width: '100vw',
@@ -21,7 +20,7 @@ const homeStyles = makeStyles(() => ({
         alignItems: 'center',
     },
     tableBg: {
-        background: 'linear-gradient(to top, #f46b45, #eea849)',
+        background: 'linear-gradient(to bottom, #000428, #004e92)',
         width: '100vw',
         height: '110vh',
         display: 'flex',
@@ -267,6 +266,11 @@ const homeStyles = makeStyles(() => ({
         display: 'flex',
         justifyContent: 'flex-end',
         backgroundColor: 'grey',
+    },
+    orderTime: {
+        textAlign: 'right',
+        marginRight: '10px',
+        color: '#32cd59',
     },
     completeButton: {
         color: '#32cd59',

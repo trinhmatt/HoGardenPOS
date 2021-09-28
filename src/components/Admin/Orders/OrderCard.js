@@ -109,19 +109,19 @@ const OrderCard = (props) => {
     return (
         <Paper elevation={10} className={styles.orderCard}>
             <Button onClick={startEditOrder}>EDIT/編輯</Button>
+            <span className={styles.orderTime}>{dayjs(orderData.time).format('h:mm A')}</span>
             <h1 className={styles.orderTable}>{orderData.table === 'takeout' ? `Takeout/外賣 #${orderData.takeoutNumber}` : `table/桌 ${orderData.table}`}</h1>
-            <p>ORDER TIME: {dayjs(orderData.time).format('h:mm A')}</p>
             {state.itemElements}
-            <h3 className={styles.orderCardTotal}>ORDER TOTAL/合計訂單: ${state.orderTotal.toFixed()}</h3>
+            <h3 className={styles.orderCardTotal}>合計訂單: ${state.orderTotal.toFixed(2)}</h3>
             <Button 
                 onClick={startCompleteOrder} 
                 variant='contained' 
+                size='small'
                 className={styles.completeButton}
                 startIcon={<CheckCircleIcon />}
             >
                 <h3>COMPLETE/<b>完畢</b></h3>
             </Button>
-            <Button href={`starpassprnt://v1/print/nopreview?back=${encodeURIComponent(window.location.href)}&html=${encodeURIComponent('<html><body><p>hi</p></body></html>')}`}>print</Button>
         </Paper>
     )
 }

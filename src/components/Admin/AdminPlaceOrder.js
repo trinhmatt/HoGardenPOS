@@ -135,11 +135,6 @@ const AdminPlaceOrder = (props) => {
         // `);
         setState({receiptHtml});
     };
-
-    const printerTest = () => {
-        setTimeout(window.close, 0);
-    }
-
     
     useEffect(() => {
         createReceipt();
@@ -154,7 +149,6 @@ const AdminPlaceOrder = (props) => {
                         <Button 
                             href={`starpassprnt://v1/print/nopreview?back=${encodeURIComponent(authConsts.CLOSE_ROUTE)}&html=${encodeURIComponent(state.receiptHtml)}`} 
                             className={styles.printerIcon}
-                            onClick={() => printerTest()}
                             >
                             <PrintIcon fontSize='large'/>
                         </Button>
