@@ -46,14 +46,7 @@ const Orders = (props) => {
             return orderCards;
         }
     }
-    const filterDrinks = () => {
-        if (state.orderObjs && state.orderObjs.length > 0) {
-            let drinkCards = [];
-            for (let i = 0; i < state.orderObjs.length; i++) {
-
-            }
-        }
-    }
+    
     const completeOrder = (index) => {
         const order = state.orderObjs[index];
         database.ref(`old_orders/${currentDayStr}`).once("value")
@@ -79,7 +72,6 @@ const Orders = (props) => {
             <div className={styles.header}>
                 <h1 className={styles.subTitle}>{isTakeout ? "takeout" : "orders"}</h1>
                 <h2 className={styles.subTitle2}>{isTakeout ? "外賣" : "订单"}</h2>
-                <Button onClick={filterDrinks}>DRINKS ONLY</Button>
                 <Button
                     onClick={() => props.history.push('/admin/past-orders')}
                     variant='contained'

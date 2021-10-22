@@ -134,9 +134,9 @@ const DrinkAndSoupSection = (props) => {
         if (state.selectedIndex.drink !== -1 && drinkArr[state.selectedIndex.drink] && drinkArr[state.selectedIndex.drink].hasSugar) {
             for (let i = 0; i < itemChoices.drinkOptions.sugar.length; i++) {
                 sugarOptions.push(
-                    <div key={`${i}/sugarOption`}>
                         <Button 
                             id={`${i}/sugar`}
+                            key={`${i}/sugarOption`}
                             value={JSON.stringify(itemChoices.drinkOptions.sugar[i])}
                             onClick={handleDrinkOptionSelect}
                             className={language === 'english' ? 
@@ -145,13 +145,17 @@ const DrinkAndSoupSection = (props) => {
                         >
                                 {itemChoices.drinkOptions.sugar[i][language]}
                         </Button>
-                    </div>
                 );
             }
             optionElements.push(
                 <div key="allSugar">
-                    <h2>Sugar Level<span className={styles.red}>*</span></h2>
-                    {sugarOptions}
+                    <h2>
+                        {language === 'english' ? 
+                        <span>Sugar Level</span> : <span>糖度</span>
+                        }
+                        <span className={styles.red}>*</span>
+                    </h2>
+                    <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{sugarOptions}</ButtonGroup>
                 </div>
             );
         }
@@ -159,22 +163,29 @@ const DrinkAndSoupSection = (props) => {
         if (state.coldSelected) {
             for (let i = 0; i < itemChoices.drinkOptions.ice.length; i++) {
                 iceOptions.push(
-                    <div key={'iceOptions'+i}>
                         <Button 
                             id={`${i}/ice`}
+                            key={'iceOptions'+i}
                             value={JSON.stringify(itemChoices.drinkOptions.ice[i])}
                             onClick={handleDrinkOptionSelect}
-                            
+                            className={language === 'english' ? 
+                                    cx(styles.itemChoices,(state.selectedIndex.ice.english === itemChoices.drinkOptions.ice[i].english ? styles.selectedChoice : null)) :
+                                    cx(styles.chinItemChoices,(state.selectedIndex.ice.english === itemChoices.drinkOptions.ice[i].english ? styles.chinSelectedChoice : null))}
                         >
                             {itemChoices.drinkOptions.ice[i][language]}
                         </Button>
-                    </div>
-                )
+                );
             }
             optionElements.push(
                 <div key="allIce">
-                    <h2>Ice Level<span className={styles.red}>*</span></h2>
-                    {iceOptions}
+                    <br />
+                    <h2>
+                        {language === 'english' ? 
+                        <span>Ice Level</span> : <span>冰位</span>
+                        }
+                        <span className={styles.red}>*</span>
+                    </h2>
+                    <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{iceOptions}</ButtonGroup>
                 </div>
             )
         }
@@ -216,7 +227,8 @@ const DrinkAndSoupSection = (props) => {
             }
             <br />
             {state.drinkSelected && 
-                <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>{renderDrinkOptions()}</ButtonGroup>}
+                renderDrinkOptions()
+            }
         </div>
     )
 }

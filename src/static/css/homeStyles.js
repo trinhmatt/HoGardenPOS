@@ -352,7 +352,52 @@ const homeStyles = makeStyles(() => ({
     orderTakenTable: {
         backgroundColor: '#32cd59',
         border: '2px solid #000',
-    }
+    },
+
+    //ERROR PAGE
+    title: {
+        fontFamily: ['"M PLUS Rounded 1c"', 'sans-serif'].join(','),
+        color: '#ffdd7a',
+        //phone
+        '@media (min-width: 375px)': {  
+            fontSize: '50px',
+        },
+        //ipad+
+        '@media (min-width: 760px)': {  
+            fontSize: '80px',
+            letterSpacing: '15px',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
+            fontSize: '80px',
+            letterSpacing: '20px',
+        },
+    },
+    errorText: {
+        fontFamily: ['"M PLUS Rounded 1c"', 'sans-serif'].join(','),
+        color: '#ffdd7a',
+        textAlign: 'center',
+        whiteSpace: 'pre-line',
+        //phone
+        '@media (min-width: 375px)': {  
+            fontSize: '20px',
+        },
+        //ipad+
+        '@media (min-width: 760px)': {  
+            fontSize: '40px',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
+            fontSize: '50px',
+        },
+    },
+
+    //SETTINGS
+    settingsBox: {
+        textAlign: 'center', 
+        padding: '10px',
+        margin: '25px',
+    },
     
 }));
 

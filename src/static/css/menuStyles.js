@@ -618,6 +618,22 @@ const menuStyles = makeStyles(() => ({
             fontSize: '35px',
         },
     },
+    addOnText: {
+        textTransform: 'uppercase', 
+        fontSize: '14px',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '20px',
+        },
+    },
+    chinAddOnText: {
+        textTransform: 'uppercase', 
+        fontSize: '20px',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '30px',
+        },
+    },
     itemChoices: {
         color: '#000',
         backgroundColor: '#f8f8ff !important',
@@ -643,7 +659,7 @@ const menuStyles = makeStyles(() => ({
         },
     },
     selectedChoice: {
-        backgroundColor: '#000',
+        backgroundColor: '#000 !important',
         color: '#fff',
         //ipad
         '@media (min-width: 760px)': {
@@ -651,7 +667,7 @@ const menuStyles = makeStyles(() => ({
         }
     },
     chinSelectedChoice: {
-        backgroundColor: '#000',
+        backgroundColor: '#000 !important',
         color: '#fff',
         fontSize: '20px',
         //ipad
@@ -673,6 +689,28 @@ const menuStyles = makeStyles(() => ({
             fontSize: '60px',
         },
     },
+    addOnQtyBtn: {
+        color: '#000',
+        //phone
+        '@media (min-width: 375px)': {
+            fontSize: '28px',
+        },
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '30px',
+        },
+    },
+    disabledAddOnQtyBtn: {
+        color: 'darkgray',
+        //phone
+        '@media (min-width: 375px)': {
+            fontSize: '28px',
+        },
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '30px',
+        },
+    },
     disabledAddItemQtyBtn: {
         color: 'darkgray',
         //phone
@@ -690,6 +728,7 @@ const menuStyles = makeStyles(() => ({
         bottom: '10px',
         backgroundColor: '#000',
         color: '#fff',
+        fontSize: '18px',
         //ipad
         '@media (min-width: 760px)': {
             fontSize: '20px',

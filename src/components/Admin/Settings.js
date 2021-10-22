@@ -55,7 +55,7 @@ const Settings = (props) => {
             let weekdayElements = [];
             for (const day in authConsts.WEEKDAYS) {
                 weekdayElements.push(
-                    <div key={day}>
+                    <div key={day} style={{padding: '25px'}}>
                         <FormControlLabel 
                             control={
                                 <Checkbox 
@@ -87,6 +87,7 @@ const Settings = (props) => {
                                 disabled={!state.newValues[day].isOpen}
                             />
                         </div>
+                        <br />
                     </div>
                 )
             }
@@ -104,11 +105,10 @@ const Settings = (props) => {
                 <h1 className={styles.subTitle}>settings</h1>
                 <h2 className={styles.subTitle2}>設置</h2>
             </div>
-            <Paper elevation={3} style={{textAlign: 'center', padding: '10px'}}>
+            <Paper elevation={3} className={styles.settingsBox}>
                 <FormGroup row>
                     {renderWeekDays()}
                 </FormGroup>
-                <br />
                 <Button variant='contained' color='secondary' disabled={isEqual()} onClick={saveSettings}>SAVE/保存</Button>
             </Paper>
         </div>

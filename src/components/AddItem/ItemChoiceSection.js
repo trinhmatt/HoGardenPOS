@@ -8,6 +8,11 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { menuStyles } from '../../static/css/menuStyles';
 import cx from 'clsx';
 
+//Material ui imports
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+
 //Constants imports
 import { itemChoices, softDrinks } from '../../static/constants/menu-constants';
 
@@ -175,7 +180,7 @@ const ItemChoiceSection = (props) => {
                 }
                 
                 // Add on choice can be change/extra or qty choice 
-                if (choicesArr.type !== "Add") {
+                if (choicesArr.type.english !== "Add") {
 
                     // This logic is just to not render the add on if it is an iced drink and if the drink is ice cream or soft drink
                     if ( 
@@ -202,20 +207,20 @@ const ItemChoiceSection = (props) => {
                 } else {
                     choiceElements.push(
                         <div key={choicesArr.choices[i].english}>
-                            <span>{choicesArr.choices[i][language]} (+{price})</span>
-                            <Button 
-                                value={`${choiceType}${i}:${JSON.stringify(choicesArr.choices[i])}/-1`} 
-                                onClick={handleQtyChoice}
-                            >
-                                -
-                            </Button>
-                            <span>{state.qty[`${choiceType}${i}`] ? state.qty[`${choiceType}${i}`] : 0}</span>
-                            <Button 
-                                value={`${choiceType}${i}:${JSON.stringify(choicesArr.choices[i])}/1`} 
-                                onClick={handleQtyChoice}
-                            >
-                                +
-                            </Button>
+                            <span className={language === 'english' ? styles.addOnText : styles.chinAddOnText}>{choicesArr.choices[i][language]} (+{price})</span>
+                            {state.qty > 0 ?
+                                    <IconButton value={`${choiceType}${i}:${JSON.stringify(choicesArr.choices[i])}/-1`} onClick={handleQtyChoice}>
+                                        <RemoveCircleIcon className={styles.addOnQtyBtn} />
+                                    </IconButton>
+                                    :
+                                    <IconButton value="-1" disabled onClick={handleQtyChoice}>
+                                        <RemoveCircleIcon className={styles.disabledAddOnQtyBtn} />
+                                    </IconButton>
+                            }
+                            <span className={language === 'english' ? styles.addOnText : styles.chinAddOnText}>{state.qty[`${choiceType}${i}`] ? state.qty[`${choiceType}${i}`] : 0}</span>
+                            <IconButton value={`${choiceType}${i}:${JSON.stringify(choicesArr.choices[i])}/1`} onClick={handleQtyChoice}>
+                                <AddCircleIcon className={styles.addOnQtyBtn} />
+                            </IconButton>
                         </div>
                     )
                 }
