@@ -33,7 +33,13 @@ const AdminPlaceOrder = (props) => {
         let cartItems = '';
         const dateTime = dayjs().format('DD/MM/YYYY HH:mm:ss');
         let cartSubTotal = 0.0;
-        const cartCopy = cart.length === undefined ? cart.orderItems : cart;
+        let cartCopy = cart;
+        if (cartCopy.orders) {
+            let newCartCopy = [];
+            for (let i = 0; i < cartCopy.orders.length; i++) {
+                newCartCopy = newCartCopy.concat(cartCopy.orders[i].orderItems);
+            }
+        }
         for (let i = 0; i < cartCopy.length; ++i) {
             let itemTotal = (cartCopy[i].price * cartCopy[i].qty);
             cartSubTotal += (cartCopy[i].price * cartCopy[i].qty);

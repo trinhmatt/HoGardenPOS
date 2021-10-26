@@ -33,7 +33,7 @@ const Tables = (props) => {
             tableNumber = tableNumber.replace("C", "門");
         }
         if (state.filledTables[tableNumber]) {
-            props.updateCart(state.filledTables[tableNumber].data);
+            props.updateCart({orders: state.filledTables[tableNumber].data});
             props.history.push(`/admin/place-order/${tableNumber}`);
         } else {
             props.clearCart();
@@ -49,7 +49,11 @@ const Tables = (props) => {
 
             if (orders && orders.length > 0) {
                 for (let i = 0; i < orders.length; i++) {
-                    filledTables[orders[i].table] = {filled: true, data: orders[i]};
+                    if (!filledTables[orders[i].table]) {
+                        filledTables[orders[i].table] = {filled: true, data: [orders[i]]};
+                    } else {
+                        filledTables[orders[i].table].data.push(orders[i]);
+                    }
                     if (!currentTables.current[orders[i].table] && !currentIsFirstRender.current) {
                         filledTables[orders[i].table].isNew = true;
                     }

@@ -19,9 +19,8 @@ import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox'
 
 const CartItem = (props) => {
     const styles = menuStyles();
-    const { itemData, language, updateCart, updateExistingOrder, index, table, price } = props;
-    const isAdminUpdate = !!props.cart.orderItems; //if orderItems exist, it is an existing order and the admin is updating  
-    const cart = isAdminUpdate ? props.cart.orderItems : props.cart;
+    const { itemData, language, updateCart, updateExistingOrder, index, table, price, cart } = props;
+    const isAdminUpdate = !!props.cart.orders; //if orders exist, it is an existing order and the admin is updating  
     let hasChoices = false;
 
     const renderChoices = () => {
@@ -87,13 +86,41 @@ const CartItem = (props) => {
 
     const changeQty = (e) => {
         const qty = itemData.qty + parseInt(e.currentTarget.value);
-        let cartItems = [...cart];
-        if (qty > 0) {
+        let cartItems = cart;
+        if (isAdminUpdate) {
+            // If admin update, need to find which order in the array this item belongs to 
+            let foundItem = false;
+            for (let i = 0; i < cartItems.orders.length; i++) {
+                if (itemData.belongsToOrder === cartItems.orders[i].id) {
+                    for (let n = 0; n < cartItems.orders[i].orderItems.length; n++) {
+                        if (itemData.indexInOrder === n) {
+                            foundItem = true;
+                            if (qty > 0) {
+                                cartItems.orders[i].orderItems[n].qty = qty;
+                            } else {
+                                cartItems.orders[i].orderItems.splice(n, 1);
+                            }
+                    
+                        }
+                    }
+                }
+            }
+            if (!foundItem && itemData.belongsToOrder === "new") {
+                for (let i = 0; i < cartItems.orderItems.length; i++) {
+                    if (i === itemData.indexInOrder) {
+                        if (qty > 0) {
+                            cartItems.orderItems[i].qty = qty;
+                        } else {
+                            cartItems.orderItems.splice(i, 1);
+                        }
+                    }
+                }
+            }
+        } else if (qty > 0) {
             cartItems[index].qty = qty;
         } else {
             cartItems.splice(index, 1);
         }
-        
         isAdminUpdate ? updateExistingOrder(cartItems) : updateCart(cartItems);
     }
 

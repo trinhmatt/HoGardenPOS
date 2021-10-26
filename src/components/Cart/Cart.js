@@ -24,7 +24,7 @@ const Cart = (props) => {
     const styles = menuStyles();
     const table = props.match.params.number;
     const { cart, language, auth, clearCart } = props;
-    const isAdminUpdate = !!cart.orderItems; // If cart = array, new order; if cart = object, update existing order (for admin)
+    const isAdminUpdate = !!cart.orders; // If cart = array, new order; if cart = object, update existing order (for admin)
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -44,7 +44,30 @@ const Cart = (props) => {
     useEffect(() => {
         let cartItems = [];
         let totalPrice = 0;
-        const cartData = isAdminUpdate ? cart.orderItems : cart;
+        let cartData = cart;
+        console.log(cart)
+        //If admin view, the cart will have an array of all orders for the specific table
+        if (isAdminUpdate) {
+            let newCartData = [];
+            // Concat all items in each order to a single array
+            for (let i = 0; i < cart.orders.length; i++) {
+                // Need to track which order the item belongs to for update
+                for (let n = 0; n < cart.orders[i].orderItems.length; n++) {
+                    cart.orders[i].orderItems[n].belongsToOrder = cart.orders[i].id;
+                    cart.orders[i].orderItems[n].indexInOrder = n;
+                }
+                newCartData = newCartData.concat(cart.orders[i].orderItems);
+            }
+            // When updating, cart.orderItems is for any new items added 
+            if (cart.orderItems) {
+                for (let i = 0; i < cart.orderItems.length; i++) {
+                    cart.orderItems[i].belongsToOrder = "new";
+                    cart.orderItems[i].indexInOrder = i;
+                }
+                newCartData = newCartData.concat(cart.orderItems);
+            }
+            cartData = newCartData;
+        }
         for (let i = 0; i < cartData.length; i++) {
             let price = calculatePrice(cartData[i]);
             totalPrice += price;
@@ -59,6 +82,9 @@ const Cart = (props) => {
         const isTakeout = table === "takeout";
 
         if (isAdminUpdate) {
+            if (cart.orderItems) {
+                pushOrderToDatabase(currentDayStr)
+            }
             updateOrderInDatabase(currentDayStr);
         } else if (isTakeout) {
             database.ref(`takeoutNumber/${currentDayStr}`).once("value")
@@ -87,7 +113,7 @@ const Cart = (props) => {
                 let order = {
                     id: orders ? orders.length : 0,
                     table: tableVal, 
-                    orderItems: cart,
+                    orderItems: (isAdminUpdate ? cart.orderItems : cart),
                     time: dayjs().format()
                 };
 
@@ -119,22 +145,23 @@ const Cart = (props) => {
         database.ref(`orders/${dayStr}`).once("value")
             .then( snapshot => {
                 let orders = snapshot.val();
-                let indexOfOrder = -1;
                 if (orders) {
-                    for (let i = 0; i < orders.length; i++) {
-                        if (orders[i].table === cart.table || (orders[i].table === "takeout" && orders[i].takeoutNumber === cart.takeoutNumber)) {
-                            indexOfOrder = i;
-                        }
+                    let ordersToUpdate = {}; 
+                    for (let i = 0; i < cart.orders.length; i++) {
+                        ordersToUpdate[cart.orders[i].id] = cart.orders[i];
                     }
-                    if (indexOfOrder > -1) {
-                        database.ref(`orders/${dayStr}`).update({[indexOfOrder]: cart})
-                            .then( () => {
-                                clearCart();
-                                props.history.push({
-                                    pathname: cart.takeoutNumber ? `/order/${cart.takeoutNumber}/takeout` : `/order/${table}/review`
-                                });
-                            })
-                    }
+                    // for (let i = 0; i < orders.length; i++) {
+                    //     if (orders[i].table === cart.table || (orders[i].table === "takeout" && orders[i].takeoutNumber === cart.takeoutNumber)) {
+                    //         indexOfOrder = i;
+                    //     }
+                    // }
+                    database.ref(`orders/${dayStr}`).update(ordersToUpdate)
+                        .then( () => {
+                            clearCart();
+                            props.history.push({
+                                pathname: cart.takeoutNumber ? `/order/${cart.takeoutNumber}/takeout` : `/order/${table}/review`
+                            });
+                        })
                 }
 
             })
@@ -142,7 +169,7 @@ const Cart = (props) => {
     return (
         <div className={!auth.userData ? styles.cartLayoutBox : styles.authCartLayoutBox}>
             {
-            cart.length > 0 || cart.orderItems && cart.orderItems.length > 0 ? 
+            cartItems.length > 0 ? 
             <div className={styles.cartLayout}>
                 <Paper elevation={3} className={!auth.userData ? styles.cartBox : styles.authCartBox}>
                     <div>
@@ -191,7 +218,7 @@ const Cart = (props) => {
                     <br /><br /><br />
                 </Paper>
                 <Button className={auth.userData ? styles.authAddToOrderBtn : styles.addToOrderBtn} variant='contained' onClick={checkout}>
-                    {cart.orderItems ? "UPDATE" : "Checkout"}
+                    {cart.orders ? "UPDATE" : "Checkout"}
                 </Button>
                 </div>
             : 

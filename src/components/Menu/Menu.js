@@ -89,20 +89,6 @@ const Menu = (props) => {
 
                 if (days[currentDay].isOpen && dayjs().isBetween(open, close, null, '[]')) {
                     renderHeader();
-                    if (props.match.params.number !== "takeout") {
-                        database.ref(`orders/${dayjs().format(authConsts.DATE)}`).once("value")
-                            .then( (snapshot) => {
-                                const orders = snapshot.val(); 
-            
-                                if (orders) {
-                                    for (let i = 0; i < orders.length; i++) {
-                                        if (orders[i].table === props.match.params.number && !isAdminUpdate) {
-                                            props.history.push(`${props.match.params.number}/review`);
-                                        }
-                                    }
-                                }
-                            })
-                    }
                 } else {
                     setState({...state, errorMsg: "We are currently closed! Please come back again."});
                 }

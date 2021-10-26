@@ -77,7 +77,7 @@
                 "hasNoodle": false,
                 "isSpicy": false,
                 "hasDrink": true,
-                "hasSoup": true,
+                "hasSoup": false,
                 "restName": "A1"
             },
             "A2": {
@@ -88,7 +88,7 @@
                 "hasNoodle": false,
                 "isSpicy": false,
                 "hasDrink": true,
-                "hasSoup": true,
+                "hasSoup": false,
                 "restName": "A2"
             },
             "A3": {
@@ -99,7 +99,7 @@
                 "hasNoodle": false,
                 "isSpicy": false,
                 "hasDrink": true,
-                "hasSoup": true,
+                "hasSoup": false,
                 "restName": "A3"
             },
             "A5": {
@@ -111,7 +111,7 @@
                 "hasEgg": true,
                 "isSpicy": false,
                 "hasDrink": true,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
@@ -134,7 +134,7 @@
                 "isSpicy": false,
                 "hasEgg": true,
                 "hasDrink": true,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
@@ -159,7 +159,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "D"
             },
@@ -170,7 +170,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "E"
             },
@@ -181,7 +181,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "F"
             },
@@ -192,7 +192,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "G"
             },
@@ -203,7 +203,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "H"
             },
@@ -225,7 +225,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "J"
             },
@@ -236,7 +236,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "K"
             },
@@ -247,7 +247,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "L"
             },
@@ -258,7 +258,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "M"
             },
@@ -269,7 +269,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全1"
             },
@@ -280,7 +280,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全2"
             },
@@ -291,7 +291,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全3"
             },
@@ -302,7 +302,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全4"
             },
@@ -313,7 +313,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全5"
             },
@@ -324,7 +324,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全6"
             },
@@ -335,7 +335,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全7"
             },
@@ -346,7 +346,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全8"
             },
@@ -357,7 +357,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全9"
             },
@@ -368,7 +368,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全10"
             },
@@ -379,7 +379,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全11"
             },
@@ -390,7 +390,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全12"
             },
@@ -401,7 +401,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全13"
             },
@@ -412,7 +412,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全14"
             },
@@ -423,7 +423,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全15"
             },
@@ -434,7 +434,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全16"
             },
@@ -445,7 +445,7 @@
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": true,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全17"
             },
@@ -456,7 +456,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全18"
             },
@@ -467,7 +467,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全19"
             },
@@ -478,7 +478,7 @@
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
-                "hasSoup": true,
+                "hasSoup": false,
                 "hasDrink": true,
                 "restName": "全20"
             }
@@ -843,54 +843,64 @@
             "AT1": {
                 "english": "Pineapple Bun with Butter",
                 "chinese": "菠蘿油",
-                "price": 4.50
+                "price": 4.50,
+                "hasDrink": true
             },
             "AT2": {
                 "english": "Toast with Butter/Condensed Milk/Peanut Butter",
                 "chinese": "占多/奶油多/奶醬多",
                 "price": 5.50,
-                "hasCondiment": true
+                "hasCondiment": true,
+                "hasDrink": true
             },
             "AT3": {
                 "english": "Egg/Ham Sandwiches",
                 "chinese": "雞蛋三文治或腿治",
-                "price": 5.50
+                "price": 5.50,
+                "hasDrink": true
             },
             "AT4": {
                 "english": "French Toast (with Peanut Butter)",
                 "chinese": "4  西多士 (內有花生醬)",
-                "price": 5.95
+                "price": 5.95,
+                "hasDrink": true
             },
             "AT5": {
                 "english": "Ham Omelette with Butter Toast",
                 "chinese": "白菌火腿奄列 (跟牛油多士)",
-                "price": 6.95
+                "price": 6.95,
+                "hasDrink": true
             },
             "AT6": {
                 "english": "Deep Fried Chicken Wings with Fries/Salad",
                 "chinese": "炸雞翼薯條/沙律",
                 "price": 7.95,
-                "hasSide": true
+                "hasSide": true,
+                "hasDrink": true
             },
             "AT7": {
                 "english": "Deep Fried Chicken Leg with Fries/Salad",
                 "chinese": "炸雞牌薯條/沙律",
-                "price": 7.95
+                "price": 7.95,
+                "hasDrink": true
             },
             "AT8": {
                 "english": "Wonton Noodle in Soup",
                 "chinese": "雲吞麵/米/河/瀨",
-                "price": 7.95
+                "price": 7.95,
+                "hasDrink": true
             },
             "AT9": {
                 "english": "Fish Ball Noodle in Soup",
                 "chinese": "魚蛋麵/米/河/瀨",
-                "price": 7.95
+                "price": 7.95,
+                "hasDrink": true
             },
             "AT10": {
                 "english": "Beef Tendon Brisket Noodle in Soup",
                 "chinese": "牛筋腩麵/米/河/瀨",
-                "price": 7.95
+                "price": 7.95,
+                "hasDrink": true
             },
             "AT11": {
                 "english": "Satay Beef/Ham with Macaroni in Soup",
@@ -906,7 +916,8 @@
                         "english": "Ham",
                         "chinese": "火腿"
                     }
-                ]
+                ],
+                "hasDrink": true
             },
             "AT12": {
                 "english": "Luncheon Meat/Ham and Egg with Instant Moodle in Soup",
@@ -922,65 +933,77 @@
                         "english": "Ham and Egg",
                         "chinese": "火腿和鸡蛋"
                     }
-                ]
+                ],
+                "hasDrink": true
 
             },
             "AT13": {
                 "english": "Stir Fried Instant Noodle with Luncheon Meat",
                 "chinese": "餐肉炒公仔麵",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT14": {
                 "english": "Braised Egg Noodle with Beef & Mushroom in Hot Pot",
                 "chinese": "北菇砂鍋牛肉炆生麵",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT15": {
                 "english": "Stir Fried Spaghetti with Ham",
                 "chinese": "干炒火腿意大利粉",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT16": {
                 "english": "Shredded Chicken Spaghetti with Tomato Sauce",
                 "chinese": "茄汁雞絲繪意粉",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT17": {
                 "english": "Western Style Fried Rice",
                 "chinese": "西式炒飯",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT18": {
                 "english": "Singapore Style Stir Fried Vermicelli",
                 "chinese": "星州炒米",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT19": {
                 "english": "Diced Chicken and Salted Fish Fried Rice",
                 "chinese": "咸魚雞粒炒飯",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT20": {
                 "english": "Cutlet Pork Chop with Fries/Salad",
                 "chinese": "吉列豬扒薯條/沙律",
                 "price": 7.95,
-                "hasSide": true
+                "hasSide": true,
+                "hasDrink": true
             },
             "AT21": {
                 "english": "Cutlet Garoupa with Fries/Salad",
                 "chinese": "吉列石斑薯條/沙律",
                 "price": 7.95,
-                "hasSide": true
+                "hasSide": true,
+                "hasDrink": true
             },
             "AT22": {
                 "english": "Stir Fried Soya Sauce Thick Noodle",
                 "chinese": "豉油王炒河",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT23": {
                 "english": "B.L.T. Sandwich",
                 "chinese": "煙肉、生菜、番茄三文治",
-                "price": 5.95
+                "price": 5.95,
+                "hasDrink": true
             },
             "AT24": {
                 "english": "Ham & Egg/Luncheon Meat & Egg/Egg & Corned Beef Sandwiches",
@@ -1000,37 +1023,44 @@
                         "english": "Corned Beef & Egg",
                         "chinese": "蛋牛治"
                     }
-                ]
+                ],
+                "hasDrink": true
             },
             "AT25": {
                 "english": "Stir Fried Sliced Beef with Spaghetti",
                 "chinese": "干炒牛柳絲意粉",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT26": {
                 "english": "Stir Fried Bacon & Onions with Spaghetti",
                 "chinese": "香蔥煙肉干炒意粉",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT27": {
                 "english": "Club Sandwich (Toasted)",
                 "chinese": "公司三文治 (烘底)",
-                "price": 8.95
+                "price": 8.95,
+                "hasDrink": true
             },
             "AT28": {
                 "english": "Tuna Fish Sandwiches",
                 "chinese": "吞拿魚三文治",
-                "price": 5.95
+                "price": 5.95,
+                "hasDrink": true
             },
             "AT29": {
                 "english": "Braised Beef Noodle in Soup",
                 "chinese": "紅燒牛肉麵",
-                "price": 7.95
+                "price": 7.95,
+                "hasDrink": true
             },
             "AT30": {
                 "english": "Ho Garden's Noodle in Soup with Wonton, Fish Ball, Beef Ball and Luncheon Meat",
                 "chinese": "招牌湯麵  (雲吞、魚蛋、牛丸、餐肉)",
-                "price": 7.95
+                "price": 7.95,
+                "hasDrink": true
             }
         }
     },

@@ -45,14 +45,15 @@ const AddItem = (props) => {
         updateCart, 
         auth, 
         addToExistingOrder, 
-        updateExistingOrder } = props;
+        updateExistingOrder,
+        cart
+    } = props;
     
     // Bools that effect logic and rendering
-    const isAdminUpdate = !!props.cart.orderItems; //if orderItems exist, it is an existing order and the admin is updating  
+    const isAdminUpdate = !!props.cart.orders; //if orderItems exist, it is an existing order and the admin is updating  
     const isDrink = itemData.coldPrice || itemData.hotPrice;
 
     // Data used by component
-    const cart = isAdminUpdate ? props.cart.orderItems : props.cart;
     const [item, setItem] = useState({...itemData});
 
     const currentItem = useRef();
@@ -81,8 +82,37 @@ const AddItem = (props) => {
         goBackToMenu();
     }
     const startUpdateCart = () => {
-        let cartItems = [...cart];
-        if (item.qty > 0) {
+        let cartItems = cart;
+        if (isAdminUpdate) {
+            // If admin update, need to find which order in the array this item belongs to 
+            if (itemData.belongsToOrder === "new") {
+                for (let i = 0; i < cartItems.orderItems.length; i++) {
+                    if (itemData.indexInOrder === i) {
+                        if (item.qty > 0) {
+                            cartItems.orderItems[i] = { ...itemData, ...item };
+                        } else {
+                            cartItems.orderItems.splice(i, 1);
+                        }
+                    }
+                }
+            } else {
+                for (let i = 0; i < cartItems.orders.length; i++) {
+                    if (itemData.belongsToOrder === cartItems.orders[i].id) {
+                        for (let n = 0; n < cartItems.orders[i].orderItems.length; n++) {
+                            if (itemData.indexInOrder === n) {
+                                if (item.qty > 0) {
+                                    cartItems.orders[i].orderItems[n] = {...itemData, ...item};
+                                } else {
+                                    cartItems.orders[i].orderItems.splice(n, 1);
+                                }
+                        
+                            }
+                        }
+                    }
+                }
+            }
+            
+        } else if (item.qty > 0) {
             cartItems[index] = { ...itemData, ...item };
         } else {
             cartItems.splice(index, 1);
@@ -279,7 +309,7 @@ const AddItem = (props) => {
         let allRequiredChosen = true;
         for (const key in itemData) {
             if (
-                (itemData[key] && itemChoices[key] && !item[itemChoices[key].menuKey]) || 
+                (itemData[key] && itemChoices[key] && !item[itemChoices[key].menuKey] && !isTakeout) || 
                 (key === "hasProteinChoice" && !item.selectedProtein) || 
                 (key === "nChoices" && item.choices && itemData.nChoices !== item.choices.length) || 
                 (isDrink && !item.tempChoice)

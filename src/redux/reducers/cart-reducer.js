@@ -11,9 +11,9 @@ export const cartReducer = (state = initState, action) => {
         case cartConsts.actions.clear:
             return initState;
         case cartConsts.actions.updateExistingOrder:
-            return {...state, orderItems: action.newItems};
+            return {...action.updatedCart};
         case cartConsts.actions.addToExistingOrder:
-            return {...state, orderItems: [...state.orderItems, action.newItem]}
+            return {...state, orderItems: (state.orderItems ? [...state.orderItems, action.newItem] : [action.newItem])}
         default:
             return state;
     }

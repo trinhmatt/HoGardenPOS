@@ -31,20 +31,17 @@ function App(props) {
             if (currentState.current) {
               setIsFirst(false);
             } else {
-              const orderSound = new Audio(newOrderSound);
-              orderSound.play();
+              let order = snapshot.val();
 
-              console.log(snapshot.val());
-
-              document.getElementById('order-click').click();
-              
-              //write to database when order comes in on order items
-              //loop thru orderItems arr in snapshot.val()
-                //table + restName + chinese + qty (food item)
-                //table + drink
+              if (order.didPrint === undefined) {
+                order.didPrint = true;
+                const orderSound = new Audio(newOrderSound);
+                orderSound.play();
+                database.ref(`orders/${dayjs().format(authConsts.DATE)}`).update({[order.id]: order})
+                document.getElementById('order-click').click();
+              }
             }
           })
-          
         })
     } else {
       setIsFirst(true);
