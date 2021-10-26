@@ -55,7 +55,7 @@ function App(props) {
           href={`starpassprnt://v1/print/nopreview?back=${encodeURIComponent(authConsts.CLOSE_ROUTE)}&html=${encodeURIComponent('<html><body><div>nu</div></body></html>')}`}
           style={{ display: 'none' }}
         >
-        </Button>;
+        </Button>
       </MuiPickersUtilsProvider>
   );
 }

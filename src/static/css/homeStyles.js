@@ -2,8 +2,11 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
+//theme
+import theme from './theme'
+
 //Image
-import home from '../images/home.jpeg';
+import bluebackground from '../images/1014.jpg';
 
 const homeStyles = makeStyles(() => ({
 
@@ -28,7 +31,7 @@ const homeStyles = makeStyles(() => ({
         overflow: 'auto',
     },
     loginbg: {
-        backgroundImage: `url(${home})`,
+        backgroundImage: `url(${bluebackground})`,
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -226,19 +229,22 @@ const homeStyles = makeStyles(() => ({
         overflow: 'auto',
     },
     orderCard: {
-        width: '40%',
+        width: '45%',
         height: '80%',
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
         overflowY: 'auto',
         overflowX: 'hidden',
         margin: '2%',
     },
     orderTable: {
         fontSize: '25px',
+        width: '100%',
         textAlign: 'center',
-        backgroundColor: 'lightgrey',
-        boxShadow: '1px 2px 5px rgb(0 0 0 / 20%)',
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.primary.main,
+        boxShadow: `1px 5px 15px rgb(0 0 0 / 20%)`,
     },
     orderGrid: {
         padding: '2%',
@@ -263,17 +269,25 @@ const homeStyles = makeStyles(() => ({
     },
     orderCardTotal: {
         padding: '10px',
-        display: 'flex',
-        justifyContent: 'flex-end',
-        backgroundColor: 'grey',
+        marginRight: '15px',
+        textAlign: 'center',
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.primary.main,
+        width: '100%',
+        fontSize: '25px',
     },
     orderTime: {
-        textAlign: 'right',
-        marginRight: '10px',
-        color: '#32cd59',
+        textAlign: 'center',
+        width: '100%',
+        color: theme.palette.primary.main,
+        fontWeight: 'bold',
+        fontSize: '20px'
     },
     completeButton: {
         color: '#32cd59',
+        transform: 'scale(3)',
+        margin: '20px',
+        padding: '0px',
     },
     pastOrderTableCell: {
         backgroundColor: '#000',
@@ -305,8 +319,8 @@ const homeStyles = makeStyles(() => ({
         left: '1%',
     },
     takeoutBtn: {
-        backgroundColor: '#32cd59 !important',
-        color: '#000 !important',
+        backgroundColor: `${theme.palette.secondary.main} !important`,
+        color: `${theme.palette.primary.main} !important`,
         fontWeight: 'bold',
         fontSize: '20px'
     },
@@ -350,9 +364,54 @@ const homeStyles = makeStyles(() => ({
         fontSize: '20px',
     },
     orderTakenTable: {
-        backgroundColor: '#32cd59',
-        border: '2px solid #000',
-    }
+        backgroundColor: theme.palette.secondary.dark,
+        border: `2px solid ${theme.palette.secondary.light}`,
+    },
+
+    //ERROR PAGE
+    title: {
+        fontFamily: ['"M PLUS Rounded 1c"', 'sans-serif'].join(','),
+        color: '#ffdd7a',
+        //phone
+        '@media (min-width: 375px)': {  
+            fontSize: '50px',
+        },
+        //ipad+
+        '@media (min-width: 760px)': {  
+            fontSize: '80px',
+            letterSpacing: '15px',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
+            fontSize: '80px',
+            letterSpacing: '20px',
+        },
+    },
+    errorText: {
+        fontFamily: ['"M PLUS Rounded 1c"', 'sans-serif'].join(','),
+        color: '#ffdd7a',
+        textAlign: 'center',
+        whiteSpace: 'pre-line',
+        //phone
+        '@media (min-width: 375px)': {  
+            fontSize: '20px',
+        },
+        //ipad+
+        '@media (min-width: 760px)': {  
+            fontSize: '40px',
+        },
+        //desktop
+        '@media (min-width: 960px)': {
+            fontSize: '50px',
+        },
+    },
+
+    //SETTINGS
+    settingsBox: {
+        textAlign: 'center', 
+        padding: '10px',
+        margin: '25px',
+    },
     
 }));
 

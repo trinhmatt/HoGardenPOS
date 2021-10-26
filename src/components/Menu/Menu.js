@@ -15,6 +15,7 @@ import database from '../../firebase/firebase';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
+import { homeStyles } from '../../static/css/homeStyles';
 
 //Material ui imports
 import AppBar from '@material-ui/core/AppBar';
@@ -37,7 +38,10 @@ import ShoppingCart from '@material-ui/icons/ShoppingCart';
 const Menu = (props) => {
 
     dayjs.extend(isBetween);
+    //styles
     const styles = menuStyles();
+    const hStyles = homeStyles();
+
     const numSections = Object.keys(menuJSON).length;
     const { language, changeLanguage, auth, cart } = props;
     const isAdminUpdate = !!cart.orderItems;
@@ -90,7 +94,7 @@ const Menu = (props) => {
                 if (days[currentDay].isOpen && dayjs().isBetween(open, close, null, '[]')) {
                     renderHeader();
                 } else {
-                    setState({...state, errorMsg: "We are currently closed! Please come back again."});
+                    setState({...state, errorMsg: "We are currently closed\nPlease come back again!\n我們目前已關閉。請再來！"});
                 }
 
             })
@@ -119,7 +123,16 @@ const Menu = (props) => {
     }
     return (
         <React.Fragment>
-            {state.errorMsg.length > 0 && <p>{state.errorMsg}</p>}
+            {state.errorMsg.length > 0 ? 
+                <div className={hStyles.homebg} style={{justifyContent: 'center'}}>
+                    <div className={styles.centered} style={{flexDirection: 'column'}}>
+                    <div className={hStyles.title}>半島餐廳</div>
+                    <p className={hStyles.errorText}>{state.errorMsg}</p>
+                    </div>
+                </div>
+                :
+                <div></div>
+            }
             {!state.errorMsg && state.menuSections.length === numSections && 
                 <Container className={!auth.userData ? styles.menuLayout : styles.authMenuLayout}>
                     {/* Header */}

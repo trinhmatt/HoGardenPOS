@@ -125,6 +125,9 @@ const AddItem = (props) => {
         const val = choiceData.currentTarget ? choiceData.currentTarget.value : choiceData;
         let price = itemData.price;
 
+        // Total price of item
+        let totalPrice = item.price;
+
         // Have to do these separately for takeout combo 
         // When drink is chosen with soup already chosen I need to remove soup and vice-versa 
         let drinkChoice = currentItem.current.drinkChoice ? {...currentItem.current.drinkChoice} : null;
@@ -194,7 +197,7 @@ const AddItem = (props) => {
              drinkChoice,
              soupChoice, 
              [choiceType]: choiceValue, 
-             addOn: (choiceType === "drinkChoice" || choiceType === "soupChoice" ? addOnCopy : choiceType === "addOn" ? choiceValue : item.addOn) 
+             addOn: (choiceType === "drinkChoice" || choiceType === "soupChoice" ? addOnCopy : choiceType === "addOn" ? choiceValue : item.addOn),
         });
     }
 
@@ -320,11 +323,36 @@ const AddItem = (props) => {
         return item.qty === 0 || !allRequiredChosen;
     }
 
+    // Calculates price of item as user selects choices
+    const calculatePrice = () => {
+        let totalPrice = item.price;
+        let qtyCopy = 1;
+        
+        if (item.drinkChoice) {
+            if (item.drinkChoice.comboHot) {
+                totalPrice += item.drinkChoice.comboHot;
+            }
+        }
+        if (item.addOn && item.addOn.length > 0) {
+            for (let i = 0; i < item.addOn.length; ++i) {
+                if (item.addOn[i].type === 'Change' || item.addOn[i].type === 'Extra') {
+                    totalPrice += item.addOn[i].price;
+                } else {
+                    totalPrice += (item.addOn[i].price * item.addOn[i].qty);
+                }
+            }
+        }
+        if (item.qty > 0) {
+            qtyCopy = item.qty;
+        }
+        return totalPrice * qtyCopy;
+    }
+
     useEffect(() => {
         // Scroll to top of window on render
         window.scrollTo(0, 0);
     }, []);
-
+    
     return (
         <React.Fragment>
             <div className={styles.addItemLayout}>
@@ -337,7 +365,6 @@ const AddItem = (props) => {
                             </IconButton>
                             <FormGroup className={styles.switchLayout}>
                                 <FormControlLabel
-                                    className={styles.switchAddItemLayout}
                                     control={<Switch size="medium" checked={props.language === "chinese"} onChange={() => {
                                         (props.language === "chinese") ?
                                             props.changeLanguage("english") : props.changeLanguage("chinese")
@@ -360,6 +387,7 @@ const AddItem = (props) => {
                             <div>
                                 {renderChoices()}
                             </div>
+                            {/* Qty buttons */}
                             <div className={styles.row} style={{marginTop: '-25px'}}>
                                 {item.qty > 0 ?
                                     <IconButton value="-1" onClick={changeQty}>
@@ -375,10 +403,10 @@ const AddItem = (props) => {
                                     <AddCircleIcon className={styles.addItemQtyBtn} />
                                 </IconButton>
                             </div>
-                            <br /><br /><br /><br /><br />
+                            <br /><br /><br />
                         </Paper>
                         <Button
-                            className={ auth.userData ? styles.authAddToOrderBtn : language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn}
+                            className={ auth.userData ? styles.authAddToOrderBtn : language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn }
                             variant='contained' 
                             disabled={checkRequiredChoices()} 
                             onClick={index !== undefined ? startUpdateCart : addToOrder}>
@@ -388,6 +416,7 @@ const AddItem = (props) => {
                                 : 
                                 (language === 'english' ? engAddBtnText : chinAddBtnText)
                             }
+                            &nbsp;(${calculatePrice().toFixed(2)})
                         </Button>
                     </Box>
                 </Container>

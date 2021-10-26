@@ -47,6 +47,7 @@ const Orders = (props) => {
             return orderCards;
         }
     }
+    
     const completeOrder = (index) => {
         const order = state.orderObjs[index];
         database.ref(`old_orders/${currentDayStr}`).once("value")

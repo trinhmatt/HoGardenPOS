@@ -1,8 +1,16 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-// orange= #fdb678
-// green= #7f9877
+//theme
+import theme from './theme'
+
+//header banner
+import banner from '../images/header.png';
+import banneripad from '../images/header-ipad.png';
+import bannerdesktop from '../images/header-desktop.png';
+import bluebackground from '../images/1014.jpg';
+
 const menuStyles = makeStyles(() => ({
+    
     //GLOBALS
     red: {
         color: '#F50157',
@@ -29,7 +37,7 @@ const menuStyles = makeStyles(() => ({
     menuLayout: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflowX: 'hidden',
-        backgroundColor: '#fdb678',
+        backgroundColor: theme.palette.primary.main,
         //desktop
         '@media (min-width: 960px)': {
             maxWidth: 'none !important',
@@ -38,7 +46,7 @@ const menuStyles = makeStyles(() => ({
     authMenuLayout: {
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflowX: 'hidden',
-        backgroundColor: '#fdb678',
+        backgroundColor: theme.palette.primary.main,
         //desktop
         '@media (min-width: 960px)': {
             maxWidth: 'none !important',
@@ -51,7 +59,7 @@ const menuStyles = makeStyles(() => ({
         fontFamily: ['Roboto', 'sans-serif'].join(','),
         overflow: 'hidden',
         position: 'fixed',
-        backgroundColor: '#fdb678',
+        backgroundColor: theme.palette.primary.main,
         display: 'flex !important',
         flexDirection: 'column',
         alignItems: 'center',
@@ -64,21 +72,23 @@ const menuStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        backgroundImage: 'url(https://i.imgur.com/Vq44CWs.png)',
+        justifyContent: 'space-between',
         backgroundSize: 'cover',
         //phone
         '@media (min-width: 375px)': {
             height: '24vh',
+            backgroundImage: `url(${banner})`,
         },
         //ipad
         '@media (min-width: 760px)': {
             height: '25vh',
+            backgroundImage: `url(${banneripad})`,
         },
         //desktop
         '@media (min-width: 960px)': {
             height: '25vh',
             backgroundPosition: 'center',
+            backgroundImage: `url(${bannerdesktop})`,
         },
     },
     foodLayout: {
@@ -87,7 +97,7 @@ const menuStyles = makeStyles(() => ({
         paddingRight: '0% !important',
         //phone
         '@media (min-width: 375px)': {
-            marginTop: '17vh',
+            marginTop: '18vh',
         },
         //ipad
         '@media (min-width: 760px)': {
@@ -110,8 +120,7 @@ const menuStyles = makeStyles(() => ({
         display: 'flex',
         alignItems: 'flex-end',
         width: '100%',
-        marginTop: '-3vh',
-        marginRight: '-5vh',
+        marginRight: '-7vh',
     },
     authSwitchLayout: {
         display: 'flex',
@@ -124,14 +133,18 @@ const menuStyles = makeStyles(() => ({
     },
     backLayout: {
         display: 'flex',
-        alignItems: 'flex-start',
+        alignItems: 'flex-end',
         justifyContent: 'flex-start',
         width: '100%',
+        height: '25%',
+        '@media screen and (orientation: landscape)': {
+            height: '40%',
+        },
     },
     backAddItemLayout: {
         marginTop: '-23vh',
-        backgroundColor: '#000',
-        color: '#fff',
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.primary.dark,
         borderRadius: '5px',
         //phone
         '@media (min-width: 375px)': {
@@ -191,6 +204,11 @@ const menuStyles = makeStyles(() => ({
         width: '100%',
         height: '100%',
     },
+    authCartLayout: {
+        overflow: 'auto', 
+        height: '100vh',
+        backgroundColor: theme.palette.secondary.darker,
+    },
 
     //HEADERS
     smallHeader: {
@@ -207,9 +225,9 @@ const menuStyles = makeStyles(() => ({
     menuSectionTitle: {
         textTransform: 'uppercase',
         fontSize: '4vh',
-        color: '#809978',
+        color: theme.palette.primary.main,
         textAlign: 'center',
-        border: '1px solid #7f9877',
+        border: `2px solid ${theme.palette.secondary.dark}`,
         borderTop: 'transparent',
         borderLeft: 'transparent',
         borderRight: 'transparent',
@@ -220,16 +238,16 @@ const menuStyles = makeStyles(() => ({
     cartTitle: {
         textTransform: 'uppercase',
         fontSize: '30px',
-        color: '#809978',
+        color: theme.palette.primary.main,
         textAlign: 'center',
-        border: '1px solid #7f9877',
+        border: `1px solid ${theme.palette.primary.main}`,
         borderTop: 'transparent',
         borderLeft: 'transparent',
         borderRight: 'transparent',
         marginTop: '5%',
     },
     chinLanguage: {
-        color: '#000',
+        color: theme.palette.secondary.main,
     },
 
     //SCROLL
@@ -313,7 +331,7 @@ const menuStyles = makeStyles(() => ({
         alignItems: 'center',
         alignContent: 'center',
         position: 'relative',
-        border: '2px solid #7f9877',
+        border: `2px solid ${theme.palette.secondary.dark}`,
         boxShadow: '0 1px 10px rgba(0,0,0,0.2)',
         //desktop/ipad
         '@media (min-width: 760px)': {
@@ -343,7 +361,7 @@ const menuStyles = makeStyles(() => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#7f9877',
+        backgroundColor: theme.palette.secondary.dark,
         color: '#fff',
         fontWeight: 'bold',
         boxShadow: '0 1px 10px rgba(0,0,0,0.2)',
@@ -385,7 +403,7 @@ const menuStyles = makeStyles(() => ({
         alignItems: 'flex-end',
     },
     menuExtraInfo: {
-        color: '#DE6434',
+        color: theme.palette.primary.dark,
         margin: '2%',
         //phone
         '@media (min-width: 375px)': {
@@ -437,6 +455,8 @@ const menuStyles = makeStyles(() => ({
         justifyContent: 'center',
         alignItems: 'center',
         textTransform: 'uppercase',
+        padding: '20px',
+        color: theme.palette.primary.dark,
     },
     cartLayoutBox: {
         display: 'flex',
@@ -454,8 +474,8 @@ const menuStyles = makeStyles(() => ({
         fontSize: '3vw'
     },
     cartIcon: {
-        backgroundColor: '#7f9877 !important',
-        color: '#fff !important',
+        backgroundColor: `${theme.palette.secondary.main} !important`,
+        color: `${theme.palette.primary.dark} !important`,
     },
     cartItemSection: {
         display: 'flex',
@@ -473,7 +493,7 @@ const menuStyles = makeStyles(() => ({
         },
     },
     cartQty: {
-        backgroundColor: '#7f9877',
+        backgroundColor: theme.palette.primary.main,
         color: '#fff',
         paddingLeft: '15%',
         paddingRight: '15%',
@@ -509,13 +529,15 @@ const menuStyles = makeStyles(() => ({
         padding: '2% !important',
         textAlign: 'center',
         wordBreak: 'break-word',
-        backgroundColor: '#dee4db',
+        backgroundColor: theme.palette.secondary.lighter,
+        color: theme.palette.primary.main,
     },
     chinCartAddonTitle: {
         padding: '2% !important',
         textAlign: 'center',
         wordBreak: 'break-word',
-        backgroundColor: '#dee4db',
+        backgroundColor: theme.palette.secondary.lighter,
+        color: theme.palette.primary.main,
         fontSize: '20px',
         lineHeight: '1.2em',
     },
@@ -524,7 +546,7 @@ const menuStyles = makeStyles(() => ({
     },
     cartSubtitle: {
         fontSize: '12px',
-        color: '#DE6434',
+        color: theme.palette.primary.light,
     },
     cartTotals: {
         display: 'flex',
@@ -584,7 +606,8 @@ const menuStyles = makeStyles(() => ({
         padding: '5%',
         textAlign: 'center',
         wordBreak: 'break-word',
-        border: '2px dashed #7f9877',
+        border: `2px dashed ${theme.palette.secondary.dark}`,
+        color: theme.palette.primary.main,
         margin: '0',
         //phone
         '@media (min-width: 375px)': {
@@ -603,7 +626,8 @@ const menuStyles = makeStyles(() => ({
         padding: '5%',
         textAlign: 'center',
         wordBreak: 'break-word',
-        border: '2px dashed #7f9877',
+        border: `2px dashed ${theme.palette.secondary.dark}`,
+        color: theme.palette.primary.main,
         margin: '0',
         //phone
         '@media (min-width: 375px)': {
@@ -616,6 +640,22 @@ const menuStyles = makeStyles(() => ({
         //desktop
         '@media (min-width: 960px)': {
             fontSize: '35px',
+        },
+    },
+    addOnText: {
+        textTransform: 'uppercase', 
+        fontSize: '14px',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '20px',
+        },
+    },
+    chinAddOnText: {
+        textTransform: 'uppercase', 
+        fontSize: '20px',
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '30px',
         },
     },
     itemChoices: {
@@ -643,7 +683,7 @@ const menuStyles = makeStyles(() => ({
         },
     },
     selectedChoice: {
-        backgroundColor: '#000',
+        backgroundColor: '#000 !important',
         color: '#fff',
         //ipad
         '@media (min-width: 760px)': {
@@ -651,7 +691,7 @@ const menuStyles = makeStyles(() => ({
         }
     },
     chinSelectedChoice: {
-        backgroundColor: '#000',
+        backgroundColor: '#000 !important',
         color: '#fff',
         fontSize: '20px',
         //ipad
@@ -673,6 +713,28 @@ const menuStyles = makeStyles(() => ({
             fontSize: '60px',
         },
     },
+    addOnQtyBtn: {
+        color: '#000',
+        //phone
+        '@media (min-width: 375px)': {
+            fontSize: '28px',
+        },
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '30px',
+        },
+    },
+    disabledAddOnQtyBtn: {
+        color: 'darkgray',
+        //phone
+        '@media (min-width: 375px)': {
+            fontSize: '28px',
+        },
+        //ipad
+        '@media (min-width: 760px)': {
+            fontSize: '30px',
+        },
+    },
     disabledAddItemQtyBtn: {
         color: 'darkgray',
         //phone
@@ -688,11 +750,17 @@ const menuStyles = makeStyles(() => ({
         width: '75%',
         position: 'fixed',
         bottom: '10px',
-        backgroundColor: '#000',
-        color: '#fff',
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.primary.dark,
+        fontSize: '18px',
         //ipad
         '@media (min-width: 760px)': {
             fontSize: '20px',
+        },
+        '&:disabled': {
+            opacity: '0.4',
+            backgroundColor: theme.palette.secondary.light,
+            color: theme.palette.primary.dark,
         },
     },
     chinAddToOrderBtn: {
@@ -702,23 +770,33 @@ const menuStyles = makeStyles(() => ({
         backgroundColor: '#000',
         color: '#fff',
         fontSize: '20px',
+        '&:disabled': {
+            opacity: '0.4',
+            backgroundColor: theme.palette.secondary.light,
+            color: theme.palette.primary.dark,
+        },
     },
     authAddToOrderBtn: {
         width: '75%',
-        backgroundColor: '#000',
-        color: '#fff',
         marginTop: '-5%',
         marginBottom: '15%',
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.primary.dark,
         //ipad
         '@media (min-width: 760px)': {
             fontSize: '20px',
+        },
+        '&:disabled': {
+            opacity: '0.4',
+            backgroundColor: theme.palette.secondary.light,
+            color: theme.palette.primary.dark,
         },
     },
 
     //REVIEW ORDER
     reviewLayout: {
-        backgroundImage: 'linear-gradient(130deg, #fdb678 25%, #fabf8c 25%, #fabf8c 50%, #fdb678 50%, #fdb678 75%, #fabf8c 75%, #fabf8c 100%)',
-        backgroundSize: '52.22px 62.23px',
+        backgroundImage: `url(${bluebackground})`,
+        backgroundSize: '852.22px 862.23px',
         height: '100vh',
         width: '100vw',
         display: 'flex',
@@ -728,7 +806,7 @@ const menuStyles = makeStyles(() => ({
         zIndex: '-2',
     },
     reviewBox: {
-        height: '65%',
+        height: '100%',
         width: '80%',
         overflow: 'auto',
         padding: '5%',
@@ -750,12 +828,14 @@ const menuStyles = makeStyles(() => ({
         justifyContent: 'flex-end',
         fontSize: '2.2vh',
         marginTop: '10%',
+        backgroundColor: 'gainsboro',
+        padding: '15px',
     },
     authTableNumber: {
         fontSize: '30px',
         textAlign: 'center',
         backgroundColor: '#000',
-        width: '33.1%',
+        width: '33%',
         color: '#fff',
         position: 'fixed',
     },
@@ -766,10 +846,10 @@ const menuStyles = makeStyles(() => ({
         height: '40px',
         position: 'absolute',
         margin: '12% auto',
-        color: '#fff',
-        border: '1px solid #5a6f54',
+        color: theme.palette.primary.main,
+        border: `1px solid ${theme.palette.secondary.dark}`,
+        backgroundColor: theme.palette.secondary.light,
         textTransform: 'uppercase',
-        backgroundColor: '#7f9877',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -782,16 +862,16 @@ const menuStyles = makeStyles(() => ({
             left: '-25px',
             top: '25px',
             width: '12px',
-            border: '15px solid #829877',
-            borderRight: '8px solid #374333',
-            borderBottomColor: '#667d5f',
+            border: `15px solid ${theme.palette.secondary.light}`,
+            borderRight: `8px solid ${theme.palette.secondary.darker}`,
+            borderBottomColor: theme.palette.secondary.main,
             borderLeftColor: 'transparent',
             transform: 'rotate(-5deg)',
         },
         '&:after': {
             left: 'auto',
             right: '-20px',
-            borderLeft: '8px solid #374333',
+            borderLeft: `8px solid ${theme.palette.secondary.darker}`,
             borderRight: '8px solid transparent',
             transform: 'rotate(5deg)',
         },

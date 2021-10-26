@@ -130,7 +130,7 @@ const CartItem = (props) => {
             state: {itemData, index, table}
         })
     }
-    
+    console.log(props)
     return (
         <div>
             <br />

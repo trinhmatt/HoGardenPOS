@@ -13,8 +13,11 @@ import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+
 //Icon imports
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
 
 const OrderCard = (props) => {
     const styles = homeStyles();
@@ -113,15 +116,12 @@ const OrderCard = (props) => {
             <h1 className={styles.orderTable}>{orderData.table === 'takeout' ? `Takeout/外賣 #${orderData.takeoutNumber}` : `table/桌 ${orderData.table}`}</h1>
             {state.itemElements}
             <h3 className={styles.orderCardTotal}>合計訂單: ${state.orderTotal.toFixed(2)}</h3>
-            <Button 
-                onClick={startCompleteOrder} 
-                variant='contained' 
-                size='small'
+            <IconButton 
+                onClick={startCompleteOrder}
                 className={styles.completeButton}
-                startIcon={<CheckCircleIcon />}
             >
-                <h3>COMPLETE/<b>完畢</b></h3>
-            </Button>
+                <CheckCircleOutlineRoundedIcon />
+            </IconButton>
         </Paper>
     )
 }

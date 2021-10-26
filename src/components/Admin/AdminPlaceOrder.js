@@ -149,7 +149,7 @@ const AdminPlaceOrder = (props) => {
     return (
         <div>
             <Grid container spacing={0}>
-                <Grid item xs={4} style={{overflow: 'auto', height: '100vh',backgroundColor: '#7f9877', border: '2px solid #000'}}>
+                <Grid item xs={4} className={styles.authCartLayout}>
                     <div className={styles.authTableNumber}>
                         table {tableNumber} 
                         <Button 
