@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 const MenuSection = (props) => {
     const styles = menuStyles();
     const ref = useRef(null);
-    const { data, language, cart, auth } = props;
+    const { data, language, cart, auth, lastClickedElement } = props;
     const [items, setItems] = useState([]);
     const [itemElements, setItemElements] = useState([]);
 
@@ -50,7 +50,16 @@ const MenuSection = (props) => {
                 const qtyQueryKey = items[item].english.replace(" ", "");
                 const qty = itemQtyObjs[qtyQueryKey] ? itemQtyObjs[qtyQueryKey] : 0;
                 elements.push(
-                    <MenuSectionItem itemKey={item} qty={qty} sectionData={sectionData} table={props.match.params.number} language={language} key={item} data={items[item]} />
+                    <MenuSectionItem 
+                        itemKey={item} 
+                        qty={qty}
+                        lastClickedElement={lastClickedElement} 
+                        sectionData={sectionData} 
+                        table={props.match.params.number} 
+                        language={language} 
+                        key={item} 
+                        data={items[item]} 
+                    />
                 )
             }
             setItemElements(elements)
