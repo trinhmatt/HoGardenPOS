@@ -16,13 +16,13 @@ const CartItemChoice = (props) => {
     }, [])
     const parseChoice = () => {
         let choiceValue = choice;
-        console.log(type)
         if (title === "addOn" && type !== undefined) {
             const addOnType = type.indexOf("Modification") > -1 ? "Modification" : type;
             choiceValue = `${addOnTypes[addOnType][language]} ${choice}`;
         }
         return choiceValue;
     }
+    
     return (
         <div onClick={editItem}>
         <span>

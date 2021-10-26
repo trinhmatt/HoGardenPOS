@@ -208,7 +208,7 @@ const ItemChoiceSection = (props) => {
                     choiceElements.push(
                         <div key={choicesArr.choices[i].english}>
                             <span className={language === 'english' ? styles.addOnText : styles.chinAddOnText}>{choicesArr.choices[i][language]} (+{price})</span>
-                            {state.qty > 0 ?
+                            {state.qty.addOn0 > 0 ?
                                     <IconButton value={`${choiceType}${i}:${JSON.stringify(choicesArr.choices[i])}/-1`} onClick={handleQtyChoice}>
                                         <RemoveCircleIcon className={styles.addOnQtyBtn} />
                                     </IconButton>
@@ -246,6 +246,7 @@ const ItemChoiceSection = (props) => {
         return choiceElements
         //setState({...state, choiceElements});
     }
+    
     return (
         <div className={(language === 'english') ? styles.itemChoiceLayout : styles.chinItemChoiceLayout}>
             <h2>{isAddOn ? choicesArr.type[language] : itemChoices[constKey][language]}{<span className={styles.red}>{!isAddOn && '*'}</span>}</h2>

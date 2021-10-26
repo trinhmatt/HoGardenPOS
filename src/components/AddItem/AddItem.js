@@ -298,7 +298,7 @@ const AddItem = (props) => {
     const calculatePrice = () => {
         let totalPrice = item.price;
         let qtyCopy = 1;
-
+        
         if (item.drinkChoice) {
             if (item.drinkChoice.comboHot) {
                 totalPrice += item.drinkChoice.comboHot;
@@ -306,7 +306,11 @@ const AddItem = (props) => {
         }
         if (item.addOn && item.addOn.length > 0) {
             for (let i = 0; i < item.addOn.length; ++i) {
-                totalPrice += (item.addOn[i].price * item.addOn[i].qty);
+                if (item.addOn[i].type === 'Change' || item.addOn[i].type === 'Extra') {
+                    totalPrice += item.addOn[i].price;
+                } else {
+                    totalPrice += (item.addOn[i].price * item.addOn[i].qty);
+                }
             }
         }
         if (item.qty > 0) {
@@ -332,7 +336,6 @@ const AddItem = (props) => {
                             </IconButton>
                             <FormGroup className={styles.switchLayout}>
                                 <FormControlLabel
-                                    className={styles.switchAddItemLayout}
                                     control={<Switch size="medium" checked={props.language === "chinese"} onChange={() => {
                                         (props.language === "chinese") ?
                                             props.changeLanguage("english") : props.changeLanguage("chinese")
@@ -371,10 +374,10 @@ const AddItem = (props) => {
                                     <AddCircleIcon className={styles.addItemQtyBtn} />
                                 </IconButton>
                             </div>
-                            <br /><br /><br /><br /><br />
+                            <br /><br /><br />
                         </Paper>
                         <Button
-                            className={ auth.userData ? styles.authAddToOrderBtn : language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn}
+                            className={ auth.userData ? styles.authAddToOrderBtn : language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn }
                             variant='contained' 
                             disabled={checkRequiredChoices()} 
                             onClick={index !== undefined ? startUpdateCart : addToOrder}>
