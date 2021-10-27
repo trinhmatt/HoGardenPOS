@@ -133,6 +133,8 @@ const DrinkAndSoupSection = (props) => {
         let iceOptions = [];
         if (state.selectedIndex.drink !== -1 && drinkArr[state.selectedIndex.drink] && drinkArr[state.selectedIndex.drink].hasSugar) {
             for (let i = 0; i < itemChoices.drinkOptions.sugar.length; i++) {
+                console.log(language)
+                console.log(state.selectedIndex)
                 sugarOptions.push(
                         <Button 
                             id={`${i}/sugar`}
@@ -140,8 +142,8 @@ const DrinkAndSoupSection = (props) => {
                             value={JSON.stringify(itemChoices.drinkOptions.sugar[i])}
                             onClick={handleDrinkOptionSelect}
                             className={language === 'english' ? 
-                                    cx(styles.itemChoices,(state.selectedIndex.sugar.english === itemChoices.drinkOptions.sugar[i].english ? styles.selectedChoice : null)) :
-                                    cx(styles.chinItemChoices,(state.selectedIndex.sugar.english === itemChoices.drinkOptions.sugar[i].english ? styles.chinSelectedChoice : null))}
+                                    cx(styles.itemChoices,(state.selectedIndex.sugar && state.selectedIndex.sugar.english === itemChoices.drinkOptions.sugar[i].english ? styles.selectedChoice : null)) :
+                                    cx(styles.chinItemChoices,(state.selectedIndex.sugar && state.selectedIndex.sugar.english === itemChoices.drinkOptions.sugar[i].english ? styles.chinSelectedChoice : null))}
                         >
                                 {itemChoices.drinkOptions.sugar[i][language]}
                         </Button>

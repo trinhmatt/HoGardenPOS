@@ -800,6 +800,28 @@
                     {
                         "english": "Grass Jelly with Ice Cream",
                         "chinese": "雪糕涼粉冰"
+                    },
+                    {
+                        "english": "Iced Drink",
+                        "chinese": "汽水",
+                        "price": 1.50
+                    }
+                ],
+                "price": 2.00
+            },
+            {
+                "type": {
+                    "english": "Change",
+                    "chinese": "改凍飲"
+                },
+                "choices": [
+                    {
+                        "english": "Red Bean Freeze with Ice Cream",
+                        "chinese": "雪糕紅豆冰"
+                    },
+                    {
+                        "english": "Grass Jelly with Ice Cream",
+                        "chinese": "雪糕涼粉冰"
                     }
                 ],
                 "price": 2.00
@@ -1288,6 +1310,11 @@
                     {
                         "english": "Fried Rice",
                         "chinese": "炒底"
+                    },
+                    {
+                        "english": "Iced Drink",
+                        "chinese": "汽水",
+                        "price": 1.50
                     }
                 ],
                 "price": 2.00
@@ -1625,28 +1652,6 @@
             {
                 "chinese": "通粉",
                 "english": "Macaroni"
-            }
-        ],
-        "drinkChoice": [
-            {
-                "english": "Hot HK Milk Tea",
-                "chinese": "熱港式奶茶"
-            },
-            {
-                "english": "Hot Coffee",
-                "chinese": "熱咖啡"
-            },
-            {
-                "english": "Lemon Tea",
-                "chinese": "檸檬茶"
-            },
-            {
-                "english": "Chinese soup",
-                "chinese": "例湯"
-            },
-            {
-                "english": "Borscht",
-                "chinese": "羅宋湯"
             }
         ],
         "menuItems": {
