@@ -489,6 +489,8 @@
             "english": "Breakfast",
             "chinese": "美味早餐"
         },
+        "startTime": "8:00",
+        "endTime": "11:30",
         "extraInfo": [
             {
                 "english": "Available from 8:00am - 11:30am",
@@ -772,6 +774,8 @@
             "english": "Afternoon Tea",
             "chinese": "精裝下午茶"
         },
+        "startTime": "14:00",
+        "endTime": "17:30",
         "extraInfo": [
             {
                 "english": "Available from 2:00pm - 5:30pm",

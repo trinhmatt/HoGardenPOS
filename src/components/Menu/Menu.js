@@ -108,15 +108,27 @@ const Menu = (props) => {
             let menuSections = [];
             
             for (const section in menuJSON) {
-                menuSections.push(
-                    <MenuSection 
-                        lastClickedElement={props.location.state ? props.location.state.lastClickedElement : null} 
-                        lang={language} key={`menuSection/${section}`} 
-                        data={menuJSON[section]} 
-                    />
-                );
+                // menuSections.push(
+                //     <MenuSection 
+                //         lastClickedElement={props.location.state ? props.location.state.lastClickedElement : null} 
+                //         lang={language} key={`menuSection/${section}`} 
+                //         data={menuJSON[section]} 
+                //     />
+                // );
+                if (!menuJSON[section].startTime || 
+                    (menuJSON[section].startTime && dayjs().isBetween(dayjs(menuJSON[section].startTime, authConsts['24_HOUR_TIME']), dayjs(menuJSON[section].endTime, authConsts['24_HOUR_TIME']), null, '[]'))
+                ) {
+                    menuSections.push(
+                        <MenuSection 
+                            lastClickedElement={props.location.state ? props.location.state.lastClickedElement : null} 
+                            lang={language} key={`menuSection/${section}`} 
+                            data={menuJSON[section]} 
+                        />
+                    );
+                    
+                }
             }
-
+            console.log(menuSections)
             setState({...state, menuSections})
         } else {
             props.history.push("/error");
@@ -140,7 +152,7 @@ const Menu = (props) => {
                 :
                 <div></div>
             }
-            {!state.errorMsg && state.menuSections.length === numSections && 
+            {!state.errorMsg && state.menuSections.length > 0 && 
                 <Container className={!auth.userData ? styles.menuLayout : styles.authMenuLayout}>
                     {/* Header */}
                     {
