@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { itemChoices } from "../../static/constants/menu-constants";
 import { updateCart, updateExistingOrder } from '../../redux/actions/cart-actions';
 import CartItemChoice from './CartItemChoice';
+import { calculateItemPrice } from '../../static/helpers';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -28,16 +29,30 @@ const CartItem = (props) => {
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && itemData[itemChoices[key].menuKey] && itemData[key].length === undefined) {
                 hasChoices = true;
+                let sugar, ice, price;
+                if (itemData[itemChoices[key].menuKey]['sugar'] !== undefined) {
+                    sugar = itemData[itemChoices[key].menuKey]['sugar'][language];
+                }
+                if (itemData[itemChoices[key].menuKey]['ice'] !== undefined) {
+                    ice = itemData[itemChoices[key].menuKey]['ice'][language];
+                }
+                if (itemData[itemChoices[key].menuKey]['comboHot'] !== undefined) {
+                    price = itemData[itemChoices[key].menuKey]['comboHot'];
+                }
                 choices.push(
                     <CartItemChoice 
                         key={key}
                         choice={itemData[itemChoices[key].menuKey][language]} 
+                        sugar={sugar}
+                        ice={ice}
+                        price={price}
                         editItem={editItem}
                         language={language} 
                     />
                 )
             } else if (key === "choices" && itemData.choices.length > 0) {
                 for (let i = 0; i < itemData.choices.length; i++) {
+                    console.log(itemData)
                     choices.push(
                         <CartItemChoice 
                             key={`choice/${i}`}
@@ -57,7 +72,7 @@ const CartItem = (props) => {
                         language={language}
                     />
                 )
-            }
+            } 
         }
         return choices;
     }
@@ -130,7 +145,7 @@ const CartItem = (props) => {
             state: {itemData, index, table}
         })
     }
-    console.log(props)
+    
     return (
         <div>
             <br />
@@ -140,10 +155,12 @@ const CartItem = (props) => {
                     <span className={styles.cartQty}>{itemData.qty}</span>
                 </Grid>
                 <Grid onClick={editItem} item xs={7} className={(language === 'chinese') ? styles.chinCartItem : ""}>
-                    <p>{(itemData.nChoices ? "Set Dinner:" : "") + `${itemData.restName ? `${itemData.restName}.` : ""} ${itemData[language]}`} </p>
+                    {(itemData.nChoices ? "Set Dinner:" : "") + `${itemData.restName ? `${itemData.restName}.` : ""} ${itemData[language]}`}
                 </Grid>
                 <Grid item xs className={styles.cartPrice}>
-                    <span onClick={editItem} className={(language === 'chinese') ? styles.chinCartItem : ''}>${price.toFixed(2)}</span>
+                    <span onClick={editItem} className={(language === 'chinese') ? styles.chinCartItem : ''}>
+                        ${calculateItemPrice(itemData).toFixed(2)}
+                    </span>
                     <div className={styles.row}>
                         <IconButton className={styles.cartQtyBtns} value={-1} onClick={changeQty}>
                             <IndeterminateCheckBoxIcon className={styles.qtyBtnColor} />

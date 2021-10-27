@@ -11,7 +11,7 @@ import bkgrnd7 from '../images/home5.jpeg';
 import bkgrnd8 from '../images/home6.jpeg';
 import bkgrnd9 from '../images/home7.jpeg';
 
-const mainStyles = makeStyles(({spacing}) => ({
+const mainStyles = makeStyles(() => ({
     fullPage: {
         minWidth: window.screen.width,
         minHeight: window.screen.height,

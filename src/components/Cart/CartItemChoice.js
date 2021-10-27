@@ -1,8 +1,13 @@
+import { styles } from '@material-ui/pickers/views/Calendar/Calendar';
 import React, { useEffect, useState } from 'react';
 import { addOnTypes } from '../../static/constants/menu-constants';
 
+//Style imports
+import { menuStyles } from '../../static/css/menuStyles';
+
 const CartItemChoice = (props) => {
-    const { title, choice, editItem, qty, price, type, language } = props;
+    const styles = menuStyles();
+    const { title, choice, editItem, qty, price, type, language, sugar, ice } = props;
     const [state, setState] = useState({
                                 choiceBody: ""
                             });
@@ -25,10 +30,12 @@ const CartItemChoice = (props) => {
     
     return (
         <div onClick={editItem}>
-        <span>
-                <b>- </b> {parseChoice()}
-                {qty && <span>Qty: {qty}</span>}
-                {price !== undefined && <span> - ${(parseFloat(qty ? qty : 1)*price).toFixed(2)}</span>}
+            <span>
+                <b>+ </b> {parseChoice()}
+                {qty && <span> &times; {qty}</span>}
+                {price !== undefined && <span> (${(parseFloat(qty ? qty : 1)*price).toFixed(2)})</span>}
+                {sugar && <p className={styles.margin0}>*{sugar}</p>}
+                {ice && <p className={styles.margin0}>*{ice}</p>}
             </span>
         </div>
     )

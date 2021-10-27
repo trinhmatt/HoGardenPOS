@@ -8,6 +8,7 @@ import database from "../../firebase/firebase";
 import { cartConsts } from "../../static/constants/cart-constants";
 import { authConsts } from "../../static/constants/auth-constants";
 import { clearCart, updateCart } from "../../redux/actions/cart-actions";
+import { calculateItemPrice } from '../../static/helpers';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -29,23 +30,11 @@ const Cart = (props) => {
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
-    const calculatePrice = (itemData) => {
-        let total = itemData.price;
-        if (itemData.addOn && itemData.addOn.length > 0) {
-            for (let i = 0; i < itemData.addOn.length; i++) {
-                if (itemData.addOn.price) {
-                    total += itemData.addOn[i].price * (itemData.addOn[i].qty ? itemData.addOn[i].qty : 1.0);
-                }
-            }
-        }
-        total *= parseFloat(itemData.qty);
-        return total;
-    }
-
     useEffect(() => {
         let cartItems = [];
         let totalPrice = 0;
         let cartData = cart;
+        
         //If admin view, the cart will have an array of all orders for the specific table
         if (isAdminUpdate) {
             let newCartData = [];
@@ -69,7 +58,7 @@ const Cart = (props) => {
             cartData = newCartData;
         }
         for (let i = 0; i < cartData.length; i++) {
-            let price = calculatePrice(cartData[i]);
+            let price = calculateItemPrice(cartData[i]);
             totalPrice += price;
             cartItems.push(<CartItem price={price} table={props.match.params.number} key={`cartItem/${i}`} index={i} language={language} itemData={cartData[i]} />)
         }
@@ -175,7 +164,7 @@ const Cart = (props) => {
             cartItems.length > 0 ? 
             <div className={styles.cartLayout}>
                 <Paper elevation={3} className={!auth.userData ? styles.cartBox : styles.authCartBox}>
-                    <div>
+                    <div style={{width: '90%'}}>
                     { (props.language === "english") ?
                         <span>
                             <span className={styles.cartTitle}>Cart</span>

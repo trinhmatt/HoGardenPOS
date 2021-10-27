@@ -3588,19 +3588,19 @@
             },
             "D17": {
                 "english": "Diet Coke",
-                "chinese": "健怡可樂",
+                "chinese": "Diet可樂",
                 "coldPrice": 3.00,
                 "hasSugar": false
             },
             "D18": {
                 "english": "Sprite",
-                "chinese": "精靈",
+                "chinese": "雪碧",
                 "coldPrice": 3.00,
                 "hasSugar": false
             },
             "D19": {
                 "english": "Ginger Ale",
-                "chinese": "乾薑",
+                "chinese": "Ginger Ale",
                 "coldPrice": 3.00,
                 "hasSugar": false
             }
