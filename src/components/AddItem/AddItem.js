@@ -277,6 +277,7 @@ const AddItem = (props) => {
                 hasDrink={itemData.hasDrink}
                 hasSoup={itemData.hasSoup}
                 isTakeout={isTakeout}
+                clearDrinkAndSoupSelection={clearDrinkAndSoupSelection}
             />);
         
         if (sectionData.addOns && sectionData.addOns.length > 0) {
@@ -325,6 +326,10 @@ const AddItem = (props) => {
             } 
         }
         return item.qty === 0 || !allRequiredChosen;
+    }
+
+    const clearDrinkAndSoupSelection = () => {
+        setItem({...item, drinkChoice: null, soupChoice: null});
     }
 
     useEffect(() => {

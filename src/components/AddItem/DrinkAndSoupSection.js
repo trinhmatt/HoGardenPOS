@@ -24,7 +24,8 @@ const DrinkAndSoupSection = (props) => {
         selectDrinkOption,
         isTakeout,
         hasDrink,
-        hasSoup 
+        hasSoup,
+        clearDrinkAndSoupSelection
     } = props;
 
     const [state, setState] = useState({    
@@ -90,7 +91,6 @@ const DrinkAndSoupSection = (props) => {
         } else {
             setState({...state, selectedIndex: {...state.selectedIndex, [type]: index}, [typeSelected]: true})
         }
-
         selectChoice(returnValue);
     }
 
@@ -192,7 +192,8 @@ const DrinkAndSoupSection = (props) => {
         return optionElements;
     }
     const selectTakeoutSide = (e) => {
-        setState({...state, selectedSide: e.currentTarget.value});
+        clearDrinkAndSoupSelection();
+        setState({...state, selectedSide: e.currentTarget.value, selectedIndex: {...state.selectedIndex, soup: -1, drink: -1}});
     }
     return (
         <div className={(language === 'english') ? styles.itemChoiceLayout : styles.chinItemChoiceLayout}>
