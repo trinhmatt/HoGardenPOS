@@ -153,6 +153,8 @@ const AddItem = (props) => {
                 choiceValue = [];
             }
             let didChange = false;
+            let selectedIce = false;
+            let selectedHoney = false;
             for (let i = 0; i < choiceValue.length; i++) {
                 //De select add on/choice
                 if (choiceValue[i].english === returnObj.english || (choiceValue[i].type && choiceValue[i].type.indexOf("Modification") > -1 && choiceValue[i].type === returnObj.type)) {
@@ -185,6 +187,36 @@ const AddItem = (props) => {
                 if (item.addOn[i].english === "Iced Drink") {
                     addOnCopy.splice(i, 1);
                 }
+            }
+        }
+
+        // Update price of honey to make sure its right, since it needs to be updated if iced drink was selected and then de-selected 
+        if (choiceType == "addOn" && choiceValue.length > 0) {
+            let icedSelected = false;
+            let honeySelected = false;
+            let honeyIndex = -1;
+            for (let i = 0; i < choiceValue.length; i++) {
+                if (choiceValue[i].english === "Iced Drink") {
+                    icedSelected = true;
+                } else if (choiceValue[i].english === "Honey") {
+                    honeySelected = true;
+                    honeyIndex = i;
+                }
+            }
+            if (honeySelected && !icedSelected) {
+                choiceValue[honeyIndex].price = null;
+            } else if (honeySelected && icedSelected) {
+                let coldPrice = null;
+                for (let n = 0; n < sectionData.addOns.length; n++) {
+                    if (sectionData.addOns[n].type.english === "Change") {
+                        for (let x = 0; x < sectionData.addOns[n].choices.length; x++) {
+                            if (sectionData.addOns[n].choices[x].english === "Honey") {
+                                coldPrice = sectionData.addOns[n].choices[x].coldPrice;
+                            }
+                        }
+                    }
+                }
+                choiceValue[honeyIndex].price = coldPrice;
             }
         }
 
@@ -293,6 +325,7 @@ const AddItem = (props) => {
                         selectChoice={selectChoice} 
                         choicesArr={sectionData.addOns[i]} 
                         addOns={item.addOn}
+                        updateHoneyPrice={updateHoneyPrice}
                     />);
             }
         }
@@ -330,6 +363,39 @@ const AddItem = (props) => {
 
     const clearDrinkAndSoupSelection = () => {
         setItem({...item, drinkChoice: null, soupChoice: null});
+    }
+
+    const updateHoneyPrice = () => {
+        if (item.addOn && item.addOn.length > 0) {
+            let addOnsCopy = item.addOn;
+            let icedSelected = false;
+            let honeySelected = false;
+            let honeyIndex = -1;
+            for (let i = 0; i < item.addOn.length; i++) {
+                if (item.addOn[i].english === "Iced Drink") {
+                    icedSelected = true;
+                } else if (item.addOn[i].english === "Honey") {
+                    honeySelected = true;
+                    honeyIndex = i;
+                }
+            }
+            if (honeySelected && !icedSelected) {
+                addOnsCopy[honeyIndex].price = null;
+            } else if (honeySelected && icedSelected) {
+                let coldPrice = null;
+                for (let n = 0; n < itemData.addOns.length; n++) {
+                    if (itemData.addOns[n].type === "Change") {
+                        for (let x = 0; x < itemData.addOns[n].choices.length; x++) {
+                            if (itemData.addOns[n].choices[x].english === "Honey") {
+                                coldPrice = itemData.addOns[n].choices[x].coldPrice;
+                            }
+                        }
+                    }
+                }
+                addOnsCopy[honeyIndex].price = coldPrice;
+            }
+            setItem({...item, addOn: addOnsCopy});
+        }
     }
 
     useEffect(() => {

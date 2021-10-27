@@ -31,7 +31,8 @@
                     },
                     {
                         "english": "Honey",
-                        "chinese": "蜜糖"
+                        "chinese": "蜜糖",
+                        "coldPrice": 2.00
                     }
                 ],
                 "price": 1.50

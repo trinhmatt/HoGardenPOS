@@ -18,7 +18,7 @@ import { itemChoices, softDrinks } from '../../static/constants/menu-constants';
 
 const ItemChoiceSection = (props) => {
     const styles = menuStyles();
-    const { choiceType, choicesArr, selectChoice, language, constKey, selectedObj, maxChoices, drinkChoice, addOns } = props;
+    const { choiceType, choicesArr, selectChoice, language, constKey, selectedObj, maxChoices, drinkChoice, addOns, updateHoneyPrice } = props;
     const isAddOn = choiceType === "addOn";
     const isSetDinner = choiceType === "choices";
     const isModification = isAddOn && choicesArr.type && choicesArr.type.english.indexOf("Modification") > -1;
@@ -169,12 +169,35 @@ const ItemChoiceSection = (props) => {
                 // If the addOn is an iced drink, the price changes based on what drink it is 
                 if (choicesArr.choices[i].price || choicesArr.price) {
                     price = '$';
+
                     if (choicesArr.choices[i].english === "Iced Drink") {
                         choicesArr.choices[i].price = drinkChoice && drinkChoice.comboCold ? drinkChoice.comboCold-drinkChoice.comboHot : 1.50;
+                    } else if (choicesArr.choices[i].english === "Honey") {
+                        //if addons, check if iced drink selected to change price to cold price
+                        if (addOns && addOns.length > 0) {
+                            let choseIced = false;
+                            let choseHoney = false;
+                            for (let n = 0; n < addOns.length; n++) {
+                                if (addOns[n].english === "Iced Drink") {
+                                    choicesArr.choices[i].price = choicesArr.choices[i].coldPrice;
+                                    choseIced = true;
+                                } else if (addOns[n].english === "Honey") {
+                                    choseHoney = true;
+                                }
+                            }
+                            if (choseHoney && !choseIced || !choseHoney && !choseIced) {
+                                choicesArr.choices[i].price = null;
+                            }
+                        // else, reset price value so that app defaults to choicesArr.price 
+                        } else {
+                            choicesArr.choices[i].price = null;
+                        }
+                    }
+                    
+                    if (choicesArr.choices[i].price) {
                         price += parsePrice(choicesArr.choices[i].price.toString());
-                    } else if (choicesArr.choices[i].price) {
-                        price += parsePrice(choicesArr.choices[i].price.toString());
-                    } else {
+                    } 
+                    else {
                         price += parsePrice(choicesArr.price.toString());
                     }
                 }
