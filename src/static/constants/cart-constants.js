@@ -15,6 +15,8 @@ export const cartConsts = {
         "45": true,
         "A": true,
         "B": true,
+        "CA": true,
+        "CB": true,
         "C1": true,
         "C2": true,
         "C3": true,

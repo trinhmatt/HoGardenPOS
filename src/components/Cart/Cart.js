@@ -7,7 +7,7 @@ import CartItem from "./CartItem";
 import database from "../../firebase/firebase";
 import { cartConsts } from "../../static/constants/cart-constants";
 import { authConsts } from "../../static/constants/auth-constants";
-import { clearCart } from "../../redux/actions/cart-actions";
+import { clearCart, updateCart } from "../../redux/actions/cart-actions";
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -23,7 +23,8 @@ import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied'
 const Cart = (props) => {
     const styles = menuStyles();
     const table = props.match.params.number;
-    const { cart, language, auth, clearCart } = props;
+    const { cart, language, auth, clearCart, updateCart } = props;
+    const isAdmin = props.location.pathname.indexOf('admin') > -1;
     const isAdminUpdate = !!cart.orders; // If cart = array, new order; if cart = object, update existing order (for admin)
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -45,7 +46,6 @@ const Cart = (props) => {
         let cartItems = [];
         let totalPrice = 0;
         let cartData = cart;
-        console.log(cart)
         //If admin view, the cart will have an array of all orders for the specific table
         if (isAdminUpdate) {
             let newCartData = [];
@@ -80,10 +80,9 @@ const Cart = (props) => {
     const checkout = () => {
         const currentDayStr = dayjs().format(authConsts.DATE);
         const isTakeout = table === "takeout";
-
         if (isAdminUpdate) {
             if (cart.orderItems) {
-                pushOrderToDatabase(currentDayStr)
+                pushOrderToDatabase(currentDayStr);
             }
             updateOrderInDatabase(currentDayStr);
         } else if (isTakeout) {
@@ -95,8 +94,6 @@ const Cart = (props) => {
         } else {
             pushOrderToDatabase(currentDayStr);
         }
-        
-        
     }
 
     const pushOrderToDatabase = (dayStr, takeoutNumber = null) => {
@@ -133,9 +130,15 @@ const Cart = (props) => {
                 database.ref(`orders/${dayStr}`).update({[order.id]: order})
                         .then( () => {
                             clearCart();
-                            props.history.push({
-                                pathname: isTakeout ? `/order/${takeoutNumber}/takeout` : `/order/${table}/review`
-                            });
+                            if (isAdmin) {
+                                console.log('hi')
+                                const cartForUpdates = {orders: cart.orders ? [...cart.orders, order] : [order] } ;
+                                updateCart(cartForUpdates);
+                            } else {
+                                props.history.push({
+                                    pathname: isTakeout ? `/order/${takeoutNumber}/takeout` : `/order/${table}/review`
+                                });
+                            }  
                         })
                         .catch( err => console.log(err))
             })
@@ -150,17 +153,17 @@ const Cart = (props) => {
                     for (let i = 0; i < cart.orders.length; i++) {
                         ordersToUpdate[cart.orders[i].id] = cart.orders[i];
                     }
-                    // for (let i = 0; i < orders.length; i++) {
-                    //     if (orders[i].table === cart.table || (orders[i].table === "takeout" && orders[i].takeoutNumber === cart.takeoutNumber)) {
-                    //         indexOfOrder = i;
-                    //     }
-                    // }
                     database.ref(`orders/${dayStr}`).update(ordersToUpdate)
                         .then( () => {
-                            clearCart();
-                            props.history.push({
-                                pathname: cart.takeoutNumber ? `/order/${cart.takeoutNumber}/takeout` : `/order/${table}/review`
-                            });
+                            if (isAdmin) {
+
+                            } else {
+                                clearCart();
+                                props.history.push({
+                                    pathname: cart.takeoutNumber ? `/order/${cart.takeoutNumber}/takeout` : `/order/${table}/review`
+                                });
+                            }
+                            
                         })
                 }
 
@@ -241,7 +244,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    clearCart: () => dispatch(clearCart())
+    clearCart: () => dispatch(clearCart()),
+    updateCart: (newCart) => dispatch(updateCart(newCart))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart));

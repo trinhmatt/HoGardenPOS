@@ -34,11 +34,12 @@ const Tables = (props) => {
         }
         if (state.filledTables[tableNumber]) {
             props.updateCart({orders: state.filledTables[tableNumber].data});
-            props.history.push(`/admin/place-order/${tableNumber}`);
+            props.history.push(`/admin/place-order/${e.currentTarget.id}`);
         } else {
             props.clearCart();
             props.history.push(`/admin/place-order/${e.currentTarget.id}`);
         }
+        
     }
 
     useEffect(() => {

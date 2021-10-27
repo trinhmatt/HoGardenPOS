@@ -10,13 +10,11 @@ export const updateCart = (newCart) => ({
     newCart
 })
 
-export const updateExistingOrder = (updatedCart) => {
-    console.log('updatedcart: ', updatedCart)
-    return ({
-        type: cartConsts.actions.updateExistingOrder,
-        updatedCart
-    })
-}
+export const updateExistingOrder = (updatedCart) => ({
+    type: cartConsts.actions.updateExistingOrder,
+    updatedCart
+})
+
 
 export const addToExistingOrder = (newItem) => ({
     type: cartConsts.actions.addToExistingOrder,
