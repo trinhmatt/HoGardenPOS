@@ -801,16 +801,6 @@
                 "price": 2.00
             }
         ],
-        "drinkChoice": [
-            {
-                "english": "Hot HK Milk Tea",
-                "chinese": "熱港式奶茶"
-            },
-            {
-                "english": "Hot Coffee",
-                "chinese": "熱咖啡"
-            }
-        ],
         "condimentChoice": [
             {
                 "english": "Condensed Milk",

@@ -34,7 +34,7 @@ import ElevationScroll from '../subcomponents/ElevationScroll';
 
 const AddItem = (props) => {
     const styles = menuStyles();
-    const { itemData, table, index, isTakeout } = props.location.state;
+    const { itemData, table, index, isTakeout, lastClickedElement } = props.location.state;
 
     // Section data will be from the menu when adding or from itemData when editing
     const sectionData = props.location.state.sectionData ? props.location.state.sectionData : itemData.sectionData;
@@ -68,7 +68,10 @@ const AddItem = (props) => {
     
     const goBackToMenu = () => {
         // cannot just use history.goBack(), the header needs to re-render to work properly
-        props.history.push((auth.userData ? `/admin/place-order/${table}` : `/order/${table}`));
+        props.history.push({
+            pathname: (auth.userData ? `/admin/place-order/${table}` : `/order/${table}`),
+            state: {lastClickedElement}
+        });
     }
     const changeQty = (e) => {
         setItem({ ...item, qty: item.qty + parseInt(e.currentTarget.value) });

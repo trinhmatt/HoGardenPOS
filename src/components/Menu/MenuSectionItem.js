@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { withRouter } from 'react-router';
 
 //Style imports
@@ -10,11 +10,25 @@ import Grid from '@material-ui/core/Grid';
 
 const MenuSectionItem = (props) => {
     const styles = menuStyles();
-    const { data, language, table, sectionData, qty, itemKey } = props;
-    const pushToAdd = () => {
+    const { data, language, table, sectionData, qty, itemKey, lastClickedElement } = props;
+    useEffect(() => {
+        if (data.english === lastClickedElement) {
+            const section = document.getElementById(lastClickedElement);
+            
+            const header = document.getElementById('menu-header').offsetHeight;
+            window.scrollTo({ top: (section.offsetTop - header), behavior: 'smooth' });
+        }
+    }, [])
+    const pushToAdd = (e) => {
         props.history.push({
             pathname: "/add-item",
-            state: {itemData: data, table, sectionData, isTakeout: (props.location.pathname.indexOf("takeout") > -1)}
+            state: {
+                itemData: data, 
+                table, 
+                sectionData, 
+                isTakeout: (props.location.pathname.indexOf("takeout") > -1),
+                lastClickedElement: e.currentTarget.id
+            }
         })
     }
     const parsePrice = (price) => {
@@ -53,7 +67,7 @@ const MenuSectionItem = (props) => {
     }
     return (
         <div>
-            <Grid container spacing={0} className={qty > 0 ? styles.menuItemSectionQty : styles.menuItemSection} onClick={pushToAdd}>
+            <Grid id={data.english} container spacing={0} className={qty > 0 ? styles.menuItemSectionQty : styles.menuItemSection} onClick={pushToAdd}>
                 <Grid item xs={8} className={(language === 'chinese') ? styles.chinMenuItem : styles.engMenuItem}>
                     {`${data.restName ? data.restName : itemKey}. ${data[language]}`}
                 </Grid>

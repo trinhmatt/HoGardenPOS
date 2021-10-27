@@ -56,23 +56,12 @@ const Menu = (props) => {
     useEffect(() => {
         if (state.menuSections.length > 0) {
             let headerSections = [];
-            const focusSection = (sectionId) => {
-                const section = document.getElementById(sectionId);
-                
-                // Admin and customer have different headers which require different scroll to logic
-                if (props.location.pathname.indexOf("admin") > -1) {
-                    section.scrollIntoView();
-                } else {
-                    const header = document.getElementById('menu-header').offsetHeight;
-                    window.scrollTo({ top: (section.offsetTop - header), behavior: 'smooth' });
-                }
-            }
             for (let i = 0; i < state.menuSections.length; i++) {
                 headerSections.push(
                     <Container key={state.menuSections[i].props.data.title[language]} className={!auth.userData ? styles.scrollContainer : ''}>
                         <span 
                             className={auth.userData ? styles.authScrollItem : language === 'chinese' ? styles.chinScrollItem : styles.engScrollItem} 
-                            onClick={() => focusSection(state.menuSections[i].props.data.title[language])} 
+                            onClick={() => scrollToElement(state.menuSections[i].props.data.title[language])} 
                             key={`headerSection/${state.menuSections[i].props.data.title[language]}`}>
                                 {state.menuSections[i].props.data.title[language]}
                         </span>
@@ -102,12 +91,30 @@ const Menu = (props) => {
         
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+    const scrollToElement = (sectionId) => {
+        const section = document.getElementById(sectionId);
+        
+        // Admin and customer have different headers which require different scroll to logic
+        if (props.location.pathname.indexOf("admin") > -1) {
+            section.scrollIntoView();
+        } else {
+            const header = document.getElementById('menu-header').offsetHeight;
+            window.scrollTo({ top: (section.offsetTop - header), behavior: 'smooth' });
+        }
+    }
+
     const renderHeader = () => {
         if ((!!cartConsts.tables[props.match.params.number] || props.match.params.number === "takeout") && state.errorMsg.length === 0) {
             let menuSections = [];
             
             for (const section in menuJSON) {
-                menuSections.push(<MenuSection lang={language} key={`menuSection/${section}`} data={menuJSON[section]} />);
+                menuSections.push(
+                    <MenuSection 
+                        lastClickedElement={props.location.state ? props.location.state.lastClickedElement : null} 
+                        lang={language} key={`menuSection/${section}`} 
+                        data={menuJSON[section]} 
+                    />
+                );
             }
 
             setState({...state, menuSections})
