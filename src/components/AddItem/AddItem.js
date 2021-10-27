@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { itemChoices } from '../../static/constants/menu-constants';
 import menuJSON from '../../static/constants/menu.json';
+import { calculateItemPrice } from '../../static/helpers';
 import { changeLanguage } from "../../redux/actions/lang-actions";
 import { addToCart, updateCart, addToExistingOrder, updateExistingOrder } from "../../redux/actions/cart-actions";
 import ItemChoiceSection from "./ItemChoiceSection";
@@ -323,31 +324,6 @@ const AddItem = (props) => {
         return item.qty === 0 || !allRequiredChosen;
     }
 
-    // Calculates price of item as user selects choices
-    const calculatePrice = () => {
-        let totalPrice = item.price;
-        let qtyCopy = 1;
-        
-        if (item.drinkChoice) {
-            if (item.drinkChoice.comboHot) {
-                totalPrice += item.drinkChoice.comboHot;
-            }
-        }
-        if (item.addOn && item.addOn.length > 0) {
-            for (let i = 0; i < item.addOn.length; ++i) {
-                if (item.addOn[i].type === 'Change' || item.addOn[i].type === 'Extra') {
-                    totalPrice += item.addOn[i].price;
-                } else {
-                    totalPrice += (item.addOn[i].price * item.addOn[i].qty);
-                }
-            }
-        }
-        if (item.qty > 0) {
-            qtyCopy = item.qty;
-        }
-        return totalPrice * qtyCopy;
-    }
-
     useEffect(() => {
         // Scroll to top of window on render
         window.scrollTo(0, 0);
@@ -403,7 +379,7 @@ const AddItem = (props) => {
                                     <AddCircleIcon className={styles.addItemQtyBtn} />
                                 </IconButton>
                             </div>
-                            <br /><br /><br />
+                            <br /><br /><br /><br /><br />
                         </Paper>
                         <Button
                             className={ auth.userData ? styles.authAddToOrderBtn : language === 'english' ? styles.addToOrderBtn : styles.chinAddToOrderBtn }
@@ -416,7 +392,7 @@ const AddItem = (props) => {
                                 : 
                                 (language === 'english' ? engAddBtnText : chinAddBtnText)
                             }
-                            &nbsp;(${calculatePrice().toFixed(2)})
+                            &nbsp;(${calculateItemPrice(item).toFixed(2)})
                         </Button>
                     </Box>
                 </Container>

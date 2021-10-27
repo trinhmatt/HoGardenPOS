@@ -12,11 +12,8 @@ import bluebackground from '../images/1014.jpg';
 const menuStyles = makeStyles(() => ({
     
     //GLOBALS
-    red: {
-        color: '#F50157',
-    },
-    greenBackground: {
-        backgroundColor: '#7f9877',
+    margin0: {
+        margin: '0',
     },
 
     //LAYOUT
@@ -74,6 +71,7 @@ const menuStyles = makeStyles(() => ({
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundSize: 'cover',
+        backgroundPosition: 'center',
         //phone
         '@media (min-width: 375px)': {
             height: '24vh',
@@ -121,6 +119,7 @@ const menuStyles = makeStyles(() => ({
         alignItems: 'flex-end',
         width: '100%',
         marginRight: '-7vh',
+        padding: '5px',
     },
     authSwitchLayout: {
         display: 'flex',
@@ -136,7 +135,7 @@ const menuStyles = makeStyles(() => ({
         alignItems: 'flex-end',
         justifyContent: 'flex-start',
         width: '100%',
-        height: '25%',
+        height: '30%',
         '@media screen and (orientation: landscape)': {
             height: '40%',
         },
@@ -413,9 +412,9 @@ const menuStyles = makeStyles(() => ({
         '@media (min-width: 760px)': {
             fontSize:'18px',
         },
-        //desktop
-        '@media (min-width: 960px)': {
-        },
+    },
+    infoLabel: {
+        color: theme.palette.primary.light,
     },
 
     //CART
@@ -463,6 +462,7 @@ const menuStyles = makeStyles(() => ({
         alignItems: 'center',
         justifyContent: 'center',
         height: '70%',
+        width: '95%'
     },
     authCartLayoutBox: {
         display: 'flex',
@@ -495,29 +495,17 @@ const menuStyles = makeStyles(() => ({
     cartQty: {
         backgroundColor: theme.palette.primary.main,
         color: '#fff',
-        paddingLeft: '15%',
-        paddingRight: '15%',
-        //phone
-        '@media (min-width: 375px)': {
-            fontSize: '14px',
-            paddingTop: '7%',
-            paddingBottom: '7%',
-        },
-        //ipad
-        '@media (min-width: 760px)': {
-            fontSize: '14px',
-            paddingTop: '7%',
-            paddingBottom: '7%',
-        },
-        //desktop
-        '@media (min-width: 960px)': {
-            fontSize: '14px',
-        },
+        paddingLeft: '25%',
+        paddingRight: '25%',
+        paddingTop: '7%',
+        paddingBottom: '7%',
+        fontSize: '14px',
     },
     cartPrice: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        padding: '10px !important',
     },
     cartQtyBtns: {
         padding: '0',
@@ -527,6 +515,7 @@ const menuStyles = makeStyles(() => ({
     },
     cartAddonTitle: {
         padding: '2% !important',
+        margin: '5px',
         textAlign: 'center',
         wordBreak: 'break-word',
         backgroundColor: theme.palette.secondary.lighter,
@@ -758,7 +747,7 @@ const menuStyles = makeStyles(() => ({
             fontSize: '20px',
         },
         '&:disabled': {
-            opacity: '0.4',
+            opacity: '0.7',
             backgroundColor: theme.palette.secondary.light,
             color: theme.palette.primary.dark,
         },
@@ -771,7 +760,7 @@ const menuStyles = makeStyles(() => ({
         color: '#fff',
         fontSize: '20px',
         '&:disabled': {
-            opacity: '0.4',
+            opacity: '0.7',
             backgroundColor: theme.palette.secondary.light,
             color: theme.palette.primary.dark,
         },
@@ -787,7 +776,7 @@ const menuStyles = makeStyles(() => ({
             fontSize: '20px',
         },
         '&:disabled': {
-            opacity: '0.4',
+            opacity: '0.7',
             backgroundColor: theme.palette.secondary.light,
             color: theme.palette.primary.dark,
         },
@@ -811,6 +800,8 @@ const menuStyles = makeStyles(() => ({
         overflow: 'auto',
         padding: '5%',
         margin: '20% auto',
+        display: 'flex',
+        flexDirection: 'column',
         //ipad
         '@media (min-width: 760px)': {
             height: '80%',
@@ -838,6 +829,10 @@ const menuStyles = makeStyles(() => ({
         width: '33%',
         color: '#fff',
         position: 'fixed',
+    },
+    reviewAddToOrderBtn: {
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.primary.dark,
     },
 
     //RIBBON

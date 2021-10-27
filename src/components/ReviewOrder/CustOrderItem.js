@@ -2,6 +2,7 @@ import React from 'react';
 import CartItemChoice from '../Cart/CartItemChoice';
 import { itemChoices } from '../../static/constants/menu-constants';
 import { styles } from '@material-ui/pickers/views/Calendar/Calendar';
+import { calculateItemPrice } from '../../static/helpers';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
@@ -17,10 +18,23 @@ const CustOrderItem = (props) => {
         let choices = [];
         for (const key in itemData) {
             if (itemData[key] && itemChoices[key] && itemData[key].length === undefined) {
+                let sugar, ice, price;
+                if (itemData[itemChoices[key].menuKey]['sugar'] !== undefined) {
+                    sugar = itemData[itemChoices[key].menuKey]['sugar'][language];
+                }
+                if (itemData[itemChoices[key].menuKey]['ice'] !== undefined) {
+                    ice = itemData[itemChoices[key].menuKey]['ice'][language];
+                }
+                if (itemData[itemChoices[key].menuKey]['comboHot'] !== undefined) {
+                    price = itemData[itemChoices[key].menuKey]['comboHot'];
+                }
                 choices.push(
                     <CartItemChoice 
                         key={key}
                         title={itemChoices[key][language]} 
+                        sugar={sugar}
+                        ice={ice}
+                        price={price}
                         choice={itemData[itemChoices[key].menuKey][language]} 
                     />
                 )
@@ -75,7 +89,7 @@ const CustOrderItem = (props) => {
                     <p><b>{itemData[language]}</b></p>
                 </Grid>
                 <Grid item xs className={styles.cartPrice}>
-                    <span className={(language === 'chinese') && styles.chinCartItem}>${itemData.price}</span>
+                    <span className={(language === 'chinese') && styles.chinCartItem}>${calculateItemPrice(itemData).toFixed(2)}</span>
                 </Grid>
             </Grid>
             <div className={(language === 'english') ? styles.cartAddonTitle : styles.chinCartAddonTitle}>

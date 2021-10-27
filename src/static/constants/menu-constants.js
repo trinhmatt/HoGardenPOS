@@ -165,7 +165,7 @@ export const drinkOptionLabels = {
     },
     hot: {
         "english": "Hot",
-        "chinese": "燙"
+        "chinese": "熱"
     },
     soup: {
         english: "Soup",
@@ -176,7 +176,7 @@ export const drinkOptionLabels = {
         chinese: "飲料"
     },
     takeoutDrinkOrSoupLabel: {
-        english: "Comes with drink OR soup",
+        english: "Comes with drink OR soup*",
         chinese: "飲料或湯"
     }
 }

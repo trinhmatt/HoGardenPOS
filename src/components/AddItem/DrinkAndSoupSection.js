@@ -199,14 +199,37 @@ const DrinkAndSoupSection = (props) => {
             {
                 isTakeout && hasDrink && hasSoup ? 
                     <div>
+                        <br /><br /> <br /><br />
                         <div>
-                            <p>{drinkOptionLabels.takeoutDrinkOrSoupLabel[language]}</p>
-                            <Button value={"soup"} onClick={selectTakeoutSide}>{drinkOptionLabels.soup[language]}</Button>
-                            <Button value={"drink"} onClick={selectTakeoutSide}>{drinkOptionLabels.drink[language]}</Button>
+                            <h2 className={styles.infoLabel}>{drinkOptionLabels.takeoutDrinkOrSoupLabel[language]}</h2>
+                            <Button 
+                                value={"soup"} 
+                                onClick={selectTakeoutSide} 
+                                variant='contained' 
+                                size='small'
+                                className={language === 'english' ? styles.itemChoices : styles.chinItemChoices}
+                                >
+                                {drinkOptionLabels.soup[language]}
+                            </Button>
+                            &nbsp;&nbsp;
+                            <Button 
+                                value={"drink"} 
+                                onClick={selectTakeoutSide}
+                                variant='contained' 
+                                size='small'
+                                className={language === 'english' ? styles.itemChoices : styles.chinItemChoices}
+                                >
+                                {drinkOptionLabels.drink[language]}
+                            </Button>
                         </div>
+                        <br /><br />
                         <div>
+                        <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>
                             {state.selectedSide && state.selectedSide === "soup" && renderChoices("soup")}
+                        </ButtonGroup>
+                        <ButtonGroup variant='contained' size='small' className={styles.addItemChoices}>
                             {state.selectedSide && state.selectedSide === "drink" && renderChoices("drink")}
+                        </ButtonGroup>
                         </div>
                     </div> 
                 : 

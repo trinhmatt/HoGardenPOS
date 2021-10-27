@@ -5,12 +5,14 @@ import dayjs from 'dayjs';
 import database from '../../firebase/firebase';
 import CustOrderItem from './CustOrderItem';
 import { authConsts } from '../../static/constants/auth-constants';
+import { calculateItemPrice } from '../../static/helpers';
 
 //Style imports
 import { menuStyles } from '../../static/css/menuStyles';
 
 //Material ui imports
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 const ReviewOrder = (props) => {
     const styles = menuStyles();
@@ -56,23 +58,13 @@ const ReviewOrder = (props) => {
             }
         })
     }
-    const calculatePrice = (orderItem) => {
-        let price = 0.0;
-        price += orderItem.price;
-        if (orderItem.addOn && orderItem.addOn.length > 0) {
-            for (let n = 0; n < orderItem.addOn.length; n++) {
-                price += orderItem.addOn[n].price;
-            }
-        }
-        return price;
-    }
     const buildItemElements = (orderItems, allOrders = [], index = -1) => {
         let itemElements = [];
         let orderSubtotal = 0.0;
         console.log(orderItems)
         for (let i = 0; i < orderItems.length; i++) {
             itemElements.push(<CustOrderItem key={`${i}/item`} language={language} itemData={orderItems[i]} />);
-            orderSubtotal += calculatePrice(orderItems[i]);
+            orderSubtotal += calculateItemPrice(orderItems[i]);
         }
         setState({ ...state, itemElements, allOrders, index, orderSubtotal })
     }
@@ -142,7 +134,16 @@ const ReviewOrder = (props) => {
                         //     <button onClick={completeOrder}>COMPLETE ORDER</button>
                         // </div>
                     }
-                    {!isTakeout && <button onClick={() => {props.history.push(`/order/${tableNum}`)}}>Add to order</button>}
+                    <br />
+                    {!isTakeout && 
+                        <Button 
+                            onClick={() => {props.history.push(`/order/${tableNum}`)}}
+                            variant='contained'
+                            className={styles.reviewAddToOrderBtn}
+                        >
+                            Add to order
+                        </Button>
+                    }
                 </Paper>
             </div>
         </div>
