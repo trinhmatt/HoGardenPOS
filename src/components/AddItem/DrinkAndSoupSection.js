@@ -133,8 +133,6 @@ const DrinkAndSoupSection = (props) => {
         let iceOptions = [];
         if (state.selectedIndex.drink !== -1 && drinkArr[state.selectedIndex.drink] && drinkArr[state.selectedIndex.drink].hasSugar) {
             for (let i = 0; i < itemChoices.drinkOptions.sugar.length; i++) {
-                console.log(language)
-                console.log(state.selectedIndex)
                 sugarOptions.push(
                         <Button 
                             id={`${i}/sugar`}

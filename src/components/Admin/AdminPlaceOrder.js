@@ -48,11 +48,17 @@ const AdminPlaceOrder = (props) => {
             if (cartCopy[i].addOn && cartCopy[i].addOn.length > 0) {
                 addOns = '<u>Add-Ons/附加組件:</u> <br />';
                 for (let j = 0; j < cartCopy[i].addOn.length; ++j) {
-                    itemTotal += cartCopy[i].addOn[j].price;
-                    cartSubTotal += cartCopy[i].addOn[j].price;
+                    //some add-ons have no price (msg, oil)
+                    let addOnPrice = 0.0;
+                    if (!cartCopy[i].addOn[j].price) {
+                        addOnPrice = cartCopy[i].addOn[j].price;
+                    }
+                    console.log(cartCopy[i].addOn[j].price)
+                    itemTotal += addOnPrice;
+                    cartSubTotal += addOnPrice;
                     addOns += cartCopy[i].addOn[j].english
                         + '/' + cartCopy[i].addOn[j].chinese
-                        + '&emsp;$' + (cartCopy[i].addOn[j].price).toFixed(2)
+                        + '&emsp;$' + (addOnPrice).toFixed(2)
                         + '<br />';
                 }
                 addOns += '<br />';
@@ -72,73 +78,72 @@ const AdminPlaceOrder = (props) => {
         let cartTotal = ((cartSubTotal * 1.13).toFixed(2));
         cartSubTotal = cartSubTotal.toFixed(2);
         
-        let receiptHtml = 'hi';
-        // let receiptHtml = (`
-        //     <html>
-        //         <head>
-        //             <style>
-        //                 {
-        //                     box-sizing: border-box;
-        //                 }
-        //                 .center40, .center30, .center25 {
-        //                     text-align: center;
-        //                     font-size: 40px;
-        //                 }
-        //                 .center30 {
-        //                     font-size: 30px;
-        //                 }
-        //                 .center25 {
-        //                     font-size: 25px;
-        //                 }
-        //                 .right30 {
-        //                     text-align: right;
-        //                     font-size: 30px;
-        //                 }
-        //                 .column {
-        //                     float: left;
-        //                     width: 50%;
-        //                 }
-        //                 .side {
-        //                     width: 20%;
-        //                 }
-        //                 .middle {
-        //                     width: 60%;
-        //                 }
-        //                 .row:after {
-        //                     content: '';
-        //                     display: table;
-        //                     clear: both;
-        //                 }
-        //             </style>
-        //         </head>
-        //         <body>
-        //             <div class='center40'>
-        //                 HO GARDEN CHINESE RESTAURANT
-        //                 <br />
-        //                 半島餐廳
-        //             </div>
-        //             <div class='center30'>
-        //                 TEL: 905-927-9623 <br />
-        //                 ===============================
-        //                 <br />
-        //                 TABLE ${tableNumber} &emsp; ${dateTime}
-        //                 <br />
-        //                 ===============================
-        //                 <br /><br />
-        //                 ${cartItems}
-        //                 ===============================
-        //                 <br />
-        //             </div>
-        //             <div class='right30'>
-        //                 Sub-Total &emsp;&emsp; $${cartSubTotal}
-        //                 <br />
-        //                 HST 13% &emsp;&emsp; $${cartHST}
-        //                 <br />
-        //                 Total &emsp;&emsp; $${cartTotal}
-        //             </div>
-        //         </body>
-        //     </html>
-        // `);
+        let receiptHtml = (`
+            <html>
+                <head>
+                    <style>
+                        {
+                            box-sizing: border-box;
+                        }
+                        .center40, .center30, .center25 {
+                            text-align: center;
+                            font-size: 40px;
+                        }
+                        .center30 {
+                            font-size: 30px;
+                        }
+                        .center25 {
+                            font-size: 25px;
+                        }
+                        .right30 {
+                            text-align: right;
+                            font-size: 30px;
+                        }
+                        .column {
+                            float: left;
+                            width: 50%;
+                        }
+                        .side {
+                            width: 20%;
+                        }
+                        .middle {
+                            width: 60%;
+                        }
+                        .row:after {
+                            content: '';
+                            display: table;
+                            clear: both;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class='center40'>
+                        HO GARDEN CHINESE RESTAURANT
+                        <br />
+                        半島餐廳
+                    </div>
+                    <div class='center30'>
+                        TEL: 905-927-9623 <br />
+                        ===============================
+                        <br />
+                        TABLE ${tableNumber} &emsp; ${dateTime}
+                        <br />
+                        ===============================
+                        <br /><br />
+                        ${cartItems}
+                        ===============================
+                        <br />
+                    </div>
+                    <div class='right30'>
+                        Sub-Total &emsp;&emsp; $${cartSubTotal}
+                        <br />
+                        HST 13% &emsp;&emsp; $${cartHST}
+                        <br />
+                        Total &emsp;&emsp; $${cartTotal}
+                    </div>
+                </body>
+            </html>
+        `);
         setState({receiptHtml});
     };
     

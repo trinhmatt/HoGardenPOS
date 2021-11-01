@@ -85,7 +85,7 @@ const CustOrderItem = (props) => {
                 <Grid item xs={2}>
                     <span className={styles.cartQty}>{itemData.qty}</span>
                 </Grid>
-                <Grid item xs={7} className={(language === 'chinese') && styles.chinCartItem}>
+                <Grid item xs={7} className={(language === 'chinese') ? styles.chinCartItem : ''}>
                     <p><b>{itemData[language]}</b></p>
                 </Grid>
                 <Grid item xs className={styles.cartPrice}>

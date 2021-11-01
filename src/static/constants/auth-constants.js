@@ -5,6 +5,7 @@ export const authConsts = {
     DATE: "YYYY_MM_DD",
     "24_HOUR_TIME": "HH:mm",
     "12_HOUR_TIME": "hh:mm A",
+    DATE_TIME: "DD/MM/YYYY HH:mm",
     WEEKDAYS: {
         SUNDAY: {
             "english": "SUNDAY",
@@ -35,5 +36,5 @@ export const authConsts = {
             "chinese": "星期六"
         }
     },
-    CLOSE_ROUTE: "http://192.168.0.37:3000/close",
+    CLOSE_ROUTE: "http://192.168.0.32:3000/close",
 }

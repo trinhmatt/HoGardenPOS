@@ -23,7 +23,6 @@ const CartItem = (props) => {
     const { itemData, language, updateCart, updateExistingOrder, index, table, price, cart } = props;
     const isAdminUpdate = !!props.cart.orders; //if orders exist, it is an existing order and the admin is updating  
     let hasChoices = false;
-
     const renderChoices = () => {
         let choices = [];
         for (const key in itemData) {
@@ -52,7 +51,6 @@ const CartItem = (props) => {
                 )
             } else if (key === "choices" && itemData.choices.length > 0) {
                 for (let i = 0; i < itemData.choices.length; i++) {
-                    console.log(itemData)
                     choices.push(
                         <CartItemChoice 
                             key={`choice/${i}`}
@@ -72,7 +70,16 @@ const CartItem = (props) => {
                         language={language}
                     />
                 )
-            } 
+            } else if (key === "soupChoice" && itemData.soupChoice) {
+                choices.push(
+                    <CartItemChoice 
+                        key={`soupChoice/${itemData.english}/${itemData.soupChoice.english}`}
+                        choice={itemData.soupChoice[language]}
+                        editItem={editItem}
+                        language={language}
+                    />
+                )
+            }
         }
         return choices;
     }
@@ -145,47 +152,54 @@ const CartItem = (props) => {
             state: {itemData, index, table}
         })
     }
+
+    const itemDidPrint = () => {
+        let didPrint = false;
+        if (cart.orders && cart.orders[itemData.indexInOrder] !== undefined && cart.orders[itemData.indexInOrder].didPrint !== undefined) {
+            didPrint = true;
+        }
+        return didPrint;
+    }
     
     return (
-        <div>
+        <div className={itemDidPrint() ? styles.cartDidPrint : ''}>
             <br />
-            <Divider />
-            <Grid container spacing={3} className={styles.cartItemSection}>
-                <Grid onClick={editItem} item xs={2}>
-                    <span className={styles.cartQty}>{itemData.qty}</span>
-                </Grid>
-                <Grid onClick={editItem} item xs={7} className={(language === 'chinese') ? styles.chinCartItem : ""}>
-                    {(itemData.nChoices ? "Set Dinner:" : "") + `${itemData.restName ? `${itemData.restName}.` : ""} ${itemData[language]}`}
-                </Grid>
-                <Grid item xs className={styles.cartPrice}>
-                    <span onClick={editItem} className={(language === 'chinese') ? styles.chinCartItem : ''}>
-                        ${calculateItemPrice(itemData).toFixed(2)}
-                    </span>
-                    <div className={styles.row}>
-                        <IconButton className={styles.cartQtyBtns} value={-1} onClick={changeQty}>
-                            <IndeterminateCheckBoxIcon className={styles.qtyBtnColor} />
-                        </IconButton>
-                        <IconButton className={styles.cartQtyBtns} value={1} onClick={changeQty}>
-                            <AddBox className={styles.qtyBtnColor} />
-                        </IconButton>
-                    </div>
-                </Grid>
-            </Grid>
-            {
-                (renderChoices().length > 0 || (itemData.addOn && itemData.addOn.length > 0)) ?
-                <Grid container spacing={3} onClick={editItem}>
-                    <Grid item xs className={(language === 'english') ? styles.cartAddonTitle : styles.chinCartAddonTitle}>
-                        {hasChoices && <span><b>{(props.language === "english") ? 'Choices:' : '選擇:'}</b></span>}
-                        {renderChoices()}
+                <Grid container spacing={3} className={styles.cartItemSection}>
+                    <Grid onClick={editItem} item xs={2}>
+                        <span className={styles.cartQty}>{itemData.qty}</span>
                     </Grid>
-                    <Grid item xs className={(language === 'english') ? styles.cartAddonTitle : styles.chinCartAddonTitle}>
-                        {itemData.addOn && itemData.addOn.length > 0 && <span><b>{(props.language === "english") ? 'Add ons:' : '附加項目:'}</b></span>}
-                        {renderAddOns()}
+                    <Grid onClick={editItem} item xs={6} className={(language === 'chinese') ? styles.chinCartItem : ""}>
+                        {(itemData.nChoices ? "Set Dinner:" : "") + `${itemData.restName ? `${itemData.restName}.` : ""} ${itemData[language]}`}
+                    </Grid>
+                    <Grid item xs className={styles.cartPrice}>
+                        <span onClick={editItem} className={(language === 'chinese') ? styles.chinCartItem : ''}>
+                            ${calculateItemPrice(itemData).toFixed(2)}
+                        </span>
+                        <div className={styles.row}>
+                            <IconButton className={styles.cartQtyBtns} value={-1} onClick={changeQty}>
+                                <IndeterminateCheckBoxIcon className={styles.qtyBtnColor} />
+                            </IconButton>
+                            <IconButton className={styles.cartQtyBtns} value={1} onClick={changeQty}>
+                                <AddBox className={styles.qtyBtnColor} />
+                            </IconButton>
+                        </div>
                     </Grid>
                 </Grid>
-            :
-            <div></div>
-            }
+                {
+                    (renderChoices().length > 0 || (itemData.addOn && itemData.addOn.length > 0)) ?
+                    <Grid container spacing={3} onClick={editItem}>
+                        <Grid item xs className={(language === 'english') ? styles.cartAddonTitle : styles.chinCartAddonTitle}>
+                            {hasChoices && <span><b>{(props.language === "english") ? 'Choices:' : '選擇:'}</b></span>}
+                            {renderChoices()}
+                        </Grid>
+                        <Grid item xs className={(language === 'english') ? styles.cartAddonTitle : styles.chinCartAddonTitle}>
+                            {itemData.addOn && itemData.addOn.length > 0 && <span><b>{(props.language === "english") ? 'Add ons:' : '附加項目:'}</b></span>}
+                            {renderAddOns()}
+                        </Grid>
+                    </Grid>
+                :
+                <div></div>
+                }
             <br /><br />
         </div>
     )

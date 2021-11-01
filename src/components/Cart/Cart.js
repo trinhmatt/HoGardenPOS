@@ -120,7 +120,6 @@ const Cart = (props) => {
                         .then( () => {
                             clearCart();
                             if (isAdmin) {
-                                console.log('hi')
                                 const cartForUpdates = {orders: cart.orders ? [...cart.orders, order] : [order] } ;
                                 updateCart(cartForUpdates);
                             } else {
@@ -164,7 +163,7 @@ const Cart = (props) => {
             cartItems.length > 0 ? 
             <div className={styles.cartLayout}>
                 <Paper elevation={3} className={!auth.userData ? styles.cartBox : styles.authCartBox}>
-                    <div style={{width: '90%'}}>
+                    <div>
                     { (props.language === "english") ?
                         <span>
                             <span className={styles.cartTitle}>Cart</span>

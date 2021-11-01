@@ -563,6 +563,10 @@ const menuStyles = makeStyles(() => ({
         flexDirection: 'column',
         alignItems: 'flex-end',
     },
+    cartDidPrint: {
+        backgroundImage: 'linear-gradient(155deg, #c5d5f7 25%, #d6e1f9 25%, #d6e1f9 50%, #c5d5f7 50%, #c5d5f7 75%, #d6e1f9 75%, #d6e1f9 100%)',
+        backgroundSize: '47.32px 22.07px',
+    },
 
     //ADD ITEM 
     addItemContainer: {

@@ -128,7 +128,7 @@ const Menu = (props) => {
                     
                 }
             }
-            console.log(menuSections)
+            
             setState({...state, menuSections})
         } else {
             props.history.push("/error");
@@ -211,7 +211,7 @@ const Menu = (props) => {
             </Modal>
             {/* Cart button */}
             {
-                !auth.userData && !state.errorMsg && state.headerSections.length === numSections &&
+                !auth.userData && !state.errorMsg && state.headerSections.length > 0 &&
                 <CartButton {...props} cartOpen={openCart}>
                     <Fab className={styles.cartIcon} size='large'>
                         {cart.length}
