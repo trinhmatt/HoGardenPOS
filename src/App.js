@@ -89,7 +89,7 @@ function App(props) {
                   //food chit html
                   let foodChit = buildKitchenChit(order.table, order.time, cartItem);
                   localChitArr.push(foodChit);
-                  //setKitchenChit(foodChit);
+                  console.log(foodChit)
                 }
                 //print drink chit
                 //sugar, ice
@@ -112,7 +112,7 @@ function App(props) {
                     //drink chit html
                     let drinkChit = buildKitchenChit(order.table, order.time, cartItem);
                     localChitArr.push(drinkChit);
-                    //setDrinkChit(drinkChit);
+                    console.log(drinkChit)
                   }
                 }
                 //print soup chit
@@ -124,8 +124,8 @@ function App(props) {
                       + '</div>';
 
                     let soupChit = buildKitchenChit(order.table, order.time, cartItem);
+                    console.log(soupChit)
                     localChitArr.push(soupChit)
-                    //setSoupChit(soupChit);
                   }
                 }
                 let newChitArr = currentChitArr.current[0].length === 0 ? localChitArr : currentChitArr.current.concat(localChitArr);
@@ -138,11 +138,12 @@ function App(props) {
       setIsFirst(true);
     }
   }, [props.auth]);
+
   useEffect(() => {
     if (chitArr.length > 0 && chitArr[0].length > 0 && props.status.printerReady === true) {
       database.ref('printerStatus').set(false).then(() => {
-        console.log(chitArr)
-        document.getElementById('order-click').click();
+       // console.log(chitArr)
+       // document.getElementById('order-click').click();
         let chitArrCopy = chitArr;
         if (chitArrCopy.length === 1) {
           chitArrCopy[0] = ""
@@ -153,36 +154,6 @@ function App(props) {
       })
     }
   }, [chitArr, props.status])
-  // useEffect(() => {
-  //   console.log(props.status)
-  //   if (kitchenChit.length > 0 && props.status.printerReady === true) {
-  //     database.ref('printerStatus').set(false).then(() => {
-  //       document.getElementById('order-click').click();
-  //       setKitchenChit('')
-  //     })
-  //   }
-  // }, [kitchenChit, props.status]);
-  // useEffect(() => {
-  //   console.log('2 status', props.status)
-  //   if (drinkChit.length > 0 && props.status.printerReady === true) {
-  //     database.ref('printerStatus').set(false).then(() => {
-  //       console.log('2')
-  //       console.log(drinkChit)
-  //       document.getElementById('order-click2').click();
-  //       setDrinkChit('')
-  //     })
-  //   }
-  // }, [drinkChit, props.status]);
-  // useEffect(() => {
-  //   console.log('3 status', props.status)
-  //   if (soupChit.length > 0 && props.status.printerReady === true) {
-  //     console.log('3')
-  //     database.ref('printerStatus').set(false).then(() => {
-  //       document.getElementById('order-click3').click();
-  //       setSoupChit('')
-  //     })
-  //   }
-  // }, [soupChit, props.status]);
 
   return (
       <MuiPickersUtilsProvider utils={DayJSUtils}>
@@ -193,18 +164,6 @@ function App(props) {
           style={{ display: 'none' }}
         >
         </a>
-        <Button
-          id='order-click2'
-          href={`starpassprnt://v1/print/nopreview?back=${encodeURIComponent(authConsts.CLOSE_ROUTE)}&html=${encodeURIComponent(drinkChit)}`}
-          style={{ display: 'none' }}
-        >
-        </Button>
-        <Button
-          id='order-click3'
-          href={`starpassprnt://v1/print/nopreview?back=${encodeURIComponent(authConsts.CLOSE_ROUTE)}&html=${encodeURIComponent(soupChit)}`}
-          style={{ display: 'none' }}
-        >
-        </Button>
       </MuiPickersUtilsProvider>
   );
 }

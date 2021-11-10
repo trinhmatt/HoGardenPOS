@@ -36,5 +36,5 @@ export const authConsts = {
             "chinese": "星期六"
         }
     },
-    CLOSE_ROUTE: "http://192.168.0.32:3000/close",
+    CLOSE_ROUTE: "http://192.168.0.37:3000/close",
 }

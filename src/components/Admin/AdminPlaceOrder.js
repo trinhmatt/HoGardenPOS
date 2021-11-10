@@ -50,10 +50,9 @@ const AdminPlaceOrder = (props) => {
                 for (let j = 0; j < cartCopy[i].addOn.length; ++j) {
                     //some add-ons have no price (msg, oil)
                     let addOnPrice = 0.0;
-                    if (!cartCopy[i].addOn[j].price) {
+                    if (cartCopy[i].addOn[j].price) {
                         addOnPrice = cartCopy[i].addOn[j].price;
                     }
-                    console.log(cartCopy[i].addOn[j].price)
                     itemTotal += addOnPrice;
                     cartSubTotal += addOnPrice;
                     addOns += cartCopy[i].addOn[j].english
