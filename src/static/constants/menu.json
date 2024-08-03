@@ -73,7 +73,7 @@
             "A1": {
                 "english": "Stir Fried Soya Sauce Thick Noodle + Lean Pork Congee",
                 "chinese": "豉油皇炒河 拼 皮蛋瘦肉粥",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": true,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -84,7 +84,7 @@
             "A2": {
                 "english": "Beef Congee + Stir Fried Noodles with Bean Sprout",
                 "chinese": "牛肉粥 拼 豉油皇芽菜仔炒麵",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": true,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -95,7 +95,7 @@
             "A3": {
                 "english": "Pork Slice Congee + Stir Fried Noodles with Bean Sprout",
                 "chinese": "生滾肉片粥 拼 鼓油皇芽菜仔炒麵",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": true,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -103,10 +103,10 @@
                 "hasSoup": false,
                 "restName": "A3"
             },
-            "A5": {
+            "A4": {
                 "english": "Bacon, Pan Fried Eggs & Butter Toast + Ham/Beef Spaghetti in Soup",
                 "chinese": "煙肉煎雙蛋及牛油多士 拼 火腿/牛肉湯意",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "hasEgg": true,
@@ -126,10 +126,10 @@
                 ],
                 "restName": "B"
             },
-            "A6": {
+            "A5": {
                 "english": "Pan Fried Eggs & Butter Toast + Sausage/Ham/Luncheon Meat w/ Instant Noodle in Soup",
                 "chinese": "煎雙蛋及牛油多士 拼 腸仔/火腿/餐肉公仔麵",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -153,10 +153,10 @@
                 ],
                 "restName": "C"
             },
-            "A7": {
+            "A6": {
                 "english": "Egg Sandwiches + Satay Beef with Vermicelli in Soup",
                 "chinese": "雞蛋三文治 拼 沙爹牛肉湯米",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -164,7 +164,7 @@
                 "hasDrink": true,
                 "restName": "D"
             },
-            "A8": {
+            "A7": {
                 "english": "Preserved Vegetable, Ham & Beef with Udon in Soup",
                 "chinese": "冬菜火腿牛肉烏冬",
                 "price": 8.95,
@@ -175,10 +175,10 @@
                 "hasDrink": true,
                 "restName": "E"
             },
-            "A9": {
+            "A8": {
                 "english": "Vegetable & Pork Dumpling in Soup",
                 "chinese": "上蕩菜肉餃",
-                "price": 7.95,
+                "price": 8.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -186,10 +186,10 @@
                 "hasDrink": true,
                 "restName": "F"
             },
-            "A10": {
+            "A9": {
                 "english": "Vegetable & Pork Dumpling with Noodle in Soup",
                 "chinese": "菜肉餃湯麵/米/河/瀨",
-                "price": 7.95,
+                "price": 8.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -197,10 +197,10 @@
                 "hasDrink": true,
                 "restName": "G"
             },
-            "A11": {
+            "A10": {
                 "english": "Beef Ball with Noodle in Soup",
                 "chinese": "彈牙牛丸湯麵/米/河/瀨",
-                "price": 7.95,
+                "price": 8.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -208,10 +208,10 @@
                 "hasDrink": true,
                 "restName": "H"
             },
-            "A12": {
+            "A11": {
                 "english": "BBQ Pork with Round Rice Noodle in Soup",
                 "chinese": "叉燒湯麵/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -219,10 +219,10 @@
                 "hasDrink": true,
                 "restName": "I"
             },
-            "A13": {
+            "A12": {
                 "english": "Wonton with Instant Noodle in Soup",
                 "chinese": "雲吞公仔麵",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -230,10 +230,10 @@
                 "hasDrink": true,
                 "restName": "J"
             },
-            "A14": {
+            "A13": {
                 "english": "Beef Tendon Brisket with Instant Noodle in Soup",
                 "chinese": "柱候牛筋腩公仔麵",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -241,10 +241,10 @@
                 "hasDrink": true,
                 "restName": "K"
             },
-            "A15": {
+            "A14": {
                 "english": "Wonton in Soup (10pcs)",
                 "chinese": "淨雲吞(10粒)",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -252,10 +252,10 @@
                 "hasDrink": true,
                 "restName": "L"
             },
-            "A16": {
+            "A15": {
                 "english": "Pork Hock with Fermented Red Bean Curd Noodle in Soup",
                 "chinese": "南乳豬手湯麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -263,10 +263,10 @@
                 "hasDrink": true,
                 "restName": "M"
             },
-            "A17": {
+            "A16": {
                 "english": "Wonton & Beef Brisket with Noodle in Soup",
                 "chinese": "雲吞牛腩湯麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -274,10 +274,10 @@
                 "hasDrink": true,
                 "restName": "全1"
             },
-            "A18": {
+            "A17": {
                 "english": "Fish & Beef Ball with Noodle in Soup",
                 "chinese": "雙丸湯麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -285,10 +285,10 @@
                 "hasDrink": true,
                 "restName": "全2"
             },
-            "A19": {
+            "A18": {
                 "english": "Beef Ball & Beef Brisket with Noodle in Soup",
                 "chinese": "牛丸牛腩湯麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -296,10 +296,10 @@
                 "hasDrink": true,
                 "restName": "全3"
             },
-            "A20": {
+            "A19": {
                 "english": "Pan Fried Pork Chop with Noodle in Soup",
                 "chinese": "煎豬扒公仔麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -307,10 +307,10 @@
                 "hasDrink": true,
                 "restName": "全4"
             },
-            "A21": {
+            "A20": {
                 "english": "Pan Fried Egg and Satay Beef with Noodle in Soup",
                 "chinese": "煎蛋沙爹牛肉公仔麵",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -318,10 +318,10 @@
                 "hasDrink": true,
                 "restName": "全5"
             },
-            "A22": {
+            "A21": {
                 "english": "Cutlet Chicken with Noodle in Soup",
                 "chinese": "吉列雞扒湯麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -329,10 +329,10 @@
                 "hasDrink": true,
                 "restName": "全6"
             },
-            "A23": {
+            "A22": {
                 "english": "Crab Meat & Luncheon Meat with Noodle in Soup",
                 "chinese": "蟹柳餐肉公仔麵/米/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -340,10 +340,10 @@
                 "hasDrink": true,
                 "restName": "全7"
             },
-            "A24": {
+            "A23": {
                 "english": "Beef and Vegetable with Noodle in Soup",
                 "chinese": "時菜牛肉湯麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -351,10 +351,10 @@
                 "hasDrink": true,
                 "restName": "全8"
             },
-            "A25": {
+            "A24": {
                 "english": "Deep Fried Chicken Leg with Instant Noodle in Soup",
                 "chinese": "炸雞脾公仔麵/米/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -362,10 +362,10 @@
                 "hasDrink": true,
                 "restName": "全9"
             },
-            "A26": {
+            "A25": {
                 "english": "Pres. Vegetable and Shredded Pork with Noodle in Soup",
                 "chinese": "炸菜肉絲湯麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -373,10 +373,10 @@
                 "hasDrink": true,
                 "restName": "全10"
             },
-            "A27": {
+            "A26": {
                 "english": "Pres. Vegetable and Shredded Chicken with Noodle in Soup",
                 "chinese": "雪菜雞絲湯麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -384,10 +384,10 @@
                 "hasDrink": true,
                 "restName": "全11"
             },
-            "A28": {
+            "A27": {
                 "english": "Curry Shredded Chicken with Noodle in Soup",
                 "chinese": "咖喱雞絲湯麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -395,10 +395,10 @@
                 "hasDrink": true,
                 "restName": "全12"
             },
-            "A29": {
+            "A28": {
                 "english": "Cutlet Fish Fillet with Noodle in Soup",
                 "chinese": "吉列魚柳湯麵/米/河/瀨",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -406,10 +406,10 @@
                 "hasDrink": true,
                 "restName": "全13"
             },
-            "A30": {
+            "A29": {
                 "english": "Fish Fillet with Vegetable on Flat Rice Noodle in Soup",
                 "chinese": "時菜斑球通橋米線",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -417,10 +417,10 @@
                 "hasDrink": true,
                 "restName": "全14"
             },
-            "A31": {
+            "A30": {
                 "english": "Pork Chop with Lemongrass with Vermicelli in Soup",
                 "chinese": "香茅豬扒米粉",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -428,10 +428,10 @@
                 "hasDrink": true,
                 "restName": "全15"
             },
-            "A32": {
+            "A31": {
                 "english": "House Special Round Rice Noodle in Soup",
                 "chinese": "招牌湯瀨粉",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": false,
@@ -439,10 +439,10 @@
                 "hasDrink": true,
                 "restName": "全16"
             },
-            "A33": {
+            "A32": {
                 "english": "Braised Beef Noodle in Soup",
                 "chinese": "紅燒牛肉麵",
-                "price": 8.95,
+                "price": 9.95,
                 "isStar": false,
                 "hasNoodle": false,
                 "isSpicy": true,
@@ -450,10 +450,10 @@
                 "hasDrink": true,
                 "restName": "全17"
             },
-            "A34": {
+            "A33": {
                 "english": "Wonton with Noodle in Soup",
                 "chinese": "鮮蝦雲吞麵/米/河/瀨",
-                "price": 7.95,
+                "price": 8.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -461,10 +461,10 @@
                 "hasDrink": true,
                 "restName": "全18"
             },
-            "A35": {
+            "A34": {
                 "english": "Beef Tendon Brisket with Noodle in Soup",
                 "chinese": "牛筋腩麵/米/河/瀨",
-                "price": 7.95,
+                "price": 8.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -472,10 +472,10 @@
                 "hasDrink": true,
                 "restName": "全19"
             },
-            "A36": {
+            "A35": {
                 "english": "Fish Ball with Noodle in Soup",
                 "chinese": "魚蛋麵/米/河/瀨",
-                "price": 7.95,
+                "price": 8.95,
                 "isStar": false,
                 "hasNoodle": true,
                 "isSpicy": false,
@@ -556,42 +556,42 @@
             "B1": {
                 "english": "Pineapple Bun with Slice of Butter",
                 "chinese": "鮮油菠蘿",
-                "price": 4.50,
+                "price": 4.95,
                 "hasDrink": true,
                 "restName": "早1"
             },
             "B2": {
                 "english": "Egg Sandwiches",
                 "chinese": "雞蛋三文治",
-                "price": 5.50,
+                "price": 5.95,
                 "hasDrink": true,
                 "restName": "早2"
             },
             "B3": {
                 "english": "Ham Sandwiches",
                 "chinese": "火腿三文治",
-                "price": 5.50,
+                "price": 5.95,
                 "hasDrink": true,
                 "restName": "早3"
             },
             "B4": {
                 "english": "Corned Beef Sandwiches",
                 "chinese": "碎牛三文治",
-                "price": 5.50,
+                "price": 5.95,
                 "hasDrink": true,
                 "restName": "早4"
             },
             "B5": {
                 "english": "Luncheon Meat Sandwiches",
                 "chinese": "餐肉三文治",
-                "price": 5.50,
+                "price": 5.95,
                 "hasDrink": true,
                 "restName": "早5"
             },
             "B6": {
                 "english": "Toast with Condensed Milk/Butter/Jam/Peanut Butter",
                 "chinese": "奶油多/油占多/奶醬多",
-                "price": 5.50,
+                "price": 5.95,
                 "hasDrink": true,
                 "restName": "早6",
                 "hasCondiment": true
@@ -599,42 +599,42 @@
             "B7": {
                 "english": "French Toast (with Peanut Butter)",
                 "chinese": "西多士 (內有花生醬)",
-                "price": 5.95,
+                "price": 6.50,
                 "hasDrink": true,
                 "restName": "早7"
             },
             "B8": {
                 "english": "Ham & Corned Egg Sandwiches",
                 "chinese": "火腿煎蛋‧多士",
-                "price": 5.95,
+                "price": 6.50,
                 "hasDrink": true,
                 "restName": "早8"
             },
             "B9": {
                 "english": "Luncheon Meat & Egg Sandwiches",
                 "chinese": "餐肉蛋治",
-                "price": 5.95,
+                "price": 6.50,
                 "hasDrink": true,
                 "restName": "早9"
             },
             "B10": {
                 "english": "Egg & Corned Beef Sandwiches",
                 "chinese": "蛋牛三文治",
-                "price": 5.95,
+                "price": 6.50,
                 "hasDrink": true,
                 "restName": "早10"
             },
             "B11": {
                 "english": "Ham & Egg Sandwiches",
                 "chinese": "火腿蛋三文治",
-                "price": 5.95,
+                "price": 6.50,
                 "hasDrink": true,
                 "restName": "早11"
             },
             "B12": {
                 "english": "Satay Beef with Macaroni/Spaghetti/Vermicelli in Soup",
                 "chinese": "沙爹牛肉通粉/意粉/米粉",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": true,
                 "restName": "早12",
                 "hasNoodle": true
@@ -642,7 +642,7 @@
             "B13": {
                 "english": "Egg & Luncheon Meat with Macaroni/Spaghetti/Vermicelli in Soup",
                 "chinese": "煎蛋餐肉通粉/意粉/米粉",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": true,
                 "restName": "早13",
                 "hasEgg": true,
@@ -651,7 +651,7 @@
             "B14": {
                 "english": "Ham & Sausage with Macaroni/Spaghetti/Vermicelli in Soup",
                 "chinese": "火腿腸仔通粉/意粉/米粉",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": true,
                 "restName": "早14",
                 "hasNoodle": true
@@ -659,7 +659,7 @@
             "B15": {
                 "english": "Egg & Bacon with Macaroni/Spaghetti/Vermicelli in Soup",
                 "chinese": "煎蛋煙肉通粉/意粉/米粉",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": true,
                 "restName": "早15",
                 "hasEgg": true,
@@ -668,7 +668,7 @@
             "B16": {
                 "english": "Shredded Chicken with Macaroni/Spaghetti/Vermicelli in Soup",
                 "chinese": "雪菜雞絲通粉/意粉/米粉",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": true,
                 "restName": "早16",
                 "hasNoodle": true
@@ -676,49 +676,49 @@
             "B17": {
                 "english": "Tuna Fish Sandwiches",
                 "chinese": "吞拿魚三文治",
-                "price": 5.95,
+                "price": 6.50,
                 "hasDrink": true,
                 "restName": "早17"
             },
             "B18": {
                 "english": "Cheese & Ham Sandwiches",
                 "chinese": "芝士火腿三文治",
-                "price": 5.95,
+                "price": 6.50,
                 "hasDrink": true,
                 "restName": "早18"
             },
             "B19": {
                 "english": "Plain Congee + Stir Fried Soya Sauce Thick Noodle",
                 "chinese": "白粥 拼 豉油王炒河",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": false,
                 "restName": "A1"
             },
             "B20": {
                 "english": "Plain Congee + Stir Fried Noodles with Bean Sprout",
                 "chinese": "白粥 拼 豉油皇芽菜仔炒麵",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": false,
                 "restName": "A2"
             },
             "B21": {
                 "english": "Butter Toast + Ham & Macaroni in Soup",
                 "chinese": "牛油多士 拼 火腿通心粉",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": true,
                 "restName": "B"
             },
             "B22": {
                 "english": "Oatmeal + Milk & Egg Sandwiches",
                 "chinese": "牛奶麥皮 拼 雞蛋三文治",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": true,
                 "restName": "C"
             },
             "B23": {
                 "english": "Butter Toast with Ham + Mushroom Omelette",
                 "chinese": "牛油多士 拼 白菌火腿奄列",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": true,
                 "restName": "D"
             },
@@ -739,7 +739,7 @@
             "B26": {
                 "english": "Braised Beef Noodle in Soup",
                 "chinese": "紅燒牛肉麵",
-                "price": 7.95,
+                "price": 8.95,
                 "hasDrink": true,
                 "isSpicy": true,
                 "restName": "G"
@@ -860,45 +860,45 @@
             "AT1": {
                 "english": "Pineapple Bun with Butter",
                 "chinese": "菠蘿油",
-                "price": 4.50,
+                "price": 4.95,
                 "hasDrink": true
             },
             "AT2": {
                 "english": "Toast with Butter/Condensed Milk/Peanut Butter",
                 "chinese": "占多/奶油多/奶醬多",
-                "price": 5.50,
+                "price": 5.95,
                 "hasCondiment": true,
                 "hasDrink": true
             },
             "AT3": {
                 "english": "Egg/Ham Sandwiches",
                 "chinese": "雞蛋三文治或腿治",
-                "price": 5.50,
+                "price": 5.95,
                 "hasDrink": true
             },
             "AT4": {
                 "english": "French Toast (with Peanut Butter)",
-                "chinese": "4  西多士 (內有花生醬)",
-                "price": 5.95,
+                "chinese": "西多士 (內有花生醬)",
+                "price": 6.50,
                 "hasDrink": true
             },
             "AT5": {
                 "english": "Ham Omelette with Butter Toast",
                 "chinese": "白菌火腿奄列 (跟牛油多士)",
-                "price": 6.95,
+                "price": 7.50,
                 "hasDrink": true
             },
             "AT6": {
                 "english": "Deep Fried Chicken Wings with Fries/Salad",
                 "chinese": "炸雞翼薯條/沙律",
-                "price": 7.95,
+                "price": 8.95,
                 "hasSide": true,
                 "hasDrink": true
             },
             "AT7": {
                 "english": "Deep Fried Chicken Leg with Fries/Salad",
                 "chinese": "炸雞牌薯條/沙律",
-                "price": 7.95,
+                "price": 8.95,
                 "hasDrink": true
             },
             "AT8": {
@@ -939,7 +939,7 @@
             "AT12": {
                 "english": "Luncheon Meat/Ham and Egg with Instant Moodle in Soup",
                 "chinese": "餐肉或火腿煎蛋公仔麵",
-                "price": 7.95,
+                "price": 8.95,
                 "hasEgg": true,
                 "proteinChoice": [
                     {
@@ -957,31 +957,31 @@
             "AT13": {
                 "english": "Stir Fried Instant Noodle with Luncheon Meat",
                 "chinese": "餐肉炒公仔麵",
-                "price": 8.95,
+                "price": 9.95,
                 "hasDrink": true
             },
             "AT14": {
                 "english": "Braised Egg Noodle with Beef & Mushroom in Hot Pot",
                 "chinese": "北菇砂鍋牛肉炆生麵",
-                "price": 8.95,
+                "price": 9.95,
                 "hasDrink": true
             },
             "AT15": {
                 "english": "Stir Fried Spaghetti with Ham",
                 "chinese": "干炒火腿意大利粉",
-                "price": 8.95,
+                "price": 9.95,
                 "hasDrink": true
             },
             "AT16": {
                 "english": "Shredded Chicken Spaghetti with Tomato Sauce",
                 "chinese": "茄汁雞絲繪意粉",
-                "price": 8.95,
+                "price": 9.95,
                 "hasDrink": true
             },
             "AT17": {
                 "english": "Western Style Fried Rice",
                 "chinese": "西式炒飯",
-                "price": 8.95,
+                "price": 9.95,
                 "hasDrink": true
             },
             "AT18": {
@@ -993,39 +993,39 @@
             "AT19": {
                 "english": "Diced Chicken and Salted Fish Fried Rice",
                 "chinese": "咸魚雞粒炒飯",
-                "price": 8.95,
+                "price": 9.95,
                 "hasDrink": true
             },
             "AT20": {
                 "english": "Cutlet Pork Chop with Fries/Salad",
                 "chinese": "吉列豬扒薯條/沙律",
-                "price": 7.95,
+                "price": 8.95,
                 "hasSide": true,
                 "hasDrink": true
             },
             "AT21": {
                 "english": "Cutlet Garoupa with Fries/Salad",
                 "chinese": "吉列石斑薯條/沙律",
-                "price": 7.95,
+                "price": 8.95,
                 "hasSide": true,
                 "hasDrink": true
             },
             "AT22": {
                 "english": "Stir Fried Soya Sauce Thick Noodle",
                 "chinese": "豉油王炒河",
-                "price": 8.95,
+                "price": 9.95,
                 "hasDrink": true
             },
             "AT23": {
                 "english": "B.L.T. Sandwich",
                 "chinese": "煙肉、生菜、番茄三文治",
-                "price": 5.95,
+                "price": 6.50,
                 "hasDrink": true
             },
             "AT24": {
                 "english": "Ham & Egg/Luncheon Meat & Egg/Egg & Corned Beef Sandwiches",
                 "chinese": "腿蛋冶/餐蛋冶/蛋牛治",
-                "price": 5.95,
+                "price": 6.50,
                 "hasProteinChoice": true,
                 "proteinChoice": [
                     {
@@ -1046,44 +1046,44 @@
             "AT25": {
                 "english": "Stir Fried Sliced Beef with Spaghetti",
                 "chinese": "干炒牛柳絲意粉",
-                "price": 8.95,
+                "price": 9.95,
                 "hasDrink": true
             },
             "AT26": {
                 "english": "Stir Fried Bacon & Onions with Spaghetti",
                 "chinese": "香蔥煙肉干炒意粉",
-                "price": 8.95,
+                "price": 9.95,
                 "hasDrink": true
             },
             "AT27": {
                 "english": "Club Sandwich (Toasted)",
                 "chinese": "公司三文治 (烘底)",
-                "price": 8.95,
+                "price": 9.95,
                 "hasDrink": true
             },
             "AT28": {
                 "english": "Tuna Fish Sandwiches",
                 "chinese": "吞拿魚三文治",
-                "price": 5.95,
+                "price": 6.50,
                 "hasDrink": true
             },
             "AT29": {
                 "english": "Braised Beef Noodle in Soup",
                 "chinese": "紅燒牛肉麵",
-                "price": 7.95,
+                "price": 6.50,
                 "hasDrink": true
             },
             "AT30": {
                 "english": "Ho Garden's Noodle in Soup with Wonton, Fish Ball, Beef Ball and Luncheon Meat",
                 "chinese": "招牌湯麵  (雲吞、魚蛋、牛丸、餐肉)",
-                "price": 7.95,
+                "price": 8.95,
                 "hasDrink": true
             }
         }
     },
     "homesCombo": {
         "title": {
-            "english": "Home's Combo",
+            "english": "Special Combos",
             "chinese": "金牌套餐"
         },
         "extraInfo": [
@@ -1193,42 +1193,42 @@
             "HC1": {
                 "english": "Hai Nan Chicken Special Rice",
                 "chinese": "海南雞飯",
-                "price": 10.95,
+                "price": 11.95,
                 "hasSoup": true,
                 "hasDrink": true
             },
             "HC2": {
                 "english": "Teriyaki Chicken",
                 "chinese": "日式照燒雞扒飯",
-                "price": 10.95,
+                "price": 11.95,
                 "hasSoup": true,
                 "hasDrink": true
             },
             "HC3": {
                 "english": "Thai Style Pad Thai",
                 "chinese": "泰式 Pad Thai 粉",
-                "price": 10.95,
+                "price": 11.95,
                 "hasSoup": true,
                 "hasDrink": true
             },
             "HC4": {
                 "english": "House Special Pork Chop",
                 "chinese": "香茅豬扒飯",
-                "price": 10.95,
+                "price": 11.95,
                 "hasSoup": true,
                 "hasDrink": true
             },
             "HC5": {
                 "english": "Pork Belly Served with Rice",
                 "chinese": "梅菜扣肉飯",
-                "price": 10.95,
+                "price": 11.95,
                 "hasSoup": true,
                 "hasDrink": true
             },
             "HC6": {
                 "english": "Pork Hock with Fermented Red Bean Curd on Rice",
                 "chinese": "南乳豬手飯",
-                "price": 10.95,
+                "price": 11.95,
                 "hasSoup": true,
                 "hasDrink": true
             }
@@ -1920,7 +1920,7 @@
         "menuItems": {
             "FNR1": {
                 "english": "Black Pepper Beef Strips Fried Udon or Spaghetti",
-                "chinese": "椒牛柳絲炒烏冬/意粉",
+                "chinese": "黑椒牛柳絲炒烏冬/意粉",
                 "price": 10.95,
                 "isSpicy": false,
                 "hasDrink": true,
@@ -2004,8 +2004,8 @@
                 "hasDrink": true
             },
             "FNR13": {
-                "english": "西式炒意粉",
-                "chinese": "Western Style Fried Spaghetti",
+                "english": "Western Style Fried Spaghetti",
+                "chinese": "西式炒意粉",
                 "price": 10.95,
                 "isSpicy": false,
                 "hasDrink": true
